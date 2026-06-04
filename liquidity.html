@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美元流动性压力 · 传导监控</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0f; --panel:#13161e; --card:#171b24; --card-hi:#1c212c;
+    --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.13);
+    --txt:#e8e4d8; --dim:#9a9ca6; --faint:#62656f;
+    --gold:#d4a24e; --green:#46c08a; --amber:#e0a93f; --red:#e3584f; --teal:#5aa9c4;
+    --mono:'IBM Plex Mono',monospace; --serif:'Spectral','Noto Serif SC',serif;
+    --sans:-apple-system,'Noto Sans SC',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;position:relative}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(900px 500px at 85% -10%,rgba(90,169,196,.08),transparent 60%),radial-gradient(700px 600px at 5% 110%,rgba(212,162,78,.06),transparent 60%)}
+  .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 22px 70px}
+
+  header{padding:36px 0 20px;border-bottom:1px solid var(--line);margin-bottom:24px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .eyebrow a{color:var(--gold);text-decoration:none;border:1px solid var(--line-2);padding:3px 9px;border-radius:6px;font-size:10px}
+  .eyebrow a:hover{background:var(--card)}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4.6vw,40px);line-height:1.06;margin-bottom:10px}
+  .sub{color:var(--dim);font-size:14.5px;max-width:680px}
+  #stamp{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:16px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);display:inline-block}
+  #stamp b{color:var(--green)}
+
+  .hero{background:linear-gradient(160deg,#101418,#0f1117);border:1px solid var(--line-2);border-radius:16px;padding:26px 28px;margin-bottom:18px}
+  .hero-grid{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+  .score-big{text-align:center}
+  .score-big .n{font-family:var(--mono);font-size:58px;font-weight:700;line-height:1}
+  .score-big .d{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:4px}
+  .score-big .lab{font-family:var(--serif);font-size:18px;font-weight:600;margin-top:8px}
+  .gauge-track{position:relative;height:16px;border-radius:9px;overflow:hidden;display:flex;border:1px solid var(--line)}
+  .gz{height:100%} .gz.g{background:rgba(70,192,138,.45)} .gz.a{background:rgba(224,169,63,.42)} .gz.r{background:rgba(227,88,79,.45)}
+  .gauge-mk{position:absolute;top:-5px;bottom:-5px;width:3px;background:#fff;border-radius:2px;box-shadow:0 0 0 3px rgba(255,255,255,.13),0 0 10px rgba(255,255,255,.5);transition:left .4s}
+  .gauge-x{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:8px}
+  .caveat{margin-top:18px;font-size:12.5px;color:var(--dim);background:rgba(212,162,78,.06);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 14px}
+
+  .sec{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+  .sec::after{content:'';flex:1;height:1px;background:var(--line)}
+
+  /* confirmations */
+  .confs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .conf{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:15px 16px}
+  .conf .top{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+  .conf .nm{font-size:13px;font-weight:500}
+  .conf .vv{font-family:var(--mono);font-size:20px;font-weight:600;margin-bottom:5px}
+  .conf .ds{font-size:11px;color:var(--faint);line-height:1.45}
+  .pill{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;padding:2px 7px;border-radius:5px}
+  .pill.ok{background:rgba(70,192,138,.14);color:var(--green)}
+  .pill.hit{background:rgba(227,88,79,.16);color:var(--red)}
+
+  /* layers */
+  .layers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .layer{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 19px}
+  .layer-top{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+  .layer-nm{font-family:var(--serif);font-size:17px;font-weight:600}
+  .layer-sc{margin-left:auto;font-family:var(--mono);font-size:13px;font-weight:600}
+  .row{display:flex;align-items:center;gap:9px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+  .row:first-of-type{border-top:0}
+  .row .nm{color:var(--dim);flex:1}
+  .row .vv{font-family:var(--mono);font-weight:500}
+  .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .d0{background:var(--green);box-shadow:0 0 6px var(--green)}
+  .d1{background:var(--amber);box-shadow:0 0 6px var(--amber)}
+  .d2{background:var(--red);box-shadow:0 0 6px var(--red)}
+
+  .extras{display:flex;flex-wrap:wrap;gap:1px;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--line)}
+  .ex{flex:1;min-width:140px;background:var(--panel);padding:13px 16px}
+  .ex .k{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .ex .v{font-family:var(--mono);font-size:19px;font-weight:600;margin-top:4px}
+
+  .chart-wrap{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:20px 20px 14px}
+  #chart{width:100%;height:auto;display:block}
+  #chart-empty{font-family:var(--mono);font-size:12.5px;color:var(--faint);text-align:center;padding:40px 0}
+
+  footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint);line-height:1.7}
+  footer b{color:var(--dim)}
+  @media(max-width:820px){.confs{grid-template-columns:1fr 1fr}.layers{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr;gap:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span>◆ 流动性传导监控 · LIQUIDITY STRESS</span><a href="index.html">← 回 ERP 打分引擎</a></div>
+    <h1>美元流动性压力 · 6 层传导(免费源版)</h1>
+    <p class="sub">用免费 FRED 数据量化资金面→负债表→中介能力的流动性压力,与 ERP 引擎共用同一份实时数据。压力分越高 = 越紧。</p>
+    <div id="stamp">加载中…</div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-grid">
+      <div class="score-big">
+        <div class="n" id="stress-n">—</div>
+        <div class="d">压力指数 / 10</div>
+        <div class="lab" id="stress-lab">—</div>
+      </div>
+      <div>
+        <div class="gauge-track">
+          <div class="gz g" style="flex:3"></div><div class="gz a" style="flex:3"></div><div class="gz r" style="flex:4"></div>
+          <div class="gauge-mk" id="gauge-mk" style="left:0%"></div>
+        </div>
+        <div class="gauge-x"><span>0 · 宽松</span><span>3</span><span>6 · 警戒</span><span>10 · 紧张</span></div>
+        <div class="caveat" id="caveat">本分数仅含可免费获取的 <b>Repo / 银行负债表 / 中介能力</b> 三层;<b>未含能源与离岸美元基差两层</b>(需付费源),因此读数会比 timsun 等含全部六层的平台偏低/偏宽松。<b>请看方向与变化,而非绝对值。</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">升级为系统性压力的确认条件</div>
+  <div class="confs" id="confs"></div>
+
+  <div class="sec">分层打分</div>
+  <div class="layers" id="layers"></div>
+
+  <div class="sec" style="margin-top:22px">关键存量</div>
+  <div class="extras" id="extras"></div>
+
+  <div class="sec">30 天压力曲线</div>
+  <div class="chart-wrap">
+    <svg id="chart" viewBox="0 0 700 220" preserveAspectRatio="none" style="display:none"></svg>
+    <div id="chart-empty">历史积累中 · 每个交易日自动 +1 个数据点</div>
+  </div>
+
+  <footer>
+    <p><b>数据 ·</b> 全部来自 FRED 免费接口:SOFR/IORB、RRP、准备金(WRESBAL)、净流动性(WALCL−TGA−RRP)、HY/IG 信用利差(ICE BofA)、NFCI、VIX、股债相关性。<b>评分 ·</b> 每指标按阈值记 0/1/2(松/警/紧),分层取均值×5→层分(0-10),三层取均值→总分。<b>缺口 ·</b> 能源、离岸美元基差、SRF 使用等需付费/专业源,暂未接入。非投资建议。</p>
+  </footer>
+</div>
+
+<script>
+const FMT = {
+  sofr_iorb:v=>(v>0?'+':'')+v+'%', rrp:v=>'$'+v+'B', reserves:v=>v+'T',
+  netliq:v=>(v>0?'+':'')+v+'B', hy_oas:v=>v+'%', nfci:v=>(+v).toFixed(2),
+  vix:v=>v, move:v=>v, corr:v=>(v/100).toFixed(2),
+};
+const NAME = {
+  sofr_iorb:'SOFR-IORB', rrp:'RRP 余额', reserves:'银行准备金', netliq:'净流动性4周',
+  hy_oas:'HY 信用利差', nfci:'NFCI 金融条件', vix:'VIX', move:'MOVE', corr:'股债相关性',
+};
+const LAYER_NAME = {repo:'在岸 Repo · 资金面', balance:'银行资产负债表', intermediation:'中介能力 · 风险资产'};
+const CONF_NAME = {sofr_iorb_positive:'SOFR-IORB 转正', hy_widening:'HY 利差走阔', nfci_positive:'NFCI 转正', vix_above20:'VIX > 20'};
+const CONF_FMT  = {sofr_iorb_positive:v=>(v>0?'+':'')+v+'%', hy_widening:v=>v+'%', nfci_positive:v=>(+v).toFixed(2), vix_above20:v=>v};
+
+async function load(){
+  let data;
+  try{
+    const r = await fetch('data.json?t='+Date.now());
+    data = await r.json();
+  }catch(e){ document.getElementById('stamp').textContent='⚠ 暂无 data.json,请先在 Actions 跑一次 refresh'; return; }
+
+  const ts = new Date(data.generated_at).toLocaleString();
+  document.getElementById('stamp').innerHTML = '● 数据更新于 <b>'+ts+'</b>';
+
+  const liq = data.liquidity;
+  if(!liq || liq.stress==null){ document.getElementById('stress-lab').textContent='等待数据'; return; }
+
+  // hero
+  document.getElementById('stress-n').textContent = liq.stress.toFixed(1);
+  const col = liq.stress<3?'var(--green)':liq.stress<6?'var(--amber)':'var(--red)';
+  document.getElementById('stress-n').style.color = col;
+  document.getElementById('stress-lab').textContent = liq.label;
+  document.getElementById('stress-lab').style.color = col;
+  document.getElementById('gauge-mk').style.left = Math.max(1,Math.min(99,liq.stress/10*100))+'%';
+
+  // confirmations
+  document.getElementById('confs').innerHTML = Object.entries(liq.confirmations).map(([k,c])=>{
+    const hit = c.triggered;
+    const val = c.value==null?'—':CONF_FMT[k](c.value);
+    return `<div class="conf"><div class="top"><span class="nm">${CONF_NAME[k]}</span>
+      <span class="pill ${hit?'hit':'ok'}">${hit?'已触发':'未触发'}</span></div>
+      <div class="vv" style="color:${hit?'var(--red)':'var(--txt)'}">${val}</div>
+      <div class="ds">${c.desc}</div></div>`;
+  }).join('');
+
+  // layers
+  document.getElementById('layers').innerHTML = Object.entries(liq.layers).map(([key,L])=>{
+    if(L.score==null) return '';
+    const sc = L.score, scol = sc<3?'var(--green)':sc<6?'var(--amber)':'var(--red)';
+    const rows = Object.entries(L.items).map(([id,it])=>
+      `<div class="row"><span class="dot d${it.pt}"></span><span class="nm">${NAME[id]}</span>
+       <span class="vv">${FMT[id]?FMT[id](it.value):it.value}</span></div>`).join('');
+    return `<div class="layer"><div class="layer-top"><span class="layer-nm">${LAYER_NAME[key]}</span>
+      <span class="layer-sc" style="color:${scol}">${sc.toFixed(1)}/10</span></div>${rows}</div>`;
+  }).join('');
+
+  // extras
+  const ex = liq.extra;
+  const exItems = [
+    ['净流动性', ex.netliq_t==null?'—':ex.netliq_t+'T'],
+    ['银行准备金', ex.reserves_t==null?'—':ex.reserves_t+'T'],
+    ['HY 信用利差', ex.hy_oas==null?'—':ex.hy_oas+'%'],
+    ['IG 信用利差', ex.ig_oas==null?'—':ex.ig_oas+'%'],
+    ['SOFR', ex.sofr==null?'—':ex.sofr+'%'],
+    ['IORB', ex.iorb==null?'—':ex.iorb+'%'],
+  ];
+  document.getElementById('extras').innerHTML = exItems.map(([k,v])=>
+    `<div class="ex"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+
+  // history chart
+  drawChart((data.history||[]).filter(h=>h.stress!=null));
+}
+
+function drawChart(hist){
+  const svg = document.getElementById('chart'), empty = document.getElementById('chart-empty');
+  if(hist.length < 2){ svg.style.display='none'; empty.style.display='block'; return; }
+  empty.style.display='none'; svg.style.display='block';
+  const W=700,H=220,pad=34, x0=pad, x1=W-10, y0=10, y1=H-24;
+  const n=hist.length;
+  const X = i => x0 + (x1-x0)*(n===1?0:i/(n-1));
+  const Y = s => y1 - (y1-y0)*(Math.max(0,Math.min(10,s))/10);
+  const pts = hist.map((h,i)=>[X(i),Y(h.stress)]);
+  const line = pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const area = line+` L ${x1} ${y1} L ${x0} ${y1} Z`;
+  // gridlines at stress 3 and 6
+  const g3=Y(3), g6=Y(6);
+  const last = hist[n-1];
+  svg.innerHTML = `
+    <defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(90,169,196,.35)"/><stop offset="100%" stop-color="rgba(90,169,196,0)"/>
+    </linearGradient></defs>
+    <line x1="${x0}" y1="${g3}" x2="${x1}" y2="${g3}" stroke="rgba(70,192,138,.3)" stroke-dasharray="3 4"/>
+    <line x1="${x0}" y1="${g6}" x2="${x1}" y2="${g6}" stroke="rgba(227,88,79,.3)" stroke-dasharray="3 4"/>
+    <text x="${x0-6}" y="${g3+3}" fill="var(--faint)" font-size="9" text-anchor="end" font-family="monospace">3</text>
+    <text x="${x0-6}" y="${g6+3}" fill="var(--faint)" font-size="9" text-anchor="end" font-family="monospace">6</text>
+    <text x="${x0-6}" y="${y1+3}" fill="var(--faint)" font-size="9" text-anchor="end" font-family="monospace">0</text>
+    <text x="${x0-6}" y="${y0+8}" fill="var(--faint)" font-size="9" text-anchor="end" font-family="monospace">10</text>
+    <path d="${area}" fill="url(#ar)"/>
+    <path d="${line}" fill="none" stroke="var(--teal)" stroke-width="2"/>
+    <circle cx="${pts[n-1][0].toFixed(1)}" cy="${pts[n-1][1].toFixed(1)}" r="3.5" fill="#fff"/>
+    <text x="${pts[n-1][0].toFixed(1)}" y="${(pts[n-1][1]-8).toFixed(1)}" fill="#fff" font-size="11" text-anchor="end" font-family="monospace">${last.stress.toFixed(1)}</text>
+    <text x="${x0}" y="${H-6}" fill="var(--faint)" font-size="9" font-family="monospace">${hist[0].date}</text>
+    <text x="${x1}" y="${H-6}" fill="var(--faint)" font-size="9" text-anchor="end" font-family="monospace">${last.date}</text>`;
+}
+
+load();
+</script>
+</body>
+</html>
