@@ -1,24 +1,45 @@
 {
-  "generated_at": "2026-06-04T08:59:36+00:00",
+  "generated_at": "2026-06-04T09:07:56+00:00",
   "values": {
+    "net_liq": 41.4,
+    "rrp": 2.062,
+    "realy": 2.07,
+    "bei": 2.38,
+    "tp": 0.7541,
+    "slope": 41.0,
+    "corr": 83.0,
     "move": 74.0
   },
   "lights": {
+    "net_liq": "amber",
+    "rrp": "red",
+    "realy": "amber",
+    "bei": "amber",
+    "tp": "amber",
+    "slope": "amber",
+    "corr": "red",
     "move": "green"
   },
   "sources": {
+    "net_liq": "FRED WALCL-TGA-RRP",
+    "rrp": "FRED RRPONTSYD",
+    "realy": "FRED DFII10",
+    "bei": "FRED T10YIE",
+    "tp": "FRED THREEFYTP10 (KW)",
+    "slope": "FRED DGS10-DGS2",
+    "corr": "FRED SP500/DGS10 30d",
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": null,
-    "y10": null
+    "vix": 15.77,
+    "y10": 4.46
   },
   "tier_health": {
-    "one": 100,
-    "two": null
+    "one": 50,
+    "two": 40
   },
   "implied": {
-    "erp": 0.1,
-    "y10": null
+    "erp": 1.45,
+    "y10": 4.44
   }
 }
