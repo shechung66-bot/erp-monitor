@@ -1,0 +1,42 @@
+name: refresh-erp-data
+
+# Runs every weekday at 22:00 UTC (~6pm ET EDT / 5pm EST) — after FRED's daily
+# update. Adjust the cron as needed; you can also trigger it by hand from the
+# Actions tab via workflow_dispatch.
+on:
+  schedule:
+    - cron: "0 22 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write        # needed to commit data.json back to the repo
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # fetch.py uses only the standard library, so nothing to install.
+      - name: Fetch + score
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          WEBHOOK_URL:  ${{ secrets.WEBHOOK_URL }}
+          YF_MOVE: "1"
+        run: python fetch.py
+
+      - name: Commit data.json if changed
+        run: |
+          git config user.name  "erp-bot"
+          git config user.email "erp-bot@users.noreply.github.com"
+          git add data.json
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "data: refresh $(date -u +%FT%TZ)"
+            git push
+          fi
