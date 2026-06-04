@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP 打分引擎 · 可调参数交互版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0f; --panel:#13161e; --card:#171b24; --card-hi:#1c212c;
+    --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.13);
+    --txt:#e8e4d8; --dim:#9a9ca6; --faint:#62656f;
+    --gold:#d4a24e; --gold-2:#b9852e;
+    --green:#46c08a; --amber:#e0a93f; --red:#e3584f; --teal:#5aa9c4;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --serif:'Spectral','Noto Serif SC',Georgia,serif;
+    --sans:-apple-system,'Noto Sans SC',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(900px 500px at 85% -10%,rgba(212,162,78,.10),transparent 60%),radial-gradient(800px 600px at 5% 110%,rgba(90,169,196,.06),transparent 60%)}
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px 80px}
+
+  header{padding:40px 0 22px;border-bottom:1px solid var(--line);margin-bottom:26px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:13px;display:flex;gap:12px;align-items:center}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4.4vw,42px);line-height:1.08;letter-spacing:-.01em;margin-bottom:11px}
+  h1 em{font-style:italic;color:var(--gold)}
+  .sub{color:var(--dim);font-size:14.5px;max-width:740px}
+  .toolbar{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+  .btn{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:9px 16px;border-radius:8px;border:1px solid var(--line-2);background:var(--card);color:var(--txt);cursor:pointer;transition:.2s}
+  .btn:hover{background:var(--card-hi);border-color:var(--gold)}
+  .btn.gold{background:linear-gradient(120deg,var(--gold),var(--gold-2));color:#1a1206;border:0;font-weight:600}
+  .btn.gold:hover{filter:brightness(1.08)}
+
+  .layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+
+  /* ===== VALUATION ENGINE ===== */
+  .engine{position:sticky;top:18px;background:linear-gradient(165deg,#15110a,#121119 55%,#0f1118);border:1px solid var(--line-2);border-radius:16px;padding:26px 26px 24px;overflow:hidden}
+  .engine::before{content:'';position:absolute;top:-35%;right:-12%;width:420px;height:420px;background:radial-gradient(circle,rgba(212,162,78,.14),transparent 65%);pointer-events:none}
+  .panel-tag{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .panel-title{font-family:var(--serif);font-size:22px;font-weight:600;margin-bottom:4px}
+  .formula-mini{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:22px}
+  .formula-mini .d1{color:var(--teal)} .formula-mini .d2{color:var(--gold)}
+
+  .pe-hero{text-align:center;margin:6px 0 22px}
+  .pe-hero .lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .pe-hero .num{font-family:var(--mono);font-size:62px;font-weight:700;line-height:1;letter-spacing:-.02em;margin:6px 0;transition:color .3s}
+  .pe-hero .vs-mkt{font-size:12.5px;color:var(--dim)}
+  .pe-hero .vs-mkt b{font-family:var(--mono)}
+
+  /* P/E scale */
+  .pe-scale{margin:18px 0 26px}
+  .pe-bar{position:relative;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--line);display:flex}
+  .pe-zone{height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:rgba(255,255,255,.55);border-right:1px solid rgba(0,0,0,.35)}
+  .pe-zone:last-child{border-right:0}
+  .pe-mk{position:absolute;top:-6px;bottom:-6px;width:3px;background:#fff;border-radius:2px;box-shadow:0 0 0 3px rgba(255,255,255,.14),0 0 12px rgba(255,255,255,.55);transition:left .3s cubic-bezier(.3,.7,.3,1);z-index:3}
+  .pe-mk .cap{position:absolute;top:-23px;left:50%;transform:translateX(-50%);white-space:nowrap;font-family:var(--mono);font-size:10px;color:#fff;background:#1a1d26;border:1px solid var(--line-2);padding:2px 7px;border-radius:5px}
+  .pe-mkt{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--teal);opacity:.85;transition:left .3s;z-index:2}
+  .pe-mkt .cap{position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);white-space:nowrap;font-family:var(--mono);font-size:9px;color:var(--teal)}
+  .pe-scale-x{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:24px}
+
+  /* big sliders */
+  .vslider{margin:20px 0}
+  .vs-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+  .vs-name{font-family:var(--serif);font-size:16px;font-weight:600}
+  .vs-name small{font-family:var(--sans);font-size:11px;color:var(--faint);font-weight:400;margin-left:7px}
+  .vs-val{font-family:var(--mono);font-size:24px;font-weight:600}
+  .vs-val.teal{color:var(--teal)} .vs-val.gold{color:var(--gold)}
+
+  /* ERP gauge */
+  .erpg{margin:8px 0 4px}
+  .erpg-track{position:relative;height:10px;border-radius:6px;background:linear-gradient(90deg,#7a5a1c 0%,#6a5a22 28%,#3f6b53 50%,#7a4a2a 74%,#5e2622 100%);border:1px solid var(--line)}
+  .erpg-mk{position:absolute;top:-4px;bottom:-4px;width:3px;background:#fff;border-radius:2px;box-shadow:0 0 8px rgba(255,255,255,.6);transition:left .3s}
+  .erpg-ghost{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--amber);opacity:.8;transition:left .3s}
+  .erpg-x{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:7px}
+
+  /* mispricing callout */
+  .gap-box{margin-top:22px;border:1px solid var(--line-2);border-radius:12px;padding:16px 18px;background:rgba(227,88,79,.06);transition:.3s}
+  .gap-box.ok{background:rgba(70,192,138,.06)}
+  .gap-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .gap-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .gap-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--red)}
+  .gap-box.ok .gap-val{color:var(--green)}
+  .gap-txt{font-size:12.5px;color:var(--dim);line-height:1.5}
+  .gap-txt b{color:var(--txt)}
+  .gap-implied{display:flex;gap:18px;margin-top:11px;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+  .gap-implied b{color:var(--amber);font-weight:600}
+
+  /* ===== SCORING PANEL ===== */
+  .scoring{display:flex;flex-direction:column;gap:18px}
+  .tier{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 20px 16px}
+  .tier-head{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+  .tier-h{font-family:var(--serif);font-size:20px;font-weight:600}
+  .tier-grade{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:4px 11px;border-radius:18px;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:.3s}
+  .tier-sub{font-size:12px;color:var(--faint);font-family:var(--serif);font-style:italic;margin-bottom:14px}
+  .health{height:7px;border-radius:4px;background:rgba(255,255,255,.06);overflow:hidden;margin-bottom:18px}
+  .health-fill{height:100%;border-radius:4px;transition:width .35s cubic-bezier(.3,.7,.3,1),background .35s}
+
+  .step{border-top:1px solid var(--line);padding:15px 0 4px}
+  .step:first-of-type{border-top:0}
+  .step-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+  .step-name{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--dim);font-weight:500}
+  .step-q{font-size:11px;color:var(--faint);font-style:italic;font-family:var(--serif)}
+  .step-light{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.08em;display:flex;align-items:center;gap:6px;transition:.3s}
+
+  .ind{margin-bottom:15px}
+  .ind-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+  .ind-name{font-size:12.5px;color:var(--txt)}
+  .ind-val{font-family:var(--mono);font-size:13.5px;font-weight:600;transition:color .3s}
+  .swrap{position:relative;height:18px;display:flex;align-items:center}
+  .track-grad{position:absolute;left:0;right:0;height:7px;border-radius:5px;border:1px solid rgba(255,255,255,.05)}
+  input[type=range]{position:relative;width:100%;height:18px;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer;margin:0;z-index:2}
+  input[type=range]::-webkit-slider-runnable-track{height:18px;background:transparent}
+  input[type=range]::-moz-range-track{height:18px;background:transparent}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid #0a0b0f;box-shadow:0 1px 5px rgba(0,0,0,.6);margin-top:1.5px}
+  input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid #0a0b0f;box-shadow:0 1px 5px rgba(0,0,0,.6)}
+  input[type=range]:hover::-webkit-slider-thumb{background:var(--gold)}
+  input[type=range]:hover::-moz-range-thumb{background:var(--gold)}
+  .ind-foot{display:flex;align-items:center;gap:8px;margin-top:6px;font-family:var(--mono);font-size:10.5px}
+  .ind-status{color:var(--faint)}
+
+  .lite{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;transition:.3s}
+  .l-red{background:var(--red);box-shadow:0 0 7px var(--red)} .c-red{color:var(--red)}
+  .l-amber{background:var(--amber);box-shadow:0 0 7px var(--amber)} .c-amber{color:var(--amber)}
+  .l-green{background:var(--green);box-shadow:0 0 7px var(--green)} .c-green{color:var(--green)}
+  .bg-red{background:rgba(227,88,79,.13);border:1px solid rgba(227,88,79,.3)}
+  .bg-amber{background:rgba(224,169,63,.12);border:1px solid rgba(224,169,63,.3)}
+  .bg-green{background:rgba(70,192,138,.12);border:1px solid rgba(70,192,138,.3)}
+
+  /* overall verdict strip */
+  .overall{grid-column:1/-1;margin-top:4px;background:linear-gradient(120deg,#16110a,#141118);border:1px solid var(--line-2);border-radius:14px;padding:22px 26px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
+  .ov-score{text-align:center}
+  .ov-score .n{font-family:var(--mono);font-size:40px;font-weight:700;line-height:1;transition:color .3s}
+  .ov-score .l{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:5px}
+  .ov-txt{font-size:14px;color:var(--txt);line-height:1.55}
+  .ov-txt b{color:var(--gold)}
+  .ov-stage{text-align:right}
+  .ov-stage .s{font-family:var(--serif);font-size:18px;font-weight:600;transition:color .3s}
+  .ov-stage .sl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--faint);text-transform:uppercase;margin-top:4px}
+
+  footer{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint);line-height:1.7}
+  footer b{color:var(--dim)}
+  .mono{font-family:var(--mono)}
+
+  @media(max-width:900px){
+    .layout{grid-template-columns:1fr}
+    .engine{position:relative;top:0}
+    .overall{grid-template-columns:1fr;text-align:center;gap:16px}
+    .ov-stage{text-align:center}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow"><span class="dot"></span> 一阶+二阶打分逻辑 · 可调参数交互版 · ESTIMATOR</div>
+    <h1>ERP 打分引擎：拖动任一指标，<em>实时</em>重算红绿灯与 P/E 天花板</h1>
+    <p class="sub">每个指标按框架阈值映射为红/黄/绿并计分；一阶健康度 → 隐含 ERP，二阶健康度 → 隐含 10Y；右侧估值引擎实时计算 <span class="mono">P/E = 1 / (10Y + ERP)</span>。默认值锚定 2026 年 6 月实况。</p>
+    <div class="toolbar">
+      <button class="btn gold" onclick="syncFromScoring()">⟲ 用框架打分同步 10Y / ERP</button>
+      <button class="btn" onclick="resetAll()">恢复 2026·6 默认值</button>
+      <button class="btn" onclick="setMarket()">设为市场实况 (ERP 0.1% / 10Y 4.4%)</button>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- ============ SCORING (left) ============ -->
+    <div class="scoring">
+      <div class="tier" id="tier-one"></div>
+      <div class="tier" id="tier-two"></div>
+    </div>
+
+    <!-- ============ ENGINE (right) ============ -->
+    <div class="engine">
+      <div class="panel-tag">◆ 估值引擎 / Valuation Engine</div>
+      <div class="panel-title">P/E 天花板 · 终极审判</div>
+      <div class="formula-mini">P/E = 1 / ( <span class="d1">10Y 名义</span> + <span class="d2">ERP 风险溢价</span> )</div>
+
+      <div class="pe-hero">
+        <div class="lab">理论 P/E 天花板</div>
+        <div class="num" id="pe-num">22.2x</div>
+        <div class="vs-mkt">市场现价前瞻 P/E ≈ <b>23x</b> · <span id="pe-judge">略高于天花板</span></div>
+      </div>
+
+      <div class="pe-scale">
+        <div class="pe-bar" id="pe-bar">
+          <div class="pe-zone" style="flex:3;background:rgba(227,88,79,.5)">危机&lt;15</div>
+          <div class="pe-zone" style="flex:3;background:rgba(216,118,54,.5)">陷阱16-18</div>
+          <div class="pe-zone" style="flex:4;background:rgba(224,169,63,.45)">中性18-22</div>
+          <div class="pe-zone" style="flex:3;background:rgba(70,192,138,.45)">金发22-25</div>
+          <div class="pe-zone" style="flex:1;background:rgba(70,192,138,.3)"></div>
+          <div class="pe-mkt" id="pe-mkt"><span class="cap">市场 23x</span></div>
+          <div class="pe-mk" id="pe-mk"><span class="cap">天花板</span></div>
+        </div>
+        <div class="pe-scale-x"><span>12x</span><span>15x</span><span>18x</span><span>22x</span><span>25x</span><span>26x</span></div>
+      </div>
+
+      <div class="vslider">
+        <div class="vs-head"><span class="vs-name">10Y 名义收益率 <small>由二阶基本面决定</small></span><span class="vs-val teal" id="v-10y">4.40%</span></div>
+        <div class="swrap"><div class="track-grad" id="grad-10y"></div><input type="range" id="s-10y" min="3.0" max="5.5" step="0.05" value="4.40"></div>
+      </div>
+
+      <div class="vslider">
+        <div class="vs-head"><span class="vs-name">ERP 股权风险溢价 <small>由一阶流动性决定</small></span><span class="vs-val gold" id="v-erp">0.10%</span></div>
+        <div class="swrap"><div class="track-grad" id="grad-erp"></div><input type="range" id="s-erp" min="-0.5" max="3.5" step="0.05" value="0.10"></div>
+        <div class="erpg">
+          <div class="erpg-track">
+            <div class="erpg-ghost" id="erp-ghost"></div>
+            <div class="erpg-mk" id="erp-mk"></div>
+          </div>
+          <div class="erpg-x"><span>极低·抱团</span><span>正常</span><span>飙升·危机</span></div>
+        </div>
+      </div>
+
+      <div class="gap-box" id="gap-box">
+        <div class="gap-top">
+          <span class="gap-label">错价缺口 · 框架隐含 ERP − 市场 ERP</span>
+          <span class="gap-val" id="gap-val">+0.96pp</span>
+        </div>
+        <div class="gap-txt" id="gap-txt"></div>
+        <div class="gap-implied">
+          <span>框架隐含 ERP <b id="imp-erp">1.06%</b></span>
+          <span>框架隐含 10Y <b id="imp-10y">4.47%</b></span>
+          <span>框架公允 P/E <b id="imp-pe">18.0x</b></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ OVERALL ============ -->
+    <div class="overall">
+      <div class="ov-score">
+        <div class="n" id="ov-num">48</div>
+        <div class="l">综合健康度 /100</div>
+      </div>
+      <div class="ov-txt" id="ov-txt"></div>
+      <div class="ov-stage">
+        <div class="s" id="ov-stage">极低 ERP · 抱团</div>
+        <div class="sl">当前 ERP 周期定位</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p><b>方法论 ·</b> 每个指标按框架阈值计分（绿=2 / 黄=1 / 红=0）；步骤取均值定灯，层级取均值得健康度(0–100)。映射：二阶健康度 100→10Y 3.6% / 0→10Y 5.0%；一阶健康度 100→ERP 0.1% / 0→ERP 2.8%（即流动性越差、要求的风险溢价越高）。<b>错价缺口</b> = 框架隐含 ERP − 你设定的市场 ERP；正值越大，代表市场要求的风险补偿越低于框架条件所应有的水平，即风险被低估。阈值与映射区间均为框架化近似，可在代码 <span class="mono">MODEL</span> / <span class="mono">map*</span> 中自行调参。非投资建议。</p>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- DATA MODEL (defaults anchored to early-June 2026) ---------- */
+const MODEL = {
+  one: { key:'one', name:'一阶 · 流动性', sub:'油门与刹车 — 物理买卖力', steps:[
+    {name:'STEP 0 · 水源端', q:'水闸开了吗', inds:[
+      {id:'net_liq', label:'净流动性 · 4周变化 ($B)', min:-300, max:300, step:5, val:10, pol:'highGood', t1:-50, t2:60},
+      {id:'supply', label:'久期供给压力 (0全短债→100全长债)', min:0, max:100, step:1, val:46, pol:'lowGood', t1:40, t2:65},
+    ]},
+    {name:'STEP 1 · 资金端', q:'血液还在流吗', inds:[
+      {id:'fraois', label:'FRA-OIS 利差 (bp)', min:0, max:50, step:1, val:12, pol:'lowGood', t1:15, t2:25},
+      {id:'rrp', label:'隔夜逆回购 RRP 余额 ($B)', min:0, max:2500, step:10, val:8, pol:'highGood', t1:120, t2:500},
+    ]},
+    {name:'STEP 2 · 中介能力', q:'血管堵了吗', inds:[
+      {id:'tsyliq', label:'彭博美债流动性指数 (越高越差)', min:0, max:100, step:1, val:46, pol:'lowGood', t1:40, t2:70},
+      {id:'slr', label:'SLR 余量 (0告急→100宽裕)', min:0, max:100, step:1, val:60, pol:'highGood', t1:30, t2:55},
+    ]},
+    {name:'STEP 3 · 波动杠杆', q:'会有爆炸吗', inds:[
+      {id:'move', label:'MOVE 指数', min:50, max:160, step:1, val:73, pol:'lowGood', t1:90, t2:120},
+      {id:'odte', label:'0DTE 占总成交比例 (%)', min:20, max:75, step:1, val:50, pol:'lowGood', t1:45, t2:58},
+    ]},
+  ]},
+  two: { key:'two', name:'二阶 · 基本面', sub:'路况与重力 — 心理公允价值', steps:[
+    {name:'STEP 1 · 宏观天气', q:'增长与通胀成色', inds:[
+      {id:'realy', label:'10Y 实际利率 / TIPS (%)', min:0.5, max:3.0, step:0.05, val:2.0, pol:'lowGood', t1:1.4, t2:2.3},
+      {id:'bei', label:'盈亏平衡通胀 BEI (%)', min:1.5, max:3.5, step:0.05, val:2.4, pol:'lowGood', t1:2.3, t2:2.6},
+    ]},
+    {name:'STEP 2 · 筹码供需', q:'谁为久期买单', inds:[
+      {id:'tp', label:'ACM 10Y 期限溢价 (%)', min:-0.5, max:2.5, step:0.05, val:0.67, pol:'lowGood', t1:0.6, t2:1.3},
+      {id:'indirect', label:'拍卖间接投标占比 (%)', min:40, max:85, step:1, val:62, pol:'highGood', t1:60, t2:70},
+    ]},
+    {name:'STEP 3 · 财政信誉', q:'国家信用是否侵蚀定价', inds:[
+      {id:'slope', label:'10Y-2Y 熊陡斜率 (bp)', min:-60, max:120, step:1, val:52, pol:'lowGood', t1:25, t2:50},
+      {id:'corr', label:'股债相关性 (×100, 正=双杀)', min:-100, max:100, step:5, val:30, pol:'lowGood', t1:-10, t2:25},
+    ]},
+  ]},
+};
+
+const FMT = {
+  net_liq:v=>(v>0?'+':'')+v+'B', supply:v=>v, fraois:v=>v+'bp', rrp:v=>'$'+v+'B',
+  tsyliq:v=>v, slr:v=>v, move:v=>v, odte:v=>v+'%',
+  realy:v=>v.toFixed(2)+'%', bei:v=>v.toFixed(2)+'%', tp:v=>(v>0?'+':'')+v.toFixed(2)+'%',
+  indirect:v=>v+'%', slope:v=>(v>0?'+':'')+v+'bp', corr:v=>(v/100).toFixed(2)
+};
+const STATUS = {green:'安全 · 进攻', amber:'警惕 · 中性', red:'极危 · 防守'};
+const C = {green:'var(--green)', amber:'var(--amber)', red:'var(--red)'};
+
+function scoreOf(ind){
+  const v=ind.val;
+  if(ind.pol==='lowGood') return v<ind.t1?2 : v<ind.t2?1 : 0;
+  return v>ind.t2?2 : v>ind.t1?1 : 0;
+}
+function lightOf(s){return s>=2?'green':s>=1?'amber':'red';}
+function gradOf(ind){
+  const p1=((ind.t1-ind.min)/(ind.max-ind.min)*100).toFixed(1);
+  const p2=((ind.t2-ind.min)/(ind.max-ind.min)*100).toFixed(1);
+  const G='rgba(70,192,138,.30)',A='rgba(224,169,63,.30)',R='rgba(227,88,79,.32)';
+  if(ind.pol==='lowGood') return `linear-gradient(90deg,${G} 0 ${p1}%,${A} ${p1}% ${p2}%,${R} ${p2}% 100%)`;
+  return `linear-gradient(90deg,${R} 0 ${p1}%,${A} ${p1}% ${p2}%,${G} ${p2}% 100%)`;
+}
+
+/* ---------- RENDER ---------- */
+const REG = {}; // id -> ind
+function renderTier(tier){
+  const el=document.getElementById('tier-'+tier.key);
+  let h=`<div class="tier-head"><span class="tier-h">${tier.name}</span>
+     <span class="tier-grade" id="grade-${tier.key}"></span></div>
+     <div class="tier-sub">${tier.sub}</div>
+     <div class="health"><div class="health-fill" id="health-${tier.key}"></div></div>`;
+  tier.steps.forEach((st,si)=>{
+    h+=`<div class="step"><div class="step-head"><span class="step-name">${st.name}</span>
+        <span class="step-q">${st.q}</span><span class="step-light" id="sl-${tier.key}-${si}"></span></div>`;
+    st.inds.forEach(ind=>{
+      REG[ind.id]=ind;
+      h+=`<div class="ind">
+        <div class="ind-head"><span class="ind-name">${ind.label}</span><span class="ind-val" id="iv-${ind.id}"></span></div>
+        <div class="swrap"><div class="track-grad" style="background:${gradOf(ind)}"></div>
+          <input type="range" id="r-${ind.id}" min="${ind.min}" max="${ind.max}" step="${ind.step}" value="${ind.val}"></div>
+        <div class="ind-foot"><span class="lite" id="il-${ind.id}"></span><span class="ind-status" id="is-${ind.id}"></span></div>
+      </div>`;
+    });
+    h+=`</div>`;
+  });
+  el.innerHTML=h;
+  tier.steps.forEach(st=>st.inds.forEach(ind=>{
+    document.getElementById('r-'+ind.id).addEventListener('input',e=>{ind.val=parseFloat(e.target.value);compute();});
+  }));
+}
+
+/* ---------- MAPPINGS (scoring -> implied 10Y / ERP) ---------- */
+function map10Y(h2){ return 5.0 - (h2/100)*1.4; }      // worse fundamentals -> higher 10Y
+function mapERP(h1){ return 2.8 - (h1/100)*2.7; }       // worse liquidity -> higher ERP
+
+/* ---------- COMPUTE ---------- */
+function tierHealth(tier){
+  let tot=0,n=0;
+  tier.steps.forEach((st,si)=>{
+    let ss=0;
+    st.inds.forEach(ind=>{
+      const s=scoreOf(ind), lt=lightOf(s);
+      document.getElementById('iv-'+ind.id).textContent=FMT[ind.id](ind.val);
+      document.getElementById('iv-'+ind.id).style.color=C[lt];
+      document.getElementById('il-'+ind.id).className='lite l-'+lt;
+      document.getElementById('is-'+ind.id).textContent=STATUS[lt];
+      document.getElementById('is-'+ind.id).className='ind-status c-'+lt;
+      ss+=s; tot+=s; n++;
+    });
+    const savg=ss/st.inds.length, slt=lightOf(savg);
+    const sl=document.getElementById('sl-'+tier.key+'-'+si);
+    sl.innerHTML=`<span class="lite l-${slt}"></span>${slt==='green'?'绿':slt==='amber'?'黄':'红'}`;
+    sl.className='step-light c-'+slt;
+  });
+  return tot/n/2*100; // 0..100
+}
+function paintGrade(key,h){
+  const lt=h>=66?'green':h>=40?'amber':'red';
+  const g=document.getElementById('grade-'+key);
+  g.innerHTML=`<span class="lite l-${lt}"></span>${lt==='green'?'绿灯 · 安全':lt==='amber'?'黄灯 · 警惕':'红灯 · 偏危'}`;
+  g.className='tier-grade bg-'+lt;
+  const f=document.getElementById('health-'+key);
+  f.style.width=h.toFixed(0)+'%'; f.style.background=C[lt];
+  return lt;
+}
+
+function compute(){
+  const h1=tierHealth(MODEL.one), h2=tierHealth(MODEL.two);
+  paintGrade('one',h1); paintGrade('two',h2);
+  const overall=(h1+h2)/2;
+  const olt=overall>=66?'green':overall>=40?'amber':'red';
+  document.getElementById('ov-num').textContent=overall.toFixed(0);
+  document.getElementById('ov-num').style.color=C[olt];
+
+  /* valuation engine */
+  const y10=parseFloat(document.getElementById('s-10y').value);
+  const erp=parseFloat(document.getElementById('s-erp').value);
+  document.getElementById('v-10y').textContent=y10.toFixed(2)+'%';
+  document.getElementById('v-erp').textContent=erp.toFixed(2)+'%';
+  document.getElementById('grad-10y').style.background=gradOf({min:3.0,max:5.5,t1:4.0,t2:4.8,pol:'lowGood'});
+  document.getElementById('grad-erp').style.background=gradOf({min:-0.5,max:3.5,t1:1.0,t2:2.0,pol:'highGood'});
+
+  const denom=(y10+erp)/100;
+  const pe=denom>0?1/denom:99;
+  document.getElementById('pe-num').textContent=pe.toFixed(1)+'x';
+  const peLt=pe>=22?'green':pe>=18?'amber':pe>=15?'red':'red';
+  document.getElementById('pe-num').style.color= pe>=22?'var(--green)':pe>=18?'var(--amber)':'var(--red)';
+  // P/E scale marker: map 12..26 -> 0..100
+  const pePos=v=>Math.max(1,Math.min(99,(v-12)/(26-12)*100));
+  document.getElementById('pe-mk').style.left=pePos(pe)+'%';
+  document.getElementById('pe-mkt').style.left=pePos(23)+'%';
+  document.getElementById('pe-judge').textContent = pe>=23.5?'天花板高于现价 · 仍有空间' : pe>=22?'天花板≈现价 · 充分定价' : pe>=18?'现价高于天花板 · 偏贵':'现价远高于天花板 · 估值杀风险';
+  document.getElementById('pe-judge').style.color = pe>=22?'var(--green)':pe>=18?'var(--amber)':'var(--red)';
+
+  // ERP positioning gauge: -0.5..3.0 -> 0..100
+  const erpPos=Math.max(1,Math.min(99,(erp-(-0.5))/(3.0-(-0.5))*100));
+  document.getElementById('erp-mk').style.left=erpPos+'%';
+
+  /* framework-implied & mispricing gap */
+  const impErp=mapERP(h1), imp10=map10Y(h2);
+  const impPe=1/((imp10+impErp)/100);
+  document.getElementById('imp-erp').textContent=impErp.toFixed(2)+'%';
+  document.getElementById('imp-10y').textContent=imp10.toFixed(2)+'%';
+  document.getElementById('imp-pe').textContent=impPe.toFixed(1)+'x';
+  const ghostPos=Math.max(1,Math.min(99,(impErp-(-0.5))/(3.0-(-0.5))*100));
+  document.getElementById('erp-ghost').style.left=ghostPos+'%';
+
+  const gap=impErp-erp;
+  const gb=document.getElementById('gap-box');
+  document.getElementById('gap-val').textContent=(gap>=0?'+':'')+gap.toFixed(2)+'pp';
+  if(gap>0.4){ gb.className='gap-box';
+    document.getElementById('gap-txt').innerHTML=`市场要求的风险补偿比框架条件所应有的水平 <b>低 ${gap.toFixed(2)} 个百分点</b> → 风险被<b>低估</b>，正是"被迫抱团/完美定价"的特征。框架公允 P/E 约 <b>${impPe.toFixed(1)}x</b>，市场现价 ~23x。`;
+  } else if(gap<-0.4){ gb.className='gap-box ok';
+    document.getElementById('gap-txt').innerHTML=`市场要求的风险补偿比框架条件所需 <b>高 ${(-gap).toFixed(2)} 个百分点</b> → 风险或已<b>过度</b>定价，存在向上修复空间。`;
+  } else { gb.className='gap-box ok';
+    document.getElementById('gap-txt').innerHTML=`市场 ERP 与框架隐含值基本吻合（缺口 ${gap.toFixed(2)}pp）→ 定价大体合理。`;
+  }
+
+  /* overall stage + verdict text */
+  let stage,scol;
+  if(erp<1.0){stage='极低 ERP · 抱团';scol='var(--gold)';}
+  else if(erp<2.0){stage='正常 · 中性';scol='var(--txt)';}
+  else {stage='飙升 · 危机重估';scol='var(--red)';}
+  document.getElementById('ov-stage').textContent=stage;
+  document.getElementById('ov-stage').style.color=scol;
+  document.getElementById('ov-txt').innerHTML=
+    `一阶流动性健康度 <b>${h1.toFixed(0)}</b> · 二阶基本面健康度 <b>${h2.toFixed(0)}</b>。`+
+    (gap>0.4? ` 框架隐含 ERP(${impErp.toFixed(2)}%) 显著高于市场设定(${erp.toFixed(2)}%)——<b>缺口 ${gap.toFixed(2)}pp</b> 量化了"市场尚未为收紧定价"。`
+            : ` 当前市场 ERP 与框架条件大体匹配。`);
+}
+
+/* ---------- ACTIONS ---------- */
+function syncFromScoring(){
+  const h1=tierHealth(MODEL.one), h2=tierHealth(MODEL.two);
+  document.getElementById('s-10y').value=map10Y(h2).toFixed(2);
+  document.getElementById('s-erp').value=mapERP(h1).toFixed(2);
+  compute();
+}
+function setMarket(){
+  document.getElementById('s-10y').value='4.40';
+  document.getElementById('s-erp').value='0.10';
+  compute();
+}
+function resetAll(){
+  for(const tk in MODEL) MODEL[tk].steps.forEach(st=>st.inds.forEach(ind=>{
+    // restore defaults from a frozen copy
+    ind.val=DEFAULTS[ind.id];
+    const r=document.getElementById('r-'+ind.id); if(r) r.value=ind.val;
+  }));
+  setMarket();
+}
+
+/* ---------- INIT ---------- */
+const DEFAULTS={};
+for(const tk in MODEL) MODEL[tk].steps.forEach(st=>st.inds.forEach(ind=>DEFAULTS[ind.id]=ind.val));
+
+/* ---------- LIVE DATA (reads data.json produced by fetch.py) ---------- */
+async function loadLive(){
+  try{
+    const res = await fetch('data.json?t=' + Date.now());
+    if(!res.ok) throw new Error('no data.json yet');
+    const data = await res.json();
+    for(const [id,v] of Object.entries(data.values||{})){
+      const ind = REG[id], slider = document.getElementById('r-'+id);
+      if(ind && slider){
+        const c = Math.max(ind.min, Math.min(ind.max, v));
+        ind.val = c; slider.value = c;
+      }
+    }
+    if(data.context && data.context.y10!=null)
+      document.getElementById('s-10y').value = data.context.y10.toFixed(2);
+    stampFreshness(data);
+  }catch(e){ console.warn('live data unavailable, using defaults:', e.message); }
+  compute();
+}
+function stampFreshness(data){
+  let bar = document.getElementById('live-bar');
+  if(!bar){
+    bar = document.createElement('div'); bar.id='live-bar';
+    bar.style.cssText='font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:14px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card)';
+    document.querySelector('.toolbar').after(bar);
+  }
+  const live = Object.keys(data.values||{}).map(id => REG[id]?REG[id].label:id);
+  const ts = new Date(data.generated_at).toLocaleString();
+  bar.innerHTML = '\u25CF \u5b9e\u65f6\u6570\u636e\u66f4\u65b0\u4e8e <b style="color:var(--green)">'+ts+'</b> \u00b7 \u81ea\u52a8\u5b57\u6bb5 '+live.length+' \u9879\uff08\u5176\u4f59\u4e3a\u624b\u52a8\u5224\u65ad\uff09';
+}
+
+renderTier(MODEL.one); renderTier(MODEL.two);
+document.getElementById('s-10y').addEventListener('input',compute);
+document.getElementById('s-erp').addEventListener('input',compute);
+loadLive();
+</script>
+</body>
+</html>
