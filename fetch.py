@@ -122,6 +122,22 @@ def get_indirect_pct():
     except Exception as e:
         print(f"[warn] Treasury auctions: {e}", file=sys.stderr); return None
 
+def get_cnn_fng():
+    """CNN Fear & Greed via its public dataviz endpoint (best-effort; browser UA)."""
+    try:
+        ua = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+        req = urllib.request.Request("https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
+                                     headers={"User-Agent": ua, "Accept": "application/json"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            j = json.loads(r.read().decode())
+        fg = j.get("fear_and_greed", {})
+        if fg.get("score") is not None:
+            return {"score": round(float(fg["score"])), "rating": fg.get("rating")}
+    except Exception as e:
+        print(f"[warn] CNN F&G: {e}", file=sys.stderr)
+    return None
+
 def collect():
     vals, src = {}, {}
     def put(idd, v, s):
@@ -234,6 +250,7 @@ def main():
         "tier_health": {"one": h1, "two": h2},
         "implied": {"erp": imp_erp, "y10": imp_10y},
         "liquidity": liquidity, "history": history,
+        "sentiment": {"cnn": get_cnn_fng()},
     }
     json.dump(out, open(OUT, "w"), ensure_ascii=False, indent=2)
     print(f"wrote {OUT}: 一阶={h1} 二阶={h2} 流动性压力={liquidity['stress']}/10 "

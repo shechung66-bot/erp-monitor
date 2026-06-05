@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>情绪与仓位框架 · MSS 综合情绪指数</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0f; --panel:#13161e; --card:#171b24; --card-hi:#1c212c;
+    --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.13);
+    --txt:#e8e4d8; --dim:#9a9ca6; --faint:#62656f;
+    --gold:#d4a24e; --green:#46c08a; --teal:#5aa9c4; --amber:#e0a93f; --orange:#e08a3f; --red:#e3584f;
+    --mono:'IBM Plex Mono',monospace; --serif:'Spectral','Noto Serif SC',serif;
+    --sans:-apple-system,'Noto Sans SC',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;position:relative}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(900px 500px at 85% -10%,rgba(212,162,78,.08),transparent 60%),radial-gradient(700px 600px at 5% 110%,rgba(70,192,138,.05),transparent 60%)}
+  .wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 22px 70px}
+
+  header{padding:34px 0 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(24px,4.4vw,38px);line-height:1.08;margin-bottom:9px}
+  .sub{color:var(--dim);font-size:14px;max-width:680px}
+  .formula{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:12px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 13px;display:inline-block}
+  .formula b{color:var(--gold)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .panel h2{font-family:var(--serif);font-size:18px;font-weight:600;margin-bottom:4px}
+  .panel .pnote{font-size:12px;color:var(--faint);margin-bottom:16px}
+
+  .inp{margin-bottom:15px}
+  .inp-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}
+  .inp-name{font-size:13.5px}
+  .inp-name .badge{font-family:var(--mono);font-size:9px;letter-spacing:.05em;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle}
+  .badge.auto{background:rgba(70,192,138,.15);color:var(--green)}
+  .badge.man{background:rgba(224,169,63,.13);color:var(--amber)}
+  .go{font-family:var(--mono);font-size:10.5px;color:var(--teal);text-decoration:none;border:1px solid var(--line-2);padding:2px 8px;border-radius:5px}
+  .go:hover{background:var(--panel)}
+  .inp input{width:100%;background:#0d0f14;border:1px solid var(--line-2);border-radius:8px;color:var(--txt);font-family:var(--mono);font-size:16px;padding:9px 12px;outline:none}
+  .inp input:focus{border-color:var(--gold)}
+  .aaii-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn{width:100%;margin-top:6px;font-family:var(--mono);font-size:13px;font-weight:600;padding:11px;border-radius:9px;border:0;background:linear-gradient(120deg,var(--gold),#b9852e);color:#1a1206;cursor:pointer}
+  .btn:hover{filter:brightness(1.08)}
+
+  .std{display:flex;gap:1px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--line);margin-bottom:18px}
+  .std .c{flex:1;background:var(--panel);padding:11px 12px;text-align:center}
+  .std .k{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.05em}
+  .std .v{font-family:var(--mono);font-size:20px;font-weight:600;margin-top:3px}
+
+  .mss-big{text-align:center;margin:6px 0 16px}
+  .mss-big .n{font-family:var(--mono);font-size:54px;font-weight:700;line-height:1}
+  .mss-big .z{font-family:var(--serif);font-size:18px;font-weight:600;margin-top:6px}
+  .mss-big .zk{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:2px}
+
+  .gauge{position:relative;height:18px;border-radius:10px;overflow:hidden;display:flex;border:1px solid var(--line);margin-bottom:7px}
+  .gz{height:100%}
+  .gauge-mk{position:absolute;top:-5px;bottom:-5px;width:3px;background:#fff;border-radius:2px;box-shadow:0 0 0 3px rgba(255,255,255,.13),0 0 10px rgba(255,255,255,.5);transition:left .35s}
+  .gauge-x{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint)}
+  .strategy{margin-top:16px;border-left:3px solid var(--gold);background:rgba(212,162,78,.06);border-radius:0 8px 8px 0;padding:13px 15px}
+  .strategy .t{font-weight:600;font-size:14px;margin-bottom:5px}
+  .strategy .d{font-size:13px;color:var(--dim);line-height:1.55}
+
+  .sec{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+  .sec::after{content:'';flex:1;height:1px;background:var(--line)}
+
+  .diverge{border-radius:13px;padding:18px 20px;border:1px solid var(--line)}
+  .diverge.buy{background:rgba(70,192,138,.08);border-color:rgba(70,192,138,.3)}
+  .diverge.sell{background:rgba(227,88,79,.09);border-color:rgba(227,88,79,.3)}
+  .diverge.neutral{background:var(--card)}
+  .diverge .tag{font-family:var(--serif);font-size:18px;font-weight:600;margin-bottom:6px}
+  .diverge.buy .tag{color:var(--green)} .diverge.sell .tag{color:var(--red)}
+  .diverge .note{font-size:13px;color:var(--dim)}
+
+  .hist{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+  #spark{width:100%;height:90px;display:block;margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+  th,td{padding:7px 6px;text-align:right;border-top:1px solid var(--line)}
+  th{color:var(--faint);font-weight:500;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase}
+  td:first-child,th:first-child{text-align:left}
+  .empty{color:var(--faint);font-size:12.5px;text-align:center;padding:20px 0;font-family:var(--mono)}
+  .clearbtn{font-family:var(--mono);font-size:10.5px;color:var(--faint);background:none;border:1px solid var(--line);border-radius:6px;padding:4px 9px;cursor:pointer;margin-top:10px}
+
+  #stamp{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:14px}
+  #stamp b{color:var(--green)}
+  footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint);line-height:1.7}
+  footer b{color:var(--dim)}
+  @media(max-width:780px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<!--NAV-->
+<div style="background:#0a0b0f;border-bottom:1px solid rgba(255,255,255,.1);padding:9px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:-apple-system,'Noto Sans SC',system-ui,sans-serif;position:relative;z-index:5">
+  <span style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#d4a24e;margin-right:8px">US MACRO</span>
+  <a href="index.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">ERP 引擎</a>
+  <a href="liquidity.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">流动性</a>
+  <a href="mag7.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">巨头研究</a>
+  <a href="sentiment.html" style="text-decoration:none;font:600 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#0a0b0f;background:#d4a24e;border:1px solid #d4a24e;padding:6px 13px;border-radius:7px">情绪</a>
+</div>
+<!--/NAV-->
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">◆ 量化情绪与仓位框架 · MARKET SENTIMENT SCORE</div>
+    <h1>三维情绪框架 · MSS 综合情绪指数</h1>
+    <p class="sub">资金面(NAAIM 聪明钱)× 情绪面(CNN 动量)× 散户面(AAII 反向)。把飘忽的"市场情绪"量化为可执行的仓位指南——在别人贪婪时恐惧。</p>
+    <div class="formula">MSS = N×<b>0.5</b> + C×<b>0.3</b> + A×<b>0.2</b> &nbsp;·&nbsp; A = ((牛% − 熊%) + 100) / 2</div>
+    <div id="stamp"></div>
+  </header>
+
+  <div class="grid2">
+    <!-- INPUTS -->
+    <div class="panel">
+      <h2>录入当周数值</h2>
+      <div class="pnote">CNN 自动填充;NAAIM / AAII 每周四点"去查"看一眼填进来。</div>
+
+      <div class="inp">
+        <div class="inp-head"><span class="inp-name">NAAIM 敞口指数 <span class="badge man">手动</span></span>
+          <a class="go" href="https://naaim.org/programs/naaim-exposure-index/" target="_blank" rel="noopener">去查 ↗</a></div>
+        <input id="i-naaim" type="number" step="0.01" placeholder="例 90.5(可 >100)">
+      </div>
+
+      <div class="inp">
+        <div class="inp-head"><span class="inp-name">CNN 恐惧与贪婪 <span class="badge auto" id="cnn-badge">自动</span></span>
+          <a class="go" href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" rel="noopener">去查 ↗</a></div>
+        <input id="i-cnn" type="number" step="1" placeholder="0 - 100">
+      </div>
+
+      <div class="inp">
+        <div class="inp-head"><span class="inp-name">AAII 情绪调查 <span class="badge man">手动</span></span>
+          <a class="go" href="https://www.aaii.com/sentiment-survey" target="_blank" rel="noopener">去查 ↗</a></div>
+        <div class="aaii-row">
+          <div><input id="i-bull" type="number" step="0.1" placeholder="看多 Bull %"></div>
+          <div><input id="i-bear" type="number" step="0.1" placeholder="看空 Bear %"></div>
+        </div>
+      </div>
+
+      <button class="btn" onclick="record()">记录本周 ✓</button>
+    </div>
+
+    <!-- RESULT -->
+    <div class="panel">
+      <h2>综合情绪指数 MSS</h2>
+      <div class="pnote">分越高 = 越贪婪/仓位越拥挤;越低 = 越恐惧/轻仓。</div>
+
+      <div class="std">
+        <div class="c"><div class="k">N · 资金面</div><div class="v" id="o-n">—</div></div>
+        <div class="c"><div class="k">C · 情绪面</div><div class="v" id="o-c">—</div></div>
+        <div class="c"><div class="k">A · 散户面</div><div class="v" id="o-a">—</div></div>
+      </div>
+
+      <div class="mss-big">
+        <div class="n" id="o-mss">—</div>
+        <div class="z" id="o-zone">录入数值后计算</div>
+        <div class="zk" id="o-zk"></div>
+      </div>
+
+      <div class="gauge" id="gauge">
+        <div class="gz" style="flex:30;background:rgba(70,192,138,.5)"></div>
+        <div class="gz" style="flex:20;background:rgba(90,169,196,.45)"></div>
+        <div class="gz" style="flex:20;background:rgba(224,169,63,.45)"></div>
+        <div class="gz" style="flex:15;background:rgba(224,138,63,.5)"></div>
+        <div class="gz" style="flex:15;background:rgba(227,88,79,.55)"></div>
+        <div class="gauge-mk" id="mss-mk" style="left:0%;display:none"></div>
+      </div>
+      <div class="gauge-x"><span>0 恐惧</span><span>30</span><span>50</span><span>70</span><span>85</span><span>100 贪婪</span></div>
+
+      <div class="strategy"><div class="t" id="o-strat-t">—</div><div class="d" id="o-strat-d">输入 NAAIM、CNN、AAII 三项后,自动给出区间与策略。</div></div>
+    </div>
+  </div>
+
+  <div class="sec">背离信号(最值钱的信号)</div>
+  <div class="diverge neutral" id="diverge">
+    <div class="tag" id="dv-tag">需要更多周数据</div>
+    <div class="note" id="dv-note">每周四记录一次,积累 2–4 周后自动判断「机构吸筹」或「主力派发」背离。</div>
+  </div>
+
+  <div class="sec">每周记录 <span id="hist-cnt" style="color:var(--gold)"></span></div>
+  <div class="hist">
+    <svg id="spark" viewBox="0 0 600 90" preserveAspectRatio="none" style="display:none"></svg>
+    <table id="hist-table"><tbody></tbody></table>
+    <div class="empty" id="hist-empty">还没有记录 · 填好三项后点"记录本周"</div>
+    <button class="clearbtn" onclick="clearHist()" id="clearbtn" style="display:none">清空记录</button>
+  </div>
+
+  <footer>
+    <p><b>框架 ·</b> NAAIM=聪明钱真实仓位,CNN=动量/衍生品情绪,AAII=散户反向。权重 0.5 / 0.3 / 0.2。区间:&lt;30 战略布局(逆向买入)· 30–50 正常多头 · 50–70 持有成长 · 70–85 停止追高 · ≥85 反向减仓。<b>数据 ·</b> CNN 由后台 <code>data.json</code> 自动填充;NAAIM / AAII 无免费接口,每周四手动录入(与你的清单一致)。<b>记录保存在本浏览器本地</b>(localStorage),换设备/清缓存会清空。非投资建议。</p>
+  </footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const HKEY = 'mss_hist_v1';
+let MEM = null; // in-memory fallback if localStorage blocked
+
+function loadHist(){
+  if(MEM) return MEM;
+  try{ MEM = JSON.parse(localStorage.getItem(HKEY) || '[]'); }
+  catch(e){ MEM = []; }
+  return MEM;
+}
+function saveHist(h){
+  MEM = h;
+  try{ localStorage.setItem(HKEY, JSON.stringify(h)); }catch(e){}
+}
+
+const ZONES = [
+  {max:30,  col:'var(--green)',  name:'战略布局区 · 逆向买入',   t:'战略性左侧建仓',
+   d:'市场已把大部分利空定价。可对基本面扎实、估值合理的核心标的分批买入,或卖出轻微虚值 Put(Short Put)收集筹码。'},
+  {max:50,  col:'var(--teal)',   name:'正常多头区 · 分批回补/持股', t:'顺势而为',
+   d:'恐慌后反弹或震荡市,机构试探性加仓。结合布林中轨/斐波那契支撑,回踩时逐步把仓位推高到核心仓位(50–60%)。'},
+  {max:70,  col:'var(--amber)',  name:'情绪平稳/观察区 · 持有成长', t:'让利润奔跑',
+   d:'健康牛市或趋势中继,各项指标不温不火。不轻易择时、不猜顶,主要精力放在个股季度财报基本面跟踪上。'},
+  {max:85,  col:'var(--orange)', name:'警惕/拥挤区 · 停止追高',   t:'收紧止损,停止开新仓',
+   d:'机构逼近/超过满仓(NAAIM>100),CNN 进入贪婪,散户转多。容错率极低,提高移动止损或用 Collar 锁利,不为最后的铜板冒险。'},
+  {max:101, col:'var(--red)',    name:'极端风险区 · 反向减仓',   t:'坚决降至防御仓位',
+   d:'三者同时见顶——真金白银与口头情绪同时满载。一旦流动性边际收紧或国债拍卖暴冷极易踩踏。降至防御仓位,分批买入长端 Put 保护。'},
+];
+function zoneOf(mss){ return ZONES.find(z => mss < z.max) || ZONES[ZONES.length-1]; }
+
+function readInputs(){
+  const num = id => { const v = parseFloat($(id).value); return isNaN(v) ? null : v; };
+  return {naaim:num('i-naaim'), cnn:num('i-cnn'), bull:num('i-bull'), bear:num('i-bear')};
+}
+function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+
+function compute(){
+  const {naaim,cnn,bull,bear} = readInputs();
+  const haveAll = [naaim,cnn,bull,bear].every(v => v!=null);
+  if(naaim!=null) $('o-n').textContent = clamp(naaim,0,100).toFixed(0);
+  if(cnn!=null)   $('o-c').textContent = clamp(cnn,0,100).toFixed(0);
+  if(bull!=null && bear!=null) $('o-a').textContent = clamp(((bull-bear)+100)/2,0,100).toFixed(1);
+  if(!haveAll){ return; }
+
+  const N = clamp(naaim,0,100), C = clamp(cnn,0,100), A = clamp(((bull-bear)+100)/2,0,100);
+  const MSS = N*0.5 + C*0.3 + A*0.2;
+  const z = zoneOf(MSS);
+  $('o-mss').textContent = MSS.toFixed(1);
+  $('o-mss').style.color = z.col;
+  $('o-zone').textContent = z.name; $('o-zone').style.color = z.col;
+  $('o-zk').textContent = `N ${N.toFixed(0)} · C ${C.toFixed(0)} · A ${A.toFixed(1)}`;
+  $('mss-mk').style.display = 'block';
+  $('mss-mk').style.left = clamp(MSS,1,99) + '%';
+  $('o-strat-t').textContent = z.t; $('o-strat-t').style.color = z.col;
+  $('o-strat-d').textContent = z.d;
+  return {N,C,A,MSS};
+}
+
+function record(){
+  const r = compute();
+  const {naaim,cnn,bull,bear} = readInputs();
+  if(!r || [naaim,cnn,bull,bear].some(v=>v==null)){ alert('请先填好 NAAIM、CNN、AAII 看多、AAII 看空 四项'); return; }
+  const today = new Date().toISOString().slice(0,10);
+  let h = loadHist().filter(x => x.date !== today);
+  h.push({date:today, naaim, cnn, bull, bear, mss:+r.MSS.toFixed(1)});
+  h = h.slice(-52);
+  saveHist(h);
+  renderHist(); renderDiverge();
+}
+function clearHist(){ if(confirm('清空所有每周记录?')){ saveHist([]); renderHist(); renderDiverge(); } }
+
+function renderDiverge(){
+  const h = loadHist();
+  const box = $('diverge'), tag = $('dv-tag'), note = $('dv-note');
+  if(h.length < 2){ box.className='diverge neutral'; tag.textContent='需要更多周数据';
+    note.textContent='每周四记录一次,积累 2–4 周后自动判断背离。'; return; }
+  const cur = h[h.length-1], ref = h[Math.max(0, h.length-4)];
+  const dN = cur.naaim - ref.naaim;
+  const dA = (cur.bull-cur.bear) - (ref.bull-ref.bear);
+  if(dN > 5 && dA < -5){ box.className='diverge buy'; tag.textContent='嘴炮型背离 · 机构悄悄吸筹(强买入)';
+    note.textContent=`NAAIM 较 ${ref.date} 升 ${dN.toFixed(0)},AAII 牛熊差降 ${(-dA).toFixed(0)} → 散户割肉、聪明钱接盘。`; return; }
+  if(dN < -5 && cur.cnn >= 60){ box.className='diverge sell'; tag.textContent='空头不死背离 · 主力派发(减仓)';
+    note.textContent=`NAAIM 较 ${ref.date} 降 ${(-dN).toFixed(0)},但 CNN 仍 ${cur.cnn}(贪婪)→ 拉权重出货。`; return; }
+  box.className='diverge neutral'; tag.textContent='无明显背离';
+  note.textContent=`NAAIM Δ${dN>=0?'+':''}${dN.toFixed(0)} · AAII牛熊差 Δ${dA>=0?'+':''}${dA.toFixed(0)} · CNN ${cur.cnn}(对比 ${ref.date})`;
+}
+
+function renderHist(){
+  const h = loadHist();
+  $('hist-cnt').textContent = h.length ? h.length+' 周' : '';
+  const tb = $('hist-table').querySelector('tbody');
+  if(!h.length){ $('hist-empty').style.display='block'; $('spark').style.display='none'; $('clearbtn').style.display='none'; tb.innerHTML=''; return; }
+  $('hist-empty').style.display='none'; $('clearbtn').style.display='inline-block';
+  tb.innerHTML = '<tr><th>日期</th><th>NAAIM</th><th>CNN</th><th>牛-熊</th><th>MSS</th></tr>' +
+    h.slice().reverse().map(x=>{
+      const z = zoneOf(x.mss);
+      return `<tr><td>${x.date}</td><td>${x.naaim}</td><td>${x.cnn}</td><td>${(x.bull-x.bear).toFixed(0)}</td>
+        <td style="color:${z.col};font-weight:600">${x.mss}</td></tr>`;
+    }).join('');
+  // sparkline
+  const svg=$('spark'); svg.style.display='block';
+  if(h.length<2){ svg.innerHTML=''; return; }
+  const W=600,H=90,p=6, n=h.length;
+  const X=i=> p + (W-2*p)*(i/(n-1));
+  const Y=v=> (H-p) - (H-2*p)*(clamp(v,0,100)/100);
+  const line=h.map((x,i)=>(i?'L':'M')+X(i).toFixed(1)+' '+Y(x.mss).toFixed(1)).join(' ');
+  svg.innerHTML = `<line x1="${p}" y1="${Y(70)}" x2="${W-p}" y2="${Y(70)}" stroke="rgba(224,138,63,.3)" stroke-dasharray="3 4"/>
+    <line x1="${p}" y1="${Y(30)}" x2="${W-p}" y2="${Y(30)}" stroke="rgba(70,192,138,.3)" stroke-dasharray="3 4"/>
+    <path d="${line}" fill="none" stroke="var(--gold)" stroke-width="2"/>
+    <circle cx="${X(n-1).toFixed(1)}" cy="${Y(h[n-1].mss).toFixed(1)}" r="3.5" fill="#fff"/>`;
+}
+
+async function init(){
+  // prefill CNN from data.json (auto), and NAAIM/AAII from last saved week
+  let cnnAuto=null, ts=null;
+  try{
+    const d = await (await fetch('data.json?t='+Date.now())).json();
+    ts = d.generated_at;
+    if(d.sentiment && d.sentiment.cnn && d.sentiment.cnn.score!=null) cnnAuto = d.sentiment.cnn;
+  }catch(e){}
+  const h = loadHist(); const last = h.length ? h[h.length-1] : null;
+  if(cnnAuto){ $('i-cnn').value = cnnAuto.score; $('cnn-badge').textContent = '自动 ✓'; }
+  else { $('cnn-badge').textContent='手动'; $('cnn-badge').className='badge man'; if(last) $('i-cnn').value=last.cnn; }
+  if(last){ $('i-naaim').value=last.naaim; $('i-bull').value=last.bull; $('i-bear').value=last.bear; }
+  $('stamp').innerHTML = ts ? ('● CNN 数据更新于 <b>'+new Date(ts).toLocaleString()+'</b>'
+        + (cnnAuto&&cnnAuto.rating?(' · '+cnnAuto.rating):'')) : '● 离线模式 · 全部手动录入';
+  ['i-naaim','i-cnn','i-bull','i-bear'].forEach(id => $(id).addEventListener('input', compute));
+  compute(); renderHist(); renderDiverge();
+}
+init();
+</script>
+</body>
+</html>
