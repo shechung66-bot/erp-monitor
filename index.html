@@ -42,7 +42,7 @@
   .layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
 
   /* ===== VALUATION ENGINE ===== */
-  .engine{position:sticky;top:18px;background:linear-gradient(165deg,#15110a,#121119 55%,#0f1118);border:1px solid var(--line-2);border-radius:16px;padding:26px 26px 24px;overflow:hidden}
+  .engine{background:linear-gradient(165deg,#15110a,#121119 55%,#0f1118);border:1px solid var(--line-2);border-radius:16px;padding:26px 26px 24px;overflow:hidden}
   .engine::before{content:'';position:absolute;top:-35%;right:-12%;width:420px;height:420px;background:radial-gradient(circle,rgba(212,162,78,.14),transparent 65%);pointer-events:none}
   .panel-tag{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
   .panel-title{font-family:var(--serif);font-size:22px;font-weight:600;margin-bottom:4px}
@@ -135,7 +135,7 @@
   .bg-green{background:rgba(70,192,138,.12);border:1px solid rgba(70,192,138,.3)}
 
   /* overall verdict strip */
-  .overall{grid-column:1/-1;margin-top:4px;background:linear-gradient(120deg,#16110a,#141118);border:1px solid var(--line-2);border-radius:14px;padding:22px 26px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
+  .overall{grid-column:1/-1;margin-top:4px;position:relative;z-index:2;background:linear-gradient(120deg,#16110a,#141118);border:1px solid var(--line-2);border-radius:14px;padding:22px 26px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
   .ov-score{text-align:center}
   .ov-score .n{font-family:var(--mono);font-size:40px;font-weight:700;line-height:1;transition:color .3s}
   .ov-score .l{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:5px}
