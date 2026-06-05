@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AAPL 投资框架综合分析 · 2026年6月</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #F8F4EC;
+  --bg-alt: #FFFFFF;
+  --bg-deep: #1A1815;
+  --ink: #1C1B17;
+  --ink-2: #4A4843;
+  --ink-3: #8A857D;
+  --line: #E2DBCC;
+  --line-2: #CFC6B3;
+  --accent: #1E2A4A;
+  --green: #2D6A4F;
+  --green-bg: #E5EDE6;
+  --blue: #1E3A5F;
+  --blue-bg: #E2EAF1;
+  --amber: #B8651E;
+  --amber-bg: #F2E5D0;
+  --red: #8B1E1E;
+  --red-bg: #F1DCDC;
+  --teal: #2A6F69;
+  --purple: #3D2E5E;
+  --coral: #A0421A;
+  --pink: #872D52;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  font-feature-settings: "kern", "liga", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+/* HERO */
+.hero { padding: 80px 0 64px; border-bottom: 1px solid var(--line); position: relative; }
+.hero-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-tag::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.hero-title {
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(40px, 5.5vw, 64px);
+  line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.hero-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+.hero-sub { font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 760px; margin-bottom: 40px; font-weight: 300; }
+.hero-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 24px; padding-top: 32px; border-top: 1px solid var(--line);
+}
+.hero-meta div { font-size: 13px; }
+.hero-meta .label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;
+}
+.hero-meta .value { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--ink); }
+
+/* SECTIONS */
+.section { padding: 80px 0 40px; border-bottom: 1px solid var(--line); }
+.section:last-of-type { border-bottom: none; }
+.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
+.section-title {
+  font-family: var(--font-display); font-size: clamp(30px, 4vw, 42px); font-weight: 500;
+  line-height: 1.15; letter-spacing: -0.015em; margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-lead { font-size: 19px; line-height: 1.65; color: var(--ink-2); max-width: 780px; margin-bottom: 40px; font-weight: 300; }
+
+/* PROSE */
+.prose p { margin-bottom: 16px; color: var(--ink-2); }
+.prose p strong, .prose strong { color: var(--ink); font-weight: 600; }
+.prose .highlight { background: linear-gradient(180deg, transparent 60%, rgba(184, 101, 30, 0.18) 60%); padding: 0 2px; }
+
+/* SUBSECTION */
+.subsection { margin-top: 40px; }
+.subsection-h { font-family: var(--font-display); font-style: italic; font-size: 24px; font-weight: 500; margin-bottom: 16px; color: var(--ink); }
+.subsection-h.tight { margin-top: 36px; }
+
+/* EQUATION / CALLOUT */
+.equation-box { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; margin: 32px 0; }
+.equation { font-family: var(--font-display); font-style: italic; font-size: clamp(18px, 2.2vw, 24px); font-weight: 400; color: var(--ink); line-height: 1.45; text-align: center; }
+.equation small { font-family: var(--font-mono); font-style: normal; font-size: 12px; color: var(--ink-3); display: block; margin-top: 12px; letter-spacing: 0.05em; }
+
+/* GATE CARD */
+.gate-card { background: var(--bg-alt); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 28px 32px; margin: 28px 0; }
+.gate-card .gate-h { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.gate-card p { font-size: 14px; color: var(--ink-2); margin-bottom: 10px; }
+.gate-card p:last-child { margin-bottom: 0; }
+.gate-card .na { font-family: var(--font-mono); font-size: 11px; background: var(--amber-bg); color: var(--amber); padding: 1px 7px; border-radius: 3px; }
+
+/* TABLE */
+.metrics-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+.metrics-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); text-align: left; padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line-2); font-weight: 500; }
+.metrics-table td { padding: 13px 12px 13px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.metrics-table td:first-child { font-weight: 500; color: var(--ink); }
+.metrics-table .num { font-family: var(--font-mono); color: var(--ink-3); width: 28px; }
+.metrics-table .mono { font-family: var(--font-mono); }
+.tg { color: var(--green); font-weight: 500; }
+.tr { color: var(--red); font-weight: 500; }
+.ta { color: var(--amber); font-weight: 500; }
+
+/* QUICK GRID */
+.quick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 32px 0; }
+.quick-cell { background: var(--bg-alt); padding: 18px 20px; }
+.quick-cell .qlabel { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+.quick-cell .qvalue { font-family: var(--font-display); font-size: 22px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+.qvalue.pos { color: var(--green); }
+.qvalue.neg { color: var(--red); }
+.qvalue.warn { color: var(--amber); }
+
+/* STOCK HEADER */
+.stock-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: 24px; }
+.stock-id { display: flex; flex-direction: column; }
+.stock-tier { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; padding: 4px 10px; border-radius: 4px; display: inline-block; width: fit-content; font-weight: 500; }
+.tier-2 { background: var(--blue-bg); color: var(--blue); }
+.stock-ticker { font-family: var(--font-display); font-size: clamp(48px, 6vw, 72px); font-weight: 500; letter-spacing: -0.03em; line-height: 1; font-variation-settings: "opsz" 144; }
+.stock-tagline { font-family: var(--font-display); font-style: italic; font-size: 20px; color: var(--ink-2); margin-top: 8px; font-weight: 400; }
+.stock-price-display { text-align: right; font-family: var(--font-mono); }
+.stock-price-display .price { font-size: 32px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+.stock-price-display .change { font-size: 13px; color: var(--ink-3); margin-top: 4px; }
+.change-pos { color: var(--green); }
+.change-neg { color: var(--red); }
+
+/* CHART */
+.chart-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-wrap { position: relative; width: 100%; }
+.chart-title { font-family: var(--font-display); font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.chart-note { font-size: 12px; color: var(--ink-3); margin-bottom: 18px; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; font-size: 12px; color: var(--ink-2); }
+.chart-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); }
+.legend-sq { width: 12px; height: 12px; border-radius: 2px; }
+
+/* SCENARIO */
+.scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.scenario-card { padding: 20px; border-radius: 8px; }
+.scenario-bull { background: var(--green-bg); }
+.scenario-base { background: #EDE9E0; }
+.scenario-bear { background: var(--red-bg); }
+.scenario-card .stier { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.scenario-bull .stier { color: var(--green); }
+.scenario-base .stier { color: #6B5B3A; }
+.scenario-bear .stier { color: var(--red); }
+.scenario-card .target { font-family: var(--font-display); font-size: 34px; font-weight: 500; line-height: 1; margin-bottom: 8px; }
+.scenario-bull .target { color: var(--green); }
+.scenario-base .target { color: #6B5B3A; }
+.scenario-bear .target { color: var(--red); }
+.scenario-card .sdesc { font-size: 12px; line-height: 1.5; }
+.scenario-bull .sdesc { color: var(--green); }
+.scenario-base .sdesc { color: #6B5B3A; }
+.scenario-bear .sdesc { color: var(--red); }
+.scenario-card .sprob { font-family: var(--font-mono); font-size: 11px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); }
+
+/* LADDER */
+.ladder-row { display: flex; align-items: center; padding: 12px 16px; border-radius: 6px; margin: 6px 0; font-size: 14px; }
+.ladder-row.zone-avoid { background: var(--red-bg); color: var(--red); }
+.ladder-row.zone-watch { background: var(--amber-bg); color: var(--amber); }
+.ladder-row.zone-build { background: var(--blue-bg); color: var(--blue); }
+.ladder-row.zone-ideal { background: var(--green-bg); color: var(--green); }
+.ladder-row.zone-heavy { background: #D6E5DD; color: #1B4D38; }
+.ladder-row .zlabel { flex: 1; font-weight: 500; }
+.ladder-row .zprice { font-family: var(--font-mono); font-weight: 500; }
+.ladder-current { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line-2); display: flex; align-items: center; gap: 8px; }
+.ladder-current::before { content: ''; width: 8px; height: 8px; background: var(--ink); border-radius: 50%; }
+
+/* RISK */
+.risk-list { margin-top: 16px; }
+.risk-item { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+.risk-item:last-child { border-bottom: 1px solid var(--line); }
+.risk-num { font-family: var(--font-display); font-size: 28px; font-weight: 500; font-style: italic; color: var(--amber); line-height: 1; flex-shrink: 0; width: 36px; }
+.risk-body p { font-size: 14px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+.risk-body strong { color: var(--ink); }
+
+/* FIVE FORCES */
+.forces-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 24px 0; }
+.force-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+.force-card .fhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.force-card .fname { font-family: var(--font-display); font-size: 17px; font-weight: 500; }
+.force-rate { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; font-weight: 500; }
+.rate-low { background: var(--green-bg); color: var(--green); }
+.rate-mid { background: var(--amber-bg); color: var(--amber); }
+.rate-high { background: var(--red-bg); color: var(--red); }
+.force-card p { font-size: 13px; color: var(--ink-2); line-height: 1.55; margin: 0; }
+
+/* SCORECARD TABLE */
+.rank-table-wrap { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; margin: 24px 0; }
+.rank-table-full { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+.rank-table-full th { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); text-align: left; padding: 14px 12px; border-bottom: 1px solid var(--line-2); font-weight: 500; background: var(--bg); }
+.rank-table-full td { padding: 13px 12px; border-bottom: 1px solid var(--line); font-size: 13px; vertical-align: top; }
+.rank-table-full td.mono { font-family: var(--font-mono); }
+.rank-table-full tr:last-child td { border-bottom: none; }
+.score-pill { font-family: var(--font-mono); font-weight: 600; font-size: 13px; }
+
+/* PULL QUOTE */
+.pull-quote { font-family: var(--font-display); font-style: italic; font-size: clamp(21px, 2.4vw, 27px); line-height: 1.4; color: var(--accent); padding: 28px 0 28px 32px; border-left: 3px solid var(--accent); margin: 36px 0; font-weight: 400; font-variation-settings: "opsz" 144; }
+.pull-quote::before { content: '"'; font-size: 1.5em; line-height: 0; vertical-align: -0.2em; margin-right: 0.05em; color: var(--amber); }
+
+/* VERDICT */
+.verdict-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 24px 0; }
+.verdict-tier-card { padding: 24px; }
+.vt1 { background: var(--green-bg); }
+.vt2 { background: var(--blue-bg); }
+.vt3 { background: var(--amber-bg); }
+.verdict-tier-card .vlabel { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.vt1 .vlabel { color: var(--green); } .vt2 .vlabel { color: var(--blue); } .vt3 .vlabel { color: var(--amber); }
+.verdict-tier-card .vname { font-family: var(--font-display); font-size: 22px; font-weight: 500; margin-bottom: 12px; line-height: 1.2; }
+.vt1 .vname { color: var(--green); } .vt2 .vname { color: var(--blue); } .vt3 .vname { color: var(--amber); }
+.verdict-tier-card .vbody { font-size: 13px; line-height: 1.6; }
+.vt1 .vbody { color: #1F4A37; } .vt2 .vbody { color: #16284A; } .vt3 .vbody { color: #7A4310; }
+
+/* RECO BANNER */
+.reco { background: var(--bg-deep); color: #F4EEE2; border-radius: 10px; padding: 40px; margin: 32px 0; }
+.reco .rlabel { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #B9AE98; margin-bottom: 16px; }
+.reco .rverdict { font-family: var(--font-display); font-size: clamp(36px, 5vw, 52px); font-weight: 500; line-height: 1.05; margin-bottom: 8px; }
+.reco .rverdict em { font-style: italic; color: #C9A86A; }
+.reco .rsub { font-size: 15px; color: #C9C1B2; max-width: 640px; margin-top: 16px; line-height: 1.6; }
+.reco-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 24px; margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.12); }
+.reco-stats .rs-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #B9AE98; margin-bottom: 6px; }
+.reco-stats .rs-value { font-family: var(--font-display); font-size: 24px; font-weight: 500; color: #F4EEE2; }
+
+/* TOC */
+.toc { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
+.toc ol { list-style: none; }
+.toc li { display: flex; align-items: baseline; padding: 8px 0; border-bottom: 1px dotted var(--line-2); font-size: 14px; }
+.toc li:last-child { border-bottom: none; }
+.toc .toc-num { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); width: 32px; flex-shrink: 0; }
+.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+.toc a:hover { border-bottom-color: var(--amber); }
+
+/* FOOTER */
+.footer { padding: 48px 0 64px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.footer h4 { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--ink-2); margin-bottom: 12px; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 56px 0 40px; }
+  .section { padding: 48px 0 32px; }
+  .stock-header { flex-direction: column; align-items: flex-start; }
+  .stock-price-display { text-align: left; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .equation-box { padding: 24px; }
+  .reco { padding: 28px; }
+}
+@media print { body { background: white; } .section { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+<!--NAV--><div style="background:#0a0b0f;border-bottom:1px solid rgba(255,255,255,.1);padding:9px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:-apple-system,'Noto Sans SC',system-ui,sans-serif;position:relative;z-index:999"><span style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#d4a24e;margin-right:8px">US MACRO</span><a href="index.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">ERP 引擎</a><a href="liquidity.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">流动性</a><a href="mag7.html" style="text-decoration:none;font:600 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#0a0b0f;background:#d4a24e;border:1px solid #d4a24e;padding:6px 13px;border-radius:7px">巨头研究</a></div><!--/NAV-->
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">独立投资研究 · 框架 B 八模块深度分析 · 2026年6月</div>
+    <h1 class="hero-title">AAPL <em>苹果</em><br>投资框架综合分析</h1>
+    <p class="hero-sub">用八模块深度框架拆解全球质量最高的现金机器之一:从业务结构、财务健康、护城河到估值情景。结论先行 —— 生意是 A+,价格是问题。在 $311 历史新高、37 倍 TTM P/E 的位置,框架给出的不是"买",而是"持有 + 等回调"。</p>
+    <div class="hero-meta">
+      <div><div class="label">现价</div><div class="value">$311</div></div>
+      <div><div class="label">市值</div><div class="value">$4.6T</div></div>
+      <div><div class="label">TTM P/E</div><div class="value" style="color:var(--amber);">37×</div></div>
+      <div><div class="label">质量评分</div><div class="value" style="color:var(--green);">22/25</div></div>
+      <div><div class="label">框架判定</div><div class="value" style="color:var(--blue);">持有</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORK FIT GATE -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">前置闸门 · 框架适配</div>
+    <h2 class="section-title">先选<em>对的框架</em>,再开始分析</h2>
+    <p class="section-lead">商业模式分类是分析前必须通过的第一道闸门。AAPL 是成熟、高盈利、资本轻型的复利型公司 —— 这决定了哪些工具适用、哪些必须标记为 N/A,而不是强行套用后产生误导性输出。</p>
+
+    <div class="gate-card">
+      <div class="gate-h">适用框架</div>
+      <p><strong>框架 B(八模块深度分析)+ 框架 A(FCF/质量锚定)</strong>。AAPL 拥有稳定的正向自由现金流、净现金资产负债表、极低资本开支,完全符合"利润型稳定公司 / 复利机器"画像。本报告以框架 B 的八模块结构展开,并叠加框架 A 的 25 分质量评分卡与 FCF Yield 锚定。</p>
+      <p><strong>框架 C(成长股三筛)不适用</strong>。Rule of X、EV/GP/NTM、QoQ 收入加速三筛是为超高速增长 / 尚未盈利的公司设计的;AAPL 是 14% 净利率以上、连续盈利数十年的巨头,套用会严重失真。</p>
+      <div class="gate-h" style="margin-top:18px;">标记为 N/A 的指标(强行计算会降低分析质量)</div>
+      <p>
+        <span class="na">LTV / CAC</span> <span class="na">NRR 净收入留存</span> <span class="na">Churn 流失率</span> <span class="na">Magic Number</span> <span class="na">Burn Rate / Runway</span><br>
+        以上为 SaaS / 订阅平台专用单位经济指标。AAPL 的核心是消费硬件 + 高黏性服务生态,客户经济应以<strong>装机量、换机留存率、ARPU、服务附着率</strong>衡量(见模块四),而非 SaaS KPI。Burn Rate / Runway 对一家年产 ~$105B 自由现金流的公司毫无意义。</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">八模块目录</div>
+      <ol>
+        <li><span class="toc-num">01</span><a href="#m1">公司概览与核心业务</a></li>
+        <li><span class="toc-num">02</span><a href="#m2">财务质量与健康现状</a></li>
+        <li><span class="toc-num">03</span><a href="#m3">增长分析:真实性、可持续性、市场空间</a></li>
+        <li><span class="toc-num">04</span><a href="#m4">盈利能力与商业模式</a></li>
+        <li><span class="toc-num">05</span><a href="#m5">护城河与五力模型</a></li>
+        <li><span class="toc-num">06</span><a href="#m6">管理层与治理评估</a></li>
+        <li><span class="toc-num">07</span><a href="#m7">估值评估与情景分析</a></li>
+        <li><span class="toc-num">08</span><a href="#m8">投资结论与推荐</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 1 -->
+<section class="section" id="m1">
+  <div class="container">
+    <div class="section-label">模块一</div>
+    <h2 class="section-title">公司概览与<em>核心业务</em></h2>
+
+    <div class="stock-header">
+      <div class="stock-id">
+        <span class="stock-tier tier-2">Tier 2 · 优质 / 估值偏高</span>
+        <h2 class="stock-ticker">AAPL</h2>
+        <p class="stock-tagline">全球最强消费生态的"现金机器"</p>
+      </div>
+      <div class="stock-price-display">
+        <div class="price">$311</div>
+        <div class="change change-pos">+52% YTD · 历史新高区</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>苹果是全球市值最高的公司之一(~$4.6T),业务围绕一个核心飞轮:<strong>用硬件锁定用户,用服务持续变现</strong>。2.5 亿台活跃设备的装机量(过去 12 个月净增 1.5 亿台)构成了一个其他任何公司都无法复制的分发网络。FQ2'26(3 月季)收入 <span class="highlight">$111.2B,YoY +17%,创史上最强三月季</span>,EPS $2.01(+22%),毛利率 49.3% 创历史纪录。</p>
+    </div>
+
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">FQ2'26 收入</div><div class="qvalue">$111.2B</div></div>
+      <div class="quick-cell"><div class="qlabel">YoY 增长</div><div class="qvalue pos">+17%</div></div>
+      <div class="quick-cell"><div class="qlabel">EPS</div><div class="qvalue pos">$2.01</div></div>
+      <div class="quick-cell"><div class="qlabel">毛利率</div><div class="qvalue pos">49.3%</div></div>
+      <div class="quick-cell"><div class="qlabel">活跃装机量</div><div class="qvalue">2.5B</div></div>
+      <div class="quick-cell"><div class="qlabel">美国换机留存</div><div class="qvalue pos">89%</div></div>
+    </div>
+
+    <h3 class="subsection-h">业务收入拆解 · FQ2'26</h3>
+    <div class="chart-card">
+      <div class="chart-title">五大业务板块收入结构</div>
+      <div class="chart-note">iPhone 仍占产品组合 ~51%,服务升至 28% 且为最高毛利来源</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="segChart"></canvas></div>
+    </div>
+
+    <table class="metrics-table">
+      <thead><tr><th>业务板块</th><th>FQ2'26 收入</th><th>YoY</th><th>毛利特征</th></tr></thead>
+      <tbody>
+        <tr><td>iPhone</td><td class="mono">$56.99B</td><td class="tg">+22%</td><td>ASP 升至高 $900 档,Pro 占比 58% 创纪录</td></tr>
+        <tr><td>Services</td><td class="mono">$30.98B</td><td class="tg">+16%</td><td>毛利率 ~77%,利润引擎,创历史新高</td></tr>
+        <tr><td>Wearables/Home</td><td class="mono">$7.90B</td><td class="tg">+健康</td><td>AirPods Pro 3 + 新 Apple Watch</td></tr>
+        <tr><td>Mac</td><td class="mono">$8.40B</td><td class="ta">受限</td><td>M5 + MacBook Neo;受内存供应制约</td></tr>
+        <tr><td>iPad</td><td class="mono">$6.91B</td><td class="tg">增长</td><td>M4 iPad Air 拉动</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-h">地理区域拆解</h3>
+    <div class="chart-card">
+      <div class="chart-title">五大区域 · FQ2'26 YoY 增速</div>
+      <div class="chart-note">大中华区 +28% 强势反转(去年同期为 -8%);所有区域双位数增长</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="geoChart"></canvas></div>
+    </div>
+    <div class="prose">
+      <p>美洲(~$45B)与欧洲(~$25B)是基本盘,<strong>大中华区($20.5B,+28%)的反转是本季最被低估的亮点</strong> —— 这是从去年同期下滑 8% 的剧烈翻转。但需注意:这一区域同时是最大的地缘 / 关税风险敞口(绝大多数 iPhone 仍在中国制造),增速的可持续性存疑(见模块三、模块八)。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 2 -->
+<section class="section" id="m2">
+  <div class="container">
+    <div class="section-label">模块二 · Quick Scan:现金为王</div>
+    <h2 class="section-title">财务质量与<em>健康现状</em></h2>
+    <p class="section-lead">框架核心要求 —— 资本轻型(Capex/Revenue &lt; 10%)、现金转换 &gt; 1.0、净债务/FCF &lt; 3x。AAPL 在这三项上的表现是教科书级的,与 AI 重资本超大盘股(MSFT/GOOGL/META Capex/Rev 已达 30–55%)形成鲜明对比。</p>
+
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">TTM 收入</div><div class="qvalue">~$451B</div></div>
+      <div class="quick-cell"><div class="qlabel">TTM 净利</div><div class="qvalue pos">~$123B</div></div>
+      <div class="quick-cell"><div class="qlabel">净利率</div><div class="qvalue pos">27%</div></div>
+      <div class="quick-cell"><div class="qlabel">Capex/Rev</div><div class="qvalue pos">~2.7%</div></div>
+      <div class="quick-cell"><div class="qlabel">TTM FCF</div><div class="qvalue pos">~$105B</div></div>
+      <div class="quick-cell"><div class="qlabel">净债务/EBITDA</div><div class="qvalue pos">净现金</div></div>
+    </div>
+
+    <h3 class="subsection-h">2.1 盈利能力与增长质量</h3>
+    <div class="prose">
+      <p>毛利率从长期"高 30%"区间稳步抬升至 <strong>49.3%(历史纪录)</strong>,核心驱动是服务收入占比上升(服务毛利 ~77% vs 产品 ~39%)的<span class="highlight">结构性混合效应</span>。这是真实的、可持续的利润质量提升,不是会计调整。Non-GAAP 调整方面:股权激励(SBC)TTM ~$13B,占收入 ~3%,温和、未造成严重稀释(净股本逐年下降)。</p>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">毛利率 / 净利率趋势</div>
+      <div class="chart-note">服务混合 + ASP 提升驱动毛利率持续上行</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="marginChart"></canvas></div>
+    </div>
+
+    <h3 class="subsection-h tight">2.2 运营效率与杠杆</h3>
+    <div class="prose">
+      <p>关键信号:<strong>R&amp;D 同比 +33%(FQ2'26 达 $11.4B),远快于收入 +17%</strong>。这是 AI 投入的集中体现 —— 但 AAPL 的 AI 是"费用型"(研发 + 每年约 $1B 给 Google Gemini 的许可费),而非"资本型"。这与 hyperscaler 把 AI 变成数千亿 Capex 的路径根本不同,意味着 AAPL 的运营杠杆与 FCF 不会被 AI 资本周期吞噬。</p>
+    </div>
+
+    <h3 class="subsection-h tight">2.3 资产负债表健康</h3>
+    <table class="metrics-table">
+      <thead><tr><th>项目</th><th>数值(Mar'26)</th><th>框架安全线</th><th>判定</th></tr></thead>
+      <tbody>
+        <tr><td>现金及等价物</td><td class="mono">~$45B</td><td>—</td><td class="tg">充裕</td></tr>
+        <tr><td>总债务</td><td class="mono">~$85B</td><td>—</td><td class="ta">含连同有价证券后为净现金</td></tr>
+        <tr><td>净债务 / EBITDA</td><td class="mono">净现金</td><td>&lt; 3.0×</td><td class="tg">远优于</td></tr>
+        <tr><td>商誉占比</td><td class="mono">极低</td><td>不宜过高</td><td class="tg">无并购堆积风险</td></tr>
+        <tr><td>净资产</td><td class="mono">为正</td><td>不可为负</td><td class="tg">健康</td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--ink-2); font-size:14px;">注:苹果长期目标为"净现金中性"(Net Cash Neutral),通过持续回购把资产负债表上的净现金逐步还给股东。这意味着账面净现金会逐渐收窄,但这是<strong>主动资本配置选择</strong>而非财务恶化。</p>
+
+    <h3 class="subsection-h tight">2.4 现金流与利润含金量</h3>
+    <div class="prose">
+      <p>FQ1'26 单季经营现金流 $53.9B、资本开支仅 $2.4B —— <strong>单季 FCF ~$51.5B</strong>。全年口径 TTM OCF ~$120B,Capex ~$12B,FCF ~$105B。OCF/净利润 &gt; 1.0,利润含金量极高。FCF Yield ≈ <span class="highlight">2.3%</span> —— 这是<strong>整份分析中唯一不漂亮的数字</strong>:低于 10 年期国债 4.56% + 3% 风险溢价的隐含门槛,直接说明当前估值偏贵(详见模块七)。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 3 -->
+<section class="section" id="m3">
+  <div class="container">
+    <div class="section-label">模块三</div>
+    <h2 class="section-title">增长分析:<em>真实性</em>与可持续性</h2>
+
+    <div class="prose">
+      <p><strong>增长来源诚实拆解:</strong>当前 +17% 的高增长由两股力量驱动 —— (1)<strong>iPhone 17 超级周期</strong>(放量 + ASP 提升 + Pro 占比 58%),本质上是<span class="highlight">周期性的换机潮</span>,不可线性外推;(2)<strong>服务的结构性复利增长</strong>(+16%,真正的 recurring revenue)。把这两者分开看非常重要:服务的增长是可持续的,iPhone 周期的增长不是。</p>
+      <p>长期视角更冷静:FY2023–2024 苹果收入近乎停滞(~$383B→$391B),5 年收入 CAGR 约 8.7% —— 勉强越过框架 8% 的及格线,但远谈不上高速。<strong>市场当前给的估值(37x)对应的是高速增长公司的倍数,而苹果的长期增长曲线是温和、周期性的。</strong>这是核心矛盾。</p>
+    </div>
+
+    <h3 class="subsection-h">市场空间(TAM)与扩张路径</h3>
+    <table class="metrics-table">
+      <thead><tr><th>驱动</th><th>逻辑</th><th>可量化性</th></tr></thead>
+      <tbody>
+        <tr><td>服务深化</td><td>2.5B 装机量 × ARPU 提升(广告、支付、订阅附着)</td><td class="tg">高 · 最清晰的增长引擎</td></tr>
+        <tr><td>新兴市场</td><td>印度(第二大手机市场)双位数增长,渗透率仍低</td><td class="tg">高 · S 曲线早期</td></tr>
+        <tr><td>AI / Siri 重构</td><td>Gemini 驱动的新 Siri(iOS 27)可能触发换机 + 服务升级</td><td class="ta">中 · 取决于执行</td></tr>
+        <tr><td>新品类</td><td>智能眼镜、健康、Vision 生态</td><td class="tr">低 · 期权价值,未兑现</td></tr>
+      </tbody>
+    </table>
+
+    <div class="prose">
+      <p><strong>风险评估:</strong>苹果增长对消费周期与高端手机需求敏感;大中华区增速反转的可持续性未经验证;最深层的风险来自服务高管 Eddy Cue 自己的法庭证词 —— <span class="highlight">"十年后人们可能不再需要 iPhone"</span>。在 AI 原生设备(OpenAI 等)可能重塑硬件品类的时代,这句话点出了苹果终值(Terminal Value)的根本不确定性。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 4 -->
+<section class="section" id="m4">
+  <div class="container">
+    <div class="section-label">模块四</div>
+    <h2 class="section-title">盈利能力与<em>商业模式</em></h2>
+    <p class="section-lead">商业模式是否"越做越赚钱"?答案是肯定的 —— 但驱动力来自<strong>组合结构变化</strong>(服务占比上升)而非单纯的规模效应。</p>
+
+    <div class="prose">
+      <p>正确的"单位经济"视角不是 SaaS 的 LTV/CAC,而是<strong>每台活跃设备的服务变现能力</strong>。2.5B 装机量是几乎零边际成本的分发网络:每新增一个服务订阅用户、每一笔 Apple Pay 交易、每一次 App Store 抽成,都以接近 77% 的毛利落到底线。这就是"越做越赚钱"的机制 —— 装机量是资产,服务是复利。</p>
+    </div>
+
+    <div class="gate-card">
+      <div class="gate-h">核心 KPI · 苹果适配版(SaaS 指标已标记 N/A)</div>
+      <p><strong>装机量:</strong>2.5B 活跃设备,12 个月净增 1.5B → 分发网络持续扩大。</p>
+      <p><strong>换机留存(代理 Churn):</strong>美国 iPhone 用户换机留存 ~89% → 极低流失,极高切换成本。</p>
+      <p><strong>ARPU 趋势(代理 NRR):</strong>服务收入持续以双位数增长 + ASP 上行 → 单用户价值持续提升,相当于 NRR &gt; 100% 的硬件生态等价物。</p>
+      <p><strong>毛利结构:</strong>产品 ~39% / 服务 ~77%,混合后 49.3% 且趋势向上。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 5 -->
+<section class="section" id="m5">
+  <div class="container">
+    <div class="section-label">模块五</div>
+    <h2 class="section-title">护城河与<em>五力模型</em></h2>
+    <p class="section-lead">苹果的护城河是消费科技领域最宽的之一:品牌 + 生态锁定 + 高切换成本三重叠加。但 AI 时代正在测试它最脆弱的一环 —— 技术领先性。</p>
+
+    <div class="forces-grid">
+      <div class="force-card"><div class="fhead"><span class="fname">现有竞争</span><span class="force-rate rate-mid">中</span></div><p>高端机与三星 / 华为竞争;苹果出货 +5% 而全球手机市场 -6%,份额仍在扩张,但 AI 功能落后于 Galaxy AI / Pixel。</p></div>
+      <div class="force-card"><div class="fhead"><span class="fname">买方议价</span><span class="force-rate rate-low">低</span></div><p>消费者分散且高黏性,89% 换机留存。苹果拥有定价权(ASP 持续上行)。</p></div>
+      <div class="force-card"><div class="fhead"><span class="fname">供方议价</span><span class="force-rate rate-mid">中</span></div><p>自研 Apple Silicon 削弱了对供应商的依赖,但<strong>当前内存(RAM)短缺</strong>正在抬升成本、制约 Mac/iPhone 产能。</p></div>
+      <div class="force-card"><div class="fhead"><span class="fname">新进入者</span><span class="force-rate rate-low">低</span></div><p>生态 + 资本 + 品牌构成极高壁垒,几乎无人能复制 2.5B 装机网络。</p></div>
+      <div class="force-card"><div class="fhead"><span class="fname">替代品威胁</span><span class="force-rate rate-high">升高</span></div><p><strong>这是唯一在恶化的一力。</strong>AI 原生设备可能在 10 年维度上挑战智能手机品类本身;苹果在 AI 上的落后放大了这一尾部风险。</p></div>
+    </div>
+
+    <div class="prose">
+      <p><strong>护城河判定:</strong>品牌效应 + 网络效应 + 高切换成本三重护城河依然坚固,短中期(1–3 年)几乎不可被侵蚀。但框架要求诚实标注趋势 —— <span class="highlight">护城河的"技术领先"支柱正在被 AI 削弱</span>,苹果从"AI 自研领导者"叙事降级为"靠 Google Gemini 补课的追随者"。这不影响近期现金流,但影响 5–10 年的终值假设。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 6 -->
+<section class="section" id="m6">
+  <div class="container">
+    <div class="section-label">模块六</div>
+    <h2 class="section-title">管理层与<em>治理评估</em></h2>
+
+    <div class="prose">
+      <p><strong>执行力与兑现能力:连续 8 个季度 EPS 超预期</strong>,FQ2'26 指引给出 +14–17% 收入增长(远超市场预期的 +9.5%),指引兑现历史优秀 —— 在框架的管理层评分中应给予溢价。资本配置纪律是教科书级:$100B 新回购授权 + 股息上调 4% 至 $0.27,持续把净现金还给股东。</p>
+      <p><strong>重大治理事件 —— CEO 交接:</strong>Tim Cook 将于 <span class="highlight">2026 年 9 月 1 日卸任</span>,由硬件工程负责人 John Ternus 接任,结束 15 年任期。这是本分析中最大的"软性"不确定项:Cook 把苹果从 iPhone 公司打造成服务 + 资本配置巨头,其卸任叠加 AI 转型的关键节点,带来执行连续性风险。WWDC 2026(6 月 8 日)是 Cook 任内最后一场,新 Siri 的成败将定义这场交接的基调。</p>
+    </div>
+
+    <table class="metrics-table">
+      <thead><tr><th>治理维度</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>指引兑现</td><td class="tg">优秀 · 连续 8 季超预期,应给予框架溢价</td></tr>
+        <tr><td>激励一致性</td><td>SBC 温和(~3% 收入),与股东长期利益基本一致</td></tr>
+        <tr><td>资本配置</td><td class="tg">顶级 · 持续大额回购 + 稳定股息</td></tr>
+        <tr><td>继任风险</td><td class="ta">中 · Cook 卸任叠加 AI 转型,执行连续性待观察</td></tr>
+        <tr><td>披露透明度</td><td>高 · 分部 / 区域披露清晰规范</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- MODULE 7 -->
+<section class="section" id="m7">
+  <div class="container">
+    <div class="section-label">模块七</div>
+    <h2 class="section-title">估值评估与<em>情景分析</em></h2>
+    <p class="section-lead">这是整份分析的关键转折。质量五颗星,但价格在历史新高。框架的纪律在此刻最有价值 —— 拒绝为优秀生意支付任意价格。</p>
+
+    <h3 class="subsection-h">当前估值水平 vs 历史</h3>
+    <table class="metrics-table">
+      <thead><tr><th>指标</th><th>当前</th><th>10年中位</th><th>判定</th></tr></thead>
+      <tbody>
+        <tr><td>P/E (TTM)</td><td class="mono">~37×</td><td class="mono">~25×</td><td class="tr">高出 ~50%</td></tr>
+        <tr><td>Forward P/E (FY26E $8.75)</td><td class="mono">~35×</td><td class="mono">~24×</td><td class="tr">显著偏高</td></tr>
+        <tr><td>Forward P/E (FY27E $9.86)</td><td class="mono">~31×</td><td class="mono">~24×</td><td class="ta">偏高</td></tr>
+        <tr><td>EV/EBITDA</td><td class="mono">~22.5×</td><td class="mono">~18×</td><td class="ta">偏高</td></tr>
+        <tr><td>FCF Yield</td><td class="mono">~2.3%</td><td>—</td><td class="tr">低于无风险+溢价门槛</td></tr>
+        <tr><td>PEG(前瞻)</td><td class="mono">~2.1–2.8</td><td>~1.0 为合理</td><td class="tr">成长性无法匹配估值</td></tr>
+      </tbody>
+    </table>
+
+    <div class="chart-card">
+      <div class="chart-title">P/E 估值区间 · 当前位于历史高位</div>
+      <div class="chart-note">现价 37× TTM 接近 2024年12月的历史峰值(40×),远高于 10 年中位 25×</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="peChart"></canvas></div>
+    </div>
+
+    <h3 class="subsection-h">内在价值评估(DCF)· 终值高度敏感</h3>
+    <div class="prose">
+      <p>以 FCF ~$108B 为基,WACC 8.5%、永续 g 3% 的<strong>保守 DCF 给出约 $160/股</strong>;只有把增速与终值假设大幅上调(8% 增速、4% 永续、8% WACC)才能逼近现价。这正是框架反复强调的:<span class="highlight">Terminal Value 是最主观、最易受情绪影响的因素</span>。DCF 的结论是 —— <strong>$311 已经 price-in 了相当乐观的永续增长 + 持续的溢价倍数</strong>,几乎没有安全边际。对苹果这类成熟巨头,相对估值(前瞻 P/E)比 DCF 更可靠,下方情景以此为锚。</p>
+    </div>
+    <table class="metrics-table">
+      <thead><tr><th>DCF 假设</th><th>保守</th><th>基准</th><th>乐观</th></tr></thead>
+      <tbody>
+        <tr><td>5年 FCF 增速</td><td class="mono">5%</td><td class="mono">6.5%</td><td class="mono">8%</td></tr>
+        <tr><td>永续增长 g</td><td class="mono">2.5%</td><td class="mono">3%</td><td class="mono">4%</td></tr>
+        <tr><td>WACC</td><td class="mono">9%</td><td class="mono">8.5%</td><td class="mono">8%</td></tr>
+        <tr><td>每股内在价值</td><td class="mono tr">~$160</td><td class="mono ta">~$245</td><td class="mono tg">~$330</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-h">相对估值三情景 · ~2027 目标价</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card scenario-bear">
+        <div class="stier">熊市 · 25%</div>
+        <div class="target">$215</div>
+        <div class="sdesc">大中华区再度回落 + 关税冲击 + AI 落后被定价 + 内存挤压毛利;倍数压缩至 22×</div>
+        <div class="sprob">22× × ~$9.8 EPS</div>
+      </div>
+      <div class="scenario-card scenario-base">
+        <div class="stier">基准 · 45%</div>
+        <div class="target">$283</div>
+        <div class="sdesc">iPhone 周期正常化,回归中个位数增长;倍数向历史中位回归至 ~28×</div>
+        <div class="sprob">28× × ~$10.1 EPS</div>
+      </div>
+      <div class="scenario-card scenario-bull">
+        <div class="stier">牛市 · 30%</div>
+        <div class="target">$388</div>
+        <div class="sdesc">Siri/AI 重估 + 服务加速 + 中国守住 + 内存压力可控;维持溢价 34×</div>
+        <div class="sprob">34× × ~$11.4 EPS</div>
+      </div>
+    </div>
+    <p style="color:var(--ink-2); margin-top:16px;"><strong>概率加权目标价 ≈ $298</strong> —— <span class="highlight">略低于现价 $311</span>。框架判定:合理偏贵,缺乏安全边际。</p>
+
+    <h3 class="subsection-h">合理建仓价格带</h3>
+    <div class="ladder-row zone-avoid"><span class="zlabel">不建议追高</span><span class="zprice">&gt; $320</span></div>
+    <div class="ladder-row zone-watch"><span class="zlabel">观察区(现价所在)</span><span class="zprice">$290–320</span></div>
+    <div class="ladder-row zone-build"><span class="zlabel">合理建仓</span><span class="zprice">$250–290</span></div>
+    <div class="ladder-row zone-ideal"><span class="zlabel">理想加仓</span><span class="zprice">$220–250</span></div>
+    <div class="ladder-row zone-heavy"><span class="zlabel">重仓机会</span><span class="zprice">&lt; $220</span></div>
+    <div class="ladder-current">当前 $311 在观察区,处于概率加权目标价之上;新资金宜等回调,不宜追高</div>
+  </div>
+</section>
+
+<!-- MODULE 8 -->
+<section class="section" id="m8">
+  <div class="container">
+    <div class="section-label">模块八 · 最终结论</div>
+    <h2 class="section-title">投资<em>结论与推荐</em></h2>
+
+    <h3 class="subsection-h">质量评分卡 · 22/25(轻松越过 ≥18 门槛)</h3>
+    <div class="chart-card">
+      <div class="chart-title">10 维质量评分(每维 0–5)</div>
+      <div class="chart-note">仅"收入增长(周期性 + 长期温和)"与"FCF 稳定性(内存逆风)"未满分;其余九维全部优秀</div>
+      <div class="chart-wrap" style="height:380px;"><canvas id="qualityChart"></canvas></div>
+    </div>
+
+    <h3 class="subsection-h">情景分析汇总表</h3>
+    <div class="rank-table-wrap">
+      <table class="rank-table-full">
+        <thead><tr><th>情景</th><th>关键假设</th><th>1–3年目标价</th><th>级别</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="score-pill tg">牛市 30%</span></td>
+            <td>新 Siri 成功重估 + 服务加速 + 中国守住 + 维持溢价倍数</td>
+            <td class="mono tg">$360–400</td>
+            <td>中风险 / 高回报</td>
+          </tr>
+          <tr>
+            <td><span class="score-pill ta">基准 45%</span></td>
+            <td>iPhone 周期正常化 + 中个位数增长 + 倍数回归历史中位</td>
+            <td class="mono ta">$270–300</td>
+            <td>中性 / 持有</td>
+          </tr>
+          <tr>
+            <td><span class="score-pill tr">熊市 25%</span></td>
+            <td>中国回落 + 关税 + AI 落后惩罚 + 内存挤压毛利 + 倍数压缩</td>
+            <td class="mono tr">$200–230</td>
+            <td>高风险 / 减持</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-h">核心投资逻辑(简洁总结)</h3>
+    <div class="prose">
+      <p><strong>增长靠什么?</strong>近期靠 iPhone 17 周期(不可持续),长期靠服务复利 + 新兴市场(可持续但温和)。<strong>空间有多大?</strong>2.5B 装机量的服务变现是最清晰的引擎,但硬件 TAM 已成熟。<strong>钱能不能赚?</strong>赚钱能力世界级 —— 49% 毛利、27% 净利、~$105B FCF、净现金、资本极轻。生意没有任何问题。</p>
+    </div>
+
+    <div class="pull-quote">这是一道纯粹的"价格题",不是"质量题"。框架在 $311 给出的不是"别买这家公司",而是"别在这个价格为这家公司付钱"。</div>
+
+    <div class="verdict-grid">
+      <div class="verdict-tier-card vt1">
+        <div class="vlabel">生意质量</div>
+        <div class="vname">A+ / 22分</div>
+        <p class="vbody">全球最强消费生态之一。资本轻型、净现金、~$105B FCF、连续 8 季超预期。质量层无可挑剔。</p>
+      </div>
+      <div class="verdict-tier-card vt3">
+        <div class="vlabel">当前估值</div>
+        <div class="vname">偏贵 / 无边际</div>
+        <p class="vbody">37× TTM、历史新高、FCF Yield 仅 2.3%。概率加权目标价 ~$298 低于现价。市场已 price-in 乐观假设。</p>
+      </div>
+      <div class="verdict-tier-card vt2">
+        <div class="vlabel">操作建议</div>
+        <div class="vname">持有 · 等回调</div>
+        <p class="vbody">长期持有者:质量 + 回购托底,无需卖出。新资金:等 $250–290 合理建仓,$220 以下重仓。</p>
+      </div>
+    </div>
+
+    <div class="reco">
+      <div class="rlabel">最终推荐</div>
+      <div class="rverdict"><em>持有</em> · Hold</div>
+      <p class="rsub">在 $311 的历史新高、37 倍 TTM 估值下,框架不推荐新建仓 —— 不是因为公司不好,而是因为价格已透支了乐观情景,安全边际为零。这是一家应当长期持有、但只在合理价格买入的复利机器。耐心等待市场出现 Capex 恐慌、中国担忧或 AI 失望式的错杀时刻(类似同业回调到合理建仓区),再分批进场。WWDC(6/8)新 Siri 与 9 月 CEO 交接是两个关键观察窗口。</p>
+      <div class="reco-stats">
+        <div><div class="rs-label">现价</div><div class="rs-value">$311</div></div>
+        <div><div class="rs-label">加权目标</div><div class="rs-value">~$298</div></div>
+        <div><div class="rs-label">理想建仓</div><div class="rs-value">$250–290</div></div>
+        <div><div class="rs-label">质量评分</div><div class="rs-value">22/25</div></div>
+        <div><div class="rs-label">股息率</div><div class="rs-value">~0.35%</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <h4>免责声明</h4>
+    <p>本报告为基于公开数据和投资框架(框架 B 八模块 + 框架 A 质量/FCF 锚定)的独立分析推演,不构成任何投资建议、招揽或意见。所有数据来源为苹果公司财报(FQ2'26 截至 2026 年 3 月 28 日)、SEC 备案文件及公开市场数据,股价截至 2026 年 6 月 4 日(~$311)。市场状况可能在报告发布后发生重大变化。读者在做出任何投资决策前,应自行进行尽职调查并咨询合格的财务顾问。投资有风险,过往表现不代表未来结果。</p>
+    <p style="margin-top:16px;">方法论说明:本报告对苹果显式标记了 SaaS 专用指标(LTV/CAC、NRR、Churn、Magic Number、Burn/Runway)为 N/A,改用装机量、换机留存、ARPU 等适配性 KPI;框架适配闸门置于分析之前。</p>
+    <p style="margin-top:24px; font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:0.08em;">AAPL FRAMEWORK REPORT · JUNE 2026 · END</p>
+  </div>
+</footer>
+
+<script>
+const C = {
+  iphone: "#1E2A4A", services: "#2D6A4F", wearables: "#B8651E",
+  mac: "#2A6F69", ipad: "#872D52",
+  americas: "#1E3A5F", europe: "#2A6F69", china: "#8B1E1E", japan: "#B8651E", roap: "#3D2E5E",
+  green: "#2D6A4F", amber: "#B8651E", red: "#8B1E1E", blue: "#1E3A5F", ink3: "#8A857D"
+};
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.color = "#4A4843";
+
+// SEGMENT doughnut
+new Chart(document.getElementById("segChart"), {
+  type: "doughnut",
+  data: {
+    labels: ["iPhone $57.0B", "Services $31.0B", "Wearables $7.9B", "Mac $8.4B", "iPad $6.9B"],
+    datasets: [{
+      data: [56.99, 30.98, 7.90, 8.40, 6.91],
+      backgroundColor: [C.iphone, C.services, C.wearables, C.mac, C.ipad],
+      borderColor: "#FFFFFF", borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: "58%",
+    plugins: {
+      legend: { position: "right", labels: { font: { size: 12, family: "'JetBrains Mono', monospace" }, padding: 12, boxWidth: 12 } },
+      tooltip: { callbacks: { label: (c) => c.label + " (" + (c.parsed/111.18*100).toFixed(1) + "%)" } }
+    }
+  }
+});
+
+// GEO bar
+new Chart(document.getElementById("geoChart"), {
+  type: "bar",
+  data: {
+    labels: ["大中华区", "Rest APAC", "日本", "欧洲", "美洲"],
+    datasets: [{
+      data: [28.1, 25.3, 15.1, 14.7, 11.9],
+      backgroundColor: [C.china, C.roap, C.japan, C.europe, C.americas],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: "y", responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => "YoY +" + c.parsed.x + "%" } } },
+    scales: {
+      x: { beginAtZero: true, ticks: { callback: (v) => v + "%" }, grid: { color: "rgba(226,219,204,0.5)" } },
+      y: { grid: { display: false }, ticks: { font: { size: 13 } } }
+    }
+  }
+});
+
+// MARGIN trend
+new Chart(document.getElementById("marginChart"), {
+  type: "line",
+  data: {
+    labels: ["FY2023", "FY2024", "FY2025", "TTM FQ2'26"],
+    datasets: [
+      { label: "毛利率", data: [44.1, 46.2, 47.6, 48.8], borderColor: C.green, backgroundColor: "rgba(45,106,79,0.08)", fill: true, tension: 0.3, borderWidth: 2.5, pointRadius: 4 },
+      { label: "净利率", data: [25.3, 24.0, 26.3, 27.2], borderColor: C.blue, backgroundColor: "transparent", tension: 0.3, borderWidth: 2.5, pointRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: "top", labels: { font: { size: 12, family: "'JetBrains Mono', monospace" }, boxWidth: 12 } }, tooltip: { callbacks: { label: (c) => c.dataset.label + ": " + c.parsed.y + "%" } } },
+    scales: {
+      x: { grid: { display: false } },
+      y: { min: 20, max: 55, ticks: { callback: (v) => v + "%" }, grid: { color: "rgba(226,219,204,0.5)" } }
+    }
+  }
+});
+
+// PE history
+new Chart(document.getElementById("peChart"), {
+  type: "bar",
+  data: {
+    labels: ["2016低点", "5年均值", "10年中位", "3年均值", "当前 TTM"],
+    datasets: [{
+      data: [10.9, 29.8, 25.0, 32.4, 37.4],
+      backgroundColor: [C.ink3, C.blue, C.green, C.amber, C.red],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => "P/E " + c.parsed.y + "×" } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 12 } } },
+      y: { beginAtZero: true, max: 42, ticks: { callback: (v) => v + "×" }, grid: { color: "rgba(226,219,204,0.5)" } }
+    }
+  }
+});
+
+// QUALITY scorecard
+new Chart(document.getElementById("qualityChart"), {
+  type: "bar",
+  data: {
+    labels: ["收入增长", "收入质量", "Op Margin趋势", "现金转换", "Capex/Rev", "FCF Margin", "ROIC", "股本回购", "净现金", "FCF稳定性"],
+    datasets: [{
+      data: [4, 5, 5, 5, 5, 5, 5, 5, 5, 4],
+      backgroundColor: (ctx) => ctx.raw === 5 ? C.green : C.amber,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: "y", responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => c.parsed.x + " / 5" } } },
+    scales: {
+      x: { beginAtZero: true, max: 5, ticks: { stepSize: 1 }, grid: { color: "rgba(226,219,204,0.5)" } },
+      y: { grid: { display: false }, ticks: { font: { size: 12 } } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>META 深度财务分析 · 八模块框架研究报告 · 2026年5月</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #F8F4EC;
+  --bg-alt: #FFFFFF;
+  --bg-deep: #1A1815;
+  --ink: #1C1B17;
+  --ink-2: #4A4843;
+  --ink-3: #8A857D;
+  --line: #E2DBCC;
+  --line-2: #CFC6B3;
+  --accent: #1E2A4A;
+  --green: #2D6A4F;
+  --green-bg: #E5EDE6;
+  --blue: #1E3A5F;
+  --blue-bg: #E2EAF1;
+  --amber: #B8651E;
+  --amber-bg: #F2E5D0;
+  --red: #8B1E1E;
+  --red-bg: #F1DCDC;
+  --teal: #2A6F69;
+  --purple: #3D2E5E;
+  --meta-blue: #1862C6;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  font-feature-settings: "kern", "liga", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+/* HERO */
+.hero { padding: 80px 0 64px; border-bottom: 1px solid var(--line); }
+.hero-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-tag::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.hero-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(40px, 5.5vw, 62px); line-height: 1.1;
+  letter-spacing: -0.02em; margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.hero-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+.hero-sub {
+  font-size: 19px; line-height: 1.6; color: var(--ink-2);
+  max-width: 760px; margin-bottom: 40px; font-weight: 300;
+}
+.hero-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 24px; padding-top: 32px; border-top: 1px solid var(--line);
+}
+.hero-meta .label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;
+}
+.hero-meta .value { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--ink); }
+
+/* SECTIONS */
+.section { padding: 72px 0 36px; border-bottom: 1px solid var(--line); }
+.section:last-of-type { border-bottom: none; }
+.section-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-display); font-size: clamp(30px, 4vw, 42px);
+  font-weight: 500; line-height: 1.15; letter-spacing: -0.015em;
+  margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-lead {
+  font-size: 19px; line-height: 1.65; color: var(--ink-2);
+  max-width: 780px; margin-bottom: 36px; font-weight: 300;
+}
+
+/* PROSE */
+.prose p { margin-bottom: 16px; color: var(--ink-2); }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose .highlight {
+  background: linear-gradient(180deg, transparent 60%, rgba(184, 101, 30, 0.18) 60%);
+  padding: 0 2px;
+}
+.subsection { margin-top: 44px; }
+.subsection-h {
+  font-family: var(--font-display); font-style: italic; font-size: 24px;
+  font-weight: 500; margin-bottom: 16px; color: var(--ink);
+}
+.subsub {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--amber); margin: 28px 0 12px;
+  font-weight: 500;
+}
+
+/* QUICK GRID */
+.quick-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px; background: var(--line); border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden; margin: 32px 0;
+}
+.quick-cell { background: var(--bg-alt); padding: 18px 20px; }
+.quick-cell .qlabel {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;
+}
+.quick-cell .qvalue {
+  font-family: var(--font-display); font-size: 22px; font-weight: 500;
+  letter-spacing: -0.01em; color: var(--ink);
+}
+.qvalue.pos { color: var(--green); }
+.qvalue.neg { color: var(--red); }
+.qvalue.warn { color: var(--amber); }
+
+/* TABLE */
+.metrics-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+.metrics-table th {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-3); text-align: left;
+  padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line-2); font-weight: 500;
+}
+.metrics-table td { padding: 13px 12px 13px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.metrics-table td:first-child { font-weight: 500; color: var(--ink); }
+.metrics-table .mono { font-family: var(--font-mono); font-size: 13px; }
+.tag-pos { color: var(--green); font-weight: 600; }
+.tag-neg { color: var(--red); font-weight: 600; }
+.tag-warn { color: var(--amber); font-weight: 600; }
+
+/* CHART */
+.chart-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-title { font-family: var(--font-display); font-size: 17px; font-weight: 500; margin-bottom: 6px; color: var(--ink); }
+.chart-note { font-size: 12px; color: var(--ink-3); margin-bottom: 20px; }
+.chart-wrap { position: relative; width: 100%; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; font-size: 12px; color: var(--ink-2); }
+.chart-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); }
+.legend-sq { width: 12px; height: 12px; border-radius: 2px; }
+
+/* EQUATION */
+.callout {
+  background: var(--bg-alt); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border-radius: 6px; padding: 24px 28px; margin: 28px 0;
+}
+.callout .ctitle { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.callout p { font-size: 14px; color: var(--ink-2); margin: 0; }
+
+/* SCENARIO */
+.scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.scenario-card { padding: 22px; border-radius: 8px; }
+.scenario-bull { background: var(--green-bg); }
+.scenario-base { background: #EDE9E0; }
+.scenario-bear { background: var(--red-bg); }
+.scenario-card .stier { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.scenario-bull .stier { color: var(--green); }
+.scenario-base .stier { color: #6B5B3A; }
+.scenario-bear .stier { color: var(--red); }
+.scenario-card .target { font-family: var(--font-display); font-size: 30px; font-weight: 500; line-height: 1; margin-bottom: 8px; }
+.scenario-bull .target { color: var(--green); }
+.scenario-base .target { color: #6B5B3A; }
+.scenario-bear .target { color: var(--red); }
+.scenario-card .sdesc { font-size: 12px; line-height: 1.5; }
+.scenario-bull .sdesc { color: var(--green); }
+.scenario-base .sdesc { color: #6B5B3A; }
+.scenario-bear .sdesc { color: var(--red); }
+.scenario-card .sprob { font-family: var(--font-mono); font-size: 11px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); }
+
+/* PORTER */
+.porter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; }
+.porter-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+.porter-card .pforce { font-family: var(--font-display); font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+.porter-card .plevel { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-weight: 500; }
+.lvl-low { background: var(--green-bg); color: var(--green); }
+.lvl-mid { background: var(--amber-bg); color: var(--amber); }
+.lvl-high { background: var(--red-bg); color: var(--red); }
+.porter-card p { font-size: 13px; line-height: 1.55; color: var(--ink-2); margin: 0; }
+
+/* RISK */
+.risk-list { margin-top: 16px; }
+.risk-item { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+.risk-item:last-child { border-bottom: 1px solid var(--line); }
+.risk-num { font-family: var(--font-display); font-size: 28px; font-weight: 500; font-style: italic; color: var(--amber); line-height: 1; flex-shrink: 0; width: 36px; }
+.risk-body p { font-size: 14px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+.risk-body strong { color: var(--ink); }
+
+/* VERDICT */
+.verdict-banner {
+  background: var(--green-bg); border: 1px solid #BFD4C6; border-radius: 10px;
+  padding: 32px; margin: 28px 0; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+}
+.verdict-rec { font-family: var(--font-display); font-size: 48px; font-weight: 600; color: var(--green); line-height: 1; }
+.verdict-rec small { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: #4F7A63; margin-top: 8px; font-weight: 400; }
+.verdict-text { flex: 1; min-width: 280px; font-size: 14px; color: #234B38; line-height: 1.6; }
+
+/* PULL QUOTE */
+.pull-quote {
+  font-family: var(--font-display); font-style: italic;
+  font-size: clamp(21px, 2.5vw, 27px); line-height: 1.4; color: var(--accent);
+  padding: 28px 0 28px 32px; border-left: 3px solid var(--accent); margin: 32px 0;
+  font-weight: 400; font-variation-settings: "opsz" 144;
+}
+.pull-quote::before { content: '"'; font-size: 1.5em; line-height: 0; vertical-align: -0.2em; margin-right: 0.05em; color: var(--amber); }
+
+/* TOC */
+.toc { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
+.toc ol { list-style: none; }
+.toc li { display: flex; align-items: baseline; padding: 8px 0; border-bottom: 1px dotted var(--line-2); font-size: 14px; }
+.toc li:last-child { border-bottom: none; }
+.toc .toc-num { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); width: 32px; flex-shrink: 0; }
+.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+.toc a:hover { border-bottom-color: var(--amber); }
+
+/* FOOTER */
+.footer { padding: 48px 0 64px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.footer h4 { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--ink-2); margin-bottom: 12px; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 56px 0 40px; }
+  .section { padding: 48px 0 28px; }
+  .scenario-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  body { background: white; }
+  .section { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<!--NAV--><div style="background:#0a0b0f;border-bottom:1px solid rgba(255,255,255,.1);padding:9px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:-apple-system,'Noto Sans SC',system-ui,sans-serif;position:relative;z-index:999"><span style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#d4a24e;margin-right:8px">US MACRO</span><a href="index.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">ERP 引擎</a><a href="liquidity.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">流动性</a><a href="mag7.html" style="text-decoration:none;font:600 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#0a0b0f;background:#d4a24e;border:1px solid #d4a24e;padding:6px 13px;border-radius:7px">巨头研究</a></div><!--/NAV-->
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">Framework B · 八模块深度财务分析 · 2026年5月28日</div>
+    <h1 class="hero-title">META Platforms<br><em>八维度</em>深度投资研究</h1>
+    <p class="hero-sub">基于 Q1 2026 最新财报与市场数据,从业务结构、财务质量、增长真实性、商业模式、护城河、治理、估值到情景判定,逐一拆解这台"AI 时代的现金机器"——以及它账面之下隐藏的资本周期张力。</p>
+    <div class="hero-meta">
+      <div><div class="label">现价 (5/27 收盘)</div><div class="value">$612</div></div>
+      <div><div class="label">市值</div><div class="value">$1.61T</div></div>
+      <div><div class="label">Fwd P/E</div><div class="value">~20.7x</div></div>
+      <div><div class="label">质量评级</div><div class="value" style="color:var(--green);">A 级</div></div>
+      <div><div class="label">最终结论</div><div class="value" style="color:var(--green);">买入</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOC -->
+<section class="section">
+  <div class="container">
+    <div class="toc">
+      <div class="toc-title">报告结构 · 八大模块 + 情景判定</div>
+      <ol>
+        <li><span class="toc-num">01</span><a href="#s1">公司概览与核心业务</a></li>
+        <li><span class="toc-num">02</span><a href="#s2">财务质量与健康(现金为王)</a></li>
+        <li><span class="toc-num">03</span><a href="#s3">增长真实性、可持续性与市场空间</a></li>
+        <li><span class="toc-num">04</span><a href="#s4">盈利能力与商业模式</a></li>
+        <li><span class="toc-num">05</span><a href="#s5">护城河与五力模型</a></li>
+        <li><span class="toc-num">06</span><a href="#s6">管理层与治理</a></li>
+        <li><span class="toc-num">07</span><a href="#s7">估值评估与敏感性</a></li>
+        <li><span class="toc-num">08</span><a href="#s8">投资结论与情景分析</a></li>
+      </ol>
+    </div>
+    <div class="callout">
+      <div class="ctitle">数据基准</div>
+      <p>本报告所有财务数据截至 <strong>2026 年 Q1(3 月 31 日)</strong>财报及 5 月 27 日市场收盘。META Q1 2026 收入 $56.31B(+33% YoY)、净利 $26.77B(含 $8.03B 一次性税收优惠)、经营现金流 $32.23B、自由现金流 $12.39B、现金及有价证券 $81.18B。当前股价 $612,处于 52 周区间 $520–$796 中段偏下。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 1. OVERVIEW ===== -->
+<section class="section" id="s1">
+  <div class="container">
+    <div class="section-label">模块 01</div>
+    <h2 class="section-title">公司概览与<em>核心业务</em></h2>
+    <p class="section-lead">META 本质上是一台靠 35 亿日活用户驱动的全球广告印钞机——而它正把这台机器赚到的现金,以史上罕见的规模重新押注到 AI 基础设施上。</p>
+
+    <div class="prose">
+      <p><strong>核心业务与行业地位。</strong>META 通过两大可报告分部运营:<strong>Family of Apps(FoA)</strong>——Facebook、Instagram、Messenger、WhatsApp、Threads,贡献全公司 <span class="highlight">99.3% 的收入</span>;以及 <strong>Reality Labs(RL)</strong>——VR/AR 硬件与 Ray-Ban Meta 智能眼镜。2026 年新增的第三条主线是 AI:Meta Superintelligence Labs 已发布首个 Muse Spark 模型,驱动全家族应用的 Meta AI 助手。Family 日活人数(DAP)在 2026 年 3 月达 <strong>35.6 亿</strong>(+4% YoY)。META 正逼近成为全球第一大数字广告卖家——这是 Google 把持了十余年的位置。</p>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">业务收入拆解(近三年趋势)</h3>
+      <div class="chart-card">
+        <div class="chart-title">分部收入与增长轨迹</div>
+        <div class="chart-note">FoA 几乎是收入全部;RL 收入微不足道却持续巨额亏损。单位:十亿美元。</div>
+        <div class="chart-wrap" style="height:340px;"><canvas id="segRevChart"></canvas></div>
+      </div>
+      <table class="metrics-table">
+        <thead><tr><th>分部 / 口径</th><th>Q1 2026</th><th>YoY</th><th>性质</th></tr></thead>
+        <tbody>
+          <tr><td>广告收入</td><td class="mono">$55.02B</td><td class="mono tag-pos">+33%</td><td>核心引擎,印象量+19%、单价+12%</td></tr>
+          <tr><td>FoA 其他收入</td><td class="mono">$0.89B</td><td class="mono tag-pos">+73.5%</td><td>WhatsApp 商业消息($2B+ 年化跑率)</td></tr>
+          <tr><td>Reality Labs</td><td class="mono">$0.40B</td><td class="mono tag-neg">−2%</td><td>Quest 下滑,AI 眼镜增长抵消</td></tr>
+          <tr><td><strong>总收入</strong></td><td class="mono"><strong>$56.31B</strong></td><td class="mono tag-pos"><strong>+33%</strong></td><td>恒定汇率口径 +29%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">地理区域拆解</h3>
+      <div class="chart-card">
+        <div class="chart-title">收入按用户地域分布(2025 全年估算)</div>
+        <div class="chart-note">北美 + 欧洲约占 ~70% 收入,但用户增量主要来自亚太与其他地区——这里 ARPP 仅为美国的零头,是长期变现空间。</div>
+        <div class="chart-wrap" style="height:300px;"><canvas id="geoChart"></canvas></div>
+      </div>
+      <div class="prose">
+        <p>这是 META 商业模式的关键不对称:<strong>成熟市场(美/加、欧洲)贡献绝大部分收入,新兴市场贡献绝大部分用户增量</strong>。2025 年全球 ARPP 为 $57.03(+15%),但美/加地区 ARPP 是亚太/其他地区的数倍——意味着如果 AI 能拉升新兴市场单用户变现,存在巨大未释放的杠杆。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. FINANCIAL QUALITY ===== -->
+<section class="section" id="s2">
+  <div class="container">
+    <div class="section-label">模块 02</div>
+    <h2 class="section-title">财务质量与健康<br><em>现金为王</em></h2>
+    <p class="section-lead">单看利润表,META 是教科书级的高质量公司:81.9% 毛利率、39% 净利率。但翻到现金流量表,一个清晰的张力浮现——资本开支正在吞噬自由现金流。</p>
+
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">毛利率 TTM</div><div class="qvalue pos">81.9%</div></div>
+      <div class="quick-cell"><div class="qlabel">净利率 TTM</div><div class="qvalue pos">39.4%</div></div>
+      <div class="quick-cell"><div class="qlabel">ROE TTM</div><div class="qvalue pos">39.5%</div></div>
+      <div class="quick-cell"><div class="qlabel">营业利润率 Q1</div><div class="qvalue pos">40.6%</div></div>
+      <div class="quick-cell"><div class="qlabel">现金及证券</div><div class="qvalue pos">$81.2B</div></div>
+      <div class="quick-cell"><div class="qlabel">FY25 FCF</div><div class="qvalue warn">$43.6B</div></div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">2.1 盈利能力与增长质量</h3>
+      <div class="prose">
+        <p><strong>收入增长。</strong>近三年收入从 FY2023 的 $135B → FY2024 $164.5B → FY2025 ~$201B,3 年 CAGR 约 <strong>22%</strong>。Q1 2026 加速至 +33%。<span class="highlight">几乎 100% 为有机增长</span>——没有重大并购贡献,没有一次性资产出售拉动,纯靠广告量价齐升。这是增长质量最高的一种形态。</p>
+        <p><strong>利润含金量与 Non-GAAP 提示。</strong>这里必须警惕税收项目的剧烈扰动:Q1 2026 净利 $26.77B 中含 <strong>$8.03B 一次性税收优惠</strong>(企业替代性最低税过渡减免),剔除后净利约 $18.7B、稀释 EPS 从 $10.44 降至 $7.31。而上一财年 Q3 2025 恰恰相反——记录了 <strong>$15.93B 一次性非现金税收费用</strong>。<strong>因此 TTM GAAP EPS $32.97 严重失真,直接做估值会误导</strong>;应以营业利润口径或调整后 EPS 为锚。</p>
+        <p><strong>ROIC vs WACC。</strong>以经营资本回报衡量,META 历史 ROIC 长期高于 30%,远超约 9% 的 WACC——价值创造毋庸置疑。<strong>真正的开放问题是边际 ROIC</strong>:每年新投入的千亿级 AI capex,其增量回报率能否维持在 WACC 之上,这是整个投资逻辑的胜负手。</p>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">2.2 运营效率与杠杆</h3>
+      <div class="chart-card">
+        <div class="chart-title">运营费用结构(占收入比)</div>
+        <div class="chart-note">研发占比从 2024 年的 27% 升至 2026 年的 31%,反映 AI 人才与算力投入。营销与管理费用保持纪律。</div>
+        <div class="chart-wrap" style="height:300px;"><canvas id="opexChart"></canvas></div>
+      </div>
+      <div class="prose">
+        <p><strong>运营杠杆出现裂痕。</strong>Q1 2026 收入增长 +33%,但营业利润仅增长 +30%——<span class="highlight">收入增速首次快于利润增速</span>。原因是 RL 持续失血与 AI 基础设施折旧开始计入成本。这不是经营恶化,而是资本周期高峰期的典型特征:先花钱(capex → 折旧),后收钱(AI 变现)。管理层维持 FY2026 全年总费用指引 $162–169B 不变。</p>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">2.3 资产负债表健康与安全性</h3>
+      <table class="metrics-table">
+        <thead><tr><th>安全性指标</th><th>数值</th><th>评估</th></tr></thead>
+        <tbody>
+          <tr><td>现金及有价证券</td><td class="mono">$81.18B</td><td class="tag-pos">充裕</td></tr>
+          <tr><td>净债务 / EBITDA</td><td class="mono">净现金为正</td><td class="tag-pos">远低于 3.0x 安全线</td></tr>
+          <tr><td>负债权益比 (MRQ)</td><td class="mono">~24%</td><td class="tag-pos">保守</td></tr>
+          <tr><td>非可撤销合同承诺</td><td class="mono">$237.7B</td><td class="tag-warn">本季+$107B,需持续现金支撑</td></tr>
+          <tr><td>负资产 / 商誉异常</td><td class="mono">无</td><td class="tag-pos">无异常信号</td></tr>
+        </tbody>
+      </table>
+      <div class="prose">
+        <p>资产负债表整体稳健,仍为净现金状态。<strong>唯一需要持续盯防的是合同承诺的暴增</strong>——本季度因多年期云协议与基础设施采购协议,合同承诺一次性跳升 $107B 至 $237.7B。META 已开始发行债券为 capex 融资,但与 ORCL 那种"靠融资才能续命"的重资本下注不同,META 的扩张<span class="highlight">仍以自有经营现金流为主</span>。</p>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">2.4 现金流与利润含金量</h3>
+      <div class="chart-card">
+        <div class="chart-title">资本开支正在吞噬自由现金流</div>
+        <div class="chart-note">经营现金流(OCF)持续强劲,但 capex 自 2024 年起加速,FY2026E 在 $125–145B 指引下,全年 FCF 可能被压缩至接近盈亏平衡。单位:十亿美元。</div>
+        <div class="chart-wrap" style="height:340px;"><canvas id="cashflowChart"></canvas></div>
+      </div>
+      <div class="prose">
+        <p><strong>OCF 验证利润真实。</strong>FY2025 经营现金流高达 $115.8B,远超净利润,说明利润高度"含金"。问题不在赚现金的能力,而在<strong>花现金的速度</strong>:FY2024 capex ~$37B → FY2025 ~$72B → FY2026E 指引 $125–145B(中值 $135B)。</p>
+        <p>结果是 FCF 出现罕见压缩:FY2024 ~$54B → FY2025 $43.6B(同比下滑)。Q1 2026 capex $19.84B 尚未满产,FCF 仍有 $12.39B;但若全年 capex 冲向 $135B,<span class="highlight">FY2026 全年 FCF 可能仅个位数十亿,甚至接近归零</span>。META 没有"烧钱跑道"问题(它现金流极其充沛),但 FCF Yield 这个估值锚会在 2026 年暂时失效——这正是必须用前瞻盈利、而非当期 FCF 来估值的原因。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. GROWTH ===== -->
+<section class="section" id="s3">
+  <div class="container">
+    <div class="section-label">模块 03</div>
+    <h2 class="section-title">增长<em>真实性</em>、可持续性<br>与市场空间</h2>
+    <p class="section-lead">最强的增长信号不是收入数字本身,而是它的构成:广告印象 +19% 与单价 +12% 同时发生——量价齐升,是平台健康度的黄金证据。</p>
+
+    <div class="prose">
+      <p><strong>增长真实性拆解。</strong>Q1 2026 广告收入 +33% 可拆为两个独立引擎:<strong>放量(印象 +19%)</strong>—— Reels 时长在 Instagram 上 +10%、Facebook 视频时长 +8%(四年来最大季度增幅);<strong>提价(单价 +12%)</strong>—— AI 驱动的广告定向显著提升转化效率。据报道,Nvidia 披露 META 的 AI 模型使广告点击率提升 <span class="highlight">3.5 倍</span>。这是"AI 反哺核心业务"飞轮的硬证据——AI 不只是成本中心,它正在直接拉高广告 ROI 从而支撑提价。</p>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">未来 3–5 年增长驱动(可量化)</h3>
+      <div class="porter-grid">
+        <div class="porter-card"><div class="pforce">Reels 变现</div><div class="plevel lvl-low">明确</div><p>短视频广告加载率与 RPM 仍低于 Feed,持续追平是确定性增量。</p></div>
+        <div class="porter-card"><div class="pforce">WhatsApp 商业消息</div><div class="plevel lvl-low">明确</div><p>已达 $2B+ 年化跑率,会话式商务在新兴市场是主流支付/购物入口。</p></div>
+        <div class="porter-card"><div class="pforce">AI 广告效率</div><div class="plevel lvl-mid">高弹性</div><p>Advantage+、生成式广告创意——直接拉升单价,是利润率的最大变量。</p></div>
+        <div class="porter-card"><div class="pforce">Meta AI 订阅</div><div class="plevel lvl-mid">早期</div><p>已推出 $7.99/月 AI 订阅与各 App Plus 版本($2.99–3.99),探索广告外的第二曲线。</p></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">市场空间(TAM)与渗透</h3>
+      <div class="prose">
+        <p><strong>TAM 天花板很高。</strong>全球数字广告市场超 $7,000 亿且持续增长,META 当前年化广告收入约 $210B,渗透率仍在 30% 以下——核心广告业务仍处 S 曲线中段,而非顶部。<strong>叠加两个尚未货币化的期权</strong>:(1) 商业消息/会话式商务(WhatsApp 30 亿月活);(2) AI 助手/智能眼镜定义的下一代计算入口。</p>
+        <p><strong>风险评估。</strong>核心增长驱动面临三重外部风险:广告业务的<strong>经济周期敏感性</strong>(宏观回落即时拖累)、<strong>竞争</strong>(TikTok、YouTube、AI 聊天对注意力的分流)、以及<strong>监管</strong>(隐私新规、反垄断对定向能力的限制)。这些在模块 05、06 详述。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. BUSINESS MODEL ===== -->
+<section class="section" id="s4">
+  <div class="container">
+    <div class="section-label">模块 04</div>
+    <h2 class="section-title">盈利能力与<em>商业模式</em></h2>
+    <p class="section-lead">把 RL 的亏损暂时剥离,META 的核心广告业务是地球上单位经济最优的生意之一:接近零的边际成本,叠加网络效应带来的定价权。</p>
+
+    <div class="prose">
+      <p><strong>商业模式是否越做越赚钱?</strong>看分部利润率即可回答:Q1 2026 <strong>FoA 营业利润率约 48%</strong>($26.9B / $55.9B),且随规模与 AI 效率提升仍在扩张。但全公司营业利润率被 RL 拉低至 40.6%——<span class="highlight">RL 是一个每季度稳定亏损约 $4B 的"利润漏斗"</span>。Q1 2026 RL 收入仅 $402M、营业亏损 $4.03B,自 2020 年底以来累计亏损已突破 <strong>$830 亿</strong>。这是 Zuckerberg 个人意志驱动的长期下注,短期不会关停。</p>
+      <p><strong>单位经济模型。</strong>广告业务的本质是:用户免费使用 → 产生数据与注意力 → 卖给数百万广告主。<span class="highlight">每多一个广告展示的边际成本几乎为零</span>,而 AI 让每次展示更值钱(提价)。这是变动成本极低、规模杠杆极高的结构。</p>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">核心 KPI(平台类)</h3>
+      <table class="metrics-table">
+        <thead><tr><th>指标</th><th>数值/趋势</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td>Family DAP</td><td class="mono">35.6 亿 (+4%)</td><td>规模天花板,首现季度环比微降(伊朗/俄罗斯扰动)</td></tr>
+          <tr><td>ARPP(年度)</td><td class="mono">$57.03 (+15%)</td><td>单用户变现持续提升=黏性+提价同时成立</td></tr>
+          <tr><td>用户流失</td><td class="mono tag-pos">极低</td><td>免费产品+网络效应,无传统 churn 问题</td></tr>
+          <tr><td>参与度</td><td class="mono tag-pos">Reels +10%</td><td>时长仍在增长,广告库存可持续扩张</td></tr>
+        </tbody>
+      </table>
+      <div class="prose">
+        <p>由于产品免费,传统 LTV/CAC、NRR 框架不直接适用,但其经济实质等价于:获客成本极低(病毒式网络扩张)、生命周期价值随 ARPP 逐年抬升、留存近乎"锁定"。这是比多数 SaaS 公司更优的单位经济。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. MOAT ===== -->
+<section class="section" id="s5">
+  <div class="container">
+    <div class="section-label">模块 05</div>
+    <h2 class="section-title">护城河与<em>五力模型</em></h2>
+    <p class="section-lead">META 拥有科技业最宽的护城河之一——35 亿用户的网络效应、独有数据、AI 规模——但 AI 时代正同时从"替代品"和"供应商"两侧侵蚀它。</p>
+
+    <div class="chart-card">
+      <div class="chart-title">波特五力强度评估</div>
+      <div class="chart-note">数值越靠外=对 META 越有利(威胁越低/议价力越强)。满分 5。</div>
+      <div class="chart-wrap" style="height:380px;"><canvas id="porterChart"></canvas></div>
+    </div>
+
+    <div class="porter-grid">
+      <div class="porter-card"><div class="pforce">新进入者威胁</div><div class="plevel lvl-low">低</div><p>35 亿用户的网络效应、数据壁垒、千亿级资本门槛——几乎不可复制。</p></div>
+      <div class="porter-card"><div class="pforce">替代品威胁</div><div class="plevel lvl-high">中–高</div><p>TikTok 抢注意力,AI 聊天/搜索可能改变信息获取方式。这是最大的长期变量。</p></div>
+      <div class="porter-card"><div class="pforce">买方(广告主)议价</div><div class="plevel lvl-mid">中</div><p>数百万分散广告主议价力弱,但大广告主有 Google/Amazon 等替代渠道。</p></div>
+      <div class="porter-card"><div class="pforce">供方议价</div><div class="plevel lvl-high">中–高</div><p>对 Nvidia GPU 高度依赖,毛利受压;MTIA Gen2(博通代工)2027 量产可缓解。</p></div>
+      <div class="porter-card"><div class="pforce">现有竞争强度</div><div class="plevel lvl-high">高</div><p>与 Google、TikTok、Amazon Ads、Snap 在注意力与广告预算上激烈竞争。</p></div>
+    </div>
+
+    <div class="prose">
+      <p><strong>护城河类型:网络效应 + 数据 + 规模。</strong>这是宽护城河,但<span class="highlight">不是不可侵蚀的</span>。META 应对替代品威胁的方式是"自我颠覆"——用 Reels 正面迎击 TikTok、用 Meta AI 正面迎击 ChatGPT、用 MTIA 自研芯片降低对 Nvidia 的依赖。Q1 数据显示 Reels 反击有效(时长持续增长)。供应商议价权问题(GPU 成本)是当前毛利与 capex 暴增的直接来源,也是 2027 年自研芯片落地后的最大改善预期。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. GOVERNANCE ===== -->
+<section class="section" id="s6">
+  <div class="container">
+    <div class="section-label">模块 06</div>
+    <h2 class="section-title">管理层与<em>治理</em></h2>
+    <p class="section-lead">执行力 A+,治理结构 C。这是 META 投资逻辑里最矛盾的一环:同一个创始人的绝对控制权,既是高效决策的来源,也是治理风险的核心。</p>
+
+    <table class="metrics-table">
+      <thead><tr><th>治理维度</th><th>评估</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>执行力 / 兑现能力</td><td class="tag-pos">优秀</td><td>长期稳定达到或超越收入指引;Q1 2026 收入与 EPS 双双超预期。</td></tr>
+        <tr><td>指引准确性</td><td class="tag-pos">高</td><td>收入指引可信度强,费用与 capex 指引则随 AI 周期上修(透明披露原因)。</td></tr>
+        <tr><td>激励机制</td><td class="tag-warn">中</td><td>薪酬与长期股价挂钩,但 SBC 规模大,需关注稀释。</td></tr>
+        <tr><td>治理结构</td><td class="tag-neg">弱</td><td>双层股权:Zuckerberg 凭 B 类超级投票权掌握绝对控制,股东制衡力有限。</td></tr>
+        <tr><td>内部交易 / 诉讼</td><td class="tag-warn">关注</td><td>高管按 10b5-1 计划常规减持;Berger Montague 正调查董事会受信义务问题。</td></tr>
+      </tbody>
+    </table>
+
+    <div class="prose">
+      <p><strong>双层股权是一把双刃剑。</strong>它让 META 能做出 RL 这种"十年累计亏 $830 亿仍不关停"、以及"一年 capex 砸 $135B"的长周期豪赌——这些决策若交给季度导向的市场,几乎不可能通过。但代价是<span class="highlight">股东几乎无法对资本配置失误进行制衡</span>。对投资者而言,这意味着你买入 META,本质上是把资本配置权完全托付给 Zuckerberg 个人的判断。历史上他做对了(移动转型、Reels、AI 反击),但这是一个需要持续验证的信任前提。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 7. VALUATION ===== -->
+<section class="section" id="s7">
+  <div class="container">
+    <div class="section-label">模块 07</div>
+    <h2 class="section-title">估值评估与<em>敏感性</em></h2>
+    <p class="section-lead">核心结论先行:META 在七大科技股里是唯一一只"高质量 + 估值未被透支"的标的。当前 Fwd P/E ~20.7x,显著低于其 5 年均值 ~23x、10 年均值 ~27x。</p>
+
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">Fwd P/E (NTM)</div><div class="qvalue pos">~20.7x</div></div>
+      <div class="quick-cell"><div class="qlabel">10 年均值 P/E</div><div class="qvalue">~26.9x</div></div>
+      <div class="quick-cell"><div class="qlabel">5 年均值 P/E</div><div class="qvalue">~23.4x</div></div>
+      <div class="quick-cell"><div class="qlabel">PEG(粗略)</div><div class="qvalue pos">~1.0</div></div>
+      <div class="quick-cell"><div class="qlabel">街头目标价(中位)</div><div class="qvalue">~$830</div></div>
+      <div class="quick-cell"><div class="qlabel">街头评级</div><div class="qvalue pos">Strong Buy</div></div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">7.1 相对估值(基于前瞻 EPS)</h3>
+      <div class="prose">
+        <p>由于税收项目扰动,我们以<strong>正常化前瞻 EPS</strong> 而非 GAAP TTM EPS 为锚。市场共识 FY2026 EPS 约 $30–33,FY2027 约 $35。当前股价 $612 对应 FY26 约 19–20x——<span class="highlight">对一家收入增速 20%+、净利率近 40% 的公司而言,这是便宜的</span>。PEG ≈ 1.0,估值与成长性匹配良好。</p>
+      </div>
+      <table class="metrics-table">
+        <thead><tr><th>情景</th><th>FY27E EPS</th><th>P/E 倍数</th><th>对应价位</th></tr></thead>
+        <tbody>
+          <tr><td>保守</td><td class="mono">$30</td><td class="mono">16x</td><td class="mono">~$480</td></tr>
+          <tr><td>中性</td><td class="mono">$35</td><td class="mono">22x</td><td class="mono">~$770</td></tr>
+          <tr><td>乐观</td><td class="mono">$40</td><td class="mono">28x</td><td class="mono">~$1,120</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">7.2 DCF 与敏感性</h3>
+      <div class="prose">
+        <p><strong>DCF 的关键张力在于 FCF 的"V 形"假设。</strong>由于 FY2026 capex 高峰将把 FCF 暂时压至接近零,DCF 高度依赖于"capex 在 2027–2028 见顶、FCF margin 随后恢复至 20%+"这一前提。关键假设:WACC ~9%、永续增长 g ~3.5%。在此基础上,合理价值区间约 <strong>$650–$850</strong>。</p>
+        <p><strong>敏感性</strong>:WACC 每变动 ±0.5%、g 每变动 ±0.5%,对应估值摆动约 ±12–18%。最大的非财务敏感变量不是 WACC 或 g,而是<span class="highlight">"AI capex 的边际回报率"这一无法精确建模的假设</span>——这也是为什么 META 的估值分歧主要体现在终值(Terminal Value)而非近期现金流。</p>
+      </div>
+      <div class="callout">
+        <div class="ctitle">估值方法论提示</div>
+        <p>对当前阶段的 META,<strong>FCF Yield 锚暂时失效</strong>(因 capex 高峰),应主要依赖前瞻 P/E + 正常化盈利能力,辅以"capex 正常化后的 FCF"做 DCF 交叉验证。直接用 TTM GAAP EPS($32.97,含税收扰动)或当期 FCF(被 capex 压缩)都会得出误导性结论。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 8. CONCLUSION ===== -->
+<section class="section" id="s8">
+  <div class="container">
+    <div class="section-label">模块 08</div>
+    <h2 class="section-title">投资结论与<em>情景分析</em></h2>
+    <p class="section-lead">综合八模块:质量 A 级、估值合理偏低、增长加速、护城河宽但面临 AI 侵蚀、治理集中、资本周期处于高峰。这是一笔"用合理价格买入高质量资产、并押注资本回报的"投资。</p>
+
+    <div class="subsection">
+      <h3 class="subsection-h">核心投资逻辑(三句话)</h3>
+      <div class="prose">
+        <p><strong>增长靠什么?</strong>广告量价齐升 + AI 直接拉升广告效率(点击率 3.5 倍)+ Reels/WhatsApp 商业消息两条增量曲线。<br>
+        <strong>空间有多大?</strong>$7,000 亿+ 数字广告 TAM 渗透率仍 &lt;30%,叠加会话式商务与 AI 助手两个未货币化期权。<br>
+        <strong>钱能不能赚?</strong>核心 FoA 营业利润率 48%、净现金资产负债表、ROIC 远超 WACC。唯一变量是千亿 capex 的边际回报——这是逻辑的胜负手。</p>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">情景分析 · 1–3 年目标价</h3>
+      <div class="chart-card">
+        <div class="chart-title">三情景目标价区间 vs 现价</div>
+        <div class="chart-note">虚线为当前股价 $612。概率加权目标价 ≈ $810,隐含约 32% 上行空间。</div>
+        <div class="chart-wrap" style="height:300px;"><canvas id="scenarioChart"></canvas></div>
+      </div>
+      <div class="scenario-grid">
+        <div class="scenario-card scenario-bear">
+          <div class="stier">熊市 · 20%</div>
+          <div class="target">$450–540</div>
+          <div class="sdesc">广告周期回落 + capex 无明显回报 + 监管/诉讼重锤;利润率永久下移,P/E 杀至 16–18x。</div>
+          <div class="sprob">高风险 / 减持</div>
+        </div>
+        <div class="scenario-card scenario-base">
+          <div class="stier">基准 · 50%</div>
+          <div class="target">$720–820</div>
+          <div class="sdesc">符合管理层指引,广告 +18–20%,capex 在 FY27 见顶并形成平台。约 22–24x × FY27 EPS。</div>
+          <div class="sprob">中性 / 持有–买入</div>
+        </div>
+        <div class="scenario-card scenario-bull">
+          <div class="stier">牛市 · 30%</div>
+          <div class="target">$1,000–1,150</div>
+          <div class="sdesc">AI 广告效率驱动增长再加速,capex 见顶回落,RL 亏损收窄,MTIA 改善毛利,倍数重估至 28–30x。</div>
+          <div class="sprob">低风险 / 高回报</div>
+        </div>
+      </div>
+      <p style="color:var(--ink-2); margin-top:16px;"><strong>概率加权目标价 ≈ $810</strong>(隐含约 +32%);与街头中位目标 ~$830 基本一致,但本框架下更偏保守的纪律性。</p>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-h">最终推荐</h3>
+      <div class="verdict-banner">
+        <div class="verdict-rec">买入<small>BUY · BUILD POSITION</small></div>
+        <div class="verdict-text">
+          META 是当前 AI 主题大盘股里唯一"高质量 + 估值未被透支"的标的:Fwd P/E ~20x 低于历史均值,而增长在 AI 反哺下逆势加速。<strong>现价 $612 可建底仓 3–5%</strong>;若回落至 $500–560 区间(类似 2026 年 3 月 $520 的 capex 恐慌时刻)则为理想加仓位。核心风险是 capex 回报的兑现节奏与监管尾部——这要求分批建仓、留足子弹,而非一次性满仓。
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-h">五大关键风险</h3>
+    <div class="risk-list">
+      <div class="risk-item"><div class="risk-num">1</div><div class="risk-body"><p><strong>Capex 回报兑现风险。</strong>2026 指引已升至 $125–145B,FCF 被压至接近零。若 AI 变现不及预期或 capex 再度上修,市场会立即用"重资本下注"逻辑重新定价。</p></div></div>
+      <div class="risk-item"><div class="risk-num">2</div><div class="risk-body"><p><strong>Reality Labs 持续失血。</strong>单季亏损约 $4B、累计已超 $830 亿,CFO 预计 2026 亏损与 2025 相当。这是 Zuckerberg 坚持的项目,短期不会止血。</p></div></div>
+      <div class="risk-item"><div class="risk-num">3</div><div class="risk-body"><p><strong>监管与诉讼尾部风险。</strong>青少年危害集体诉讼、FTC 反垄断、欧盟对 AI 运营的反竞争审查、隐私新规限制广告定向——任一恶化都可能造成重大损失(公司已在财报中明确警示)。</p></div></div>
+      <div class="risk-item"><div class="risk-num">4</div><div class="risk-body"><p><strong>广告周期敏感性。</strong>META 仍是周期性公司。2026 下半年若宏观回落,广告预算会立即收缩,放大 capex 高峰期的盈利压力。</p></div></div>
+      <div class="risk-item"><div class="risk-num">5</div><div class="risk-body"><p><strong>AI 替代核心场景。</strong>若 AI 聊天/智能体改变用户信息获取与社交方式,长期可能侵蚀 Feed 的注意力时长——这是护城河最深层的结构性威胁。</p></div></div>
+    </div>
+
+    <div class="pull-quote">META 是一笔"信任 Zuckerberg 资本配置能力"的下注。框架告诉你它便宜且优质;但最终决定回报的,是那 $135B 的 capex 三年后能否变成现金流——这个问题财报暂时还回答不了。</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <h4>免责声明</h4>
+    <p>本报告为基于公开数据与八模块投资分析框架(Framework B)的独立推演,不构成任何投资建议、招揽或意见。所有数据来源为 META 财报、SEC 备案文件、分析师共识及公开市场数据,截至 2026 年 5 月 27 日市场收盘。市场状况可能在报告发布后发生重大变化。读者在做出任何投资决策前,应自行尽职调查并咨询合格的财务顾问。投资有风险,过往表现不代表未来结果。</p>
+    <p style="margin-top:16px;">方法论提示:本报告对税收一次性项目(Q1'26 +$8.03B 优惠 / Q3'25 −$15.93B 费用)做了正常化处理,估值以前瞻 P/E 为主锚,因当期 FCF 受 capex 高峰扭曲、FCF Yield 锚暂时失效。</p>
+    <p style="margin-top:24px; font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:0.08em;">META · FRAMEWORK B DEEP DIVE · MAY 2026 · END</p>
+  </div>
+</footer>
+
+<script>
+const C = {
+  meta:"#1862C6", metaLt:"#5B93D8", green:"#2D6A4F", amber:"#B8651E",
+  red:"#8B1E1E", blue:"#1E3A5F", ink3:"#8A857D", line:"rgba(226,219,204,0.6)"
+};
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.color = "#4A4843";
+
+// 1. SEGMENT REVENUE (stacked bar FoA vs RL by year)
+new Chart(document.getElementById("segRevChart"), {
+  type:"bar",
+  data:{
+    labels:["FY2023","FY2024","FY2025","TTM(Q1'26)"],
+    datasets:[
+      { label:"Family of Apps", data:[133.0,162.4,199.5,213.5], backgroundColor:C.meta, stack:"s" },
+      { label:"Reality Labs",   data:[1.9,2.1,1.5,1.5],         backgroundColor:C.amber, stack:"s" }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{ position:"bottom", labels:{ font:{size:12}, usePointStyle:true } },
+      tooltip:{ callbacks:{ label:(c)=> c.dataset.label+": $"+c.parsed.y+"B" } } },
+    scales:{ x:{ stacked:true, grid:{display:false} },
+      y:{ stacked:true, ticks:{ callback:(v)=>"$"+v+"B" }, grid:{ color:C.line } } }
+  }
+});
+
+// 2. GEOGRAPHIC doughnut
+new Chart(document.getElementById("geoChart"), {
+  type:"doughnut",
+  data:{
+    labels:["美国和加拿大","欧洲","亚太","其他地区"],
+    datasets:[{ data:[45,25,21,9], backgroundColor:[C.meta,C.blue,C.amber,C.ink3], borderColor:"#fff", borderWidth:2 }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false, cutout:"58%",
+    plugins:{ legend:{ position:"right", labels:{ font:{size:13}, usePointStyle:true, padding:14 } },
+      tooltip:{ callbacks:{ label:(c)=> c.label+": ~"+c.parsed+"%" } } }
+  }
+});
+
+// 3. OPEX as % revenue (grouped)
+new Chart(document.getElementById("opexChart"), {
+  type:"bar",
+  data:{
+    labels:["Cost of Rev","R&D","Marketing&Sales","G&A"],
+    datasets:[
+      { label:"Q1 2024", data:[18,27,7,4], backgroundColor:C.metaLt },
+      { label:"Q1 2026", data:[18,31,5,5], backgroundColor:C.meta }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{ position:"bottom", labels:{ usePointStyle:true } },
+      tooltip:{ callbacks:{ label:(c)=> c.dataset.label+": "+c.parsed.y+"%" } } },
+    scales:{ x:{ grid:{display:false} }, y:{ beginAtZero:true, max:35, ticks:{ callback:(v)=>v+"%" }, grid:{ color:C.line } } }
+  }
+});
+
+// 4. CASHFLOW — OCF, Capex, FCF
+new Chart(document.getElementById("cashflowChart"), {
+  type:"bar",
+  data:{
+    labels:["FY2023","FY2024","FY2025","FY2026E"],
+    datasets:[
+      { label:"经营现金流 OCF", data:[71,91,116,145], backgroundColor:C.green, order:2 },
+      { label:"资本开支 Capex", data:[27,37,72,135], backgroundColor:C.amber, order:2 },
+      { type:"line", label:"自由现金流 FCF", data:[44,54,44,10], borderColor:C.red, backgroundColor:C.red,
+        borderWidth:3, tension:0.3, pointRadius:5, order:1 }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{ position:"bottom", labels:{ usePointStyle:true } },
+      tooltip:{ callbacks:{ label:(c)=> c.dataset.label+": $"+c.parsed.y+"B" } } },
+    scales:{ x:{ grid:{display:false} }, y:{ beginAtZero:true, ticks:{ callback:(v)=>"$"+v+"B" }, grid:{ color:C.line } } }
+  }
+});
+
+// 5. PORTER radar (outer = favorable to META)
+new Chart(document.getElementById("porterChart"), {
+  type:"radar",
+  data:{
+    labels:["阻挡新进入者","抵御替代品","对买方议价力","对供方议价力","竞争优势"],
+    datasets:[{ label:"META 护城河强度", data:[4.7,2.6,3.2,2.4,2.8],
+      backgroundColor:"rgba(24,98,198,0.15)", borderColor:C.meta, borderWidth:2,
+      pointBackgroundColor:C.meta, pointRadius:4 }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{ display:false },
+      tooltip:{ callbacks:{ label:(c)=> c.label+": "+c.parsed.r+"/5" } } },
+    scales:{ r:{ min:0, max:5, ticks:{ stepSize:1, backdropColor:"transparent", font:{size:10} },
+      grid:{ color:C.line }, angleLines:{ color:C.line }, pointLabels:{ font:{size:12} } } }
+  }
+});
+
+// 6. SCENARIO floating bars
+new Chart(document.getElementById("scenarioChart"), {
+  type:"bar",
+  data:{
+    labels:["熊市 (20%)","基准 (50%)","牛市 (30%)"],
+    datasets:[{ label:"目标价区间",
+      data:[[450,540],[720,820],[1000,1150]],
+      backgroundColor:[C.red,"#6B5B3A",C.green], borderRadius:4, barThickness:42 }]
+  },
+  options:{
+    indexAxis:"y", responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{ display:false },
+      tooltip:{ callbacks:{ label:(c)=> "$"+c.raw[0]+" – $"+c.raw[1] } } },
+    scales:{
+      x:{ min:300, max:1200, ticks:{ callback:(v)=>"$"+v }, grid:{ color:C.line } },
+      y:{ grid:{ display:false } }
+    }
+  },
+  plugins:[{
+    id:"curPrice",
+    afterDraw(chart){
+      const {ctx, chartArea, scales:{x}} = chart;
+      const px = x.getPixelForValue(612);
+      ctx.save();
+      ctx.strokeStyle = "#1C1B17"; ctx.setLineDash([5,4]); ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(px, chartArea.top); ctx.lineTo(px, chartArea.bottom); ctx.stroke();
+      ctx.setLineDash([]); ctx.fillStyle = "#1C1B17"; ctx.font = "500 11px 'JetBrains Mono', monospace";
+      ctx.textAlign = "center"; ctx.fillText("现价 $612", px, chartArea.top - 6);
+      ctx.restore();
+    }
+  }]
+});
+</script>
+
+</body>
+</html>

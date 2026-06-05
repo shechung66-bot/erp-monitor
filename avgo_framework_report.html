@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Broadcom (AVGO) 八维投资框架深度研究 · 2026年6月</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #F8F4EC;
+  --bg-alt: #FFFFFF;
+  --bg-deep: #1A1815;
+  --ink: #1C1B17;
+  --ink-2: #4A4843;
+  --ink-3: #8A857D;
+  --line: #E2DBCC;
+  --line-2: #CFC6B3;
+  --accent: #1E2A4A;
+  --green: #2D6A4F;
+  --green-bg: #E5EDE6;
+  --blue: #1E3A5F;
+  --blue-bg: #E2EAF1;
+  --amber: #B8651E;
+  --amber-bg: #F2E5D0;
+  --red: #8B1E1E;
+  --red-bg: #F1DCDC;
+  --teal: #2A6F69;
+  --purple: #3D2E5E;
+  --coral: #A0421A;
+  --pink: #872D52;
+  --brand: #9E1B22;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  font-feature-settings: "kern", "liga", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+/* HERO */
+.hero { padding: 80px 0 64px; border-bottom: 1px solid var(--line); position: relative; }
+.hero-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-tag::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.hero-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(38px, 5.2vw, 60px); line-height: 1.1; letter-spacing: -0.02em;
+  margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.hero-title em { font-style: italic; font-weight: 400; color: var(--brand); }
+.hero-sub { font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 740px; margin-bottom: 40px; font-weight: 300; }
+.hero-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 24px; padding-top: 32px; border-top: 1px solid var(--line);
+}
+.hero-meta div { font-size: 13px; }
+.hero-meta .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+.hero-meta .value { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--ink); }
+
+/* SECTIONS */
+.section { padding: 72px 0 36px; border-bottom: 1px solid var(--line); }
+.section:last-of-type { border-bottom: none; }
+.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand); margin-bottom: 16px; }
+.section-title {
+  font-family: var(--font-display); font-size: clamp(30px, 3.8vw, 42px); font-weight: 500;
+  line-height: 1.15; letter-spacing: -0.015em; margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.section-title em { font-style: italic; color: var(--brand); }
+.section-lead { font-size: 19px; line-height: 1.65; color: var(--ink-2); max-width: 780px; margin-bottom: 36px; font-weight: 300; }
+
+/* PROSE */
+.prose p { margin-bottom: 16px; color: var(--ink-2); }
+.prose p strong, .prose strong { color: var(--ink); font-weight: 600; }
+.prose .highlight { background: linear-gradient(180deg, transparent 60%, rgba(184, 101, 30, 0.18) 60%); padding: 0 2px; }
+
+/* SUBSECTION */
+.subsection { margin-top: 40px; }
+.subsection-h { font-family: var(--font-display); font-style: italic; font-size: 24px; font-weight: 500; margin-bottom: 16px; color: var(--ink); }
+.subsection-h.tight { margin-top: 36px; }
+
+/* QUICK GRID */
+.quick-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px; background: var(--line); border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden; margin: 32px 0;
+}
+.quick-cell { background: var(--bg-alt); padding: 18px 20px; }
+.quick-cell .qlabel { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+.quick-cell .qvalue { font-family: var(--font-display); font-size: 22px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+.qvalue.pos { color: var(--green); }
+.qvalue.neg { color: var(--red); }
+.qvalue.warn { color: var(--amber); }
+
+/* TABLE */
+.metrics-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+.metrics-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); text-align: left; padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line-2); font-weight: 500; }
+.metrics-table td { padding: 13px 12px 13px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.metrics-table td:first-child { font-weight: 500; color: var(--ink); }
+.metrics-table .mono { font-family: var(--font-mono); }
+.metrics-table .num { font-family: var(--font-mono); color: var(--ink-3); width: 28px; }
+.tag-pos { color: var(--green); font-weight: 600; }
+.tag-neg { color: var(--red); font-weight: 600; }
+.tag-warn { color: var(--amber); font-weight: 600; }
+.tag-na { color: var(--ink-3); font-family: var(--font-mono); font-size: 12px; }
+
+/* CHART */
+.chart-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-cap { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-3); margin-bottom: 18px; text-transform: uppercase; }
+.chart-wrap { position: relative; width: 100%; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; font-size: 12px; color: var(--ink-2); }
+.chart-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); }
+.legend-sq { width: 12px; height: 12px; border-radius: 2px; }
+
+/* EQUATION / CALLOUT */
+.callout-box { background: var(--bg-alt); border: 1px solid var(--line); border-left: 3px solid var(--brand); border-radius: 6px; padding: 24px 28px; margin: 28px 0; }
+.callout-box .ctitle { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); margin-bottom: 10px; }
+.callout-box p { font-size: 14px; color: var(--ink-2); margin: 0; }
+.callout-box p + p { margin-top: 10px; }
+
+/* PULL QUOTE */
+.pull-quote {
+  font-family: var(--font-display); font-style: italic; font-size: clamp(21px, 2.4vw, 27px);
+  line-height: 1.4; color: var(--brand); padding: 28px 0 28px 32px; border-left: 3px solid var(--brand);
+  margin: 32px 0; font-weight: 400; font-variation-settings: "opsz" 144;
+}
+.pull-quote::before { content: '"'; font-size: 1.5em; line-height: 0; vertical-align: -0.2em; margin-right: 0.05em; color: var(--amber); }
+
+/* FORCES GRID */
+.forces-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 24px 0; }
+.force-card { background: var(--bg-alt); padding: 22px; }
+.force-card .fhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.force-card .fname { font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--ink); }
+.force-rating { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; font-weight: 500; }
+.r-low { background: var(--green-bg); color: var(--green); }
+.r-mid { background: var(--amber-bg); color: var(--amber); }
+.r-high { background: var(--red-bg); color: var(--red); }
+.force-card p { font-size: 13px; line-height: 1.55; color: var(--ink-2); margin: 0; }
+
+/* RISK LIST */
+.risk-list { margin-top: 16px; }
+.risk-item { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+.risk-item:last-child { border-bottom: 1px solid var(--line); }
+.risk-num { font-family: var(--font-display); font-size: 28px; font-weight: 500; font-style: italic; color: var(--amber); line-height: 1; flex-shrink: 0; width: 36px; }
+.risk-body p { font-size: 14px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+.risk-body strong { color: var(--ink); }
+
+/* SCENARIO */
+.scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.scenario-card { padding: 22px; border-radius: 8px; }
+.scenario-bull { background: var(--green-bg); }
+.scenario-base { background: #EDE9E0; }
+.scenario-bear { background: var(--red-bg); }
+.scenario-card .stier { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.scenario-bull .stier { color: var(--green); }
+.scenario-base .stier { color: #6B5B3A; }
+.scenario-bear .stier { color: var(--red); }
+.scenario-card .target { font-family: var(--font-display); font-size: 34px; font-weight: 500; line-height: 1; margin-bottom: 8px; }
+.scenario-bull .target { color: var(--green); }
+.scenario-base .target { color: #6B5B3A; }
+.scenario-bear .target { color: var(--red); }
+.scenario-card .sdesc { font-size: 12.5px; line-height: 1.5; }
+.scenario-bull .sdesc { color: #1F4A37; }
+.scenario-base .sdesc { color: #6B5B3A; }
+.scenario-bear .sdesc { color: #5A1212; }
+.scenario-card .sprob { font-family: var(--font-mono); font-size: 11px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); }
+
+/* SENSITIVITY TABLE */
+.sens-wrap { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; margin: 24px 0; }
+.sens-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 13px; min-width: 520px; }
+.sens-table th, .sens-table td { padding: 12px 14px; text-align: center; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.sens-table th { background: var(--bg); color: var(--ink-3); font-size: 11px; letter-spacing: 0.06em; font-weight: 500; }
+.sens-table td:first-child, .sens-table th:first-child { text-align: left; background: var(--bg); color: var(--ink-2); font-weight: 500; }
+.sens-table .cell-base { background: var(--green-bg); color: var(--green); font-weight: 600; }
+.sens-table .cell-hi { background: var(--blue-bg); color: var(--blue); }
+.sens-table .cell-lo { background: var(--red-bg); color: var(--red); }
+
+/* VERDICT */
+.verdict-banner { background: var(--bg-deep); color: #F0EBE0; border-radius: 10px; padding: 40px; margin: 32px 0; }
+.verdict-banner .vrating { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A24B; margin-bottom: 14px; }
+.verdict-banner .vmain { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 40px); font-weight: 500; line-height: 1.2; margin-bottom: 16px; }
+.verdict-banner .vmain em { font-style: italic; color: #E8C36B; }
+.verdict-banner .vsub { font-size: 15px; line-height: 1.6; color: #C8C1B2; max-width: 720px; }
+.verdict-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.12); }
+.verdict-stats .vs-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #8C8576; margin-bottom: 6px; }
+.verdict-stats .vs-value { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: #F0EBE0; }
+
+/* TOC */
+.toc { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
+.toc ol { list-style: none; }
+.toc li { display: flex; align-items: baseline; padding: 8px 0; border-bottom: 1px dotted var(--line-2); font-size: 14px; }
+.toc li:last-child { border-bottom: none; }
+.toc .toc-num { font-family: var(--font-mono); font-size: 11px; color: var(--brand); width: 32px; flex-shrink: 0; }
+.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+.toc a:hover { border-bottom-color: var(--amber); }
+
+/* FOOTER */
+.footer { padding: 48px 0 64px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.footer h4 { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--ink-2); margin-bottom: 12px; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 56px 0 40px; }
+  .section { padding: 48px 0 28px; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .verdict-banner { padding: 28px; }
+}
+@media print { body { background: white; } .toc { page-break-after: always; } }
+</style>
+</head>
+<body>
+<!--NAV--><div style="background:#0a0b0f;border-bottom:1px solid rgba(255,255,255,.1);padding:9px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:-apple-system,'Noto Sans SC',system-ui,sans-serif;position:relative;z-index:999"><span style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#d4a24e;margin-right:8px">US MACRO</span><a href="index.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">ERP 引擎</a><a href="liquidity.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">流动性</a><a href="mag7.html" style="text-decoration:none;font:600 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#0a0b0f;background:#d4a24e;border:1px solid #d4a24e;padding:6px 13px;border-radius:7px">巨头研究</a></div><!--/NAV-->
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">独立投资研究 · 八维框架深度 · 2026年6月4日</div>
+    <h1 class="hero-title">Broadcom <em>AVGO</em><br>八维投资框架深度研究</h1>
+    <p class="hero-sub">AI 资本周期里"不花钱、只收钱"的定制芯片设计霸主。Q2 FY2026(6月3日发布)交出史上最强财报 —— 营收 +48%、AI 半导体 +143% —— 股价却在盘后重挫约 14%。本报告按八维框架逐项拆解,回答一个问题:在 ~$413 的回调价位,这是机会还是陷阱?</p>
+    <div class="hero-meta">
+      <div><div class="label">现价 (6/4)</div><div class="value">~$413</div></div>
+      <div><div class="label">财报后回调</div><div class="value" style="color:var(--red);">-14%</div></div>
+      <div><div class="label">市值</div><div class="value">~$2.0T</div></div>
+      <div><div class="label">FY26 预期 P/E</div><div class="value">~38x</div></div>
+      <div><div class="label">框架结论</div><div class="value" style="color:var(--blue);">持有 / 逢跌建仓</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOC -->
+<section class="section" style="padding-top:56px;">
+  <div class="container">
+    <div class="toc">
+      <div class="toc-title">报告结构 · 八维框架</div>
+      <ol>
+        <li><span class="toc-num">01</span><a href="#s1">公司概览与核心业务</a></li>
+        <li><span class="toc-num">02</span><a href="#s2">财务质量与健康现状(现金为王)</a></li>
+        <li><span class="toc-num">03</span><a href="#s3">增长分析:真实性、可持续性与 TAM</a></li>
+        <li><span class="toc-num">04</span><a href="#s4">盈利能力与商业模式</a></li>
+        <li><span class="toc-num">05</span><a href="#s5">护城河与外部环境(五力)</a></li>
+        <li><span class="toc-num">06</span><a href="#s6">管理层与治理</a></li>
+        <li><span class="toc-num">07</span><a href="#s7">估值评估与情景分析</a></li>
+        <li><span class="toc-num">08</span><a href="#s8">投资结论与推荐</a></li>
+      </ol>
+    </div>
+    <div class="callout-box">
+      <div class="ctitle">框架适配性声明(前置门控)</div>
+      <p>AVGO 是<strong>"半导体 + 基础设施软件"双引擎、收购驱动、资本极轻(Capex/收入 ≈ 1%)的成熟盈利型公司</strong>,因此本报告以传统盈利型框架(P/E、EV/EBITDA、DCF)为主轴。</p>
+      <p>对其中天然不适配的指标,本报告明确标注 <strong>N/A 而非强行套用</strong>:LTV/CAC、获客成本、Burn Rate / Runway 对一家年自由现金流近 $300 亿、半导体按"设计中标 + 多年量产"而非"按客获取"的公司没有分析意义。SaaS 类指标(NRR/Churn)仅对 VMware 软件分部做定性处理。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========= SECTION 1 ========= -->
+<section class="section" id="s1">
+  <div class="container">
+    <div class="section-label">第一部分 · 公司概览</div>
+    <h2 class="section-title">一家被低估的<em>"AI 卖铲人"</em>,只是铲子是定制的</h2>
+    <p class="section-lead">如果说 NVDA 卖的是通用 GPU 这把"标准铲",Broadcom 卖的就是为每个超大客户量身打造的"定制铲"(XPU/ASIC)。它不与客户竞争算力,而是把客户的芯片设计能力外包给自己 —— 这是 AI 产业链里位置最舒服的一环之一。</p>
+
+    <div class="prose">
+      <p>Broadcom 的业务由两大分部构成:<strong>半导体解决方案(Semiconductor Solutions)</strong>与<strong>基础设施软件(Infrastructure Software)</strong>。前者涵盖定制 AI 加速器(XPU)、AI 网络芯片、宽带、无线(Apple 是大客户)、存储等;后者以 2023 年底 $690 亿收购的 <strong>VMware</strong> 为核心,正从永久授权转向 VCF 订阅模式。</p>
+      <p>FY2026 Q2,半导体占总收入 <span class="highlight">68%(+79% YoY)</span>,软件占 32%(+9% YoY)。其中 <strong>AI 半导体单季收入 $108 亿,同比 +143%,已占公司总收入近一半</strong> —— AI 已经从"故事"变成了 Broadcom 的主引擎。</p>
+    </div>
+
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">Q2 总收入</div><div class="qvalue pos">$22.2B</div></div>
+      <div class="quick-cell"><div class="qlabel">YoY 增速</div><div class="qvalue pos">+48%</div></div>
+      <div class="quick-cell"><div class="qlabel">AI 半导体</div><div class="qvalue pos">$10.8B</div></div>
+      <div class="quick-cell"><div class="qlabel">AI YoY</div><div class="qvalue pos">+143%</div></div>
+      <div class="quick-cell"><div class="qlabel">XPU 设计份额</div><div class="qvalue pos">~70%</div></div>
+      <div class="quick-cell"><div class="qlabel">FY25 收入</div><div class="qvalue">$63.9B</div></div>
+    </div>
+
+    <h3 class="subsection-h">业务收入拆解 · 近三财年(单位:$B)</h3>
+    <div class="chart-card">
+      <div class="chart-cap">分部收入演变 · FY2023(并购前)→ FY2026E</div>
+      <div class="chart-legend">
+        <span class="chart-legend-item"><span class="legend-sq" style="background:#9E1B22;"></span>半导体解决方案</span>
+        <span class="chart-legend-item"><span class="legend-sq" style="background:#1E3A5F;"></span>基础设施软件(VMware)</span>
+        <span class="chart-legend-item" style="margin-left:auto;">FY26E 为基于 Q3 指引的推算</span>
+      </div>
+      <div class="chart-wrap" style="height:340px;"><canvas id="segChart"></canvas></div>
+    </div>
+
+    <div class="prose">
+      <p>三年收入翻倍的故事分两段:<strong>FY23→FY24 的跳升主要来自 VMware 并表</strong>(软件分部从 ~$76 亿暴增至 $215 亿);<strong>FY24→FY26 的加速则纯粹由 AI 半导体驱动</strong>(从 ~$120 亿/年冲向 FY26 的 $560 亿目标)。这是一次"先用债务买软件现金牛,再用 AI 半导体引爆增长"的精妙资本运作。</p>
+    </div>
+
+    <h3 class="subsection-h tight">地理拆解</h3>
+    <div class="prose">
+      <p>按发货地口径,<strong>中国(含香港)占 FY2025 收入约 17%(FY2024 为 20%)</strong>,呈下降趋势。需要强调的是:Broadcom 在 10-K 中明确指出,发货地常为亚洲(用于组装),<strong>但终端客户多在其他国家</strong>,因此"发货地 = 终端需求地"的简单推断会失真。真实的终端需求高度集中在<strong>美国超大规模云厂商(Google / Meta / OpenAI / Anthropic 等)</strong>。这意味着地缘风险既真实(对华出口管制)又被部分高估(终端非中国)。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========= SECTION 2 ========= -->
+<section class="section" id="s2">
+  <div class="container">
+    <div class="section-label">第二部分 · 财务质量</div>
+    <h2 class="section-title">现金为王:<em>46% 的自由现金流率</em>是什么概念?</h2>
+    <p class="section-lead">用一句话概括 Broadcom 的财务质量:这是一台把营收的一半左右直接转成自由现金流、且几乎不需要花钱维护的机器。这种现金转化效率在万亿市值公司里极为罕见。</p>
+
+    <h3 class="subsection-h">2.1 盈利能力与增长质量</h3>
+    <table class="metrics-table">
+      <thead><tr><th>指标 (Q2 FY26)</th><th>数值</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>非 GAAP 毛利率</td><td class="mono">77.1%</td><td><span class="tag-pos">极强定价权</span> · 软件 + 定制芯片高附加值</td></tr>
+        <tr><td>非 GAAP 营业利润率</td><td class="mono">67.3%</td><td><span class="tag-pos">行业顶级</span> · 强规模化经营杠杆</td></tr>
+        <tr><td>调整后 EBITDA 利润率</td><td class="mono">69%</td><td><span class="tag-pos">创历史新高</span></td></tr>
+        <tr><td>GAAP 净利润</td><td class="mono">$9.31B (+88%)</td><td>含约 $20 亿无形资产摊销拖累</td></tr>
+        <tr><td>非 GAAP 净利润</td><td class="mono">$12.07B (+55%)</td><td><span class="tag-pos">真实盈利能力</span></td></tr>
+        <tr><td>3 年收入 CAGR</td><td class="mono">~24%</td><td>含 VMware;有机 AI 增速远高于此</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout-box">
+      <div class="ctitle">Non-GAAP 含金量审查(关键)</div>
+      <p>GAAP 与非 GAAP 净利润之间 $27.6 亿的差额,主要由两项构成:① <strong>收购相关无形资产摊销 ~$19.7 亿</strong>(非现金,VMware/博通历史并购遗留,可视为"会计噪音");② <strong>股权激励 SBC ~$20.9 亿</strong>。</p>
+      <p>其中 <strong>SBC 是真实的股东成本,不应被无视 —— 它约占收入的 9.4%,是本框架下唯一需要警惕的"美化"项</strong>。好消息是:公司用回购对冲了稀释,摊薄股本稳定在 ~49.4 亿股附近(并未显著膨胀)。结论:利润含金量高,但分析时应以"非 GAAP 减去 SBC 影响"做保守锚定。</p>
+    </div>
+
+    <h3 class="subsection-h tight">2.2–2.4 现金流、运营杠杆与资产负债表</h3>
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">经营现金流 OCF</div><div class="qvalue pos">$10.49B</div></div>
+      <div class="quick-cell"><div class="qlabel">资本开支 Capex</div><div class="qvalue pos">$0.23B</div></div>
+      <div class="quick-cell"><div class="qlabel">自由现金流 FCF</div><div class="qvalue pos">$10.26B</div></div>
+      <div class="quick-cell"><div class="qlabel">FCF 利润率</div><div class="qvalue pos">46%</div></div>
+      <div class="quick-cell"><div class="qlabel">OCF / 净利润</div><div class="qvalue pos">1.13x</div></div>
+      <div class="quick-cell"><div class="qlabel">Capex / 收入</div><div class="qvalue pos">~1.0%</div></div>
+    </div>
+
+    <div class="prose">
+      <p><strong>这是整篇报告最重要的一组数字。</strong>当 MSFT/META/GOOGL/ORCL 把营收的 30%–75% 砸进 AI Capex 时,Broadcom 的 Capex 仅占收入约 <span class="highlight">1%</span> —— 它是 fabless(无晶圆厂)设计公司 + 软件公司的组合,把重资产环节外包给了台积电。<strong>它享受了整个 AI 资本周期的需求,却几乎不承担资本开支的代价。</strong>这是它与 NVDA 共享、而与四大云厂商截然相反的"卖铲人"经济结构。</p>
+      <p>OCF/净利润 = 1.13x,说明利润有充分现金支撑,质量过硬(本季应收/存货因 AI 备货大增 ~$37 亿,是增长性占用,非质量问题)。</p>
+    </div>
+
+    <h3 class="subsection-h tight">资产负债表健康:从 VMware 债务高峰快速去杠杆</h3>
+    <table class="metrics-table">
+      <thead><tr><th>指标</th><th>数值 (截至 5/3/2026)</th><th>安全线评估</th></tr></thead>
+      <tbody>
+        <tr><td>现金及等价物</td><td class="mono">$19.6B</td><td>充裕,环比 +$5.5B</td></tr>
+        <tr><td>总债务</td><td class="mono">$64.9B</td><td>VMware 收购遗留,持续偿还中</td></tr>
+        <tr><td>净债务</td><td class="mono">~$45.3B</td><td>—</td></tr>
+        <tr><td>净债务 / EBITDA (TTM)</td><td class="mono">~0.9x</td><td><span class="tag-pos">远低于 3.0x 安全线</span> · 已从并购峰值 ~3.4x 大幅下降</td></tr>
+        <tr><td>负债权益比 (D/E)</td><td class="mono">~0.74x</td><td><span class="tag-pos">健康</span></td></tr>
+        <tr><td>商誉</td><td class="mono">$97.8B</td><td><span class="tag-warn">异常信号</span> · 占总资产 55%,系并购密集所致</td></tr>
+        <tr><td>净资产</td><td class="mono">$87.7B</td><td>为正,无负资产风险</td></tr>
+        <tr><td>烧钱率 / 跑道</td><td class="tag-na">N/A</td><td>公司大幅盈利,指标不适用</td></tr>
+      </tbody>
+    </table>
+    <div class="prose">
+      <p>唯一需要标注的"异常信号"是 <strong>$978 亿商誉(占总资产 55%)</strong> —— 这是 Broadcom 作为连环并购机器的结构性特征,而非舞弊信号。风险在于:若未来某项收购(尤其 VMware)的现金流不及预期,可能触发巨额减值。但以当前软件分部 ARR 仍 +17% 的态势看,短期减值风险低。<strong>更重要的是去杠杆速度:净债务/EBITDA 已从并购峰值的 ~3.4x 降至 ~0.9x,且仍在快速下降</strong> —— 这是资产负债表从"高杠杆赌局"回归"稳健"的明确信号。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========= SECTION 3 ========= -->
+<section class="section" id="s3">
+  <div class="container">
+    <div class="section-label">第三部分 · 增长分析</div>
+    <h2 class="section-title">AI 半导体:从 $200 亿到<em>$1000 亿</em>的两年冲刺</h2>
+    <p class="section-lead">增长的真实性几乎无需质疑 —— 它由真实的多年期订单、$730 亿+ 的积压订单和六大超大客户的供货合同背书。真正的问题不是"增长是否真实",而是"增长能否持续到管理层画的那条线"。</p>
+
+    <div class="chart-card">
+      <div class="chart-cap">AI 半导体季度收入轨迹 · 加速曲线(单位:$B)</div>
+      <div class="chart-wrap" style="height:360px;"><canvas id="aiChart"></canvas></div>
+    </div>
+
+    <div class="prose">
+      <p>增长来源拆解清晰可量化:① <strong>放量</strong> —— 客户从 Google 单一拓展到六家;② <strong>客单价/规模</strong> —— 每个客户的部署从 GW 级走向多 GW 级;③ <strong>提价能力</strong> —— 77% 毛利率印证定制设计的不可替代性。管理层给出的两条硬目标是:<strong>FY2026 AI 半导体收入重申 $560 亿(约 +180%);FY2027 超过 $1000 亿</strong>,背后是 $730 亿积压订单 + Q2 新增 $300 亿+ 预订 + 两家新客户 $60 亿订单。</p>
+    </div>
+
+    <h3 class="subsection-h">市场空间 (TAM) 与渗透率</h3>
+    <table class="metrics-table">
+      <thead><tr><th>维度</th><th>数据</th><th>含义</th></tr></thead>
+      <tbody>
+        <tr><td>定制 XPU 市场 (TAM)</td><td class="mono">~$840 亿 by CY2029</td><td>第三方估算;且仅含定制加速器,未含网络</td></tr>
+        <tr><td>三大客户 SAM</td><td class="mono">$600–900 亿 by FY27</td><td>管理层口径的可服务收入空间</td></tr>
+        <tr><td>当前 S 曲线位置</td><td class="mono">陡峭加速段</td><td>渗透率快速上升,远未见顶</td></tr>
+        <tr><td>扩张路径</td><td colspan="2" class="mono">新客户(Apple/ByteDance)+ 网络芯片(41% 份额)+ VMware 私有云 AI 化</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout-box">
+      <div class="ctitle">本季新变量 · Apollo / Blackstone $350 亿 XPU 融资结构</div>
+      <p>Broadcom 宣布与 Apollo、Blackstone 等合作部署 <strong>超过 20GW AI 算力,首期由 Apollo 主导的规模达 $350 亿</strong>。这扩大了需求可见度,但也引入了一个需要警惕的信号:<strong>当芯片销售开始依赖外部资本方"代客户买单"的融资结构时,产业链开始出现"循环融资"的影子</strong> —— 这是 AI 资本周期成熟期的典型特征,也是判断周期顶部的重要观察变量。</p>
+    </div>
+
+    <h3 class="subsection-h tight">增长风险评估</h3>
+    <div class="prose">
+      <p>核心增长驱动面临三类风险:① <strong>周期敏感性</strong> —— AI 资本开支若在 2027–2028 进入消化期,定制芯片需求会同步放缓(与本研究 NVDA 章节同源的"卖铲人困境");② <strong>客户内化</strong> —— Marvell 已在财报中点名"客户自建设计能力"为长期威胁;③ <strong>软件分部减速</strong> —— VMware 增速已从 +47% 回落至 +9%(基数效应 + 订阅转化接近尾声)。本季股价大跌的直接导火索,正是软件分部 $71.8 亿略低于市场"耳语预期"的 ~$73.2 亿。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========= SECTION 4 ========= -->
+<section class="section" id="s4">
+  <div class="container">
+    <div class="section-label">第四部分 · 商业模式</div>
+    <h2 class="section-title">越做越赚钱?<em>是的,而且杠杆惊人</em></h2>
+    <p class="section-lead">检验商业模式的黄金问题:收入增长时,利润增长得更快吗?Broadcom 的答案是教科书级别的"是"。</p>
+
+    <div class="prose">
+      <p><strong>经营杠杆验证:</strong>Q2 收入 +48%,而非 GAAP 营业利润 +52%、调整后 EBITDA +52% —— 利润增速跑赢收入增速,且营业利润率在已经 67% 的高位上仍在扩张。这意味着每增加 1 美元收入,落到利润端的边际贡献极高。规模化释放潜力<strong>仍未见顶</strong>。</p>
+    </div>
+
+    <h3 class="subsection-h">单位经济与核心 KPI(分部适配)</h3>
+    <table class="metrics-table">
+      <thead><tr><th>KPI</th><th>半导体分部</th><th>软件分部 (VMware)</th></tr></thead>
+      <tbody>
+        <tr><td>商业模式</td><td>设计中标 + 多年量产</td><td>VCF 订阅(经常性收入)</td></tr>
+        <tr><td>单位经济</td><td><span class="tag-pos">极佳</span> · NRE 前置,量产期高毛利</td><td><span class="tag-pos">极佳</span> · 订阅 + 提价 + 高切换成本</td></tr>
+        <tr><td>LTV / CAC</td><td class="tag-na">N/A · 非按客获取模式</td><td class="tag-na">N/A · 企业级而非 PLG</td></tr>
+        <tr><td>NRR / 净收入留存</td><td class="tag-na">N/A</td><td><span class="tag-pos">高</span> · ARR +17%,提价驱动</td></tr>
+        <tr><td>客户流失率 Churn</td><td>低 · 多年合同锁定</td><td>低 · 私有云迁移成本极高</td></tr>
+      </tbody>
+    </table>
+    <div class="prose">
+      <p>遵循框架纪律:<strong>LTV/CAC 对 Broadcom 不适用并标注 N/A</strong> —— 半导体按"设计项目"而非"按客户获取"计价,软件是企业级长约而非自助式 SaaS。强行套用这些 SaaS 指标只会降低分析质量。真正有意义的单位经济结论是:两个分部都具备"高毛利 + 高切换成本 + 经常性/多年期收入"的优质特征。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========= SECTION 5 ========= -->
+<section class="section" id="s5">
+  <div class="container">
+    <div class="section-label">第五部分 · 护城河</div>
+    <h2 class="section-title">五力分析:<em>一条又宽又有裂缝</em>的护城河</h2>
+    <p class="section-lead">Broadcom 的护城河真实而宽阔(70%+ 设计份额、CUDA 式的协同设计黏性、VMware 锁定),但它有一道结构性裂缝 —— 它的客户,正是地球上最有能力自建芯片设计的几家公司。</p>
+
+    <div class="forces-grid">
+      <div class="force-card">
+        <div class="fhead"><span class="fname">现有竞争强度</span><span class="force-rating r-mid">中</span></div>
+        <p>定制 ASIC 设计实为<strong>博通(~70%)+ Marvell(~20–25%)的双寡头</strong>,合计 ~95%。博通服务"领跑者"(Google TPU),Marvell 服务"追赶者"(AWS/微软)。双源采购的客观需求让 Marvell 难以被消灭,但博通锁定了最大蛋糕。</p>
+      </div>
+      <div class="force-card">
+        <div class="fhead"><span class="fname">买方议价能力</span><span class="force-rating r-high">高</span></div>
+        <p><strong>最大的风险项。</strong>前三大客户贡献 AI 收入的绝大部分,Google 是绝对锚定。客户既是金主又是潜在自建者,议价能力天然偏强。这是博通护城河上最明显的裂缝。</p>
+      </div>
+      <div class="force-card">
+        <div class="fhead"><span class="fname">供方议价能力</span><span class="force-rating r-mid">中</span></div>
+        <p>高度依赖<strong>台积电单一先进制程</strong>(3nm/7nm 及以下 AI 芯片约 92% 出自台积电)。这是全行业共担的供应链集中风险,非博通独有,但确实削弱其议价地位。</p>
+      </div>
+      <div class="force-card">
+        <div class="fhead"><span class="fname">新进入者威胁</span><span class="force-rating r-low">低</span></div>
+        <p>定制高端 ASIC 需要十年级的 IP 积累、与客户的深度协同设计关系(Google TPU 已合作 7 代/自 2014 年)、以及先进封装能力。<strong>资本与时间壁垒极高</strong>。</p>
+      </div>
+      <div class="force-card">
+        <div class="fhead"><span class="fname">替代品威胁</span><span class="force-rating r-mid">中</span></div>
+        <p>NVDA 通用 GPU 是"替代品"也是"互补品"。定制 XPU 在特定推理/训练负载上性价比更优,但 GPU 的通用性 + CUDA 生态仍是默认选项。两者更可能<strong>长期共存</strong>。</p>
+      </div>
+      <div class="force-card">
+        <div class="fhead"><span class="fname">护城河类型</span><span class="force-rating r-low">宽</span></div>
+        <p><strong>切换成本(协同设计 IP 深度绑定)+ 成本/性能优势 + VMware 软件锁定</strong>三重叠加。Morningstar 给予"宽护城河"评级。本质上是一条"CUDA 式"的客户锁定。</p>
+      </div>
+    </div>
+
+    <div class="pull-quote">博通护城河的悖论:它最大的优势(为超大客户做最深度的协同设计)与它最大的风险(这些超大客户最有能力把设计收回去)是同一枚硬币的两面。</div>
+  </div>
+</section>
+
+<!-- ========= SECTION 6 ========= -->
+<section class="section" id="s6">
+  <div class="container">
+    <div class="section-label">第六部分 · 管理层与治理</div>
+    <h2 class="section-title">Hock Tan:<em>半导体界最强的资本配置者之一</em></h2>
+    <p class="section-lead">在评估一家连环并购公司时,管理层的资本配置能力比任何单一财务指标都重要。Broadcom 的核心投资逻辑,有相当一部分押注在 CEO Hock Tan 这个人身上。</p>
+
+    <table class="metrics-table">
+      <thead><tr><th>治理维度</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>执行力 / 指引兑现</td><td><span class="tag-pos">优秀</span> · 已连续多个季度超越自身指引;AI 收入屡次"上调后再超预期"</td></tr>
+        <tr><td>资本配置记录</td><td><span class="tag-pos">顶级</span> · 收购(Broadcom/CA/Symantec/VMware)+ 提效 + 去杠杆的成熟打法</td></tr>
+        <tr><td>激励一致性</td><td>2025年9月授予 Tan 新 PSU,锁定其领导至 <strong>FY2030</strong>,且设<strong>归属后持有要求</strong> —— 利益绑定正向</td></tr>
+        <tr><td>内部交易倾向</td><td><span class="tag-warn">需注意</span> · 创始人/高管常态化通过 10b5-1 计划减持(本报告未取得精确的近 6 个月逐笔数据,谨慎不做过度解读)</td></tr>
+        <tr><td>董事会 / 披露</td><td>2026 股东大会董事全数连任;披露透明度符合大盘股标准</td></tr>
+      </tbody>
+    </table>
+
+    <div class="prose">
+      <p><strong>正面:</strong>Hock Tan 是半导体行业公认的运营 + 资本配置大师,其"低价收购被低估的资产 → 砍掉非核心 → 提价提效 → 用现金流去杠杆"的剧本已被反复验证。新 PSU 将其绑定至 2030,缓解了关键人风险(尽管未根除 —— 他已 74 岁,接班计划是长期变量)。</p>
+      <p><strong>需注意:</strong>① 9% 收入级别的 SBC 是持续的股东稀释来源;② 创始人/高管的常态化减持(多为预设计划)不宜过度解读为看空信号,但投资者应自行核查 SEC Form 4 的近期逐笔记录,本报告对此保持数据诚实、不臆测。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========= SECTION 7 ========= -->
+<section class="section" id="s7">
+  <div class="container">
+    <div class="section-label">第七部分 · 估值</div>
+    <h2 class="section-title">贵不贵?<em>看你站在 FY26 还是 FY27</em></h2>
+    <p class="section-lead">这是全篇最纠结的一环。用今年(FY26)的盈利看,~38x 不便宜;但博通的增长高度前置到 FY27,用明年的盈利看,~25x 对一家 50%+ EPS 增速、46% FCF 率、宽护城河的公司而言相当合理。估值结论极度依赖你愿意"看多远"。</p>
+
+    <h3 class="subsection-h">7.1 当前估值水平与同业 / 历史对比</h3>
+    <table class="metrics-table">
+      <thead><tr><th>估值指标</th><th>当前 (~$413)</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>FY26E P/E (非 GAAP)</td><td class="mono">~38x</td><td>高于历史中枢,但低于 AI 狂热峰值</td></tr>
+        <tr><td>FY27E P/E (非 GAAP)</td><td class="mono">~25x</td><td><span class="tag-pos">对其增速合理</span></td></tr>
+        <tr><td>EV / EBITDA (FY26E)</td><td class="mono">~34x</td><td>FY27E 降至 ~26x</td></tr>
+        <tr><td>P/S (FY26E)</td><td class="mono">~20x</td><td>受 67% 营业利润率支撑</td></tr>
+        <tr><td>PEG (FY26 ~50% 增速)</td><td class="mono">~0.76</td><td><span class="tag-pos">成长与估值匹配</span></td></tr>
+        <tr><td>股息收益率</td><td class="mono">~0.63%</td><td>$2.60/年;非收益型标的</td></tr>
+        <tr><td>ROIC vs WACC</td><td class="mono">ROIC &gt; WACC</td><td>核心业务 ROIC 极高;并表口径受 $978 亿商誉拖累,但仍高于 ~9–10% 的 WACC,<span class="tag-pos">价值创造为正</span></td></tr>
+      </tbody>
+    </table>
+    <div class="callout-box">
+      <div class="ctitle">市场共识(财报后)</div>
+      <p>市场共识 FY26 非 GAAP EPS 财报前约 <strong>$9.9</strong>,鉴于 Q2 超预期 + Q3 指引 $294 亿(+84%),预计上修至 <strong>~$10.5–11</strong>;FY27 共识约 <strong>$16.5</strong>。约 46 位分析师给予"强力买入",平均目标价 <strong>~$480–487</strong>,最高 $630(Susquehanna),Jefferies 财报后上调至 $550;Morningstar 公允价值 $439(高不确定性)。</p>
+    </div>
+
+    <h3 class="subsection-h tight">7.2 相对估值法 · FY27 远期 P/E 区间</h3>
+    <table class="metrics-table">
+      <thead><tr><th>情景</th><th>FY27 EPS</th><th>P/E</th><th>隐含价格</th></tr></thead>
+      <tbody>
+        <tr><td>保守</td><td class="mono">$14.0</td><td class="mono">20x</td><td class="mono tag-neg">$280</td></tr>
+        <tr><td>中性</td><td class="mono">$16.5</td><td class="mono">31x</td><td class="mono">$510</td></tr>
+        <tr><td>乐观</td><td class="mono">$17.5</td><td class="mono">40x</td><td class="mono tag-pos">$700</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-h tight">7.3 DCF 内在价值与敏感性</h3>
+    <div class="prose">
+      <p>关键假设:FY26 FCF 基数 ~$420 亿;阶段一(1–5 年)FCF CAGR ~20%(AI 放量);阶段二(6–10 年)衰减至 ~8%;永续增长 g = 3%;WACC = 9.5%。基准情景 DCF 隐含公允价值约 <strong>$500</strong>,与相对估值中性情景($510)、概率加权目标($519)高度收敛。</p>
+    </div>
+    <div class="sens-wrap">
+      <table class="sens-table">
+        <thead>
+          <tr><th>WACC \ 永续 g</th><th>2.5%</th><th>3.0%</th><th>3.5%</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>8.5%</td><td class="cell-hi">$565</td><td class="cell-hi">$600</td><td class="cell-hi">$642</td></tr>
+          <tr><td>9.5%</td><td>$472</td><td class="cell-base">$500</td><td>$532</td></tr>
+          <tr><td>10.5%</td><td class="cell-lo">$402</td><td class="cell-lo">$424</td><td class="cell-lo">$448</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>敏感性揭示:在偏保守的折现假设(WACC 10.5%)下,DCF 公允价值落在 <strong>$402–448</strong> —— 几乎正好是当前股价。换言之,<strong>当前 ~$413 的价位,大致对应"市场用偏高折现率 + 不给任何乐观增长溢价"的定价</strong>。这意味着下行风险被压缩了一部分,而上行需要 AI 故事继续兑现。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========= SECTION 8 ========= -->
+<section class="section" id="s8">
+  <div class="container">
+    <div class="section-label">第八部分 · 投资结论</div>
+    <h2 class="section-title">情景分析与<em>最终推荐</em></h2>
+    <p class="section-lead">核心投资逻辑一句话:博通是 AI 基础设施里仅次于 NVDA 的"第二把铲子",但它资本更轻、护城河有 VMware 加持、且刚被市场情绪重锤了 14%。问题只剩下:这个价位的风险回报够不够好。</p>
+
+    <h3 class="subsection-h">三情景目标价 · 1–3 年(~FY27–28 视野)</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card scenario-bear">
+        <div class="stier">熊市 · 20%</div>
+        <div class="target">$280</div>
+        <div class="sdesc">AI 资本开支 27–28 进入消化期 + 大客户自建内化 + 估值压缩至 ~20x。风险级别:高 / 卖出</div>
+        <div class="sprob">FY27 EPS ~$14 × 20x</div>
+      </div>
+      <div class="scenario-card scenario-base">
+        <div class="stier">基准 · 50%</div>
+        <div class="target">$510</div>
+        <div class="sdesc">兑现 FY27 $1000 亿 AI 目标,增速自然回落,倍数正常化至 ~31x。中性 / 持有</div>
+        <div class="sprob">FY27 EPS ~$16.5 × 31x</div>
+      </div>
+      <div class="scenario-card scenario-bull">
+        <div class="stier">牛市 · 30%</div>
+        <div class="target">$700</div>
+        <div class="sdesc">AI 目标提前/超额兑现 + FY28 能见度强 + 新客户放量,倍数维持 ~40x。低风险 / 高回报</div>
+        <div class="sprob">FY27 EPS ~$17.5 × 40x</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-cap">情景概率分布与概率加权目标价</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="scenarioChart"></canvas></div>
+    </div>
+
+    <div class="prose">
+      <p><strong>概率加权目标价 ≈ $519</strong>(0.3×700 + 0.5×510 + 0.2×280)。相对当前 ~$413,约 <span class="highlight">26% 的 2–3 年上行空间,折合年化 IRR 约 9–11%</span>,外加 ~0.6% 股息。这是一个"扎实但不惊艳"的风险回报 —— 高质量公司在合理偏贵的价位。</p>
+    </div>
+
+    <h3 class="subsection-h tight">综合质量画像</h3>
+    <div class="chart-card">
+      <div class="chart-cap">八维框架质量雷达(0–10)· 一句话:顶级生意,估值中庸</div>
+      <div class="chart-wrap" style="height:420px;"><canvas id="radarChart"></canvas></div>
+    </div>
+
+    <h3 class="subsection-h tight">五大关键风险</h3>
+    <div class="risk-list">
+      <div class="risk-item"><div class="risk-num">1</div><div class="risk-body"><p><strong>客户集中度</strong>:前三大客户(Google 为锚)贡献 AI 收入绝大部分。任一大客户放缓或转向,单季度业绩与股价都会剧烈波动。</p></div></div>
+      <div class="risk-item"><div class="risk-num">2</div><div class="risk-body"><p><strong>AI 资本周期消化风险</strong>:与 NVDA 同源。若 2027–2028 超大客户集体降速 Capex,定制芯片需求会快速回落,38x 的估值将承受戴维斯双杀。</p></div></div>
+      <div class="risk-item"><div class="risk-num">3</div><div class="risk-body"><p><strong>客户内化设计能力</strong>:Google/Meta 等长期有能力把芯片设计收回内部。这是护城河的结构性裂缝,虽非短期事件,但是终局变量。</p></div></div>
+      <div class="risk-item"><div class="risk-num">4</div><div class="risk-body"><p><strong>"循环融资"信号</strong>:Apollo/Blackstone $350 亿 XPU 融资结构虽扩大需求,但当芯片销售依赖外部资本代付时,需警惕这是 AI 周期成熟期的顶部特征之一。</p></div></div>
+      <div class="risk-item"><div class="risk-num">5</div><div class="risk-body"><p><strong>台积电单一依赖 + 地缘</strong>:先进制程几乎全部依赖台积电;对华出口管制与台海风险是行业共担的尾部风险。$978 亿商誉的潜在减值是次要但需监控的会计风险。</p></div></div>
+    </div>
+
+    <div class="verdict-banner">
+      <div class="vrating">最终推荐 · Final Verdict</div>
+      <div class="vmain">持有 / <em>逢回调分批买入</em><br>(Hold · Accumulate on Weakness)</div>
+      <p class="vsub">Broadcom 是 AI 基础设施里质量仅次于 NVDA 的标的:资本极轻、护城河宽、现金流强、去杠杆顺利,且由顶级资本配置者掌舵。本季 14% 的回调把估值从"狂热"拉回"合理偏贵",~$413 进入可分批建仓区间 —— 但客户集中度与周期风险决定了它不该被重仓追高。本框架将其归入"二线核心:回调分批、$350–400 为甜蜜区、$280 以下为重仓机会"。</p>
+      <div class="verdict-stats">
+        <div><div class="vs-label">概率加权目标</div><div class="vs-value">~$519</div></div>
+        <div><div class="vs-label">2–3 年 IRR</div><div class="vs-value" style="color:#9FD3B8;">~9–11%</div></div>
+        <div><div class="vs-label">DCF 公允价值</div><div class="vs-value">~$500</div></div>
+        <div><div class="vs-label">甜蜜建仓区</div><div class="vs-value" style="color:#E8C36B;">$350–400</div></div>
+      </div>
+    </div>
+
+    <div class="callout-box">
+      <div class="ctitle">与本研究框架的横向对照</div>
+      <p>在"AI 时代七大科技股"研究中,只有 META 被评为"现在可建仓"。<strong>AVGO 的画像介于 NVDA 与 META 之间</strong>:它有 NVDA 级别的"卖铲人"质量与周期诅咒,但本季回调后的估值比 NVDA 更接近合理区。若以同一把尺子衡量,AVGO 应与 NVDA/MSFT 同列"二线 · 等回调分批"梯队 —— 而本次 14% 的下跌,恰好是该框架所等待的那种"市场错觉时刻"的雏形。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <h4>免责声明</h4>
+    <p>本报告为基于公开数据与投资框架的独立分析推演,不构成任何投资建议、招揽或意见。所有数据来源为公司财报(Broadcom Q2 FY2026 Form 8-K,2026年6月3日发布)、SEC 备案文件、管理层电话会及公开市场数据,截至 2026 年 6 月 4 日。市场状况可能在报告发布后发生重大变化。本人非持牌财务顾问。读者在做出任何投资决策前,应自行进行尽职调查并咨询合格的财务顾问。投资有风险,过往表现不代表未来结果。部分前瞻指标(FY26/FY27 EPS、情景目标价、DCF)为基于假设的估算,实际结果可能显著偏离。</p>
+    <p style="margin-top:16px;">框架说明:本报告采用八维深度框架(公司概览 → 财务质量 → 增长 → 商业模式 → 五力护城河 → 管理层治理 → 估值情景 → 投资结论),并对不适配指标(LTV/CAC、NRR、Burn Rate)显式标注 N/A 而非强行套用。</p>
+    <p style="margin-top:24px; font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:0.08em;">AVGO EIGHT-DIMENSION FRAMEWORK REPORT · JUNE 2026 · END</p>
+  </div>
+</footer>
+
+<script>
+const C = {
+  brand: "#9E1B22", brandLite: "#C95A5F",
+  semi: "#9E1B22", soft: "#1E3A5F",
+  ai: "#9E1B22", grid: "rgba(226,219,204,0.6)",
+  green: "#2D6A4F", amber: "#B8651E", red: "#8B1E1E", blue: "#1E3A5F", ink2: "#4A4843"
+};
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.color = "#4A4843";
+
+/* SEGMENT STACKED BAR */
+new Chart(document.getElementById("segChart"), {
+  type: "bar",
+  data: {
+    labels: ["FY2023","FY2024","FY2025","FY2026E"],
+    datasets: [
+      { label:"半导体解决方案", data:[28.2, 30.1, 36.9, 73.0], backgroundColor: C.semi, borderRadius:3 },
+      { label:"基础设施软件", data:[7.6, 21.5, 27.0, 30.0], backgroundColor: C.soft, borderRadius:3 }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:(c)=>c.dataset.label+": $"+c.parsed.y+"B" } } },
+    scales:{
+      x:{ stacked:true, grid:{display:false} },
+      y:{ stacked:true, beginAtZero:true, ticks:{ callback:(v)=>"$"+v+"B" }, grid:{color:C.grid} }
+    }
+  }
+});
+
+/* AI REVENUE RAMP */
+const aiLabels = ["Q1'25","Q2'25","Q3'25","Q4'25","Q1'26","Q2'26","Q3'26E"];
+new Chart(document.getElementById("aiChart"), {
+  type: "bar",
+  data: {
+    labels: aiLabels,
+    datasets: [{
+      label:"AI 半导体收入",
+      data:[4.1, 4.4, 5.2, 6.2, 8.4, 10.8, 16.0],
+      backgroundColor: aiLabels.map((l,i)=> i>=6 ? C.brandLite : C.brand),
+      borderRadius:4
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{ callbacks:{ label:(c)=> "$"+c.parsed.y+"B" } }
+    },
+    scales:{
+      x:{ grid:{display:false} },
+      y:{ beginAtZero:true, max:18, ticks:{ callback:(v)=>"$"+v+"B" }, grid:{color:C.grid} }
+    }
+  }
+});
+
+/* SCENARIO BAR */
+new Chart(document.getElementById("scenarioChart"), {
+  type: "bar",
+  data: {
+    labels: ["熊市 (20%)","基准 (50%)","牛市 (30%)","概率加权"],
+    datasets: [{
+      data:[280, 510, 700, 519],
+      backgroundColor:[C.red, "#6B5B3A", C.green, C.brand],
+      borderRadius:4
+    }]
+  },
+  options: {
+    indexAxis:"y", responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{ callbacks:{ label:(c)=> "$"+c.parsed.x } }
+    },
+    scales:{
+      x:{ beginAtZero:true, max:760, ticks:{ callback:(v)=>"$"+v }, grid:{color:C.grid} },
+      y:{ grid:{display:false} }
+    }
+  }
+});
+
+/* RADAR */
+new Chart(document.getElementById("radarChart"), {
+  type: "radar",
+  data: {
+    labels: ["盈利能力","增长质量","资产负债健康","现金流质量","护城河","管理层治理","估值吸引力"],
+    datasets: [{
+      label:"AVGO",
+      data:[10, 9, 7, 9, 9, 8, 5],
+      backgroundColor:"rgba(158,27,34,0.14)",
+      borderColor:C.brand, borderWidth:2,
+      pointBackgroundColor:C.brand, pointRadius:4
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:(c)=> c.label+": "+c.parsed.r+"/10" } } },
+    scales:{
+      r:{
+        min:0, max:10, ticks:{ stepSize:2, backdropColor:"transparent", color:"#8A857D", font:{size:10} },
+        grid:{ color:"rgba(207,198,179,0.7)" }, angleLines:{ color:"rgba(207,198,179,0.7)" },
+        pointLabels:{ font:{ size:13, weight:"500" }, color:"#1C1B17" }
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GOOGL 深度财务分析报告 · Framework B · 2026年5月</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #F8F4EC;
+  --bg-alt: #FFFFFF;
+  --bg-deep: #1A1815;
+  --ink: #1C1B17;
+  --ink-2: #4A4843;
+  --ink-3: #8A857D;
+  --line: #E2DBCC;
+  --line-2: #CFC6B3;
+  --accent: #1E2A4A;
+  --green: #2D6A4F;
+  --green-bg: #E5EDE6;
+  --blue: #1E3A5F;
+  --blue-bg: #E2EAF1;
+  --amber: #B8651E;
+  --amber-bg: #F2E5D0;
+  --red: #8B1E1E;
+  --red-bg: #F1DCDC;
+  --teal: #2A6F69;
+  --purple: #3D2E5E;
+  --coral: #A0421A;
+  --pink: #872D52;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  font-feature-settings: "kern", "liga", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+/* HERO */
+.hero { padding: 80px 0 64px; border-bottom: 1px solid var(--line); position: relative; }
+.hero-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-tag::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.hero-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(40px, 5.5vw, 64px); line-height: 1.1;
+  letter-spacing: -0.02em; margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.hero-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+.hero-sub {
+  font-size: 19px; line-height: 1.6; color: var(--ink-2);
+  max-width: 760px; margin-bottom: 40px; font-weight: 300;
+}
+.hero-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 24px; padding-top: 32px; border-top: 1px solid var(--line);
+}
+.hero-meta .label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;
+}
+.hero-meta .value { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--ink); }
+
+/* SECTIONS */
+.section { padding: 72px 0 36px; border-bottom: 1px solid var(--line); }
+.section:last-of-type { border-bottom: none; }
+.section-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-display); font-size: clamp(30px, 4vw, 42px);
+  font-weight: 500; line-height: 1.15; letter-spacing: -0.015em;
+  margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-lead { font-size: 18px; line-height: 1.65; color: var(--ink-2); max-width: 780px; margin-bottom: 36px; font-weight: 300; }
+
+/* PROSE */
+.prose p { margin-bottom: 16px; color: var(--ink-2); }
+.prose p strong, .prose strong { color: var(--ink); font-weight: 600; }
+.prose .highlight { background: linear-gradient(180deg, transparent 60%, rgba(184, 101, 30, 0.18) 60%); padding: 0 2px; }
+
+/* SUBSECTION */
+.subsection { margin-top: 40px; }
+.subsection-h {
+  font-family: var(--font-display); font-style: italic; font-size: 24px;
+  font-weight: 500; margin-bottom: 16px; color: var(--ink);
+}
+.minihead {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--amber); margin: 28px 0 12px; font-weight: 500;
+}
+
+/* QUICK GRID */
+.quick-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px; background: var(--line); border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden; margin: 32px 0;
+}
+.quick-cell { background: var(--bg-alt); padding: 18px 20px; }
+.quick-cell .qlabel {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;
+}
+.quick-cell .qvalue { font-family: var(--font-display); font-size: 22px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+.qvalue.pos { color: var(--green); }
+.qvalue.neg { color: var(--red); }
+.qvalue.warn { color: var(--amber); }
+
+/* TABLE */
+.metrics-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+.metrics-table th {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-3); text-align: left;
+  padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line-2); font-weight: 500;
+}
+.metrics-table td { padding: 13px 12px 13px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.metrics-table td:first-child { font-weight: 500; color: var(--ink); }
+.metrics-table .num { font-family: var(--font-mono); color: var(--ink-3); width: 28px; }
+.metrics-table .mono { font-family: var(--font-mono); }
+.t-pos { color: var(--green); }
+.t-neg { color: var(--red); }
+.t-warn { color: var(--amber); }
+
+/* CHART */
+.chart-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-wrap { position: relative; width: 100%; }
+.chart-title { font-family: var(--font-display); font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+.chart-note { font-size: 12px; color: var(--ink-3); margin-bottom: 16px; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; font-size: 12px; color: var(--ink-2); }
+.chart-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); }
+.legend-sq { width: 12px; height: 12px; border-radius: 2px; }
+
+/* SCORECARD */
+.score-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.score-row:last-child { border-bottom: none; }
+.score-name { flex: 0 0 200px; font-size: 14px; color: var(--ink); }
+.score-bar-track { flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; }
+.score-val { font-family: var(--font-mono); font-size: 13px; flex: 0 0 44px; text-align: right; }
+
+/* SCENARIO */
+.scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.scenario-card { padding: 20px; border-radius: 8px; }
+.scenario-bull { background: var(--green-bg); }
+.scenario-base { background: #EDE9E0; }
+.scenario-bear { background: var(--red-bg); }
+.scenario-card .stier { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.scenario-bull .stier { color: var(--green); }
+.scenario-base .stier { color: #6B5B3A; }
+.scenario-bear .stier { color: var(--red); }
+.scenario-card .target { font-family: var(--font-display); font-size: 32px; font-weight: 500; line-height: 1; margin-bottom: 8px; }
+.scenario-bull .target { color: var(--green); }
+.scenario-base .target { color: #6B5B3A; }
+.scenario-bear .target { color: var(--red); }
+.scenario-card .sdesc { font-size: 12px; line-height: 1.5; }
+.scenario-bull .sdesc { color: var(--green); }
+.scenario-base .sdesc { color: #6B5B3A; }
+.scenario-bear .sdesc { color: var(--red); }
+.scenario-card .sprob { font-family: var(--font-mono); font-size: 11px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); }
+
+/* RISK LIST */
+.risk-list { margin-top: 16px; }
+.risk-item { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+.risk-item:last-child { border-bottom: 1px solid var(--line); }
+.risk-num { font-family: var(--font-display); font-size: 28px; font-weight: 500; font-style: italic; color: var(--amber); line-height: 1; flex-shrink: 0; width: 36px; }
+.risk-body p { font-size: 14px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+.risk-body strong { color: var(--ink); }
+
+/* FIVE FORCES */
+.forces-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 24px 0; }
+.force-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+.force-card .fhead { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.force-card .fname { font-family: var(--font-display); font-size: 17px; font-weight: 500; }
+.force-card .frate { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; }
+.frate.low { background: var(--green-bg); color: var(--green); }
+.frate.med { background: var(--amber-bg); color: var(--amber); }
+.frate.high { background: var(--red-bg); color: var(--red); }
+.force-card p { font-size: 13px; line-height: 1.55; color: var(--ink-2); margin: 0; }
+
+/* EQUATION / CALLOUT */
+.callout { background: var(--bg-alt); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 6px; padding: 24px 28px; margin: 28px 0; }
+.callout .ctitle { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.callout p { font-size: 15px; color: var(--ink-2); margin: 0 0 8px; }
+.callout p:last-child { margin-bottom: 0; }
+
+/* DCF TABLE */
+.dcf-wrap { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; margin: 24px 0; }
+.dcf-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 560px; }
+.dcf-table th, .dcf-table td { padding: 12px 14px; text-align: center; font-family: var(--font-mono); border-bottom: 1px solid var(--line); }
+.dcf-table th { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); background: var(--bg); font-weight: 500; }
+.dcf-table td:first-child, .dcf-table th:first-child { text-align: left; font-weight: 500; color: var(--ink); }
+.dcf-table tr:last-child td { border-bottom: none; }
+.cell-cheap { background: rgba(45,106,79,0.14); color: #1F4A37; font-weight: 600; }
+.cell-fair { background: rgba(184,101,30,0.12); color: #7A4310; }
+.cell-rich { background: rgba(139,30,30,0.12); color: #5A1212; }
+
+/* PULL QUOTE */
+.pull-quote {
+  font-family: var(--font-display); font-style: italic; font-size: clamp(21px, 2.5vw, 27px);
+  line-height: 1.4; color: var(--accent); padding: 28px 0 28px 32px;
+  border-left: 3px solid var(--accent); margin: 32px 0; font-weight: 400; font-variation-settings: "opsz" 144;
+}
+.pull-quote::before { content: '"'; font-size: 1.5em; line-height: 0; vertical-align: -0.2em; margin-right: 0.05em; color: var(--amber); }
+
+/* VERDICT */
+.verdict-banner { background: var(--bg-deep); color: #F3EEE2; border-radius: 10px; padding: 40px; margin: 32px 0; }
+.verdict-banner .vrating { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #C8A56A; margin-bottom: 14px; }
+.verdict-banner .vmain { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 500; line-height: 1.15; margin-bottom: 16px; }
+.verdict-banner .vmain em { font-style: italic; color: #C8A56A; }
+.verdict-banner p { color: #C7C1B4; font-size: 15px; line-height: 1.6; max-width: 720px; }
+
+/* TOC */
+.toc { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
+.toc ol { list-style: none; }
+.toc li { display: flex; align-items: baseline; padding: 8px 0; border-bottom: 1px dotted var(--line-2); font-size: 14px; }
+.toc li:last-child { border-bottom: none; }
+.toc .toc-num { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); width: 32px; flex-shrink: 0; }
+.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+.toc a:hover { border-bottom-color: var(--amber); }
+
+/* FOOTER */
+.footer { padding: 48px 0 64px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.footer h4 { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--ink-2); margin-bottom: 12px; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 56px 0 40px; }
+  .section { padding: 48px 0 28px; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .score-name { flex: 0 0 130px; font-size: 13px; }
+}
+@media print { body { background: white; } .section { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+<!--NAV--><div style="background:#0a0b0f;border-bottom:1px solid rgba(255,255,255,.1);padding:9px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:-apple-system,'Noto Sans SC',system-ui,sans-serif;position:relative;z-index:999"><span style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#d4a24e;margin-right:8px">US MACRO</span><a href="index.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">ERP 引擎</a><a href="liquidity.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">流动性</a><a href="mag7.html" style="text-decoration:none;font:600 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#0a0b0f;background:#d4a24e;border:1px solid #d4a24e;padding:6px 13px;border-radius:7px">巨头研究</a></div><!--/NAV-->
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">Framework B · 八模块深度财务分析 · 2026年5月</div>
+    <h1 class="hero-title">GOOGL · Alphabet<br><em>全栈 AI 的双面叙事</em></h1>
+    <p class="hero-sub">从基本面到护城河、从盈利质量到情景估值,逐模块拆解 Alphabet。一家被"AI 颠覆者"与"AI 受害者"两种故事反复定价的公司 —— 当下的核心矛盾不是增长,而是 <strong>Capex/Revenue 从 15% 飙向 40% 对自由现金流的吞噬</strong>,以及反垄断尾部风险。</p>
+    <div class="hero-meta">
+      <div><div class="label">现价 (5/28)</div><div class="value">$390.94</div></div>
+      <div><div class="label">市值</div><div class="value">$4.71T</div></div>
+      <div><div class="label">数据截至</div><div class="value">2026-05-28</div></div>
+      <div><div class="label">10Y Treasury</div><div class="value">4.56%</div></div>
+      <div><div class="label">分析师评级</div><div class="value" style="color:var(--green);">Strong Buy</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOC -->
+<section class="section" style="padding-top:56px;">
+  <div class="container">
+    <div class="toc">
+      <div class="toc-title">Framework B · 目录</div>
+      <ol>
+        <li><span class="toc-num">01</span><a href="#s1">公司基本概览与核心业务</a></li>
+        <li><span class="toc-num">02</span><a href="#s2">财务质量与健康现状(现金为王)</a></li>
+        <li><span class="toc-num">03</span><a href="#s3">增长分析:真实性、可持续性与市场空间</a></li>
+        <li><span class="toc-num">04</span><a href="#s4">盈利能力与商业模式评估</a></li>
+        <li><span class="toc-num">05</span><a href="#s5">竞争优势(护城河)与外部环境</a></li>
+        <li><span class="toc-num">06</span><a href="#s6">管理层与治理评估</a></li>
+        <li><span class="toc-num">07</span><a href="#s7">估值评估与情景分析</a></li>
+        <li><span class="toc-num">08</span><a href="#s8">投资结论与推荐</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1. 公司概览 ============ -->
+<section class="section" id="s1">
+  <div class="container">
+    <div class="section-label">模块一 · 基本概览</div>
+    <h2 class="section-title">三个引擎、<em>一个广告心脏</em></h2>
+    <p class="section-lead">Alphabet 通过三个报告分部运营:Google Services(搜索、YouTube、订阅与硬件)、Google Cloud,以及 Other Bets(Waymo、Verily 等长期项目)。但本质上,2025 年仍有 <strong>超过 70% 的总收入来自在线广告</strong> —— 一颗强劲但具有周期性的心脏。</p>
+
+    <div class="prose">
+      <p>核心地位:Google 搜索在全球搜索市场份额约 90%,YouTube 是全球最大视频平台之一(2025 全年广告+订阅收入已突破 <strong>$60B</strong>),Android 与 Chrome 构成分发底座,Google Cloud 已坐稳全球第三大云厂商。AI 层面,Alphabet 是少数同时拥有<strong>自研芯片(TPU)、前沿模型(Gemini)、超大规模云、以及全球级分发入口</strong>的"全栈"玩家。</p>
+    </div>
+
+    <h3 class="minihead">业务收入拆解 · Q1 2026(季度)</h3>
+    <div class="chart-card">
+      <div class="chart-title">分部收入结构与增速</div>
+      <div class="chart-note">Q1 2026 总收入 $109.9B(+22% YoY)· 第 11 个连续双位数增长季度</div>
+      <div class="chart-wrap" style="height:340px;"><canvas id="segChart"></canvas></div>
+    </div>
+
+    <table class="metrics-table">
+      <thead><tr><th>业务板块</th><th>Q1 2026 收入</th><th>YoY 增速</th><th>占比</th></tr></thead>
+      <tbody>
+        <tr><td>Google Search & other</td><td class="mono">~$56.6B</td><td class="mono t-pos">+19%</td><td class="mono">~52%</td></tr>
+        <tr><td>YouTube ads</td><td class="mono">$9.88B</td><td class="mono t-pos">+11%</td><td class="mono">9%</td></tr>
+        <tr><td>Google Network</td><td class="mono">~$7.3B</td><td class="mono t-neg">−4%</td><td class="mono">7%</td></tr>
+        <tr><td>Subscriptions, platforms & devices</td><td class="mono">$12.38B</td><td class="mono t-pos">+19%</td><td class="mono">11%</td></tr>
+        <tr><td>Google Cloud</td><td class="mono">$20.03B</td><td class="mono t-pos">+63%</td><td class="mono">18%</td></tr>
+        <tr><td>Other Bets</td><td class="mono">$0.41B</td><td class="mono t-neg">−9%</td><td class="mono">&lt;1%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px; color:var(--ink-3);">注:Search & other 与 Network 为估算拆分;Google Services 合计 $89.6B(+16%)。</p>
+
+    <h3 class="minihead">地理区域拆解</h3>
+    <div class="prose">
+      <p>按历史结构,美国约占总收入 <strong>~49%</strong>、EMEA ~29%、APAC ~17%、Other Americas ~5%。广告业务对全球宏观与汇率敏感;2026 年初强美元为收入带来约 3pp 的逆风(报告增速 22% vs 固定汇率 19%)。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. 财务质量 ============ -->
+<section class="section" id="s2">
+  <div class="container">
+    <div class="section-label">模块二 · 财务质量与健康(Quick Scan: 现金为王)</div>
+    <h2 class="section-title">利润表很美,<em>现金流表在流血</em></h2>
+    <p class="section-lead">Alphabet 的盈利能力依然是大型科技股中的顶尖水平 —— 但 2025 年起,激进的 AI 资本开支正在系统性吞噬自由现金流。同时,GAAP 净利润被巨额股权投资公允价值收益严重"美化",必须剥离后才能看清真实含金量。</p>
+
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">FY25 收入</div><div class="qvalue pos">$402.8B</div></div>
+      <div class="quick-cell"><div class="qlabel">FY25 营业利润率</div><div class="qvalue pos">32%</div></div>
+      <div class="quick-cell"><div class="qlabel">ROIC(估)</div><div class="qvalue pos">~25%</div></div>
+      <div class="quick-cell"><div class="qlabel">FY25 经营现金流</div><div class="qvalue pos">$174B</div></div>
+      <div class="quick-cell"><div class="qlabel">FY25 自由现金流</div><div class="qvalue warn">~$64B</div></div>
+      <div class="quick-cell"><div class="qlabel">FCF Yield</div><div class="qvalue neg">~1.4%</div></div>
+      <div class="quick-cell"><div class="qlabel">净现金</div><div class="qvalue pos">~$50B</div></div>
+      <div class="quick-cell"><div class="qlabel">净债务/EBITDA</div><div class="qvalue pos">净现金</div></div>
+    </div>
+
+    <h3 class="minihead">2.1 盈利能力与增长质量</h3>
+    <table class="metrics-table">
+      <thead><tr><th>指标</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>趋势</th></tr></thead>
+      <tbody>
+        <tr><td>收入</td><td class="mono">$307.4B</td><td class="mono">$350.0B</td><td class="mono">$402.8B</td><td class="t-pos">+15% / 3yr CAGR ~13%</td></tr>
+        <tr><td>营业利润</td><td class="mono">$84.3B</td><td class="mono">$112.4B</td><td class="mono">$129.0B</td><td class="t-pos">扩张</td></tr>
+        <tr><td>营业利润率</td><td class="mono">27%</td><td class="mono">32%</td><td class="mono">32%</td><td class="t-pos">高位企稳</td></tr>
+        <tr><td>净利润(GAAP)</td><td class="mono">$73.8B</td><td class="mono">$100.1B</td><td class="mono">$132.2B</td><td class="t-warn">含 $29.8B 股权收益</td></tr>
+        <tr><td>稀释 EPS(GAAP)</td><td class="mono">$5.80</td><td class="mono">$8.04</td><td class="mono">$10.81</td><td class="t-warn">被一次性收益放大</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="ctitle">⚠ Non-GAAP / 含金量警示</div>
+      <p><strong>FY2025 净利润 $132.2B 中,约 $29.8B(税后 ~$24B)来自股权证券的公允价值收益(主要为非上市股权的未实现增值)。</strong>这是非现金、非经常、且高度波动的项目。Q1 2026 一个季度又录得 $28.7B 税后股权收益,贡献 $2.35/股。</p>
+      <p>因此当前 ~29x 的"账面" TTM P/E 是被低估的失真值 —— 剥离股权收益后的<strong>核心经营 P/E 约为 33–34x</strong>。同时股权激励(SBC)规模可观,稀释需持续监控。</p>
+    </div>
+
+    <h3 class="minihead">2.2 & 2.4 现金流与利润含金量 —— 本案核心</h3>
+    <div class="chart-card">
+      <div class="chart-title">净利润 vs 经营现金流 vs 自由现金流</div>
+      <div class="chart-note">OCF 远高于净利润(高含金量),但 Capex 暴增使 FCF 在 2025 年掉头向下</div>
+      <div class="chart-legend">
+        <span class="chart-legend-item"><span class="legend-sq" style="background:#0F6E56;"></span>经营现金流 OCF</span>
+        <span class="chart-legend-item"><span class="legend-sq" style="background:#185FA5;"></span>资本开支 Capex</span>
+        <span class="chart-legend-item"><span class="legend-sq" style="background:#B8651E;"></span>自由现金流 FCF</span>
+      </div>
+      <div class="chart-wrap" style="height:340px;"><canvas id="cashChart"></canvas></div>
+    </div>
+    <div class="prose">
+      <p><strong>OCF/净利润 长期 > 1.0</strong>(FY25 经营性净利润口径下约 1.3x),利润含金量优秀。问题完全出在 Capex:FY24 $52.5B → FY25 ~$92B(口径含融资租赁达 $110B)→ <strong>FY26 指引 $180–190B,且 2027 将"显著增加"</strong>。结果是 FCF 从 FY24 的 $72.8B 收缩至 TTM ~$64B,FCF Yield 仅 ~1.4%。</p>
+    </div>
+
+    <h3 class="minihead">2.3 资产负债表健康</h3>
+    <div class="prose">
+      <p>资产负债表依然是<strong>堡垒级</strong>:Q1 2026 现金及有价证券 $126.8B,长期债务 $77.5B(含 Q1 新发 $31.1B 票据),仍为<strong>净现金</strong>状态;Debt/Equity ~0.07。即便 AI 资本周期之下,Alphabet 完全有能力自筹 capex、维持回购与股息,无融资依赖、无稀释压力。这是它与 ORCL 这类"举债建数据中心"标的的根本区别。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. 增长分析 ============ -->
+<section class="section" id="s3">
+  <div class="container">
+    <div class="section-label">模块三 · 增长分析</div>
+    <h2 class="section-title">增长是<em>真实的</em>,可持续性是问号</h2>
+    <p class="section-lead">三条增长曲线同时在跑:Search 用 AI 体验拉动查询量与货币化(+19%,有力驳斥"AI 颠覆搜索"叙事),Cloud 在企业 AI 需求下加速至 +63%,YouTube 稳定双位数。真实性极高;关键变量在于 AI Overview 的长期货币化效率,以及 capex 能否转化为 ROIC。</p>
+
+    <h3 class="minihead">增长真实性</h3>
+    <div class="prose">
+      <p>Q1 2026 的增长来自<strong>量价齐升</strong>而非财技:搜索查询量创历史新高、AI Overviews 月活超 20 亿、Cloud backlog 单季度近乎翻倍至 <span class="highlight">$462B</span>(管理层称"受算力约束,需求其实更高")。Cloud 已首次成为云增长的主引擎来自企业 AI 解决方案,而非单纯基础设施转售。这些都是可量化、可持续的有机增长信号。</p>
+    </div>
+
+    <h3 class="minihead">市场空间 (TAM) 与渗透率</h3>
+    <table class="metrics-table">
+      <thead><tr><th>赛道</th><th>TAM 量级</th><th>渗透 / 阶段</th><th>扩张路径</th></tr></thead>
+      <tbody>
+        <tr><td>数字广告</td><td class="mono">$1T+</td><td>成熟、份额领先</td><td>AI 提升广告相关性与转化、零售媒体</td></tr>
+        <tr><td>云 + 企业 AI</td><td class="mono">$1T+(2030)</td><td class="t-pos">S 曲线早中段</td><td>Gemini Enterprise、TPU 对外、Agent 化</td></tr>
+        <tr><td>YouTube / 订阅</td><td class="mono">数千亿</td><td>持续渗透</td><td>CTV、Shorts 货币化、Google One/350M 订阅</td></tr>
+        <tr><td>Waymo / Other Bets</td><td class="mono">期权价值</td><td class="t-warn">早期、亏损</td><td>Robotaxi 多城扩张(尚未计入估值)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="minihead">增长驱动力评分</h3>
+    <div class="chart-card">
+      <div class="score-row"><div class="score-name">Search AI 货币化</div><div class="score-bar-track"><div class="score-bar-fill" style="width:80%; background:var(--green);"></div></div><div class="score-val">强</div></div>
+      <div class="score-row"><div class="score-name">Cloud / 企业 AI</div><div class="score-bar-track"><div class="score-bar-fill" style="width:92%; background:var(--green);"></div></div><div class="score-val">极强</div></div>
+      <div class="score-row"><div class="score-name">YouTube</div><div class="score-bar-track"><div class="score-bar-fill" style="width:70%; background:var(--teal);"></div></div><div class="score-val">稳健</div></div>
+      <div class="score-row"><div class="score-name">订阅 (Google One/Gemini)</div><div class="score-bar-track"><div class="score-bar-fill" style="width:75%; background:var(--teal);"></div></div><div class="score-val">良</div></div>
+      <div class="score-row"><div class="score-name">Network 广告</div><div class="score-bar-track"><div class="score-bar-fill" style="width:25%; background:var(--red);"></div></div><div class="score-val">衰退</div></div>
+    </div>
+
+    <h3 class="minihead">增长风险</h3>
+    <div class="prose">
+      <p>三个核心质疑:① <strong>AI Overview / AI Mode 的货币化效率</strong>是否低于传统蓝色链接(每次查询广告位减少);② Cloud 高增速部分受算力约束压抑,而 capex 的 ROI 兑现存在时滞;③ 广告业务对宏观周期敏感 —— 若 2026 下半年经济回落,广告会立即放缓。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. 盈利能力与商业模式 ============ -->
+<section class="section" id="s4">
+  <div class="container">
+    <div class="section-label">模块四 · 盈利能力与商业模式</div>
+    <h2 class="section-title">越做越赚钱?<em>结构性是,周期性不一定</em></h2>
+    <p class="section-lead">广告是教科书级的高毛利、强运营杠杆模型;Cloud 已经跨过盈亏平衡并扩张利润率(Q1 2026 营业利润率 32.9%)。整体商业模式的"赚钱能力"毋庸置疑 —— 唯一的逆风是当前阶段折旧加速(capex 转化为 D&A),短期压制经营杠杆。</p>
+
+    <h3 class="minihead">利润率趋势</h3>
+    <div class="chart-card">
+      <div class="chart-title">营业利润率演变(整体 vs Cloud)</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="marginChart"></canvas></div>
+    </div>
+
+    <div class="prose">
+      <p><strong>单位经济模型</strong>:搜索广告的边际成本接近于零,每一次有效查询的增量货币化几乎直接落到利润。Cloud 此前是利润拖累,如今已成为利润<strong>贡献者</strong> —— 这是商业模式质量提升的关键拐点。需注意:Wiz 收购将在 2026 余下时间对 Cloud 营业利润率带来低个位数百分点的短期稀释。</p>
+      <p><strong>运营杠杆</strong>:FY25 收入 +15% 对应营业利润 +15%(杠杆暂时被 capex 折旧与法律费用抵消)。一旦 capex 强度在 FY27 见顶并回落,营业杠杆有望重新释放 —— 这正是牛市情景的核心假设。</p>
+    </div>
+
+    <div class="callout">
+      <div class="ctitle">商业模式判定</div>
+      <p>结构上属于<strong>高质量复利机器</strong>:高毛利、网络效应、强现金生成、净现金资产负债表。当前唯一的"瑕疵"是资本密集度从 15% 跳升至 ~40% —— 这是<strong>主动的战略下注</strong>,而非被动失血(对比 ORCL),但它把 FCF Yield 压到了远低于无风险利率的水平。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. 护城河 ============ -->
+<section class="section" id="s5">
+  <div class="container">
+    <div class="section-label">模块五 · 护城河与外部环境(波特五力)</div>
+    <h2 class="section-title">护城河很宽,<em>但有人在抽干一段</em></h2>
+    <p class="section-lead">Alphabet 拥有多重护城河:搜索的数据飞轮与网络效应、Android/Chrome 的分发壁垒、TPU+Gemini 的全栈成本优势、YouTube 的内容网络效应。最大的结构性威胁来自两个方向 —— 生成式 AI 对搜索入口的潜在替代,以及反垄断对分发与数据壁垒的强制拆解。</p>
+
+    <div class="forces-grid">
+      <div class="force-card"><div class="fhead"><div class="fname">替代品威胁</div><span class="frate high">高</span></div><p>ChatGPT / Perplexity 等生成式 AI 直接挑战搜索入口。Alphabet 以 AI Overviews/AI Mode/Gemini 正面迎战,Q1 +19% 搜索增速暂时证明防御有效,但长期入口迁移风险仍在。</p></div>
+      <div class="force-card"><div class="fhead"><div class="fname">现有竞争强度</div><span class="frate med">中高</span></div><p>云端与 MSFT/AMZN 三足鼎立;AI 模型与 OpenAI/Anthropic/Meta 激烈竞争。但 Alphabet 全栈自研(TPU)带来独特成本结构。</p></div>
+      <div class="force-card"><div class="fhead"><div class="fname">买方议价能力</div><span class="frate low">低</span></div><p>广告主高度分散、无单一大客户;搜索用户黏性极高("习惯性默认")。议价权牢牢在 Alphabet 一方。</p></div>
+      <div class="force-card"><div class="fhead"><div class="fname">供方议价能力</div><span class="frate med">中</span></div><p>对 NVDA 的 GPU 依赖被自研 TPU 显著对冲 —— 这是相对同业的关键优势。但前沿制程产能、电力与数据中心供应链仍偏紧。</p></div>
+      <div class="force-card"><div class="fhead"><div class="fname">新进入者威胁</div><span class="frate low">低</span></div><p>搜索/云的资本与数据壁垒极高。真正的"新进入"风险来自 AI 范式转移而非传统新玩家。</p></div>
+      <div class="force-card" style="border-left:3px solid var(--red);"><div class="fhead"><div class="fname">⚖ 监管(外生力)</div><span class="frate high">高</span></div><p>非五力之一,但本案最大尾部风险。见下文反垄断追踪。</p></div>
+    </div>
+
+    <h3 class="minihead">反垄断追踪(截至 2026年5月)</h3>
+    <div class="prose">
+      <p><strong>搜索案:</strong>2025年9月 Mehta 法官裁定行为性救济(禁止独家分发合同、强制向竞争对手共享部分搜索数据),但<span class="highlight">拒绝了拆分 Chrome / Android 的结构性救济</span> —— 当时股价盘后大涨 8%。目前双方均已上诉:Google 于 2026年1月就数据共享条款上诉,DOJ 与 38 州于 2月就"未拆分 Chrome、未终止 Apple 默认搜索协议"提起交叉上诉。D.C. 巡回法院审理预计耗时数月。</p>
+      <p><strong>广告技术案(AdX):</strong>Brinkema 法官的救济裁决已逾期(自定 3月31日截止),市场分析者认为某种形式的<strong>AdX 结构性分离</strong>仍有可能 —— 这是需密切关注的活跃风险点。</p>
+    </div>
+    <div class="callout">
+      <div class="ctitle">护城河净评</div>
+      <p>综合判定:<strong>宽护城河、稳定趋势,但带一条监管"裂缝"</strong>。基准情形下行为性救济对盈利影响有限(已被市场消化);真正的估值杀伤来自小概率的结构性拆分(Chrome 或 AdX)—— 这构成熊市情景的主要触发器。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. 管理层 ============ -->
+<section class="section" id="s6">
+  <div class="container">
+    <div class="section-label">模块六 · 管理层与治理</div>
+    <h2 class="section-title">执行力强,<em>治理结构存双层股权折价</em></h2>
+    <div class="prose">
+      <p><strong>执行力与兑现能力:</strong>Pichai 团队近 11 个季度连续双位数增长,指引兑现度高。AI 转型在被广泛唱衰("Code Red")后,以 Gemini 3 / AI Overviews / Cloud 加速实现了漂亮反转 —— 这是过去 18 个月管理层最重要的信誉加分项。资本配置纪律:持续大额回购(FY25 约 $306 亿)+ 递增股息(Q2 2026 季度股息上调 5% 至 $0.22)。</p>
+      <p><strong>激励机制:</strong>高管薪酬与长期股东利益总体一致,但 SBC 规模较大,需以净回购对冲稀释来评估真实股东回报。</p>
+      <p><strong>内部交易:</strong>过去 6 个月未见异常的集中抛售;董事/高管的减持多为程序化(10b5-1)与遗产规划性质(如创始人系股东的常规减持),非信心信号。近期一名工程师因利用机密数据进行场外押注被起诉,属个体合规事件,不涉及公司治理层。</p>
+      <p><strong>治理结构:</strong>双层股权使创始人(Page/Brin)经由 Class B 仍掌握多数投票权 —— 这带来长期主义的好处,也意味着外部股东对重大决策(如 capex 力度、Other Bets 持续投入)缺乏制衡,需计入治理折价。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. 估值 ============ -->
+<section class="section" id="s7">
+  <div class="container">
+    <div class="section-label">模块七 · 估值评估与情景分析</div>
+    <h2 class="section-title">便宜还是贵?<em>取决于你看哪个分母</em></h2>
+    <p class="section-lead">这是本案最微妙的部分。按账面 TTM P/E ~29x,Alphabet 看似只略高于历史均值;但剥离股权证券收益后,核心经营 P/E 约 33–34x,且 FCF Yield 仅 ~1.4% —— 远低于 4.56% 的无风险利率。框架的纪律性结论:<strong>当前价格已为"一切顺利"定价,安全边际薄。</strong></p>
+
+    <h3 class="minihead">7.1 当前估值水平</h3>
+    <table class="metrics-table">
+      <thead><tr><th>指标</th><th>当前</th><th>历史均值(3–5yr)</th><th>判定</th></tr></thead>
+      <tbody>
+        <tr><td>TTM P/E(GAAP)</td><td class="mono">~29x</td><td class="mono">~23–25x</td><td class="t-warn">高于均值(被股权收益压低)</td></tr>
+        <tr><td>核心经营 P/E(剥离股权收益)</td><td class="mono">~33–34x</td><td class="mono">~24x</td><td class="t-neg">显著偏高</td></tr>
+        <tr><td>Forward P/E(FY26 共识 EPS)</td><td class="mono">~28–34x</td><td class="mono">—</td><td class="t-warn">取决于 GAAP/非GAAP 口径</td></tr>
+        <tr><td>FCF Yield</td><td class="mono t-neg">~1.4%</td><td class="mono">—</td><td class="t-neg">远低于 10Y(4.56%)+3% 门槛</td></tr>
+        <tr><td>股息收益率</td><td class="mono">~0.23%</td><td class="mono">—</td><td>象征性</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="minihead">7.2 DCF 敏感性(每股内在价值,WACC × 永续增长 g)</h3>
+    <p style="font-size:14px; color:var(--ink-2); margin-bottom:8px;">关键假设:未来 5 年 FCF 增长随 capex FY27 见顶而 V 形修复(标准化 FCF 基数 ~$95B,5yr CAGR ~14%);折现率 WACC 9.0–10.0%。</p>
+    <div class="dcf-wrap">
+      <table class="dcf-table">
+        <thead><tr><th>WACC ↓ / g →</th><th>2.5%</th><th>3.0%</th><th>3.5%</th><th>4.0%</th></tr></thead>
+        <tbody>
+          <tr><td>9.0%</td><td class="cell-fair">$380</td><td class="cell-fair">$410</td><td class="cell-cheap">$448</td><td class="cell-cheap">$498</td></tr>
+          <tr><td>9.5%</td><td class="cell-rich">$338</td><td class="cell-fair">$362</td><td class="cell-fair">$392</td><td class="cell-cheap">$430</td></tr>
+          <tr><td>10.0%</td><td class="cell-rich">$304</td><td class="cell-rich">$323</td><td class="cell-fair">$346</td><td class="cell-fair">$375</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px; color:var(--ink-3);">中性假设(WACC 9.5% / g 3.5%)下内在价值约 <strong>$392</strong>,与现价 $391 基本持平 —— 即市场已较充分定价。<span style="color:var(--green);">绿=低估</span> · <span style="color:var(--amber);">黄=合理</span> · <span style="color:var(--red);">红=高估</span>。</p>
+
+    <h3 class="minihead">7.3 相对估值(基于 FY26 远期 EPS)</h3>
+    <div class="prose">
+      <p>市场共识 FY26 标准化 EPS 约 <strong>$11.5</strong>(GAAP 含股权收益口径可达 ~$14)。以标准化 EPS 设定远期 P/E 区间:</p>
+    </div>
+    <table class="metrics-table">
+      <thead><tr><th>口径</th><th>FY26 EPS</th><th>P/E 倍数</th><th>隐含股价</th></tr></thead>
+      <tbody>
+        <tr><td>保守</td><td class="mono">$11.5</td><td class="mono">24x</td><td class="mono">$276</td></tr>
+        <tr><td>中性</td><td class="mono">$11.5</td><td class="mono">30x</td><td class="mono">$345</td></tr>
+        <tr><td>乐观</td><td class="mono">$11.5</td><td class="mono">38x</td><td class="mono">$437</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px; color:var(--ink-3);">PEG:核心 EPS 增速放缓至个位数(2026 capex 折旧拖累),但 2027+ 有望恢复双位数;以 12–15% 三年 EPS CAGR 计,PEG ~2.2–2.8,偏高。</p>
+
+    <h3 class="minihead">7.4 三情景目标价 · 1–3 年</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card scenario-bear">
+        <div class="stier">熊市 · 20%</div>
+        <div class="target">$250–300</div>
+        <div class="sdesc">结构性拆分(Chrome/AdX)落地 + AI Overview 货币化失效 + capex ROI 不及预期,倍数压缩至 20x</div>
+        <div class="sprob">高风险 / 减持</div>
+      </div>
+      <div class="scenario-card scenario-base">
+        <div class="stier">基准 · 45%</div>
+        <div class="target">$400–450</div>
+        <div class="sdesc">符合管理层指引,增长持续 + capex 维持高位,行为性救济影响有限,倍数 26–29x</div>
+        <div class="sprob">中性 / 持有</div>
+      </div>
+      <div class="scenario-card scenario-bull">
+        <div class="stier">牛市 · 35%</div>
+        <div class="target">$490–550</div>
+        <div class="sdesc">AI 全栈兑现 + Cloud 持续加速 + capex FY27 见顶、营业杠杆回归,倍数维持 30x+</div>
+        <div class="sprob">中风险 / 高回报</div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="ctitle">概率加权目标价</div>
+      <p>(0.20 × $275) + (0.45 × $425) + (0.35 × $520) = <strong>≈ $428</strong> —— 较现价 $391 约 +9% 上行,与分析师共识目标价 $429 高度吻合。换言之:<strong>当前价格的预期年化回报中性偏正,但安全边际不足以构成"现在重仓"的理由。</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. 结论 ============ -->
+<section class="section" id="s8">
+  <div class="container">
+    <div class="section-label">模块八 · 投资结论与推荐</div>
+    <h2 class="section-title">最终判决</h2>
+
+    <div class="verdict-banner">
+      <div class="vrating">最终推荐</div>
+      <div class="vmain">持有 / 逢回调建仓 ·<br><em>Buy on Weakness</em></div>
+      <p>Alphabet 是 AI 时代质量最全面的"全栈"巨头之一:净现金堡垒、多重宽护城河、增长真实且加速。但现价 $391 已接近中性内在价值($392),FCF Yield(1.4%)远低于无风险利率,且背负反垄断结构性拆分的尾部风险。按纪律性框架:<strong>不追高,等待 capex 恐慌或监管利空带来的深度回调再建仓。</strong></p>
+    </div>
+
+    <h3 class="minihead">核心投资逻辑(三句话)</h3>
+    <div class="prose">
+      <p><strong>增长靠什么?</strong> 搜索 AI 货币化(+19%)+ Cloud 企业 AI 加速(+63%,backlog $462B)双引擎,辅以 YouTube 与订阅稳健贡献。</p>
+      <p><strong>空间有多大?</strong> 广告 $1T+ 守成、云与企业 AI $1T+ 仍处 S 曲线早中段、Waymo 为免费期权 —— 长期天花板极高。</p>
+      <p><strong>钱能不能赚?</strong> 结构上确定能赚(32% 营业利润率、~25% ROIC、净现金);短期被 capex 折旧压制 FCF,FY27 资本强度见顶后有望 V 形修复。</p>
+    </div>
+
+    <h3 class="minihead">合理建仓价格带</h3>
+    <table class="metrics-table">
+      <thead><tr><th>区间</th><th>价格</th><th>动作</th></tr></thead>
+      <tbody>
+        <tr><td class="t-neg">不建议追高</td><td class="mono">&gt; $440</td><td>已透支牛市情景</td></tr>
+        <tr><td class="t-warn">观察区</td><td class="mono">$390–440</td><td>现价位置,安全边际薄,可小仓试探</td></tr>
+        <tr><td class="t-pos">合理建仓</td><td class="mono">$320–390</td><td>接近中性内在价值下沿,分批建仓</td></tr>
+        <tr><td class="t-pos">理想加仓</td><td class="mono">$260–320</td><td>监管/capex 恐慌错杀,风险回报最佳</td></tr>
+        <tr><td style="color:#1B4D38; font-weight:600;">重仓机会</td><td class="mono">&lt; $260</td><td>结构性利空充分定价后的极值</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="minihead">关键监控指标(未来 4 个季度)</h3>
+    <div class="risk-list">
+      <div class="risk-item"><div class="risk-num">1</div><div class="risk-body"><p><strong>Capex 强度拐点</strong>:2026 指引 $180–190B 是否再次上调;2027 "显著增加"的幅度。资本强度何时见顶决定 FCF 修复时点。</p></div></div>
+      <div class="risk-item"><div class="risk-num">2</div><div class="risk-body"><p><strong>反垄断进展</strong>:D.C. 巡回法院搜索案上诉、Brinkema 的 AdX 救济裁决。任一结构性拆分信号都将触发熊市重估。</p></div></div>
+      <div class="risk-item"><div class="risk-num">3</div><div class="risk-body"><p><strong>AI Overview 货币化</strong>:搜索单位货币化(每查询营收)是否随 AI 体验渗透而稳住或提升。</p></div></div>
+      <div class="risk-item"><div class="risk-num">4</div><div class="risk-body"><p><strong>Cloud 利润率</strong>:在 Wiz 稀释与算力约束下,Cloud 营业利润率能否延续扩张轨迹。</p></div></div>
+    </div>
+
+    <div class="pull-quote">GOOGL 的难点不在"好不好"(它很好),而在"贵不贵"。框架的纪律告诉你:在 FCF Yield 1.4%、内在价值与市价齐平、且头顶悬着监管利剑时,正确的姿势是耐心 —— 让市场的下一次恐慌成为你的进场点。</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <h4>免责声明</h4>
+    <p>本报告依据 Framework B 八模块框架,对 Alphabet (GOOGL) 进行独立分析推演,不构成任何投资建议、招揽或意见。数据来源为公司 Q1 2026 财报、FY2025 10-K、SEC 备案文件及公开市场数据,截至 2026 年 5 月 28 日。GAAP 净利润含大额股权证券公允价值收益,已在报告中作含金量调整说明。市场状况可能在报告发布后发生重大变化。读者在做出任何投资决策前应自行尽职调查并咨询合格财务顾问。投资有风险,过往表现不代表未来结果。</p>
+    <p style="margin-top:24px; font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:0.08em;">GOOGL · FRAMEWORK B DEEP-DIVE · MAY 2026 · END</p>
+  </div>
+</footer>
+
+<script>
+const C = { meta:"#3B6D11", search:"#185FA5", youtube:"#D4537E", cloud:"#0F6E56", subs:"#534AB7", network:"#BA7517", other:"#8A857D", amber:"#B8651E", green:"#2D6A4F", blue:"#1E3A5F" };
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.color = "#4A4843";
+
+// SEGMENT bar
+new Chart(document.getElementById("segChart"), {
+  type: "bar",
+  data: {
+    labels: ["Search","YouTube ads","Network","Subs/Devices","Cloud","Other Bets"],
+    datasets: [{
+      data: [56.6, 9.88, 7.3, 12.38, 20.03, 0.41],
+      backgroundColor: [C.search, C.youtube, C.network, C.subs, C.cloud, C.other],
+      borderRadius: 4, barThickness: 42
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display:false }, tooltip: { callbacks: { label:(c)=> "$"+c.parsed.y+"B" } } },
+    scales: {
+      y: { beginAtZero:true, ticks:{ callback:(v)=> "$"+v+"B" }, grid:{ color:"rgba(226,219,204,0.5)" } },
+      x: { grid:{ display:false }, ticks:{ font:{ size:11 } } }
+    }
+  }
+});
+
+// CASH FLOW
+new Chart(document.getElementById("cashChart"), {
+  type: "bar",
+  data: {
+    labels: ["FY2023","FY2024","FY2025","FY2026E"],
+    datasets: [
+      { label:"OCF", data:[101.7,125.3,174.4,200], backgroundColor:C.cloud, borderRadius:3 },
+      { label:"Capex", data:[32.3,52.5,92,185], backgroundColor:C.search, borderRadius:3 },
+      { label:"FCF", data:[69.5,72.8,64,15], backgroundColor:C.amber, borderRadius:3 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend:{ display:false }, tooltip:{ callbacks:{ label:(c)=> c.dataset.label+": $"+c.parsed.y+"B" } } },
+    scales: {
+      y: { beginAtZero:true, ticks:{ callback:(v)=> "$"+v+"B" }, grid:{ color:"rgba(226,219,204,0.5)" } },
+      x: { grid:{ display:false } }
+    }
+  }
+});
+
+// MARGIN
+new Chart(document.getElementById("marginChart"), {
+  type: "line",
+  data: {
+    labels: ["FY2023","FY2024","FY2025","Q1 2026"],
+    datasets: [
+      { label:"整体营业利润率", data:[27,32,32,36.1], borderColor:C.blue, backgroundColor:"rgba(30,58,95,0.08)", fill:true, tension:0.3, borderWidth:2.5, pointRadius:4 },
+      { label:"Cloud 营业利润率", data:[null,17,24,32.9], borderColor:C.cloud, backgroundColor:"rgba(15,110,86,0.06)", fill:true, tension:0.3, borderWidth:2.5, pointRadius:4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display:true, position:"bottom", labels:{ font:{ size:12 }, usePointStyle:true, boxWidth:8 } },
+      tooltip: { callbacks:{ label:(c)=> c.dataset.label+": "+c.parsed.y+"%" } }
+    },
+    scales: {
+      y: { beginAtZero:true, max:40, ticks:{ callback:(v)=> v+"%" }, grid:{ color:"rgba(226,219,204,0.5)" } },
+      x: { grid:{ display:false } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

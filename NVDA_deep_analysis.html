@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVDA 深度分析报告 | Q1 FY2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #1a1e27;
+    --border: #222835;
+    --accent: #76b900;
+    --accent2: #00c8ff;
+    --accent3: #ff6b35;
+    --warn: #f5a623;
+    --danger: #e74c3c;
+    --text: #e8eaf0;
+    --text2: #8b93a8;
+    --text3: #556070;
+    --bull: #00d97e;
+    --bear: #e74c3c;
+    --neutral: #f5a623;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, #0a0c10 0%, #0d1520 40%, #0a1a0a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(118,185,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(118,185,0,0.12);
+    border: 1px solid rgba(118,185,0,0.3);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    color: var(--text2);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label { color: var(--text3); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  .meta-val { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--text); }
+  .meta-val.green { color: var(--bull); }
+  .meta-val.orange { color: var(--warn); }
+
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .content { padding: 40px 48px; }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    border: 1px solid var(--accent);
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* KPI GRID */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .kpi-card.g::before { background: var(--bull); }
+  .kpi-card.b::before { background: var(--bear); }
+  .kpi-card.n::before { background: var(--warn); }
+  .kpi-card.a::before { background: var(--accent); }
+  .kpi-card.c::before { background: var(--accent2); }
+  .kpi-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .kpi-val { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 600; }
+  .kpi-val.g { color: var(--bull); }
+  .kpi-val.b { color: var(--bear); }
+  .kpi-val.n { color: var(--warn); }
+  .kpi-val.a { color: var(--accent); }
+  .kpi-val.c { color: var(--accent2); }
+  .kpi-sub { font-size: 11px; color: var(--text2); margin-top: 4px; }
+
+  /* TABLES */
+  .tbl-wrap { overflow-x: auto; margin: 16px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: var(--surface2);
+    color: var(--text2);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .right { text-align: right; }
+  .green { color: var(--bull); }
+  .red { color: var(--bear); }
+  .orange { color: var(--warn); }
+  .accent { color: var(--accent); }
+  .accent2 { color: var(--accent2); }
+
+  /* BAR CHART */
+  .bar-chart { margin: 16px 0; }
+  .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .bar-label { font-size: 12px; color: var(--text2); min-width: 140px; }
+  .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+  .bar-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); min-width: 60px; text-align: right; }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 0 4px 4px 0;
+    margin: 16px 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .callout.warn { border-left-color: var(--warn); }
+  .callout.danger { border-left-color: var(--danger); }
+  .callout.info { border-left-color: var(--accent2); }
+  .callout-title { font-weight: 600; margin-bottom: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .callout.warn .callout-title { color: var(--warn); }
+  .callout.danger .callout-title { color: var(--danger); }
+  .callout.info .callout-title { color: var(--accent2); }
+  .callout .callout-title { color: var(--accent); }
+
+  /* PROSE */
+  .prose { font-size: 13.5px; line-height: 1.8; color: var(--text2); }
+  .prose p { margin-bottom: 12px; }
+  .prose strong { color: var(--text); font-weight: 600; }
+  .prose ul { padding-left: 20px; }
+  .prose li { margin-bottom: 6px; }
+
+  /* MOAT PILLARS */
+  .pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .pillar-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .pillar-icon { font-size: 16px; }
+  .pillar-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .rating-bar { display: flex; gap: 3px; margin-top: 10px; }
+  .rating-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+  .rating-dot.on { background: var(--accent); }
+
+  /* SCENARIO TABLE */
+  .scenario-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .scenario-table th { background: var(--surface2); color: var(--text2); padding: 12px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid var(--border); }
+  .scenario-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .scenario-bull td:first-child { border-left: 3px solid var(--bull); }
+  .scenario-base td:first-child { border-left: 3px solid var(--warn); }
+  .scenario-bear td:first-child { border-left: 3px solid var(--bear); }
+  .scenario-table .badge-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-bull { background: rgba(0,217,126,0.12); color: var(--bull); }
+  .badge-base { background: rgba(245,166,35,0.12); color: var(--warn); }
+  .badge-bear { background: rgba(231,76,60,0.12); color: var(--bear); }
+
+  /* FINAL RECOMMENDATION */
+  .rec-box {
+    background: linear-gradient(135deg, rgba(118,185,0,0.08) 0%, rgba(118,185,0,0.03) 100%);
+    border: 1px solid rgba(118,185,0,0.3);
+    border-radius: 8px;
+    padding: 28px;
+    text-align: center;
+  }
+  .rec-label { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 600; }
+  .rec-verdict { font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+  .rec-desc { font-size: 14px; color: var(--text2); line-height: 1.8; max-width: 600px; margin: 0 auto; }
+
+  /* TAG */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .tag-g { background: rgba(0,217,126,0.12); color: var(--bull); }
+  .tag-r { background: rgba(231,76,60,0.12); color: var(--bear); }
+  .tag-o { background: rgba(245,166,35,0.12); color: var(--warn); }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.6;
+    margin-top: 40px;
+  }
+
+  /* SUBSECTION */
+  .sub-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent2);
+    margin: 20px 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+  .sub-title::before { content: '▶ '; opacity: 0.5; font-size: 10px; }
+
+  /* GROWTH DRIVERS */
+  .driver-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .driver-row:last-child { border-bottom: none; }
+  .driver-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .driver-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .driver-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+  /* FIVE FORCES */
+  .force-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+  .force-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px;
+  }
+  .force-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .force-level { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .force-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 32px 20px 24px; }
+    .hero h1 { font-size: 28px; }
+    .content { padding: 24px 20px; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .pillar-grid { grid-template-columns: 1fr; }
+    .force-grid { grid-template-columns: 1fr; }
+    .hero-meta { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+<!--NAV--><div style="background:#0a0b0f;border-bottom:1px solid rgba(255,255,255,.1);padding:9px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:-apple-system,'Noto Sans SC',system-ui,sans-serif;position:relative;z-index:999"><span style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#d4a24e;margin-right:8px">US MACRO</span><a href="index.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">ERP 引擎</a><a href="liquidity.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">流动性</a><a href="mag7.html" style="text-decoration:none;font:600 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#0a0b0f;background:#d4a24e;border:1px solid #d4a24e;padding:6px 13px;border-radius:7px">巨头研究</a></div><!--/NAV-->
+
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="badge">📊 深度研究报告 · 2026.05.21</div>
+  <h1>NVIDIA Corporation <span>(NVDA)</span><br>综合深度分析报告</h1>
+  <div class="hero-sub">基于 Q1 FY2027 最新财报 | 覆盖 FY2025–FY2027E</div>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">当前股价</span>
+      <span class="meta-val">~$223</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Q1 FY27 营收</span>
+      <span class="meta-val green">$81.6B</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">营收 YoY</span>
+      <span class="meta-val green">+85%</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Non-GAAP EPS</span>
+      <span class="meta-val green">$1.87</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">远期 P/E (FY27E)</span>
+      <span class="meta-val orange">~27x</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">投资评级</span>
+      <span class="meta-val green">审慎买入</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ─── 1. 公司概览 ─── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">1</span>
+    <span class="section-title">公司基本概览与核心业务</span>
+  </div>
+
+  <div class="prose">
+    <p>NVIDIA Corporation（纳斯达克：NVDA）是全球领先的 GPU 及加速计算平台公司，总部位于加州圣克拉拉。其核心竞争力已从游戏图形芯片演进为 AI 基础设施的"算力骨架"，凭借 Hopper/Blackwell 架构 GPU 及 CUDA 生态体系，主导全球 AI 训练与推理市场，市场份额约 80–85%。</p>
+    <p>截至 FY2026，NVIDIA 已转型为一家<strong>以数据中心为核心、全栈 AI 平台驱动</strong>的科技公司。数据中心业务贡献超过总收入的 89%，游戏、专业可视化、汽车等业务构成补充。</p>
+  </div>
+
+  <div class="sub-title">1.1 业务收入拆解（FY2024–FY2026）</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>业务板块</th>
+          <th class="right">FY2024</th>
+          <th class="right">FY2025</th>
+          <th class="right">FY2026</th>
+          <th class="right">FY26 占比</th>
+          <th class="right">FY26 YoY</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>数据中心</strong></td>
+          <td class="right mono">$47.5B</td>
+          <td class="right mono">$115.2B</td>
+          <td class="right mono accent">$193.7B</td>
+          <td class="right mono green">89.7%</td>
+          <td class="right mono green">+68%</td>
+        </tr>
+        <tr>
+          <td>游戏 Gaming</td>
+          <td class="right mono">$10.4B</td>
+          <td class="right mono">$11.4B</td>
+          <td class="right mono">$16.0B</td>
+          <td class="right mono">7.4%</td>
+          <td class="right mono green">+41%</td>
+        </tr>
+        <tr>
+          <td>专业可视化</td>
+          <td class="right mono">$1.6B</td>
+          <td class="right mono">$1.9B</td>
+          <td class="right mono">$3.2B</td>
+          <td class="right mono">1.5%</td>
+          <td class="right mono green">+70%</td>
+        </tr>
+        <tr>
+          <td>汽车与机器人</td>
+          <td class="right mono">$1.1B</td>
+          <td class="right mono">$1.7B</td>
+          <td class="right mono">$2.4B</td>
+          <td class="right mono">1.1%</td>
+          <td class="right mono green">+39%</td>
+        </tr>
+        <tr>
+          <td>OEM及其他</td>
+          <td class="right mono">$0.5B</td>
+          <td class="right mono">$0.4B</td>
+          <td class="right mono">$0.6B</td>
+          <td class="right mono">0.3%</td>
+          <td class="right mono green">+59%</td>
+        </tr>
+        <tr style="background:rgba(118,185,0,0.05)">
+          <td><strong>合计营收</strong></td>
+          <td class="right mono"><strong>$60.9B</strong></td>
+          <td class="right mono"><strong>$130.5B</strong></td>
+          <td class="right mono accent"><strong>$215.9B</strong></td>
+          <td class="right mono">100%</td>
+          <td class="right mono green"><strong>+65%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-title">1.2 业务重心可视化（FY2026）</div>
+  <div class="bar-chart">
+    <div class="bar-row">
+      <span class="bar-label">数据中心</span>
+      <div class="bar-track"><div class="bar-fill" style="width:89.7%;background:var(--accent)"></div></div>
+      <span class="bar-val mono accent">89.7%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">游戏</span>
+      <div class="bar-track"><div class="bar-fill" style="width:25%;background:var(--accent2)"></div></div>
+      <span class="bar-val mono accent2">7.4%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">专业可视化</span>
+      <div class="bar-track"><div class="bar-fill" style="width:5%;background:var(--warn)"></div></div>
+      <span class="bar-val mono orange">1.5%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">汽车与机器人</span>
+      <div class="bar-track"><div class="bar-fill" style="width:3.6%;background:#9b59b6"></div></div>
+      <span class="bar-val mono" style="color:#9b59b6">1.1%</span>
+    </div>
+  </div>
+
+  <div class="sub-title">1.3 地理收入结构</div>
+  <div class="prose">
+    <p>NVIDIA 高度依赖美国超大规模云服务商（AWS、微软 Azure、Google Cloud、Meta）驱动数据中心收入，此类客户单季贡献或超总收入40%。由于 H20 出口管制（2025年4月），<strong>中国市场收入大幅收缩</strong>，FY2027 指引已明确剔除中国数据中心计算收入（Q2 FY27 约损失 $80亿）。新兴的主权AI市场（沙特、日本、欧洲、印度）成为重要地理增量。</p>
+  </div>
+</div>
+
+<!-- ─── 2. 财务质量 ─── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">2</span>
+    <span class="section-title">财务质量与健康现状</span>
+  </div>
+
+  <div class="sub-title">2.1 盈利能力与增长质量</div>
+  <div class="kpi-grid">
+    <div class="kpi-card g">
+      <div class="kpi-label">FY26 营收</div>
+      <div class="kpi-val g">$215.9B</div>
+      <div class="kpi-sub">YoY +65%</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-label">Q1 FY27 营收</div>
+      <div class="kpi-val g">$81.6B</div>
+      <div class="kpi-sub">YoY +85% / QoQ +20%</div>
+    </div>
+    <div class="kpi-card a">
+      <div class="kpi-label">3年营收 CAGR</div>
+      <div class="kpi-val a">~87%</div>
+      <div class="kpi-sub">FY2024–FY2026</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-label">FY26 Non-GAAP EPS</div>
+      <div class="kpi-val g">$4.77</div>
+      <div class="kpi-sub">YoY +59%</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-label">Q1 FY27 Non-GAAP EPS</div>
+      <div class="kpi-val g">$1.87</div>
+      <div class="kpi-sub">YoY +140% / Beat +$0.12</div>
+    </div>
+    <div class="kpi-card a">
+      <div class="kpi-label">Q1 FY27 毛利率</div>
+      <div class="kpi-val a">75.0%</div>
+      <div class="kpi-sub">Non-GAAP（恢复至高位）</div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>利润指标</th>
+          <th class="right">FY2024</th>
+          <th class="right">FY2025</th>
+          <th class="right">FY2026</th>
+          <th class="right">Q1 FY2027</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>营收</td>
+          <td class="right mono">$60.9B</td>
+          <td class="right mono">$130.5B</td>
+          <td class="right mono">$215.9B</td>
+          <td class="right mono accent">$81.6B</td>
+        </tr>
+        <tr>
+          <td>Non-GAAP 毛利率</td>
+          <td class="right mono">~73%</td>
+          <td class="right mono">~74%</td>
+          <td class="right mono">71.3%</td>
+          <td class="right mono green">75.0%</td>
+        </tr>
+        <tr>
+          <td>Non-GAAP 净利率</td>
+          <td class="right mono">~55%</td>
+          <td class="right mono">~57%</td>
+          <td class="right mono">~56%</td>
+          <td class="right mono green">~57%</td>
+        </tr>
+        <tr>
+          <td>Non-GAAP EPS</td>
+          <td class="right mono">$1.30</td>
+          <td class="right mono">$2.99</td>
+          <td class="right mono">$4.77</td>
+          <td class="right mono green">$1.87</td>
+        </tr>
+        <tr>
+          <td>ROIC</td>
+          <td class="right mono">~60%</td>
+          <td class="right mono">~100%</td>
+          <td class="right mono green">126%</td>
+          <td class="right mono">—</td>
+        </tr>
+        <tr>
+          <td>ROE</td>
+          <td class="right mono">~70%</td>
+          <td class="right mono">~90%</td>
+          <td class="right mono green">101%</td>
+          <td class="right mono">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">💡 ROIC vs WACC 分析</div>
+    NVIDIA 的 ROIC 高达 <strong>126%</strong>，远超其 WACC（估计约9–12%），意味着每投入1元资本，可创造超过1元的超额经济利润。这是极度稀缺的资本配置效率，在全球科技股中处于前1%分位。
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title">⚠️ Non-GAAP 调整说明</div>
+    FY2026 中 Q1 受 H20 芯片出口管制冲击，计提 <strong>$45亿一次性库存减值</strong>，导致当期 GAAP 毛利率骤降至 ~60%。剔除此项后，基础毛利率为 71.3%。Q1 FY27 毛利率恢复至 75%，说明 Blackwell 架构定价权稳固。SBC（股权激励）年化约占营收 2–3%，不构成实质性利润虚增风险。
+  </div>
+
+  <div class="sub-title">2.2 运营效率与杠杆</div>
+  <div class="prose">
+    <p>NVIDIA 展现出<strong>强烈的正向运营杠杆效应</strong>：FY26 全年营收增长65%，Non-GAAP 运营利润增速显著超越营收增速。Q1 FY27 Non-GAAP 运营利润同比增长约 +73%，略低于营收 +85%，主要因 opex 规模化增长（Q2 FY27 运营费用指引约 $83亿，较 Q1 显著提升）。</p>
+    <p><strong>运营费用结构</strong>：R&D 占比最大（约占 Opex 的65–70%），体现技术领先性驱动的投资哲学；S&M 和 G&A 随营收放大呈现明显杠杆效应。效率指标方面，应收账款和库存周转保持健康——除非受出口管制冲击导致特定产品库存积压。</p>
+  </div>
+
+  <div class="sub-title">2.3 资产负债表健康性</div>
+  <div class="kpi-grid">
+    <div class="kpi-card g">
+      <div class="kpi-label">现金及等价物</div>
+      <div class="kpi-val g">$62.5B</div>
+      <div class="kpi-sub">FY2026 末（YoY +$19B）</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-label">Debt/Equity</div>
+      <div class="kpi-val g">0.07x</div>
+      <div class="kpi-sub">近乎零杠杆</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-label">流动比率</div>
+      <div class="kpi-val g">3.91x</div>
+      <div class="kpi-sub">流动性极为充裕</div>
+    </div>
+    <div class="kpi-card a">
+      <div class="kpi-label">净债务/EBITDA</div>
+      <div class="kpi-val a">负值</div>
+      <div class="kpi-sub">净现金状态（远低于3x安全线）</div>
+    </div>
+  </div>
+  <div class="callout">
+    <div class="callout-title">✅ 资产负债表评估：极度健康</div>
+    NVIDIA 处于净现金状态，商誉占比低（轻资产芯片设计公司），无会计政策重大变更风险，无负资产风险。$62.5亿现金储备 + $97亿年度自由现金流，提供充足的战略灵活性。
+  </div>
+
+  <div class="sub-title">2.4 现金流与利润含金量</div>
+  <div class="kpi-grid">
+    <div class="kpi-card g">
+      <div class="kpi-label">FY2026 经营现金流</div>
+      <div class="kpi-val g">~$108B+</div>
+      <div class="kpi-sub">显著高于净利润</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-label">FY2026 自由现金流</div>
+      <div class="kpi-val g">$97B</div>
+      <div class="kpi-sub">FCF 利润率 ~45%</div>
+    </div>
+    <div class="kpi-card a">
+      <div class="kpi-label">FY2026 股东回报</div>
+      <div class="kpi-val a">$41.1B</div>
+      <div class="kpi-sub">回购+分红</div>
+    </div>
+    <div class="kpi-card c">
+      <div class="kpi-label">Q1 FY27 股东回报</div>
+      <div class="kpi-val c">$20B</div>
+      <div class="kpi-sub">单季度创历史记录</div>
+    </div>
+  </div>
+  <div class="callout">
+    <div class="callout-title">📌 利润含金量评估：极高</div>
+    FCF 显著高于净利润（FCF 利润率约 45%），表明利润质量优秀，非现金项目（折旧等）贡献正现金流。Q1 FY27 分红从 $0.01/季提升至 <strong>$0.25/季</strong>（增幅25倍），同时追加 $800亿回购授权，管理层对现金流可持续性高度自信。不存在"亏损烧钱"问题，Burn Rate 分析不适用。
+  </div>
+</div>
+
+<!-- ─── 3. 增长分析 ─── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">3</span>
+    <span class="section-title">增长分析：真实性、可持续性与市场空间</span>
+  </div>
+
+  <div class="sub-title">3.1 增长真实性与来源</div>
+  <div class="prose">
+    <p>NVIDIA 的增长以<strong>有机增长为主（近100%）</strong>，无重大并购贡献，无资产出售一次性收入。具体驱动拆解：</p>
+  </div>
+  <div>
+    <div class="driver-row">
+      <span class="driver-icon">🔥</span>
+      <div>
+        <div class="driver-title">量价齐升：Blackwell 平台替换 Hopper</div>
+        <div class="driver-desc">Blackwell B200/B300 相对 H100 均价提升约 3–4 倍，同时出货量快速放量。Q1 FY27 数据中心计算营收 $604亿（YoY +77%），其中 Blackwell 驱动约 70% 以上。</div>
+      </div>
+    </div>
+    <div class="driver-row">
+      <span class="driver-icon">🌐</span>
+      <div>
+        <div class="driver-title">网络业务爆发：InfiniBand + NVLink + Spectrum-X</div>
+        <div class="driver-desc">Q1 FY27 数据中心网络营收达 <strong>$148亿（YoY +199%）</strong>，已成为高速增长的第二引擎，体现 NVIDIA 从芯片向全栈 AI 基础设施平台的升级。</div>
+      </div>
+    </div>
+    <div class="driver-row">
+      <span class="driver-icon">💰</span>
+      <div>
+        <div class="driver-title">超大规模云商 Capex 持续扩张</div>
+        <div class="driver-desc">AWS/Azure/GCP/Meta 四大超算云 2026 年联合 Capex 指引超 $7000亿，NVIDIA 是最直接受益方，需求能见度延伸至 2027 年。</div>
+      </div>
+    </div>
+    <div class="driver-row">
+      <span class="driver-icon">🏛️</span>
+      <div>
+        <div class="driver-title">主权AI新蓝海</div>
+        <div class="driver-desc">沙特、日本、印度、欧洲各国政府推进国家级 AI 基础设施，NVIDIA 已宣布在美国本土建厂，与多国合作伙伴推进 AI 工厂部署。</div>
+      </div>
+    </div>
+    <div class="driver-row">
+      <span class="driver-icon">🤖</span>
+      <div>
+        <div class="driver-title">推理工作负载快速崛起</div>
+        <div class="driver-desc">ChatGPT 等大模型推理需求从训练转向持续推理，预计到 2026 年推理占 AI 计算的 2/3。Blackwell 在推理效率上显著优于 Hopper，NVIDIA 软件栈（Dynamo 等）进一步锁定工作负载。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">3.2 TAM 与市场渗透阶段</div>
+  <div class="kpi-grid">
+    <div class="kpi-card a">
+      <div class="kpi-label">AI 芯片市场 (2026E)</div>
+      <div class="kpi-val a">$120B+</div>
+      <div class="kpi-sub">同比 ~3x vs 2023年</div>
+    </div>
+    <div class="kpi-card a">
+      <div class="kpi-label">AI 芯片市场 (2030E)</div>
+      <div class="kpi-val a">$400B</div>
+      <div class="kpi-sub">CAGR ~30%+</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-label">NVDA 市场份额</div>
+      <div class="kpi-val g">~80–85%</div>
+      <div class="kpi-sub">AI 加速器市场</div>
+    </div>
+    <div class="kpi-card n">
+      <div class="kpi-label">S曲线阶段</div>
+      <div class="kpi-val n">快速渗透期</div>
+      <div class="kpi-sub">仍处曲线陡峭区</div>
+    </div>
+  </div>
+  <div class="callout warn">
+    <div class="callout-title">⚠️ 主要风险因素</div>
+    <strong>1) 地缘政治/出口管制</strong>：中国市场 H20/H200 出口已受限，FY27 Q2 指引显示损失约 $80亿中国 DC 收入；若管制进一步升级至 Blackwell 系列，冲击将显著扩大。<br>
+    <strong>2) 超大规模云商自研芯片（TPU/Trainium/MTIA）</strong>：随推理需求扩大，内部定制芯片将侵蚀部分工作负载，但训练端 CUDA 锁定依然牢固。<br>
+    <strong>3) AMD MI300/MI500 竞争</strong>：AMD 市场份额约 5–10%，在内存密集型推理场景形成局部竞争，但 ROCm 软件与 CUDA 差距依然显著。<br>
+    <strong>4) 供应链瓶颈</strong>：TSMC CoWoS 封装产能、HBM 供应构成潜在增长制约。
+  </div>
+</div>
+
+<!-- ─── 4. 商业模式 ─── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">4</span>
+    <span class="section-title">盈利能力与商业模式评估</span>
+  </div>
+
+  <div class="prose">
+    <p>NVIDIA 是典型的<strong>"越做越赚钱"</strong>商业模式：以 GPU 硬件切入，叠加 CUDA、cuDNN 等深度学习框架、NVIDIA AI Enterprise 软件订阅、DGX Cloud 云服务，构建从硬件→软件→服务的递进盈利模型，毛利率持续扩张潜力明确（指引 mid-70s%）。</p>
+    <p><strong>Fabless 轻资产模式</strong>：NVIDIA 不建晶圆厂，委托 TSMC 代工，Capex 极低（年度 Capex 仅 $10–15亿量级），FCF 转化率极高。</p>
+  </div>
+
+  <div class="sub-title">4.1 单位经济学</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>产品</th>
+          <th class="right">估计均价</th>
+          <th class="right">毛利率</th>
+          <th>核心客户</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>H100 GPU（Hopper）</td>
+          <td class="right mono">$25,000–$35,000</td>
+          <td class="right mono green">~70%+</td>
+          <td>云厂商、AI 实验室</td>
+        </tr>
+        <tr>
+          <td>Blackwell B200（NVL72 系统）</td>
+          <td class="right mono">$30,000–$40,000+</td>
+          <td class="right mono green">~75%+</td>
+          <td>超大规模云、主权AI</td>
+        </tr>
+        <tr>
+          <td>NVIDIA Networking (IB/Spectrum-X)</td>
+          <td class="right mono">捆绑销售</td>
+          <td class="right mono green">高毛利</td>
+          <td>配套 GPU 集群</td>
+        </tr>
+        <tr>
+          <td>NVIDIA AI Enterprise (SaaS)</td>
+          <td class="right mono">$4,500/GPU/年</td>
+          <td class="right mono green">~80%+</td>
+          <td>企业级用户</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">ℹ️ 关于 LTV/CAC 与 Churn Rate</div>
+    NVIDIA 非 SaaS 订阅模式，但其"软件粘性"体现在：CUDA 生态切换成本极高（重新训练工程师、迁移代码库），类 NRR 指标可理解为客户持续加大 GPU 采购（扩量采购=正向 NRR）。头部客户（超大云商）年采购金额持续增长，与 NRR >130% 的 SaaS 公司逻辑类似。
+  </div>
+</div>
+
+<!-- ─── 5. 竞争优势 ─── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">5</span>
+    <span class="section-title">竞争优势（护城河）与外部环境</span>
+  </div>
+
+  <div class="sub-title">5.1 五力模型分析</div>
+  <div class="force-grid">
+    <div class="force-card">
+      <div class="force-label">新进入者威胁</div>
+      <div class="force-level green">低</div>
+      <div class="force-desc">开发竞争性 GPU + 完整软件栈需数十亿美元及10年以上时间，CUDA 生态 20 年先发优势。</div>
+    </div>
+    <div class="force-card">
+      <div class="force-label">替代品威胁</div>
+      <div class="force-level orange">中等</div>
+      <div class="force-desc">超大云商自研 ASIC（TPU/Trainium）在内部推理场景构成替代，但通用 AI 训练替代难度极高。</div>
+    </div>
+    <div class="force-card">
+      <div class="force-label">买方议价能力</div>
+      <div class="force-level orange">中-高</div>
+      <div class="force-desc">头部超大规模云商体量巨大，但 GPU 供不应求格局下议价空间有限；中小客户几乎无议价权。</div>
+    </div>
+    <div class="force-card">
+      <div class="force-label">供方议价能力</div>
+      <div class="force-level orange">中等</div>
+      <div class="force-desc">TSMC CoWoS 封装为独家，Samsung/SK Hynix HBM 为关键耗材，但 NVIDIA 凭巨额订单获优先供应权。</div>
+    </div>
+    <div class="force-card">
+      <div class="force-label">现有竞争强度</div>
+      <div class="force-level green">低-中</div>
+      <div class="force-desc">AMD ~5–10% 份额，Intel Gaudi 边缘化；无单一竞争对手构成全面威胁。竞争集中在特定推理场景。</div>
+    </div>
+    <div class="force-card">
+      <div class="force-label">综合竞争强度</div>
+      <div class="force-level green">NVDA 主导</div>
+      <div class="force-desc">当前格局对 NVIDIA 高度有利，护城河稳固但非不可侵犯——中长期需关注 CUDA 生态外围侵蚀。</div>
+    </div>
+  </div>
+
+  <div class="sub-title">5.2 护城河类型评估</div>
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="pillar-title"><span class="pillar-icon">🛠️</span> CUDA 生态系统（高切换成本）</div>
+      <div class="pillar-desc">超过500万开发者使用 CUDA，全球主流 AI 框架（PyTorch/TensorFlow）深度绑定。迁移到其他平台需重写大量代码，成本和风险极高。</div>
+      <div class="rating-bar">
+        <div class="rating-dot on"></div><div class="rating-dot on"></div>
+        <div class="rating-dot on"></div><div class="rating-dot on"></div><div class="rating-dot on"></div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title"><span class="pillar-icon">🔗</span> 网络效应</div>
+      <div class="pillar-desc">AI 研究员用 NVIDIA 训练→论文发表→开源模型基于 NVIDIA 优化→企业采购 NVIDIA→形成正向闭环。CUDA 开发者生态越大，平台越有价值。</div>
+      <div class="rating-bar">
+        <div class="rating-dot on"></div><div class="rating-dot on"></div>
+        <div class="rating-dot on"></div><div class="rating-dot on"></div><div class="rating-dot"></div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title"><span class="pillar-icon">🧠</span> 技术与品牌优势</div>
+      <div class="pillar-desc">H100/B200 在 AI 基准测试中领先竞品，"NVIDIA 认证"的基准体系本身形成技术壁垒。黄仁勋个人品牌及公司在 AI 领域的权威地位极高。</div>
+      <div class="rating-bar">
+        <div class="rating-dot on"></div><div class="rating-dot on"></div>
+        <div class="rating-dot on"></div><div class="rating-dot on"></div><div class="rating-dot"></div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title"><span class="pillar-icon">💵</span> 成本优势（规模经济）</div>
+      <div class="pillar-desc">Fabless 模式 + 超大采购规模获得 TSMC 优先排产权，R&D 成本摊薄随收入增长效果显著。高毛利率（75%）反映定价权而非成本优势。</div>
+      <div class="rating-bar">
+        <div class="rating-dot on"></div><div class="rating-dot on"></div>
+        <div class="rating-dot on"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 6. 管理层 ─── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">6</span>
+    <span class="section-title">管理层与治理评估</span>
+  </div>
+
+  <div class="prose">
+    <p><strong>CEO 黄仁勋（Jensen Huang）</strong>：联合创始人，执掌 NVIDIA 30余年，业内公认的战略远见者。其对 AI 浪潮的预判（早在2012年押注深度学习）及持续的 R&D 投入已被历史证明正确。执行力评分极高，历史财务指引多次超预期兑现。</p>
+    <p><strong>指引准确性</strong>：FY2025–FY2027 期间，管理层每季度指引均被实际结果超越（Beat）。Q1 FY27 营收 $81.6亿 vs 指引 $78亿（±2%），超预期近 5%。</p>
+    <p><strong>激励机制</strong>：黄仁勋持股约1.9%，SBC 年化占营收 ~2–3%，管理层与股东利益整体一致。Q1 FY27 将分红从 $0.01 大幅提升至 $0.25/季，并追加 $800亿回购，为股东回报设立明确预期。</p>
+    <p><strong>治理风险</strong>：黄仁勋个人依赖性较强（Key Man Risk）；NVIDIA 近年已放弃多起重大并购（如 Arm 收购流产），显示监管风险意识。信息披露透明度高，季度 CFO 书面评述为行业标杆。</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>治理维度</th><th>评估</th><th class="right">评分</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>CEO 战略远见与执行力</td><td>历史多次超预期，AI 战略领先同行10年</td><td class="right mono green">⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>指引兑现率</td><td>连续多季 Beat，Q1 FY27 超预期 ~5%</td><td class="right mono green">⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>股东回报政策</td><td>积极回购+分红大幅提升，现金回报 $20B/季</td><td class="right mono green">⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>董事会独立性</td><td>独立董事占多数，审计委员会健全</td><td class="right mono accent">⭐⭐⭐⭐</td></tr>
+        <tr><td>Key Man 风险</td><td>黄仁勋高度个人化，继任计划不透明</td><td class="right mono orange">⭐⭐⭐</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ─── 7. 估值 ─── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">7</span>
+    <span class="section-title">估值评估与情景分析</span>
+  </div>
+
+  <div class="sub-title">7.1 当前估值水平（基于 $223 股价）</div>
+  <div class="kpi-grid">
+    <div class="kpi-card n">
+      <div class="kpi-label">TTM P/E</div>
+      <div class="kpi-val n">~45x</div>
+      <div class="kpi-sub">历史均值54x，当前折价16%</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-label">远期 P/E（FY27E）</div>
+      <div class="kpi-val g">~27x</div>
+      <div class="kpi-sub">基于 EPS ~$8.29 共识</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-label">PEG 比率</div>
+      <div class="kpi-val g">0.67x</div>
+      <div class="kpi-sub">PEG &lt; 1 = 成长被低估</div>
+    </div>
+    <div class="kpi-card n">
+      <div class="kpi-label">EV/EBITDA</div>
+      <div class="kpi-val n">~40x</div>
+      <div class="kpi-sub">半导体行业龙溢价</div>
+    </div>
+    <div class="kpi-card a">
+      <div class="kpi-label">P/FCF</div>
+      <div class="kpi-val a">~55x</div>
+      <div class="kpi-sub">基于 FY26 FCF $97B</div>
+    </div>
+    <div class="kpi-card a">
+      <div class="kpi-label">P/S</div>
+      <div class="kpi-val a">~12x</div>
+      <div class="kpi-sub">基于 FY27E $369B 营收</div>
+    </div>
+  </div>
+
+  <div class="sub-title">7.2 DCF 内在价值评估（简化模型）</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>DCF 假设</th><th>保守</th><th>中性</th><th>乐观</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>FY27–FY29 FCF 年增速</td>
+          <td class="mono orange">+30%</td>
+          <td class="mono">+45%</td>
+          <td class="mono green">+60%</td>
+        </tr>
+        <tr>
+          <td>FY30–FY32 FCF 年增速</td>
+          <td class="mono orange">+15%</td>
+          <td class="mono">+25%</td>
+          <td class="mono green">+35%</td>
+        </tr>
+        <tr>
+          <td>永续增长率（g）</td>
+          <td class="mono orange">3%</td>
+          <td class="mono">4%</td>
+          <td class="mono green">5%</td>
+        </tr>
+        <tr>
+          <td>WACC（折现率）</td>
+          <td class="mono orange">12%</td>
+          <td class="mono">10%</td>
+          <td class="mono green">9%</td>
+        </tr>
+        <tr style="background:rgba(118,185,0,0.05)">
+          <td><strong>DCF 隐含目标价（1–2年）</strong></td>
+          <td class="mono orange"><strong>$180–$210</strong></td>
+          <td class="mono accent"><strong>$230–$270</strong></td>
+          <td class="mono green"><strong>$300–$370</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-title">7.3 相对估值（FY27 EPS 基准法）</div>
+  <div class="callout info">
+    <div class="callout-title">📐 市场共识 FY27 Non-GAAP EPS: ~$8.29（Seeking Alpha 共识，2026年3月时点）</div>
+    注：Q1 FY27 实际 EPS $1.87（季度），若全年维持类似节奏，FY27 全年 EPS 有望达 $8.5–$9.0，超出部分共识。
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>情景</th><th class="right">P/E 区间</th><th class="right">FY27 EPS（E）</th><th class="right">目标股价范围</th><th class="right">当前价比较</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag tag-r">保守</span></td>
+          <td class="right mono">20x–25x</td>
+          <td class="right mono">$8.29</td>
+          <td class="right mono red">$166–$207</td>
+          <td class="right mono red">↓ -7%~-26%</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-o">中性</span></td>
+          <td class="right mono">25x–32x</td>
+          <td class="right mono">$8.50</td>
+          <td class="right mono orange">$213–$272</td>
+          <td class="right mono orange">±基本匹配</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-g">乐观</span></td>
+          <td class="right mono">35x–45x</td>
+          <td class="right mono">$9.00</td>
+          <td class="right mono green">$315–$405</td>
+          <td class="right mono green">↑ +41%~+82%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">📊 PEG 估值匹配性分析</div>
+    PEG = 0.67x（基于远期 P/E ~27x ÷ 预期 EPS 增速 ~40%）。PEG 低于 1x 通常表示<strong>成长被低估</strong>。对于增速达 40–85% 的成长股，给予 P/E = 27x 的保守估值实质上隐含了对增长可持续性的重大折扣——若增速证明可持续，当前股价提供了极具吸引力的风险收益比。
+  </div>
+</div>
+
+<!-- ─── 8. 投资结论 ─── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">8</span>
+    <span class="section-title">投资结论与推荐</span>
+  </div>
+
+  <div class="sub-title">8.1 情景分析矩阵</div>
+  <div class="tbl-wrap">
+    <table class="scenario-table">
+      <thead>
+        <tr>
+          <th>情景</th>
+          <th>关键假设</th>
+          <th>1–3年目标股价</th>
+          <th>评级</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="scenario-bull">
+          <td><strong>🐂 牛市 Upside</strong></td>
+          <td>
+            AI 资本支出维持高速增长，Blackwell 供应充足持续放量；<br>
+            中国市场局部开放（H200 获批）；<br>
+            主权AI + 推理扩张超预期；<br>
+            FY27 EPS 达 $9.5–$10.5，P/E维持35–45x
+          </td>
+          <td class="mono green"><strong>$330–$420</strong></td>
+          <td><span class="badge-pill badge-bull">低风险 / 强买入</span></td>
+        </tr>
+        <tr class="scenario-base">
+          <td><strong>⚖️ 基准 Base</strong></td>
+          <td>
+            符合 Q2 FY27 $91B 指引节奏；<br>
+            毛利率稳定在 74–75%；<br>
+            中国 DC 收入不计入，但主权AI补偿；<br>
+            FY27 EPS ~$8.5–$9.0，P/E 25–32x
+          </td>
+          <td class="mono orange"><strong>$213–$270</strong></td>
+          <td><span class="badge-pill badge-base">中性 / 持有/审慎买入</span></td>
+        </tr>
+        <tr class="scenario-bear">
+          <td><strong>🐻 熊市 Downside</strong></td>
+          <td>
+            AI Capex 周期见顶回落；<br>
+            出口管制范围扩大至 Blackwell；<br>
+            超大云商加速自研替代 GPU；<br>
+            毛利率跌破 70%，FY27 EPS 低于 $7.0，P/E 压缩至 18–22x
+          </td>
+          <td class="mono red"><strong>$130–$165</strong></td>
+          <td><span class="badge-pill badge-bear">高风险 / 回避</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-title" style="margin-top:28px">8.2 核心投资逻辑（三问框架）</div>
+  <div class="tbl-wrap">
+    <table>
+      <tbody>
+        <tr>
+          <td style="font-weight:700;width:140px;color:var(--accent)">增长靠什么？</td>
+          <td>Blackwell GPU 产品周期替换 Hopper（量价双升）+ 网络基础设施爆发（IB/NVLink +199% YoY）+ 超大云商 $7000亿+ Capex 订单能见度高 + 主权AI新市场蓝海。增长驱动清晰、多元，有较高确定性。</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--accent)">空间有多大？</td>
+          <td>AI 芯片市场 2030 年 TAM ~$4000亿（CAGR 30%+），当前 NVIDIA 在 $80–90% 市场份额下，营收天花板仍在快速抬升。FY27E 营收 $370亿+ 仅占 TAM 估算的不足25%，S 曲线仍处陡峭阶段。</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--accent)">钱能不能赚？</td>
+          <td>毛利率 75%、FCF 利润率 45%、ROIC 126%——极度赚钱，且趋势向好。$97亿年度 FCF（FY26）大幅超越净利润，利润含金量极高。现金回报能力支撑 $20B/季度股东回报。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:32px">
+    <div class="rec-box">
+      <div class="rec-label">最终投资评级</div>
+      <div class="rec-verdict">审慎买入 (Buy)</div>
+      <div class="rec-desc">
+        NVIDIA 是当前市场上基本面最为强劲的科技公司之一：Q1 FY27 营收 $816亿超预期 +4%，毛利率恢复至75%，EPS 同比 +140%，Q2 指引 $91亿远超预期，分红大幅提升25倍。<br><br>
+        <strong>当前股价 ~$223，远期 P/E 约 27x，PEG 0.67x</strong>，对于增速 40–85%、ROIC 126% 的成长型 AI 基础设施龙头而言，估值并不昂贵。<br><br>
+        核心风险在于地缘政治（中国出口管制）与 AI 资本支出周期回落，建议<strong>分批建仓，设置 $165–$170 止损（对应悲观情景底部）</strong>，1–3年中性目标价 $250–$270，乐观情景上限 $350–$420。
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer" style="margin-top:32px">
+    ⚠️ <strong>免责声明</strong>：本报告仅供信息参考，不构成投资建议。所有预测和估值均基于截至 2026年5月21日公开信息，不保证准确性和完整性。投资有风险，请自行判断，必要时咨询持牌金融顾问。历史表现不代表未来结果。
+  </div>
+</div>
+
+</div><!-- end .content -->
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>巨头研究 · 八维框架报告库</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600;700&family=IBM+Plex+Mono:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0f; --panel:#13161e; --card:#171b24; --card-hi:#1c212c;
+    --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.13);
+    --txt:#e8e4d8; --dim:#9a9ca6; --faint:#62656f;
+    --gold:#d4a24e; --green:#46c08a; --teal:#5aa9c4; --red:#e3584f;
+    --mono:'IBM Plex Mono',monospace; --serif:'Spectral','Noto Serif SC',serif;
+    --sans:-apple-system,'Noto Sans SC',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;position:relative}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(900px 500px at 85% -10%,rgba(212,162,78,.09),transparent 60%),radial-gradient(700px 600px at 5% 110%,rgba(90,169,196,.06),transparent 60%)}
+  .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 22px 70px}
+
+  header{padding:34px 0 20px;border-bottom:1px solid var(--line);margin-bottom:26px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4.6vw,40px);line-height:1.06;margin-bottom:10px}
+  .sub{color:var(--dim);font-size:14.5px;max-width:680px}
+
+  .sec{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:30px 0 16px;display:flex;align-items:center;gap:12px}
+  .sec::after{content:'';flex:1;height:1px;background:var(--line)}
+  .sec .cnt{color:var(--gold)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+  a.card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:19px 20px;transition:.2s;position:relative;overflow:hidden}
+  a.card:hover{background:var(--card-hi);border-color:var(--gold);transform:translateY(-2px)}
+  a.card::after{content:'查看报告 →';position:absolute;right:18px;bottom:16px;font-family:var(--mono);font-size:11px;color:var(--faint);transition:.2s}
+  a.card:hover::after{color:var(--gold)}
+  .tk{display:inline-flex;align-items:center;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--bg);background:var(--gold);padding:3px 10px;border-radius:6px;margin-bottom:13px}
+  .tk.semi{background:var(--teal)}
+  .co{font-family:var(--serif);font-size:20px;font-weight:600;margin-bottom:4px}
+  .tag{font-size:12px;color:var(--dim);min-height:34px}
+
+  .note{margin-top:30px;background:rgba(212,162,78,.05);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 16px;font-size:13px;color:var(--dim)}
+  .note b{color:var(--txt)}
+  .note code{font-family:var(--mono);font-size:12px;color:var(--gold);background:rgba(255,255,255,.05);padding:1px 6px;border-radius:4px}
+
+  footer{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint);line-height:1.7}
+</style>
+</head>
+<body>
+<!--NAV-->
+<div style="background:#0a0b0f;border-bottom:1px solid rgba(255,255,255,.1);padding:9px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:-apple-system,'Noto Sans SC',system-ui,sans-serif;position:relative;z-index:5">
+  <span style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#d4a24e;margin-right:8px">US MACRO</span>
+  <a href="index.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">ERP 引擎</a>
+  <a href="liquidity.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">流动性</a>
+  <a href="mag7.html" style="text-decoration:none;font:600 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#0a0b0f;background:#d4a24e;border:1px solid #d4a24e;padding:6px 13px;border-radius:7px">巨头研究</a>
+</div>
+<!--/NAV-->
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">◆ 个股研究库 · 八维评估框架</div>
+    <h1>巨头研究 · 框架报告库</h1>
+    <p class="sub">按统一评估框架完成的个股深度报告。每张卡片点进去是一份独立的完整分析,与首页的宏观研判(ERP 引擎 / 流动性传导)互为补充。</p>
+  </header>
+
+  <div class="sec">大型科技 <span class="cnt">5</span></div>
+  <div class="grid">
+    <a class="card" href="aapl_framework_report.html"><span class="tk">AAPL</span><div class="co">Apple</div><div class="tag">投资框架综合分析 · 2026年6月</div></a>
+    <a class="card" href="MSFT_Framework_B_Report.html"><span class="tk">MSFT</span><div class="co">Microsoft</div><div class="tag">Framework B · 八模块深度 · 2026年5月</div></a>
+    <a class="card" href="googl_framework_b_report.html"><span class="tk">GOOGL</span><div class="co">Alphabet</div><div class="tag">Framework B · 深度财务 · 2026年5月</div></a>
+    <a class="card" href="amzn_framework_b_report.html"><span class="tk">AMZN</span><div class="co">Amazon</div><div class="tag">Framework B · 八模块 · 2026年5月</div></a>
+    <a class="card" href="meta_framework_b_report.html"><span class="tk">META</span><div class="co">Meta Platforms</div><div class="tag">八模块框架研究 · 2026年5月</div></a>
+  </div>
+
+  <div class="sec">半导体 / AI 算力 <span class="cnt">4</span></div>
+  <div class="grid">
+    <a class="card" href="NVDA_deep_analysis.html"><span class="tk semi">NVDA</span><div class="co">NVIDIA</div><div class="tag">深度分析 · Q1 FY2027</div></a>
+    <a class="card" href="avgo_framework_report.html"><span class="tk semi">AVGO</span><div class="co">Broadcom</div><div class="tag">八维投资框架深度研究 · 2026年6月</div></a>
+    <a class="card" href="amd_framework_report.html"><span class="tk semi">AMD</span><div class="co">AMD</div><div class="tag">八模块深度框架 · 2026年5月</div></a>
+    <a class="card" href="intc_framework_report.html"><span class="tk semi">INTC</span><div class="co">Intel</div><div class="tag">投资框架研究报告 · 2026年6月</div></a>
+  </div>
+
+  <div class="note">
+    <b>想再加一只(比如 TSLA)?</b> 把新报告 html 传进同一个仓库,然后在本页复制一张 <code>&lt;a class="card" ...&gt;</code> 卡片、把 <code>href</code> 改成新文件名即可——和你现在传文件一样简单。
+  </div>
+
+  <footer>
+    9 份报告均为按统一框架完成的独立分析,自包含、无外部依赖。本页仅作导航与归类,不改动报告内容。非投资建议。
+  </footer>
+</div>
+</body>
+</html>

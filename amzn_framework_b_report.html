@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AMZN 八模块深度财务分析 · Framework B · 2026年5月</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #F8F4EC;
+  --bg-alt: #FFFFFF;
+  --bg-deep: #1A1815;
+  --ink: #1C1B17;
+  --ink-2: #4A4843;
+  --ink-3: #8A857D;
+  --line: #E2DBCC;
+  --line-2: #CFC6B3;
+  --accent: #1E2A4A;
+  --green: #2D6A4F;
+  --green-bg: #E5EDE6;
+  --blue: #1E3A5F;
+  --blue-bg: #E2EAF1;
+  --amber: #B8651E;
+  --amber-bg: #F2E5D0;
+  --red: #8B1E1E;
+  --red-bg: #F1DCDC;
+  --teal: #2A6F69;
+  --purple: #3D2E5E;
+  --coral: #A0421A;
+  --pink: #872D52;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  font-feature-settings: "kern", "liga", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+/* HERO */
+.hero { padding: 80px 0 64px; border-bottom: 1px solid var(--line); position: relative; }
+.hero-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-tag::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.hero-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(40px, 5.5vw, 64px); line-height: 1.1;
+  letter-spacing: -0.02em; margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.hero-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+.hero-sub { font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 740px; margin-bottom: 40px; font-weight: 300; }
+.hero-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 24px; padding-top: 32px; border-top: 1px solid var(--line);
+}
+.hero-meta .label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;
+}
+.hero-meta .value { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--ink); }
+.hero-meta .value.warn { color: var(--amber); }
+.hero-meta .value.pos { color: var(--green); }
+
+/* SECTIONS */
+.section { padding: 72px 0 36px; border-bottom: 1px solid var(--line); }
+.section:last-of-type { border-bottom: none; }
+.section-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-display); font-size: clamp(30px, 4vw, 42px);
+  font-weight: 500; line-height: 1.15; letter-spacing: -0.015em;
+  margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-lead { font-size: 19px; line-height: 1.65; color: var(--ink-2); max-width: 780px; margin-bottom: 36px; font-weight: 300; }
+
+/* PROSE */
+.prose p { margin-bottom: 16px; color: var(--ink-2); }
+.prose p strong, .prose strong { color: var(--ink); font-weight: 600; }
+.prose .highlight { background: linear-gradient(180deg, transparent 60%, rgba(184, 101, 30, 0.18) 60%); padding: 0 2px; }
+
+/* SUBSECTION */
+.subsection { margin-top: 40px; }
+.subsection-h {
+  font-family: var(--font-display); font-style: italic; font-size: 24px;
+  font-weight: 500; margin-bottom: 16px; color: var(--ink);
+}
+.minor-h {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent); margin: 28px 0 12px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--line);
+}
+
+/* QUICK GRID */
+.quick-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px; background: var(--line); border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden; margin: 32px 0;
+}
+.quick-cell { background: var(--bg-alt); padding: 18px 20px; }
+.quick-cell .qlabel {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;
+}
+.quick-cell .qvalue { font-family: var(--font-display); font-size: 22px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+.qvalue.pos { color: var(--green); }
+.qvalue.neg { color: var(--red); }
+.qvalue.warn { color: var(--amber); }
+
+/* TABLE */
+.metrics-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+.metrics-table th {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-3); text-align: left;
+  padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line-2); font-weight: 500;
+}
+.metrics-table td { padding: 13px 12px 13px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.metrics-table td:first-child { font-weight: 500; color: var(--ink); }
+.metrics-table .mono { font-family: var(--font-mono); }
+.metrics-table .pos { color: var(--green); }
+.metrics-table .neg { color: var(--red); }
+.metrics-table .warn { color: var(--amber); }
+
+/* CHART */
+.chart-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-wrap { position: relative; width: 100%; }
+.chart-title { font-family: var(--font-display); font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.chart-note { font-size: 12px; color: var(--ink-3); margin-bottom: 16px; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; font-size: 12px; color: var(--ink-2); }
+.chart-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); }
+.legend-sq { width: 12px; height: 12px; border-radius: 2px; }
+
+/* CALLOUT */
+.callout {
+  background: var(--bg-alt); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border-radius: 6px; padding: 20px 24px; margin: 24px 0;
+}
+.callout.warn { border-left-color: var(--amber); }
+.callout.green { border-left-color: var(--green); }
+.callout.red { border-left-color: var(--red); }
+.callout .ctitle { font-family: var(--font-display); font-style: italic; font-size: 18px; margin-bottom: 8px; color: var(--ink); }
+.callout p { font-size: 14px; color: var(--ink-2); margin: 0; }
+
+/* PULL QUOTE */
+.pull-quote {
+  font-family: var(--font-display); font-style: italic;
+  font-size: clamp(22px, 2.5vw, 28px); line-height: 1.4; color: var(--accent);
+  padding: 32px 0 32px 32px; border-left: 3px solid var(--accent);
+  margin: 32px 0; font-weight: 400; font-variation-settings: "opsz" 144;
+}
+.pull-quote::before { content: '"'; font-size: 1.5em; line-height: 0; vertical-align: -0.2em; margin-right: 0.05em; color: var(--amber); }
+
+/* SCENARIO */
+.scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.scenario-card { padding: 22px; border-radius: 8px; }
+.scenario-bull { background: var(--green-bg); }
+.scenario-base { background: #EDE9E0; }
+.scenario-bear { background: var(--red-bg); }
+.scenario-card .stier { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.scenario-bull .stier { color: var(--green); }
+.scenario-base .stier { color: #6B5B3A; }
+.scenario-bear .stier { color: var(--red); }
+.scenario-card .target { font-family: var(--font-display); font-size: 34px; font-weight: 500; line-height: 1; margin-bottom: 8px; }
+.scenario-bull .target { color: var(--green); }
+.scenario-base .target { color: #6B5B3A; }
+.scenario-bear .target { color: var(--red); }
+.scenario-card .sdesc { font-size: 12px; line-height: 1.5; }
+.scenario-bull .sdesc { color: #1F4A37; }
+.scenario-base .sdesc { color: #6B5B3A; }
+.scenario-bear .sdesc { color: #5A1212; }
+.scenario-card .sprob { font-family: var(--font-mono); font-size: 11px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); }
+
+/* FORCES */
+.forces-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+.force-item { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; }
+.force-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.force-name { font-family: var(--font-display); font-size: 17px; font-weight: 500; }
+.force-rate { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; font-weight: 500; }
+.rate-low { background: var(--green-bg); color: var(--green); }
+.rate-mid { background: var(--amber-bg); color: var(--amber); }
+.rate-high { background: var(--red-bg); color: var(--red); }
+.force-item p { font-size: 13px; color: var(--ink-2); margin: 0; line-height: 1.55; }
+
+/* LADDER */
+.ladder-row { display: flex; align-items: center; padding: 12px 16px; border-radius: 6px; margin: 6px 0; font-size: 14px; }
+.ladder-row.zone-avoid { background: var(--red-bg); color: var(--red); }
+.ladder-row.zone-watch { background: var(--amber-bg); color: var(--amber); }
+.ladder-row.zone-build { background: var(--blue-bg); color: var(--blue); }
+.ladder-row.zone-ideal { background: var(--green-bg); color: var(--green); }
+.ladder-row.zone-heavy { background: #D6E5DD; color: #1B4D38; }
+.ladder-row .zlabel { flex: 1; font-weight: 500; }
+.ladder-row .zprice { font-family: var(--font-mono); font-weight: 500; }
+.ladder-current { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line-2); display: flex; align-items: center; gap: 8px; }
+.ladder-current::before { content: ''; width: 8px; height: 8px; background: var(--ink); border-radius: 50%; }
+
+/* VERDICT */
+.verdict-banner {
+  background: var(--bg-deep); color: #F5EFE2; border-radius: 10px;
+  padding: 40px 40px; margin: 32px 0; position: relative; overflow: hidden;
+}
+.verdict-banner .vrating { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 12px; }
+.verdict-banner .vverdict { font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); font-weight: 500; line-height: 1.1; margin-bottom: 16px; }
+.verdict-banner .vverdict em { font-style: italic; color: #D9A86A; }
+.verdict-banner .vbody { font-size: 15px; line-height: 1.6; color: #C9C1B2; max-width: 720px; }
+
+/* TOC */
+.toc { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
+.toc ol { list-style: none; }
+.toc li { display: flex; align-items: baseline; padding: 8px 0; border-bottom: 1px dotted var(--line-2); font-size: 14px; }
+.toc li:last-child { border-bottom: none; }
+.toc .toc-num { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); width: 32px; flex-shrink: 0; }
+.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+.toc a:hover { border-bottom-color: var(--amber); }
+
+/* FOOTER */
+.footer { padding: 48px 0 64px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.footer h4 { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--ink-2); margin-bottom: 12px; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 56px 0 40px; }
+  .section { padding: 48px 0 28px; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .forces-grid { grid-template-columns: 1fr; }
+  .verdict-banner { padding: 28px 24px; }
+}
+@media print { body { background: white; } .section { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+<!--NAV--><div style="background:#0a0b0f;border-bottom:1px solid rgba(255,255,255,.1);padding:9px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:-apple-system,'Noto Sans SC',system-ui,sans-serif;position:relative;z-index:999"><span style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#d4a24e;margin-right:8px">US MACRO</span><a href="index.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">ERP 引擎</a><a href="liquidity.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">流动性</a><a href="mag7.html" style="text-decoration:none;font:600 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#0a0b0f;background:#d4a24e;border:1px solid #d4a24e;padding:6px 13px;border-radius:7px">巨头研究</a></div><!--/NAV-->
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">框架 B · 八模块深度财务分析 · 2026年5月</div>
+    <h1 class="hero-title">AMZN <em>八模块</em><br>深度投资分析</h1>
+    <p class="hero-sub">用八模块框架(业务概览 → 财务质量 → 增长 → 商业模式 → 护城河 → 治理 → 估值 → 结论)逐层拆解 Amazon。核心张力只有一句话:利润史上最强,自由现金流却被 $200B Capex 抽干到接近零 — 它到底是"隐藏的价值股",还是"重资本陷阱"?</p>
+    <div class="hero-meta">
+      <div><div class="label">股价</div><div class="value">$265</div></div>
+      <div><div class="label">市值</div><div class="value">$2.9T</div></div>
+      <div><div class="label">数据截至</div><div class="value">2026-05-28</div></div>
+      <div><div class="label">TTM FCF</div><div class="value warn">$1.2B</div></div>
+      <div><div class="label">综合判定</div><div class="value warn">持有</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOC -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">导读</div>
+    <h2 class="section-title">一句话<em>投资逻辑</em></h2>
+    <p class="section-lead">Amazon 正在用整个公司的经营现金流(TTM $148.5B)押注 AI 基建。AWS 重新加速到 15 个季度最快(+28%),广告业务跑率破 $700 亿/年,利润率创历史新高 — 但 $200B 的 2026 资本开支让自由现金流逼近于零。这是一道"现在投入、未来兑现"的 ROIC 信仰题。</p>
+
+    <div class="toc">
+      <div class="toc-title">八模块目录</div>
+      <ol>
+        <li><span class="toc-num">01</span><a href="#m1">公司基本概览与核心业务</a></li>
+        <li><span class="toc-num">02</span><a href="#m2">财务质量与健康现状(现金为王)</a></li>
+        <li><span class="toc-num">03</span><a href="#m3">增长分析:真实性、可持续性与市场空间</a></li>
+        <li><span class="toc-num">04</span><a href="#m4">盈利能力与商业模式评估</a></li>
+        <li><span class="toc-num">05</span><a href="#m5">竞争优势(护城河)与五力模型</a></li>
+        <li><span class="toc-num">06</span><a href="#m6">管理层与治理评估</a></li>
+        <li><span class="toc-num">07</span><a href="#m7">估值评估与情景分析</a></li>
+        <li><span class="toc-num">08</span><a href="#m8">投资结论与推荐</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 1 ===== -->
+<section class="section" id="m1">
+  <div class="container">
+    <div class="section-label">模块一</div>
+    <h2 class="section-title">公司基本概览与<em>核心业务</em></h2>
+    <p class="section-lead">Amazon 早已不是一家"网购公司"。它是一个由零售飞轮供能、由 AWS 与广告两台高毛利引擎驱动的复合体 — 服务收入(AWS+第三方+广告+订阅)在 FY2025 已占总收入约 59%。</p>
+
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">Q1'26 总收入</div><div class="qvalue">$181.5B</div></div>
+      <div class="quick-cell"><div class="qlabel">YoY 增长</div><div class="qvalue pos">+17%</div></div>
+      <div class="quick-cell"><div class="qlabel">AWS 增长</div><div class="qvalue pos">+28%</div></div>
+      <div class="quick-cell"><div class="qlabel">AWS 跑率</div><div class="qvalue">$150B</div></div>
+      <div class="quick-cell"><div class="qlabel">广告 TTM</div><div class="qvalue pos">$70B+</div></div>
+      <div class="quick-cell"><div class="qlabel">FY25 收入</div><div class="qvalue">$716.9B</div></div>
+    </div>
+
+    <div class="prose">
+      <p>三大报告分部:<strong>北美零售</strong>(Q1'26 $104.1B,+12%)、<strong>国际零售</strong>($39.8B,+19%,剔除汇率 +11%)、<strong>AWS</strong>($37.6B,+28%)。AWS 只占约 21% 的收入,却贡献了约 60% 的经营利润 — 它是整家公司真正的利润心脏。</p>
+      <p>结构性看点:AWS 在岸订单 backlog 已达 <span class="highlight">$364B(尚不含与 Anthropic 新签的 $100B)</span>,提供了多年收入可见度;广告业务 TTM 跑率超 $700 亿,带软件级增量利润率;自研芯片(Graviton/Trainium/Nitro)合计跑率破 $200 亿,三位数增长,且拿下 OpenAI 约 2GW Trainium 算力承诺(2027 起放量)。</p>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">分部收入与经营利润 · Q1 2026</div>
+      <div class="chart-note">收入占比看 AWS 仅五分之一,利润占比却近六成 — 高毛利分部主导盈利结构</div>
+      <div class="chart-wrap" style="height:360px;"><canvas id="segChart"></canvas></div>
+    </div>
+
+    <div class="prose">
+      <p><strong>地理拆解:</strong>北美仍是收入主体(约 57%),国际(约 22%)在剔除汇率后增速更快(+11%),AWS(约 21%)是全球部署、跨地域的云基础设施。国际分部已转正盈利,是过去两年最重要的边际改善之一。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 2 ===== -->
+<section class="section" id="m2">
+  <div class="container">
+    <div class="section-label">模块二</div>
+    <h2 class="section-title">财务质量与<em>健康现状</em></h2>
+    <p class="section-lead">Quick Scan 的口号是"现金为王"。Amazon 在利润表上交出史上最强季度,但在现金流量表上,$200B 的 Capex 计划正在把自由现金流抽干 — 这是理解这家公司当前估值的唯一钥匙。</p>
+
+    <div class="minor-h">2.1 盈利能力与增长质量</div>
+    <table class="metrics-table">
+      <thead><tr><th>指标</th><th>当前</th><th>评估</th></tr></thead>
+      <tbody>
+        <tr><td>收入增长(YoY / 3年CAGR)</td><td class="mono">+17% / ~12%</td><td>有机增长为主,放量(单量 +15%)+ 提价(3P 费率)+ AWS 加速三轮驱动</td></tr>
+        <tr><td>毛利率(混合)</td><td class="mono pos">~49%</td><td>持续上行,服务占比提升带来结构性改善</td></tr>
+        <tr><td>经营利润率</td><td class="mono pos">13.1%(Q1 创新高)</td><td>北美零售 9.0% / AWS 37.8% / 国际转正</td></tr>
+        <tr><td>净利率(TTM)</td><td class="mono warn">12.2%</td><td>含 Anthropic 一次性收益,实际经营净利率更低</td></tr>
+        <tr><td>ROIC(估)</td><td class="mono pos">~13%</td><td>&gt; WACC(~8.5%),资本效率达标</td></tr>
+        <tr><td>ROE / ROA(TTM)</td><td class="mono">24.3% / 6.8%</td><td>ROE 受一次性收益抬高</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn">
+      <div class="ctitle">利润含金量警示:$16.8B 的"幻觉"</div>
+      <p>Q1'26 净利润 $30.3B、EPS $2.78 看似爆表,但其中包含来自 Anthropic 投资的 <strong>$16.8B 税前非经营性收益(约占 EPS 的 $1.50)</strong>。剔除后经营性 EPS 约 $1.28。TTM 净利润 $90.8B、TTM EPS $8.59 同样被这笔一次性收益显著抬高 —— 任何用"trailing P/E 31.6x 很便宜"的论断都必须先做这层调整。SBC(股权激励,年化约 $240 亿)是另一项需要扣除的非现金摊薄。</p>
+    </div>
+
+    <div class="minor-h">2.2 运营效率与杠杆</div>
+    <div class="prose">
+      <p>Q1'26 经营利润 +30%($18.4B → $23.9B),显著快于收入 +17% — <strong>正向经营杠杆成立</strong>。北美零售利润率升至 9.0%,得益于物流网络密度提升与当日达规模化;国际从亏损转为盈利。这说明零售这条"低毛利"业务正在兑现规模化的利润释放。</p>
+    </div>
+
+    <div class="minor-h">2.3 资产负债表健康与安全性</div>
+    <table class="metrics-table">
+      <thead><tr><th>项目</th><th>数值</th><th>安全性</th></tr></thead>
+      <tbody>
+        <tr><td>现金及有价证券</td><td class="mono">$143B</td><td class="pos">充裕</td></tr>
+        <tr><td>长期债务</td><td class="mono warn">$119B(去年 $66B)</td><td class="warn">一年翻倍,需警惕</td></tr>
+        <tr><td>净现金头寸</td><td class="mono pos">约 +$24B</td><td class="pos">仍为净现金</td></tr>
+        <tr><td>净债务 / EBITDA</td><td class="mono pos">负值(净现金)</td><td class="pos">&lt; 3.0x 安全线无忧</td></tr>
+        <tr><td>负债权益比</td><td class="mono">53.3%</td><td>可控</td></tr>
+      </tbody>
+    </table>
+    <div class="prose">
+      <p><strong>关键异常信号:</strong>长期债务一年内从 $66B 飙升至 $119B。目前公司仍是净现金,但若 Capex 持续高于经营现金流,这个缓冲会被快速消耗 — 这是从"自筹"滑向"融资依赖"的早期信号,需逐季监控。</p>
+    </div>
+
+    <div class="minor-h">2.4 现金流与利润含金量(核心)</div>
+    <div class="chart-card">
+      <div class="chart-title">经营现金流 vs 资本开支 vs 自由现金流(TTM 演变)</div>
+      <div class="chart-note">单位:十亿美元。OCF 增长强劲,但 Capex 以更快速度吞噬 — FCF 从 $38B 坠落至 $1.2B</div>
+      <div class="chart-wrap" style="height:360px;"><canvas id="cashChart"></canvas></div>
+    </div>
+    <div class="prose">
+      <p>这是整份报告最重要的一张图。OCF(TTM)同比 +30% 至 <strong>$148.5B</strong>,数字本身极其健康;但 Capex(TTM)增加约 $59.3B,把 <strong>FCF 从去年的 $25.9B 压到仅 $1.2B(同季单季已转负 -$2.5B)</strong>。管理层指引 2026 全年 Capex 约 <span class="highlight">$200B</span>,而全年 OCF 约 $160–170B —— 这意味着 <strong>2026 全年自由现金流将是负的,市场估计赤字 -$17B 至 -$28B</strong>。OCF 远高于净利润说明会计利润质量并不差,问题不在"赚不赚现金",而在"赚的现金全部被再投资"。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 3 ===== -->
+<section class="section" id="m3">
+  <div class="container">
+    <div class="section-label">模块三</div>
+    <h2 class="section-title">增长分析:<em>真实性</em>与市场空间</h2>
+    <p class="section-lead">增长是否真实、可持续?TAM 还有多大?这一模块判断"今天的高 Capex 未来能否兑现成收入"。</p>
+
+    <div class="minor-h">增长真实性与驱动拆解</div>
+    <div class="chart-card">
+      <div class="chart-title">总收入与 AWS 收入轨迹(年度)</div>
+      <div class="chart-note">单位:十亿美元。AWS 在大体量基数上重新加速,是增长可持续性的核心证据</div>
+      <div class="chart-wrap" style="height:340px;"><canvas id="growthChart"></canvas></div>
+    </div>
+    <div class="prose">
+      <p>增长来源是<strong>放量 + 提价 + 结构升级</strong>三者叠加,质量很高:全球付费单量 +15%(疫情后最快),第三方卖家服务 +14%,广告 +22~24%,AWS +28% 且 backlog 高达 $364B。Jassy 直言"在这么大基数上还能这样增长非常罕见 —— 上一次这种增速时 AWS 体量只有现在的一半"。</p>
+    </div>
+
+    <div class="minor-h">市场空间(TAM)与扩张路径</div>
+    <table class="metrics-table">
+      <thead><tr><th>赛道</th><th>TAM / 阶段</th><th>扩张路径</th></tr></thead>
+      <tbody>
+        <tr><td>云计算 / AI 基建</td><td class="mono">$2T+(2030E)</td><td>AWS AI 跑率 $15B+;Bedrock、Trainium、与 OpenAI/Anthropic 深度绑定</td></tr>
+        <tr><td>数字广告</td><td class="mono">$1T+</td><td>赞助广告 + Prime Video 广告 + 直播体育(Twitch)</td></tr>
+        <tr><td>全球零售</td><td class="mono">渗透率仍低</td><td>当日达密度、杂货、新兴市场、agentic commerce(Rufus)</td></tr>
+        <tr><td>自研芯片</td><td class="mono">$20B+ 跑率</td><td>Graviton/Trainium/Nitro,降低对 NVDA 依赖、提升毛利</td></tr>
+        <tr><td>低轨卫星(Kuiper)</td><td class="mono">早期期权</td><td>全球宽带,长期可选项</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout red">
+      <div class="ctitle">增长风险:云竞争正在加剧</div>
+      <p>AWS +28% 固然亮眼,但同期 <strong>Azure +40%、Google Cloud +63%</strong> 增速更快。AWS 仍是规模最大的云,但份额增长的相对领先正在被侵蚀。叠加宏观消费周期敏感性、$200B Capex 的 ROI 不确定性、以及反垄断与关税等政策风险,增长的"可持续"二字仍需逐季验证。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 4 ===== -->
+<section class="section" id="m4">
+  <div class="container">
+    <div class="section-label">模块四</div>
+    <h2 class="section-title">盈利能力与<em>商业模式</em></h2>
+    <p class="section-lead">核心问题:这门生意是否"越做越赚钱"?答案是肯定的 —— 但驱动力来自业务组合的结构性迁移,而非单一业务的提价。</p>
+    <div class="prose">
+      <p>Amazon 的飞轮是:零售规模 → Prime 会员黏性 → 第三方卖家与广告 → AWS 现金牛再投资。过去几年,收入结构正从"低毛利商品零售"持续向"高毛利服务"迁移 —— AWS 经营利润率约 37.8%、广告带软件级增量利润率。每多一个百分点的广告/AWS 增长,对 EPS 的贡献都远大于等量的零售增长。这正是混合经营利润率能创新高(13.1%)的根本原因。</p>
+      <p><strong>单位经济:</strong>北美零售经营利润率升至 9.0%,说明随着物流密度与自动化提升,单均履约成本在下降,零售本身的 unit economics 正在改善;AWS 与广告则天然具备高 LTV / 低边际成本特征。综合看,这是一门<strong>规模越大、利润率越高</strong>的生意。</p>
+    </div>
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">AWS 经营利润率</div><div class="qvalue pos">37.8%</div></div>
+      <div class="quick-cell"><div class="qlabel">北美零售利润率</div><div class="qvalue pos">9.0%</div></div>
+      <div class="quick-cell"><div class="qlabel">混合经营利润率</div><div class="qvalue pos">13.1%</div></div>
+      <div class="quick-cell"><div class="qlabel">广告增量利润率</div><div class="qvalue pos">软件级</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 5 ===== -->
+<section class="section" id="m5">
+  <div class="container">
+    <div class="section-label">模块五</div>
+    <h2 class="section-title">护城河与<em>五力模型</em></h2>
+    <p class="section-lead">Amazon 拥有当今科技界最宽、最多层次的护城河之一:网络效应、规模成本优势、切换成本与垂直整合并存。但云端的竞争强度不容忽视。</p>
+
+    <div class="forces-grid">
+      <div class="force-item">
+        <div class="force-head"><span class="force-name">新进入者威胁</span><span class="force-rate rate-low">低</span></div>
+        <p>云与物流均需千亿级资本与多年规模积累,几乎不可复制。$200B Capex 本身就是一道护城河。</p>
+      </div>
+      <div class="force-item">
+        <div class="force-head"><span class="force-name">替代品威胁</span><span class="force-rate rate-mid">中</span></div>
+        <p>云有 Azure/GCP 替代,零售有 Walmart/Temu;但 Prime 与 AWS 的切换成本显著抬高了替代门槛。</p>
+      </div>
+      <div class="force-item">
+        <div class="force-head"><span class="force-name">买方议价能力</span><span class="force-rate rate-low">低–中</span></div>
+        <p>消费者高度分散,议价力弱;大型 AWS 企业客户有一定议价力,但被长期合约与迁移成本锁定。</p>
+      </div>
+      <div class="force-item">
+        <div class="force-head"><span class="force-name">供方议价能力</span><span class="force-rate rate-low">低</span></div>
+        <p>Amazon 是多数供应商的最大买家;自研 Trainium 进一步削弱对 NVDA 的议价依赖。</p>
+      </div>
+      <div class="force-item" style="grid-column: 1 / -1;">
+        <div class="force-head"><span class="force-name">现有竞争者竞争强度</span><span class="force-rate rate-high">高</span></div>
+        <p>这是五力中唯一的高压项:云端 Azure(+40%)、Google Cloud(+63%)增速更快;零售面对 Walmart、Temu、Shein;广告面对 Google、Meta。竞争不会摧毁护城河,但会持续压制份额扩张速度与定价空间。</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p><strong>护城河类型:</strong>(1)网络效应 —— 卖家与买家互相吸引的双边市场;(2)规模成本优势 —— 全球最大的物流与数据中心网络;(3)切换成本 —— Prime 生态与 AWS 技术栈深度绑定;(4)垂直整合 —— 自研芯片把成本与性能掌握在自己手中。综合护城河评级:<strong>宽且持久</strong>,但需为"云份额增速被追赶"打折扣。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 6 ===== -->
+<section class="section" id="m6">
+  <div class="container">
+    <div class="section-label">模块六</div>
+    <h2 class="section-title">管理层与<em>治理评估</em></h2>
+    <div class="prose">
+      <p><strong>执行力与兑现能力:</strong>CEO Andrew Jassy 上任后,在成本纪律(物流网络重构、裁员)与 AWS 重新加速上交出了成绩;Q1'26 收入与利润均显著超指引(EPS $2.78 vs 预期 $1.63),历史上对季度指引的兑现度总体可靠。</p>
+      <p><strong>资本配置哲学:</strong>这是评估管理层最关键的一点。Amazon 选择把几乎全部经营现金流再投资到 Capex 与 AI,而不是回购或分红。这与当年建设物流与 AWS 的逻辑一脉相承 —— 区别只在于<strong>绝对金额的量级</strong>($200B)。这是一种"延迟满足"式的配置,赌的是未来 ROIC。对长期股东友好,但对追求短期现金回报的投资者不友好。</p>
+      <p><strong>内部交易与治理:</strong>创始人 Bezos 的减持多为预设的 10b5-1 计划(常规分散化与慈善/Blue Origin 资金需求),不宜过度解读为信心信号。董事会结构成熟、信息披露透明度高。治理风险整体偏低。</p>
+    </div>
+    <div class="callout">
+      <div class="ctitle">治理判断</div>
+      <p>管理层与长期股东利益基本一致,执行力强、配置纪律清晰。唯一需要持续审视的是:$200B 量级的资本配置一旦 ROIC 不及预期,纠错的代价会非常高 —— 这是"信任管理层"与"独立验证"必须并存的地方。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 7 ===== -->
+<section class="section" id="m7">
+  <div class="container">
+    <div class="section-label">模块七</div>
+    <h2 class="section-title">估值评估与<em>情景分析</em></h2>
+    <p class="section-lead">Amazon 的估值难点在于:FCF 接近零让传统 DCF/FCF 法暂时失效,trailing 利润又被一次性收益扭曲。因此需要同时用相对估值、EV/EBITDA 与情景法交叉验证。</p>
+
+    <div class="minor-h">当前估值水平(2026-05-28)</div>
+    <table class="metrics-table">
+      <thead><tr><th>指标</th><th>当前</th><th>与历史/同行对比</th></tr></thead>
+      <tbody>
+        <tr><td>Trailing P/E</td><td class="mono">31.6x</td><td>低于五年均值,但被 Anthropic 一次性收益压低,失真</td></tr>
+        <tr><td>Forward P/E</td><td class="mono">31.2x</td><td>高于 MSFT/GOOGL,反映折旧前置压制近端 EPS</td></tr>
+        <tr><td>EV / EBITDA</td><td class="mono">15.4x</td><td>相对合理,EBITDA 不受 Capex 折旧影响</td></tr>
+        <tr><td>P / S</td><td class="mono">3.9x</td><td>接近历史区间下沿</td></tr>
+        <tr><td>PEG(5年)</td><td class="mono warn">1.83</td><td>&gt;1,成长性未被"白送",估值与成长基本匹配偏贵</td></tr>
+        <tr><td>P / B</td><td class="mono">6.4x</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <div class="minor-h">内在价值评估(DCF · 敏感性)</div>
+    <div class="prose">
+      <p>由于 2026–2027 FCF 为负,标准 DCF 必须建立在"Capex 在 2026–27 见顶、2028 起 FCF 强劲转正"的归一化假设上。关键假设:未来 5 年归一化 FCF 复合增速 ~18–22%、永续增长 g = 3%、WACC = 8.5%。</p>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">DCF 敏感性:WACC × 永续增长率 g(每股内在价值估算)</div>
+      <div class="chart-note">单位:美元/股。基准格(WACC 8.5% / g 3.0%)约 $290。估值对 WACC 与 g 高度敏感,凸显 Terminal Value 的主观性</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="dcfChart"></canvas></div>
+    </div>
+
+    <div class="minor-h">相对估值(基于远期预期 EPS)</div>
+    <table class="metrics-table">
+      <thead><tr><th>情景</th><th>远期 EPS 基准</th><th>P/E 假设</th><th>隐含价格</th></tr></thead>
+      <tbody>
+        <tr><td>保守</td><td class="mono">FY26 GAAP ~$6.7</td><td class="mono">24x</td><td class="mono neg">~$160</td></tr>
+        <tr><td>中性</td><td class="mono">FY27 ~$9.6</td><td class="mono">30x</td><td class="mono warn">~$290</td></tr>
+        <tr><td>乐观</td><td class="mono">FY27 ~$11.5</td><td class="mono">35x</td><td class="mono pos">~$400</td></tr>
+      </tbody>
+    </table>
+
+    <div class="minor-h">情景分析与概率加权目标价(1–3 年)</div>
+    <div class="scenario-grid">
+      <div class="scenario-card scenario-bear">
+        <div class="stier">熊市 · 20%</div>
+        <div class="target">$170</div>
+        <div class="sdesc">AWS 降速至中位数、Capex 居高不下、FCF 持续为负、AI ROI 不及预期,倍数压缩至 ~22x</div>
+        <div class="sprob">高风险 / 卖出</div>
+      </div>
+      <div class="scenario-card scenario-base">
+        <div class="stier">基准 · 50%</div>
+        <div class="target">$320</div>
+        <div class="sdesc">符合指引:AWS 20–22%、Capex 2026–27 见顶、FCF 逐步恢复;贴近卖方共识 ~$312</div>
+        <div class="sprob">中性 / 持有</div>
+      </div>
+      <div class="scenario-card scenario-bull">
+        <div class="stier">牛市 · 30%</div>
+        <div class="target">$425</div>
+        <div class="sdesc">AWS 持续 25%+、广告爆发、2027 起 FCF 强劲转正、Trainium 随 OpenAI 放量,倍数重估</div>
+        <div class="sprob">高回报</div>
+      </div>
+    </div>
+    <p style="color:var(--ink-2); margin-top:16px;"><strong>概率加权目标价 ≈ $315</strong>(相对现价 $265 约 +19% 上行;但下行尾部较厚)</p>
+  </div>
+</section>
+
+<!-- ===== MODULE 8 ===== -->
+<section class="section" id="m8">
+  <div class="container">
+    <div class="section-label">模块八</div>
+    <h2 class="section-title">投资<em>结论与推荐</em></h2>
+
+    <div class="verdict-banner">
+      <div class="vrating">综合判定 · Framework B</div>
+      <div class="vverdict">持有 / 回调<em>分批吸纳</em></div>
+      <div class="vbody">质量是 A 级、护城河宽厚、AWS 重新加速、利润率创新高 —— 但 $200B Capex 让自由现金流逼近于零,且当前股价已贴近 52 周高位、估值充分。这不是"现在追高"的标的,而是"等回调到 ~$210–240 区间分批建仓"的优质资产。核心赌注:$200B Capex 能否在 2027–28 兑现为 ROIC 与 FCF 的强劲反弹。</div>
+    </div>
+
+    <div class="minor-h">合理建仓价格带</div>
+    <div class="ladder-row zone-avoid"><span class="zlabel">不建议追高</span><span class="zprice">&gt; $290</span></div>
+    <div class="ladder-row zone-watch"><span class="zlabel">观察区</span><span class="zprice">$250–290</span></div>
+    <div class="ladder-row zone-build"><span class="zlabel">合理建仓</span><span class="zprice">$210–250</span></div>
+    <div class="ladder-row zone-ideal"><span class="zlabel">理想加仓</span><span class="zprice">$180–210</span></div>
+    <div class="ladder-row zone-heavy"><span class="zlabel">重仓机会</span><span class="zprice">&lt; $180</span></div>
+    <div class="ladder-current">当前 $265 在观察区上沿;FCF 风险 + 满估值 → 等回调,不追高</div>
+
+    <div class="minor-h">核心投资逻辑(三句话)</div>
+    <div class="prose">
+      <p><strong>1. 增长靠什么?</strong> AWS 重新加速(15 季最快 +28%)+ 广告破 $700 亿跑率 + 零售利润率结构性提升,三台引擎同时点火,backlog $364B 提供多年可见度。</p>
+      <p><strong>2. 空间有多大?</strong> 云/AI 基建($2T+ TAM)、数字广告($1T+)、全球零售低渗透,加上自研芯片与 Kuiper 期权,长期天花板足够高。</p>
+      <p><strong>3. 钱能不能赚?</strong> 这是唯一的问号。经营层面极能赚现金(OCF $148.5B),但全部被 $200B Capex 吃掉,FCF 接近零。能不能赚"自由现金流",取决于这轮 AI 投资的 ROIC 兑现 —— 这是一道 2027–28 才能验证的信仰题。</p>
+    </div>
+
+    <div class="minor-h">跨框架对照:为什么 A 框架说"等"、B 框架说"持有"?</div>
+    <div class="callout warn">
+      <div class="ctitle">估值差距取证(Valuation Gap Forensics)</div>
+      <p>在七股报告(Framework A,FCF 锚定)中,AMZN 被列为 <strong>Tier 3·等待</strong>,FY2029 概率加权目标 ~$253、IRR -1.5% —— 因为 A 框架以"每股 FCF × P/FCF"为锚,而 AMZN 的 FCF 已被 Capex 抽干到接近零,锚点本身近乎失效。本次 Framework B 用利润/EV/相对估值法,得出概率加权 ~$315、约 +19% 上行,更建设性。<strong>两个框架 ~$60 的差距,几乎 100% 来自同一个变量:自由现金流。</strong>A 框架惩罚"当下 FCF 为零",B 框架奖励"被再投资的盈利能力"。谁对,取决于 Capex 的 ROIC 能否兑现 —— 若 2027+ FCF 强劲转正,B 对;若 Capex 沦为价值陷阱,A 对。这正是 AMZN 必须用 B 框架(而非 FCF 锚定的 A 框架)估值的根本原因。</p>
+    </div>
+
+    <div class="minor-h">最关键的监控指标</div>
+    <table class="metrics-table">
+      <thead><tr><th>监控项</th><th>看什么</th><th>转向信号</th></tr></thead>
+      <tbody>
+        <tr><td>季度 FCF 拐点</td><td class="mono">OCF − Capex</td><td class="pos">2027 起 FCF 转正并加速 → 看多</td></tr>
+        <tr><td>Capex 见顶</td><td class="mono">2027 指引</td><td class="warn">若再次大幅上调 → 警惕</td></tr>
+        <tr><td>AWS 增速</td><td class="mono">vs Azure/GCP</td><td class="neg">跌回中位数 → 看空</td></tr>
+        <tr><td>长期债务</td><td class="mono">净现金缓冲</td><td class="neg">转为净债务 → 融资依赖风险</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pull-quote">Amazon 是一家"现金为王"框架下最难评估的公司 —— 它每一分钱现金都在赚,却一分钱自由现金流都不剩。买它,本质上是在为它的资本配置纪律投票。</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <h4>免责声明</h4>
+    <p>本报告为基于公开数据(公司 Q1 2026 财报、SEC 8-K 备案及公开市场数据,截至 2026 年 5 月 28 日)和八模块投资框架的独立分析推演,不构成任何投资建议、招揽或意见。所有目标价、概率与情景均为框架推演结果,而非预测。市场状况可能在报告发布后发生重大变化。读者在做出任何投资决策前,应自行进行尽职调查并咨询合格的财务顾问。投资有风险,过往表现不代表未来结果。</p>
+    <p style="margin-top:16px;">分析框架:Framework B · 八模块深度财务分析(业务概览 / 财务质量 / 增长 / 商业模式 / 护城河 / 治理 / 估值 / 结论)。</p>
+    <p style="margin-top:24px; font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:0.08em;">AMZN · FRAMEWORK B DEEP ANALYSIS · MAY 2026 · END</p>
+  </div>
+</footer>
+
+<script>
+const C = {
+  na: "#1E3A5F", intl: "#2A6F69", aws: "#B8651E",
+  green: "#2D6A4F", red: "#8B1E1E", amber: "#B8651E", blue: "#1E3A5F", ink3: "#8A857D"
+};
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.color = "#4A4843";
+
+// SEGMENT — revenue + operating income (grouped bar, dual axis feel via two datasets)
+new Chart(document.getElementById("segChart"), {
+  type: "bar",
+  data: {
+    labels: ["北美零售", "国际零售", "AWS"],
+    datasets: [
+      { label: "收入 ($B)", data: [104.1, 39.8, 37.6], backgroundColor: [C.na, C.intl, C.aws], borderRadius: 4 },
+      { label: "经营利润 ($B)", data: [8.3, 1.4, 14.2], backgroundColor: ["rgba(30,58,95,0.45)", "rgba(42,111,105,0.45)", "rgba(184,101,30,0.45)"], borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: "bottom", labels: { font: { size: 12 }, usePointStyle: true } },
+      tooltip: { callbacks: { label: (c) => c.dataset.label + ": $" + c.parsed.y + "B" } } },
+    scales: { y: { beginAtZero: true, ticks: { callback: (v) => "$" + v + "B" }, grid: { color: "rgba(226,219,204,0.6)" } }, x: { grid: { display: false } } }
+  }
+});
+
+// CASH — OCF vs Capex vs FCF
+new Chart(document.getElementById("cashChart"), {
+  type: "bar",
+  data: {
+    labels: ["2024", "2025", "TTM Q1'26", "2026E"],
+    datasets: [
+      { label: "经营现金流 OCF", data: [116, 139.5, 148.5, 165], backgroundColor: C.green, borderRadius: 4 },
+      { label: "资本开支 Capex", data: [83, 128.3, 147.3, 200], backgroundColor: C.amber, borderRadius: 4 },
+      { type: "line", label: "自由现金流 FCF", data: [33, 11.2, 1.2, -35], borderColor: C.red, backgroundColor: C.red, borderWidth: 2.5, pointRadius: 5, tension: 0.2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: "bottom", labels: { font: { size: 12 }, usePointStyle: true } },
+      tooltip: { callbacks: { label: (c) => c.dataset.label + ": $" + c.parsed.y + "B" } } },
+    scales: { y: { ticks: { callback: (v) => "$" + v + "B" }, grid: { color: "rgba(226,219,204,0.6)" } }, x: { grid: { display: false } } }
+  }
+});
+
+// GROWTH — total revenue + AWS
+new Chart(document.getElementById("growthChart"), {
+  type: "line",
+  data: {
+    labels: ["2022", "2023", "2024", "2025", "2026E"],
+    datasets: [
+      { label: "总收入", data: [514, 575, 638, 716.9, 815], borderColor: C.na, backgroundColor: "rgba(30,58,95,0.08)", borderWidth: 2.5, fill: true, tension: 0.3, pointRadius: 4 },
+      { label: "AWS 收入", data: [80, 91, 108, 123, 152], borderColor: C.aws, backgroundColor: "rgba(184,101,30,0.06)", borderWidth: 2.5, fill: true, tension: 0.3, pointRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: "bottom", labels: { font: { size: 12 }, usePointStyle: true } },
+      tooltip: { callbacks: { label: (c) => c.dataset.label + ": $" + c.parsed.y + "B" } } },
+    scales: { y: { beginAtZero: true, ticks: { callback: (v) => "$" + v + "B" }, grid: { color: "rgba(226,219,204,0.6)" } }, x: { grid: { display: false } } }
+  }
+});
+
+// DCF sensitivity — grouped bars by WACC across g
+new Chart(document.getElementById("dcfChart"), {
+  type: "bar",
+  data: {
+    labels: ["g = 2.0%", "g = 2.5%", "g = 3.0%", "g = 3.5%"],
+    datasets: [
+      { label: "WACC 8.0%", data: [285, 305, 330, 362], backgroundColor: C.green, borderRadius: 4 },
+      { label: "WACC 8.5%", data: [248, 266, 290, 318], backgroundColor: C.blue, borderRadius: 4 },
+      { label: "WACC 9.0%", data: [218, 233, 252, 275], backgroundColor: C.amber, borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: "bottom", labels: { font: { size: 12 }, usePointStyle: true } },
+      tooltip: { callbacks: { label: (c) => c.dataset.label + ": $" + c.parsed.y + "/股" } } },
+    scales: { y: { beginAtZero: false, ticks: { callback: (v) => "$" + v } , grid: { color: "rgba(226,219,204,0.6)" } }, x: { grid: { display: false } } }
+  }
+});
+</script>
+
+</body>
+</html>

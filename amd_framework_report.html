@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AMD 综合投资研究报告 · 八模块深度框架 · 2026年5月</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #F8F4EC;
+  --bg-alt: #FFFFFF;
+  --bg-deep: #1A1815;
+  --ink: #1C1B17;
+  --ink-2: #4A4843;
+  --ink-3: #8A857D;
+  --line: #E2DBCC;
+  --line-2: #CFC6B3;
+  --accent: #1E2A4A;
+  --green: #2D6A4F;
+  --green-bg: #E5EDE6;
+  --blue: #1E3A5F;
+  --blue-bg: #E2EAF1;
+  --amber: #B8651E;
+  --amber-bg: #F2E5D0;
+  --red: #8B1E1E;
+  --red-bg: #F1DCDC;
+  --teal: #2A6F69;
+  --purple: #3D2E5E;
+  --coral: #A0421A;
+  --pink: #872D52;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  font-feature-settings: "kern", "liga", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+/* HERO */
+.hero { padding: 80px 0 64px; border-bottom: 1px solid var(--line); position: relative; }
+.hero-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-tag::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.hero-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(40px, 5.5vw, 64px); line-height: 1.1; letter-spacing: -0.02em;
+  margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.hero-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+.hero-sub { font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 760px; margin-bottom: 40px; font-weight: 300; }
+.hero-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 24px; padding-top: 32px; border-top: 1px solid var(--line);
+}
+.hero-meta div { font-size: 13px; }
+.hero-meta .label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;
+}
+.hero-meta .value { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--ink); }
+
+/* SECTIONS */
+.section { padding: 80px 0 40px; border-bottom: 1px solid var(--line); }
+.section:last-of-type { border-bottom: none; }
+.section-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-display); font-size: clamp(30px, 4vw, 42px);
+  font-weight: 500; line-height: 1.15; letter-spacing: -0.015em;
+  margin-bottom: 24px; font-variation-settings: "opsz" 144;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-lead { font-size: 19px; line-height: 1.65; color: var(--ink-2); max-width: 780px; margin-bottom: 40px; font-weight: 300; }
+
+/* PROSE */
+.prose p { margin-bottom: 16px; color: var(--ink-2); }
+.prose p strong, .prose strong { color: var(--ink); font-weight: 600; }
+.prose .highlight { background: linear-gradient(180deg, transparent 60%, rgba(184, 101, 30, 0.18) 60%); padding: 0 2px; }
+
+/* SUBSECTION */
+.subsection { margin-top: 44px; }
+.subsection-h {
+  font-family: var(--font-display); font-style: italic; font-size: 24px;
+  font-weight: 500; margin-bottom: 16px; color: var(--ink);
+}
+.minihead {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--coral); margin: 28px 0 10px;
+}
+
+/* QUICK GRID */
+.quick-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px; background: var(--line); border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden; margin: 32px 0;
+}
+.quick-cell { background: var(--bg-alt); padding: 18px 20px; }
+.quick-cell .qlabel {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;
+}
+.quick-cell .qvalue { font-family: var(--font-display); font-size: 22px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+.qvalue.pos { color: var(--green); }
+.qvalue.neg { color: var(--red); }
+.qvalue.warn { color: var(--amber); }
+
+/* TABLES */
+.metrics-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+.metrics-table th {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-3); text-align: left;
+  padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line-2); font-weight: 500;
+}
+.metrics-table td { padding: 13px 12px 13px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.metrics-table td:first-child { font-weight: 500; color: var(--ink); }
+.metrics-table .num { font-family: var(--font-mono); color: var(--ink-3); width: 28px; }
+.mono { font-family: var(--font-mono); }
+.tpos { color: var(--green); } .tneg { color: var(--red); } .twarn { color: var(--amber); }
+
+.rank-table-wrap { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; margin: 24px 0; }
+.rank-table-full { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+.rank-table-full th {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); text-align: left;
+  padding: 14px 12px; border-bottom: 1px solid var(--line-2); font-weight: 500; background: var(--bg);
+}
+.rank-table-full td { padding: 13px 12px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 13px; }
+.rank-table-full td:first-child { font-family: var(--font-body); font-weight: 500; color: var(--ink); }
+.rank-table-full tr:last-child td { border-bottom: none; }
+
+/* CHART */
+.chart-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-wrap { position: relative; width: 100%; }
+.chart-cap { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); margin-bottom: 16px; letter-spacing: 0.04em; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; font-size: 12px; color: var(--ink-2); }
+.chart-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); }
+.legend-sq { width: 12px; height: 12px; border-radius: 2px; }
+
+/* EQUATION / CALLOUT */
+.callout {
+  background: var(--bg-alt); border: 1px solid var(--line); border-left: 3px solid var(--coral);
+  border-radius: 8px; padding: 24px 28px; margin: 28px 0;
+}
+.callout .ctitle { font-family: var(--font-display); font-style: italic; font-size: 18px; color: var(--ink); margin-bottom: 8px; }
+.callout p { font-size: 14px; color: var(--ink-2); margin: 0; }
+
+/* PORTER FORCES */
+.forces-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 24px 0; }
+.force-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+.force-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.force-name { font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--ink); }
+.force-rate { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; }
+.r-low { background: var(--green-bg); color: var(--green); }
+.r-mid { background: var(--amber-bg); color: var(--amber); }
+.r-high { background: var(--red-bg); color: var(--red); }
+.force-card p { font-size: 13px; line-height: 1.55; color: var(--ink-2); margin: 0; }
+
+/* SCENARIO */
+.scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.scenario-card { padding: 20px; border-radius: 8px; }
+.scenario-bull { background: var(--green-bg); }
+.scenario-base { background: #EDE9E0; }
+.scenario-bear { background: var(--red-bg); }
+.scenario-card .stier { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.scenario-bull .stier { color: var(--green); }
+.scenario-base .stier { color: #6B5B3A; }
+.scenario-bear .stier { color: var(--red); }
+.scenario-card .target { font-family: var(--font-display); font-size: 34px; font-weight: 500; line-height: 1; margin-bottom: 8px; }
+.scenario-bull .target { color: var(--green); }
+.scenario-base .target { color: #6B5B3A; }
+.scenario-bear .target { color: var(--red); }
+.scenario-card .sdesc { font-size: 12px; line-height: 1.5; }
+.scenario-bull .sdesc { color: var(--green); }
+.scenario-base .sdesc { color: #6B5B3A; }
+.scenario-bear .sdesc { color: var(--red); }
+.scenario-card .sprob { font-family: var(--font-mono); font-size: 11px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); }
+
+/* LADDER */
+.ladder-row { display: flex; align-items: center; padding: 12px 16px; border-radius: 6px; margin: 6px 0; font-size: 14px; }
+.ladder-row.zone-avoid { background: var(--red-bg); color: var(--red); }
+.ladder-row.zone-watch { background: var(--amber-bg); color: var(--amber); }
+.ladder-row.zone-build { background: var(--blue-bg); color: var(--blue); }
+.ladder-row.zone-ideal { background: var(--green-bg); color: var(--green); }
+.ladder-row.zone-heavy { background: #D6E5DD; color: #1B4D38; }
+.ladder-row .zlabel { flex: 1; font-weight: 500; }
+.ladder-row .zprice { font-family: var(--font-mono); font-weight: 500; }
+.ladder-current { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line-2); display: flex; align-items: center; gap: 8px; }
+.ladder-current::before { content: ''; width: 8px; height: 8px; background: var(--ink); border-radius: 50%; }
+
+/* RISK LIST */
+.risk-list { margin-top: 16px; }
+.risk-item { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+.risk-item:last-child { border-bottom: 1px solid var(--line); }
+.risk-num { font-family: var(--font-display); font-size: 28px; font-weight: 500; font-style: italic; color: var(--amber); line-height: 1; flex-shrink: 0; width: 36px; }
+.risk-body p { font-size: 14px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+.risk-body strong { color: var(--ink); }
+
+/* VERDICT */
+.verdict-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.verdict-tier-card { padding: 24px; }
+.vt1 { background: var(--green-bg); } .vt2 { background: var(--blue-bg); } .vt3 { background: var(--amber-bg); } .vt4 { background: var(--red-bg); }
+.verdict-tier-card .vlabel { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.vt1 .vlabel { color: var(--green); } .vt2 .vlabel { color: var(--blue); } .vt3 .vlabel { color: var(--amber); } .vt4 .vlabel { color: var(--red); }
+.verdict-tier-card .vname { font-family: var(--font-display); font-size: 22px; font-weight: 500; margin-bottom: 12px; line-height: 1.2; }
+.vt1 .vname { color: var(--green); } .vt2 .vname { color: var(--blue); } .vt3 .vname { color: var(--amber); } .vt4 .vname { color: var(--red); }
+.verdict-tier-card .vbody { font-size: 13px; line-height: 1.6; }
+.vt1 .vbody { color: #1F4A37; } .vt2 .vbody { color: #16284A; } .vt3 .vbody { color: #7A4310; } .vt4 .vbody { color: #5A1212; }
+
+/* PULL QUOTE */
+.pull-quote {
+  font-family: var(--font-display); font-style: italic; font-size: clamp(21px, 2.5vw, 27px);
+  line-height: 1.4; color: var(--accent); padding: 32px 0 32px 32px;
+  border-left: 3px solid var(--accent); margin: 32px 0; font-weight: 400; font-variation-settings: "opsz" 144;
+}
+.pull-quote::before { content: '"'; font-size: 1.5em; line-height: 0; vertical-align: -0.2em; margin-right: 0.05em; color: var(--amber); }
+
+/* TOC */
+.toc { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+.toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
+.toc ol { list-style: none; }
+.toc li { display: flex; align-items: baseline; padding: 8px 0; border-bottom: 1px dotted var(--line-2); font-size: 14px; }
+.toc li:last-child { border-bottom: none; }
+.toc .toc-num { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); width: 32px; flex-shrink: 0; }
+.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+.toc a:hover { border-bottom-color: var(--amber); }
+
+/* FOOTER */
+.footer { padding: 48px 0 64px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.footer h4 { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--ink-2); margin-bottom: 12px; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 56px 0 40px; }
+  .section { padding: 48px 0 32px; }
+  .scenario-grid { grid-template-columns: 1fr; }
+}
+@media print { body { background: white; } .section { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+<!--NAV--><div style="background:#0a0b0f;border-bottom:1px solid rgba(255,255,255,.1);padding:9px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:-apple-system,'Noto Sans SC',system-ui,sans-serif;position:relative;z-index:999"><span style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#d4a24e;margin-right:8px">US MACRO</span><a href="index.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">ERP 引擎</a><a href="liquidity.html" style="text-decoration:none;font:500 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#9a9ca6;background:transparent;border:1px solid rgba(255,255,255,.1);padding:6px 13px;border-radius:7px">流动性</a><a href="mag7.html" style="text-decoration:none;font:600 13px/1 -apple-system,'Noto Sans SC',sans-serif;color:#0a0b0f;background:#d4a24e;border:1px solid #d4a24e;padding:6px 13px;border-radius:7px">巨头研究</a></div><!--/NAV-->
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">独立投资研究 · 八模块深度框架 · 2026年5月</div>
+    <h1 class="hero-title">AMD <em>综合投资</em><br>研究报告</h1>
+    <p class="hero-sub">应用八模块深度财务框架,逐层拆解 Advanced Micro Devices 的业务结构、财务质量、增长真实性、商业模式、护城河、管理层、估值与情景。核心问题:一家质量正在快速跃升的公司,在 $504 的价格上,还值得买吗?</p>
+    <div class="hero-meta">
+      <div><div class="label">标的</div><div class="value">AMD</div></div>
+      <div><div class="label">现价</div><div class="value">$504</div></div>
+      <div><div class="label">市值</div><div class="value">$808B</div></div>
+      <div><div class="label">数据截至</div><div class="value">2026-05-28</div></div>
+      <div><div class="label">框架判定</div><div class="value" style="color:var(--amber);">持有 / 待回调</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO + TOC -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">导读 · 一句话定性</div>
+    <h2 class="section-title">一家"<em>已经兑现</em>"的 AI 转型故事,<br>但价格已 Price-In 了很多未来</h2>
+    <p class="section-lead">AMD 的 Q1 2026 财报标志着一个结构性拐点 — 数据中心已成为收入与利润的"主引擎",AI 不再是"想象中的未来"而是"报表里的现实"。框架的所有质量模块都给出积极读数;唯一的张力集中在最后一个模块:估值。</p>
+
+    <div class="prose">
+      <p>这份报告刻意把"质量层"和"估值层"分开看。前六个模块(业务、财务质量、增长、商业模式、护城河、管理层)回答的是"<strong>这是不是一家好公司</strong>";第七、第八个模块(估值、结论)回答的是"<strong>现在这个价格买它,赔率好不好</strong>"。这两个问题的答案并不相同 — 这正是 AMD 当前最有意思的地方。</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">报告结构 · 八大模块</div>
+      <ol>
+        <li><span class="toc-num">01</span><a href="#m1">公司概览与核心业务</a></li>
+        <li><span class="toc-num">02</span><a href="#m2">财务质量与健康现状(现金为王)</a></li>
+        <li><span class="toc-num">03</span><a href="#m3">增长分析:真实性、可持续性与市场空间</a></li>
+        <li><span class="toc-num">04</span><a href="#m4">盈利能力与商业模式评估</a></li>
+        <li><span class="toc-num">05</span><a href="#m5">竞争优势(护城河)与五力模型</a></li>
+        <li><span class="toc-num">06</span><a href="#m6">管理层与治理评估</a></li>
+        <li><span class="toc-num">07</span><a href="#m7">估值评估与情景分析</a></li>
+        <li><span class="toc-num">08</span><a href="#m8">投资结论与推荐</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 1 ===== -->
+<section class="section" id="m1">
+  <div class="container">
+    <div class="section-label">模块一</div>
+    <h2 class="section-title">公司概览与<em>核心业务</em></h2>
+    <p class="section-lead">AMD 是全球第二大 x86 CPU 厂商、第二大独立 GPU 厂商,业务横跨数据中心、PC、游戏主机、嵌入式/工业。在 Lisa Su 主导的十年转型后,它已从"Intel 的低价替代品"进化为同时挑战 Intel(CPU)与 NVIDIA(AI GPU)的高性能计算公司。</p>
+
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">FY25 收入</div><div class="qvalue">~$34.8B</div></div>
+      <div class="quick-cell"><div class="qlabel">YoY 增长</div><div class="qvalue pos">+35%</div></div>
+      <div class="quick-cell"><div class="qlabel">数据中心占比</div><div class="qvalue">~57%</div></div>
+      <div class="quick-cell"><div class="qlabel">员工 R&D</div><div class="qvalue">~$7B/年</div></div>
+      <div class="quick-cell"><div class="qlabel">代工</div><div class="qvalue">TSMC</div></div>
+      <div class="quick-cell"><div class="qlabel">52周区间</div><div class="qvalue">$109–510</div></div>
+    </div>
+
+    <h3 class="subsection-h">四大业务板块(2026 起新口径)</h3>
+    <p style="color:var(--ink-2); margin-bottom:8px;">AMD 现按四条业务线披露,其中数据中心已成为绝对核心。下表为 Q1 2026 数据:</p>
+    <table class="metrics-table">
+      <thead><tr><th>业务板块</th><th>Q1'26 收入</th><th>YoY</th><th>核心产品 / 驱动</th></tr></thead>
+      <tbody>
+        <tr><td>数据中心 (Data Center)</td><td class="mono">$5.8B</td><td class="mono tpos">+57%</td><td>EPYC 服务器 CPU + Instinct AI GPU(MI350/MI450)</td></tr>
+        <tr><td>客户端 (Client)</td><td class="mono">$2.9B</td><td class="mono tpos">+26%</td><td>Ryzen PC 处理器,持续抢占份额</td></tr>
+        <tr><td>游戏 (Gaming)</td><td class="mono">$0.72B</td><td class="mono tpos">+11%</td><td>Radeon GPU + 主机半定制 SoC</td></tr>
+        <tr><td>嵌入式 (Embedded)</td><td class="mono">$0.87B</td><td class="mono twarn">+6%</td><td>Xilinx FPGA / 工业 / 通信(已回归增长)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-h">收入构成的三年迁移</h3>
+    <div class="chart-card">
+      <div class="chart-cap">分板块收入 · 2023–2026E(单位:十亿美元;2026E 为基于指引与一致预期的推演)</div>
+      <div class="chart-wrap" style="height:360px;"><canvas id="segStackChart"></canvas></div>
+    </div>
+    <div class="prose">
+      <p>三年前 AMD 还是一家"PC + 主机"为主的公司;今天数据中心已贡献过半收入和绝大部分利润增量。<span class="highlight">这种收入结构的迁移,本质上把 AMD 的估值叙事从"周期性消费芯片"重写为"AI 基础设施供应商"</span> — 客户更具战略性、采购绑定多年 AI 基建承诺,而非 PC 替换周期。</p>
+    </div>
+
+    <h3 class="subsection-h">地理拆解</h3>
+    <div class="prose">
+      <p>AMD 收入高度国际化,历史上美国本土占比约 30–35%,其余来自亚太(尤其是供应链与 OEM 集中的中国大陆、中国台湾、新加坡)和欧洲。<strong>中国是双刃剑</strong>:既是重要终端与渠道市场,也是地缘风险敞口 — 2025 年美国对 MI308 数据中心 GPU 的出口管制就导致约 <span class="highlight">$8 亿</span>的库存及相关减值,直接拖累当年毛利率。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 2 ===== -->
+<section class="section" id="m2">
+  <div class="container">
+    <div class="section-label">模块二 · Quick Scan:现金为王</div>
+    <h2 class="section-title">财务质量与<em>健康现状</em></h2>
+    <p class="section-lead">这一模块是框架的"体检"。结论:AMD 的现金流质量正在快速改善,资产负债表非常健康(净现金),但 GAAP 利润被巨额收购无形资产摊销严重压低 — 必须穿透 GAAP/Non-GAAP 的差异才能看清真实盈利能力。</p>
+
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">TTM 收入</div><div class="qvalue">$37.5B</div></div>
+      <div class="quick-cell"><div class="qlabel">TTM FCF</div><div class="qvalue pos">$8.6B</div></div>
+      <div class="quick-cell"><div class="qlabel">Non-GAAP 毛利率</div><div class="qvalue pos">55%</div></div>
+      <div class="quick-cell"><div class="qlabel">净现金</div><div class="qvalue pos">$8.5B</div></div>
+      <div class="quick-cell"><div class="qlabel">GAAP ROIC</div><div class="qvalue warn">~7.8%</div></div>
+      <div class="quick-cell"><div class="qlabel">净债务/EBITDA</div><div class="qvalue pos">&lt; 0(净现金)</div></div>
+    </div>
+
+    <h3 class="subsection-h">2.1 盈利能力与增长质量</h3>
+    <div class="prose">
+      <p><strong>增长是"有机 + 收购"的混合,但当前增量几乎全是有机。</strong>2022 年 Xilinx($490 亿)与 2024 年 ZT Systems 的并购曾带来阶梯式收入,但 2025–2026 的高增长(Q1'26 收入 +38%)主要来自 EPYC 与 Instinct 的自然放量,而非新并购。这是高质量增长的信号。</p>
+      <p><strong>利润的"含金量"问题在于 GAAP 与 Non-GAAP 的巨大鸿沟。</strong>Q1 2026:GAAP 摊薄 EPS 仅 <span class="mono">$0.84</span>,而 Non-GAAP EPS 为 <span class="mono">$1.37</span> — 差距高达 63%。差异主要来自 Xilinx 收购的无形资产摊销(非现金)、股权激励(SBC),以及与 OpenAI/Meta 认股权证相关的非现金费用。<span class="highlight">这意味着 GAAP ROIC(~7.8%)、GAAP 净利率(~13%)严重低估了 AMD 的真实资本回报</span> — 按现金口径,经营性回报要高得多。</p>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-cap">毛利率 / 运营利润率 / 净利率趋势(GAAP 口径,2023–Q1'26;2025 毛利率受 MI308 出口管制减值拖累)</div>
+      <div class="chart-wrap" style="height:320px;"><canvas id="marginChart"></canvas></div>
+    </div>
+
+    <div class="callout">
+      <div class="ctitle">质量含金量警示</div>
+      <p>用本框架的"OCF / Net Income"检验:TTM 经营现金流 $9.73B 远高于 GAAP 净利润 $5.01B(比值 ~1.9x)。<strong>OCF 大幅高于净利润是高质量利润的标志</strong> — 说明 GAAP 净利润被非现金项目(摊销、SBC)压低,而非被应收/存货虚增。这是一个加分项,不是减分项。</p>
+    </div>
+
+    <h3 class="subsection-h">2.2 运营效率与杠杆</h3>
+    <div class="prose">
+      <p><strong>研发是 AMD 最大的费用,也是它的命脉。</strong>R&D 单季已超 $20 亿(+31% YoY),AMD 把巨额资金投入到年度节奏的 AI 芯片路线图与 ROCm 软件生态。短期压制运营杠杆,长期是护城河的来源。Q1'26 运营利润 +95%(Non-GAAP)显著快于收入 +38%,<span class="highlight">规模化利润释放(operating leverage)开始显现</span>。</p>
+      <p>效率指标(存货、应收周转)无异常恶化信号;唯一需持续监控的是为支撑 AI 放量而建立的 HBM4/晶圆备货 — 存货的"战略性增加"需区别于"卖不动"。</p>
+    </div>
+
+    <h3 class="subsection-h">2.3 资产负债表健康</h3>
+    <table class="metrics-table">
+      <thead><tr><th>指标</th><th>数值</th><th>框架安全线</th><th>判定</th></tr></thead>
+      <tbody>
+        <tr><td>现金及短投</td><td class="mono">~$12.4B</td><td>—</td><td class="tpos">充裕</td></tr>
+        <tr><td>总债务</td><td class="mono">~$3.9B</td><td>—</td><td class="tpos">低</td></tr>
+        <tr><td>净现金</td><td class="mono">+$8.5B</td><td>正为佳</td><td class="tpos">✓ 净现金</td></tr>
+        <tr><td>净债务 / EBITDA</td><td class="mono">负值</td><td>&lt; 3.0x</td><td class="tpos">✓ 远优于</td></tr>
+        <tr><td>商誉占比</td><td class="mono">偏高(Xilinx)</td><td>注意</td><td class="twarn">需监控减值</td></tr>
+      </tbody>
+    </table>
+    <div class="prose">
+      <p><strong>异常信号检查:</strong>无净资产为负、无重大会计政策变更。唯一的结构性关注点是 Xilinx 收购留下的<strong>高额商誉与无形资产</strong> — 若 FPGA/嵌入式业务持续疲软,理论上存在减值风险(虽然嵌入式已回归增长,该风险当前较低)。</p>
+    </div>
+
+    <h3 class="subsection-h">2.4 现金流与利润含金量</h3>
+    <div class="chart-card">
+      <div class="chart-cap">经营现金流 / 资本开支 / 自由现金流 · TTM 视角(单位:十亿美元)</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="cashflowChart"></canvas></div>
+    </div>
+    <div class="prose">
+      <p>这是 AMD 与报告中 ORCL/CRWV 等"重资本 AI 下注"标的的<strong>关键区别</strong>:AMD 是<span class="highlight">轻资本(fabless)模式</span> — 把晶圆制造外包给 TSMC,自身 Capex/Revenue 仅约 3%,TTM 自由现金流高达 $8.6B,且完全自筹、无需发债融资扩张。它在 AI 资本周期中更接近"卖铲人"而非"挖矿人"。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 3 ===== -->
+<section class="section" id="m3">
+  <div class="container">
+    <div class="section-label">模块三</div>
+    <h2 class="section-title">增长分析:<em>真实性</em>、可持续性与市场空间</h2>
+    <p class="section-lead">增长的真实性是这份报告里最强的部分。AMD 的增长来自"提价 + 放量 + 客户数 + 客单价"的全面驱动,而非单一会计花招。问题不在"能不能增长",而在"市场是否已把最乐观的增长 Price-In"。</p>
+
+    <h3 class="subsection-h">增长真实性:四个来源都在发力</h3>
+    <table class="metrics-table">
+      <thead><tr><th>驱动因子</th><th>证据</th></tr></thead>
+      <tbody>
+        <tr><td>放量</td><td>数据中心 Q1'26 +57%,EPYC 服务器份额持续从 Intel 手中夺取</td></tr>
+        <tr><td>提价 / 组合</td><td>Non-GAAP 毛利率从 ~54% 升至 55%→指引 56%,高端 EPYC/Instinct 占比提升</td></tr>
+        <tr><td>客户数</td><td>OpenAI、Meta、微软、谷歌、Oracle、腾讯、美国能源部等超大客户绑定</td></tr>
+        <tr><td>客单价</td><td>从卖单芯片 → 卖 Helios 整机柜(72 颗 MI450/柜),单笔价值量级跃升</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-h">市场空间(TAM):管理层的"$1 万亿"目标</h3>
+    <div class="prose">
+      <p>2025 年 11 月分析师日,Lisa Su 给出了一组激进的中长期目标:</p>
+    </div>
+    <div class="quick-grid">
+      <div class="quick-cell"><div class="qlabel">整体收入 3–5 年 CAGR</div><div class="qvalue pos">~35%</div></div>
+      <div class="quick-cell"><div class="qlabel">AI 加速器 CAGR</div><div class="qvalue pos">~80%</div></div>
+      <div class="quick-cell"><div class="qlabel">AI 数据中心 TAM(2030)</div><div class="qvalue pos">$1T</div></div>
+      <div class="quick-cell"><div class="qlabel">服务器 CPU TAM(2030)</div><div class="qvalue pos">$120B+</div></div>
+      <div class="quick-cell"><div class="qlabel">AI GPU 份额目标</div><div class="qvalue warn">个位数→双位数</div></div>
+      <div class="quick-cell"><div class="qlabel">AI 芯片收入(2027)</div><div class="qvalue pos">数百亿美元</div></div>
+    </div>
+    <div class="prose">
+      <p>当前 AMD 在 AI GPU 市场仅约低个位数份额(NVIDIA 占 ~90%)。<strong>增长逻辑不需要 AMD 打败 NVIDIA,只需要从个位数爬到双位数份额</strong> — 在一个 2030 年达 $1 万亿的市场里,即使 10% 份额也是 $1000 亿级别的收入。这就是"S 曲线早期 + 巨大 TAM"的渗透率故事。</p>
+      <p><span class="highlight">这是一个清晰且可量化的增长路径,但它的兑现高度依赖 MI450/Helios 在 2026 下半年的成功放量</span> — 也就是说,增长真实性已被 Q1 证明,而增长的"规模上限"仍是一张待兑现的支票。</p>
+    </div>
+
+    <h3 class="subsection-h">增长风险</h3>
+    <div class="prose">
+      <p>核心增长驱动面临三类风险:(1) <strong>竞争</strong> — NVIDIA 的 CUDA 生态与年度节奏(Rubin)、客户自研 ASIC;(2) <strong>周期敏感性</strong> — 超大客户的 AI capex 一旦集体降速,AMD 作为"第二供应商"通常最先被砍单;(3) <strong>供应链</strong> — HBM4 内存与 TSMC 2nm 先进封装产能紧张,是放量的物理瓶颈。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 4 ===== -->
+<section class="section" id="m4">
+  <div class="container">
+    <div class="section-label">模块四</div>
+    <h2 class="section-title">盈利能力与<em>商业模式</em>评估</h2>
+    <p class="section-lead">核心问题:AMD 是否"越做越赚钱"?答案是肯定的 — 规模效应正在显现,产品组合向高毛利数据中心倾斜,运营杠杆开始释放。但商业模式中嵌入了一个独特的"认股权证"结构,会同时驱动增长和稀释。</p>
+
+    <div class="prose">
+      <p><strong>商业模式的核心是"设计 + 软件 + 生态",制造外包。</strong>AMD 不持有晶圆厂,资本极轻,边际成本主要是 TSMC 代工费。这意味着:每多卖一颗高端 EPYC/Instinct,增量毛利极高 → <span class="highlight">高毛利率的可持续性取决于产品领先度与议价权,而非工厂利用率</span>。</p>
+      <p><strong>单位经济正在改善。</strong>从"卖芯片"到"卖整机柜(Helios)"的转变,把单笔交易的价值量级从数千美元提升到数十万美元/柜,且系统级方案的客户切换成本更高、粘性更强。CFO 表示每 GW 的 Meta 部署预计带来"显著的双位数十亿美元"数据中心 AI 收入。</p>
+    </div>
+
+    <div class="callout">
+      <div class="ctitle">独特的认股权证商业模式(关键)</div>
+      <p>为锁定 OpenAI 与 Meta 两个 6GW 大单,AMD 各发行了最高 <strong>1.6 亿股</strong>认股权证(行权价 $0.01,合计 ~3.2 亿股),按部署里程碑 + 股价门槛(Meta 最后一档需 $600/股)分批归属。<strong>这是一把双刃剑</strong>:它把客户与 AMD 的利益深度绑定(客户成了股东,有动力把芯片真正部署起来),但若全部归属将稀释约 <span class="highlight">20%</span> 的股本 — 这必须计入完全摊薄股数(FDSO)。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 5 ===== -->
+<section class="section" id="m5">
+  <div class="container">
+    <div class="section-label">模块五</div>
+    <h2 class="section-title">竞争优势(<em>护城河</em>)与外部环境</h2>
+    <p class="section-lead">AMD 在 CPU 端拥有真实且扩张的护城河;在 AI GPU 端,护城河仍在建设中,且对手(NVIDIA)的护城河比它深。这是一个"在 CPU 上是攻守兼备的领先者,在 GPU 上是挑战者"的双重身份。</p>
+
+    <h3 class="subsection-h">波特五力分析</h3>
+    <div class="forces-grid">
+      <div class="force-card">
+        <div class="force-head"><span class="force-name">现有竞争</span><span class="force-rate r-high">强</span></div>
+        <p>CPU 端对 Intel(正在复苏)、GPU 端对 NVIDIA(绝对主导)。两线作战,竞争烈度高。</p>
+      </div>
+      <div class="force-card">
+        <div class="force-head"><span class="force-name">买方议价</span><span class="force-rate r-high">强</span></div>
+        <p>客户高度集中于少数超大云厂商,议价能力极强;且这些客户(Meta/谷歌/微软/亚马逊)都在自研 ASIC。</p>
+      </div>
+      <div class="force-card">
+        <div class="force-head"><span class="force-name">供方议价</span><span class="force-rate r-mid">中高</span></div>
+        <p>高度依赖 TSMC(先进制程)与 HBM 内存厂(SK海力士/三星);先进封装与 HBM4 是瓶颈。</p>
+      </div>
+      <div class="force-card">
+        <div class="force-head"><span class="force-name">新进入者</span><span class="force-rate r-low">低</span></div>
+        <p>高性能芯片设计有极高的资本、人才、IP 与生态壁垒;但"客户自研芯片"是变相的新进入者。</p>
+      </div>
+      <div class="force-card">
+        <div class="force-head"><span class="force-name">替代品</span><span class="force-rate r-mid">中</span></div>
+        <p>定制 ASIC、Arm 架构服务器芯片对通用 GPU/CPU 构成结构性替代压力。</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-h">护城河类型评估</h3>
+    <table class="metrics-table">
+      <thead><tr><th>护城河来源</th><th>CPU(EPYC/Ryzen)</th><th>AI GPU(Instinct)</th></tr></thead>
+      <tbody>
+        <tr><td>成本/性能优势</td><td class="tpos">强 — chiplet 架构领先</td><td class="twarn">追赶中</td></tr>
+        <tr><td>软件生态(切换成本)</td><td class="tpos">x86 兼容,成熟</td><td class="tneg">ROCm vs CUDA 仍有差距</td></tr>
+        <tr><td>规模/网络效应</td><td class="twarn">中</td><td class="twarn">建设中(开放生态策略)</td></tr>
+        <tr><td>品牌/客户信任</td><td class="tpos">已建立</td><td class="twarn">靠大单背书快速建立</td></tr>
+      </tbody>
+    </table>
+    <div class="prose">
+      <p><strong>关键判断:</strong>NVIDIA 的护城河是 <span class="highlight">CUDA 软件生态</span> — 这不是不可侵蚀的,但短期内无法被绕过。AMD 的策略是"开放生态 + 价格/能效优势 + 大客户共建",用 OpenAI/Meta 的定制合作快速积累软件成熟度。这是一个"用份额换生态、用生态换份额"的飞轮,但飞轮尚未自转。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 6 ===== -->
+<section class="section" id="m6">
+  <div class="container">
+    <div class="section-label">模块六</div>
+    <h2 class="section-title">管理层与<em>治理</em>评估</h2>
+    <p class="section-lead">这是 AMD 投资逻辑中最被低估的"软资产"。Lisa Su 被广泛视为半导体行业过去十年最成功的 CEO 之一 — 她把一家 2014 年股价约 $3、濒临退市的公司,带到了今天的全球性高性能计算巨头。</p>
+
+    <div class="prose">
+      <p><strong>执行力与兑现能力:</strong>历史上 AMD 对财务指引的兑现度高 — 连续多季超指引上沿,Q1'26 收入再次显著超出自身指引高端。十年来产品路线图(Zen 架构迭代、年度 AI 芯片节奏)基本按时交付,这是难得的"承诺-兑现"纪录。</p>
+      <p><strong>激励机制:</strong>管理层薪酬以业绩/股权为主,与股东长期利益基本一致。值得注意的是,OpenAI/Meta 认股权证的归属与 AMD 股价门槛挂钩(如 $600/股),这把"客户、管理层、股东"三方利益绑定 — 设计精巧,但也意味着管理层有强动机推高股价。</p>
+      <p><strong>内部交易:</strong>Lisa Su 多年来通过 10b5-1 计划进行常规化、预先安排的减持(自 2016 年累计约 $4 亿),这属于高管正常的财富多元化,<span class="highlight">不构成对公司前景的负面信号</span>。需持续监控的是是否出现计划外的、集中的大额抛售。</p>
+      <p><strong>治理结构:</strong>董事会独立性、信息披露透明度良好;Non-GAAP 调整披露清晰(虽然调整金额大,但项目可追溯)。</p>
+    </div>
+
+    <div class="pull-quote">"当你投资一个新领域,这是一个 5 到 10 年的弧线。我们这个行业,一切都需要时间。" — Lisa Su</div>
+  </div>
+</section>
+
+<!-- ===== MODULE 7 ===== -->
+<section class="section" id="m7">
+  <div class="container">
+    <div class="section-label">模块七</div>
+    <h2 class="section-title">估值评估与<em>情景分析</em></h2>
+    <p class="section-lead">前六个模块给 AMD 打了高分。这一模块是整个分析的"刹车片"。结论很直接:AMD 是一家好公司,但 $504 的价格已经把 2027 年的盈利能力提前 Price-In 了 — 当前估值的安全边际很薄。</p>
+
+    <h3 class="subsection-h">7.1 当前估值水平</h3>
+    <table class="metrics-table">
+      <thead><tr><th>估值指标</th><th>AMD 当前</th><th>半导体行业中位</th><th>解读</th></tr></thead>
+      <tbody>
+        <tr><td>TTM P/E (GAAP)</td><td class="mono tneg">~163x</td><td class="mono">~38x</td><td>GAAP 口径被摊销压低,参考意义有限</td></tr>
+        <tr><td>Forward P/E (NTM)</td><td class="mono twarn">~62–68x</td><td class="mono">~37x</td><td>显著溢价,但增速也显著更高</td></tr>
+        <tr><td>P/S (TTM)</td><td class="mono tneg">~21x</td><td class="mono">~8x</td><td>极高,反映高增长 + 高毛利预期</td></tr>
+        <tr><td>Forward PEG (Non-GAAP)</td><td class="mono twarn">~1.2–1.3x</td><td class="mono">~1.45x</td><td>增长调整后反而略优于行业</td></tr>
+        <tr><td>EV / TTM FCF</td><td class="mono tneg">~93x</td><td class="mono">—</td><td>传统现金流估值非常贵</td></tr>
+      </tbody>
+    </table>
+    <div class="prose">
+      <p><strong>这里有一个估值"视差"的关键洞察。</strong>用 TTM 或 FY2026 盈利看,AMD 贵得离谱(Forward P/E ~65x);但用增长调整(PEG ~1.2x),它反而比行业更便宜。<span class="highlight">真相是:市场已经在用 FY2027 的盈利能力给 AMD 定价</span> — 按 FY2027E Non-GAAP EPS(一致预期 ~$11–12,Bernstein 高达 $14)计算,$504 对应约 <strong>40–44x FY2027 P/E</strong>。换句话说,你现在买的不是 2026 年的 AMD,而是 2027 年那个 AI 放量后的 AMD。</p>
+    </div>
+
+    <h3 class="subsection-h">7.2 内在价值(DCF)与估值分歧</h3>
+    <div class="prose">
+      <p>用传统 DCF(WACC ~11–12%、永续增长 3–4%、即使给予高增长假设),独立估值机构(如 GuruFocus GF Value)给出的公允价约 <span class="mono">$229</span> — 较现价低约 55%,判定为"显著高估"。<strong>这并不意味着 AMD 一定会跌到 $229</strong>,而是说明:DCF 这类"现值折现"方法,无法消化市场对 AI 放量的乐观叙事。</p>
+      <p>这正是本框架反复强调的"估值缺口取证":当两种方法(DCF vs 市场倍数)给出 $229 vs $504 的巨大分歧时,<span class="highlight">分歧的来源几乎全部是"AI 加速器收入能否兑现 80% CAGR"这一个假设</span>。这是一个 belief 变量,不是计算变量。</p>
+    </div>
+
+    <h3 class="subsection-h">7.3 相对估值(基于远期 EPS × 倍数)</h3>
+    <div class="chart-card">
+      <div class="chart-cap">远期 P/E 区间法 · 锚定 FY2027E Non-GAAP EPS ≈ $12(单位:目标价 $/股)</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="valChart"></canvas></div>
+    </div>
+    <table class="metrics-table">
+      <thead><tr><th>情景</th><th>FY27 EPS</th><th>给予 P/E</th><th>隐含目标价</th><th>vs 现价 $504</th></tr></thead>
+      <tbody>
+        <tr><td>保守(估值回归行业)</td><td class="mono">$11</td><td class="mono">28x</td><td class="mono">$308</td><td class="mono tneg">-39%</td></tr>
+        <tr><td>中性(维持成长溢价)</td><td class="mono">$12</td><td class="mono">38x</td><td class="mono">$456</td><td class="mono twarn">-10%</td></tr>
+        <tr><td>乐观(份额 + 倍数双扩张)</td><td class="mono">$14</td><td class="mono">50x</td><td class="mono">$700</td><td class="mono tpos">+39%</td></tr>
+      </tbody>
+    </table>
+    <div class="prose">
+      <p><strong>估值匹配性结论:</strong>在中性情景下,$504 的现价对应约 -10% 的 12–18 个月回报 — 也就是说,<span class="highlight">即使 AMD 完美兑现一致预期,现价也只是"合理偏贵",而非"便宜"</span>。要获得正回报,需要进入乐观情景(份额突破双位数 + 市场愿意继续给 50x)。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 8 ===== -->
+<section class="section" id="m8">
+  <div class="container">
+    <div class="section-label">模块八 · 最终判决</div>
+    <h2 class="section-title">投资结论与<em>推荐</em></h2>
+    <p class="section-lead">把八个模块合起来:质量层全面通过,估值层亮黄灯。AMD 是一家应该长期跟踪、值得拥有的公司,但 $504 不是一个具备安全边际的进场点。框架给出的判定是 —— 持有 / 逢回调建仓。</p>
+
+    <h3 class="subsection-h">核心投资逻辑(三句话)</h3>
+    <div class="prose">
+      <p><strong>① 增长靠什么?</strong>数据中心(EPYC + Instinct)从 Intel 和 NVIDIA 双线夺取份额,AI 加速器在一个 2030 年 $1 万亿的 TAM 里从个位数份额向双位数渗透。<strong>② 空间有多大?</strong>极大,且增长真实性已被 Q1 财报证明。<strong>③ 钱能不能赚?</strong>轻资本、高毛利、强自由现金流、净现金资产负债表 — 商业模式优秀。<span class="highlight">唯一的问题是:这些好处已经被 $504 的价格充分(甚至过度)定价。</span></p>
+    </div>
+
+    <h3 class="subsection-h">情景分析 · 1–3 年目标价</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card scenario-bear">
+        <div class="stier">熊市 Bear · 25%</div>
+        <div class="target">$240</div>
+        <div class="sdesc">AI 放量不及预期 / NVIDIA 持续主导 / 估值回归 ~28x;认股权证稀释拖累 EPS</div>
+        <div class="sprob">高风险 · 卖出区间</div>
+      </div>
+      <div class="scenario-card scenario-base">
+        <div class="stier">基准 Base · 45%</div>
+        <div class="target">$470</div>
+        <div class="sdesc">符合指引与一致预期,FY27 EPS ~$11–12,倍数温和压缩至 ~40x</div>
+        <div class="sprob">中性 · 持有</div>
+      </div>
+      <div class="scenario-card scenario-bull">
+        <div class="stier">牛市 Bull · 30%</div>
+        <div class="target">$720</div>
+        <div class="sdesc">MI450/Helios 成功放量,AI GPU 份额破双位数,FY27 EPS ~$14 × 50x</div>
+        <div class="sprob">高回报 · 加仓</div>
+      </div>
+    </div>
+    <p style="color:var(--ink-2); margin-top:16px;"><strong>概率加权目标价 ≈ $488</strong> — 相对现价 $504 约为 <span class="mono tneg">-3%</span>,1–3 年期望回报接近持平偏负。这是一个典型的"好公司、贵价格"赔率结构。</p>
+
+    <h3 class="subsection-h">合理建仓价格带</h3>
+    <div class="ladder-row zone-avoid"><span class="zlabel">不建议追高</span><span class="zprice">&gt; $520</span></div>
+    <div class="ladder-row zone-watch"><span class="zlabel">观察区</span><span class="zprice">$440–520</span></div>
+    <div class="ladder-row zone-build"><span class="zlabel">合理建仓</span><span class="zprice">$360–440</span></div>
+    <div class="ladder-row zone-ideal"><span class="zlabel">理想加仓</span><span class="zprice">$280–360</span></div>
+    <div class="ladder-row zone-heavy"><span class="zlabel">重仓机会</span><span class="zprice">&lt; $280</span></div>
+    <div class="ladder-current">当前 $504 位于观察区上沿,接近"不建议追高";耐心等待回调至 $440 以下再分批建仓</div>
+
+    <h3 class="subsection-h">五大关键风险</h3>
+    <div class="risk-list">
+      <div class="risk-item"><div class="risk-num">1</div><div class="risk-body"><p><strong>估值溢价风险</strong>:现价已 Price-In FY2027 盈利,任何放量节奏的延迟都会触发剧烈的倍数压缩。这是当前最大的近期风险。</p></div></div>
+      <div class="risk-item"><div class="risk-num">2</div><div class="risk-body"><p><strong>认股权证稀释</strong>:OpenAI + Meta 合计 ~3.2 亿股(~20% 股本)。虽与里程碑挂钩(是"好的稀释"),但计入 FDSO 后会摊薄每股价值。</p></div></div>
+      <div class="risk-item"><div class="risk-num">3</div><div class="risk-body"><p><strong>执行风险</strong>:MI450 是全新架构,HBM4 与 TSMC 2nm 封装产能紧张,首次向单一客户交付 6GW 级别从未有过先例。</p></div></div>
+      <div class="risk-item"><div class="risk-num">4</div><div class="risk-body"><p><strong>NVIDIA 与 ASIC 双重夹击</strong>:CUDA 生态壁垒 + 超大客户自研芯片,AMD 作为"第二供应商"在 capex 收缩周期最先被砍单。</p></div></div>
+      <div class="risk-item"><div class="risk-num">5</div><div class="risk-body"><p><strong>地缘 / 出口管制</strong>:中国市场敞口与对华 AI 芯片出口限制(2025 MI308 已造成 $8 亿减值)是持续的尾部风险。</p></div></div>
+    </div>
+
+    <h3 class="subsection-h">最终推荐</h3>
+    <div class="verdict-grid">
+      <div class="verdict-tier-card vt3">
+        <div class="vlabel">综合判定</div>
+        <div class="vname">持有 / 逢回调建仓</div>
+        <p class="vbody">质量评级 A 级,估值评级 C 级。现价无安全边际,但公司值得长期拥有。已持有者继续持有;未持有者在 $440 以下开始分批建仓,$360 以下为理想区。投机性追高(&gt;$520)不可取。</p>
+      </div>
+      <div class="verdict-tier-card vt1">
+        <div class="vlabel">质量层</div>
+        <div class="vname">优秀</div>
+        <p class="vbody">增长真实、现金流强劲、净现金资产负债表、管理层卓越、轻资本商业模式。八模块中前六个模块全面通过。</p>
+      </div>
+      <div class="verdict-tier-card vt4">
+        <div class="vlabel">估值层</div>
+        <div class="vname">充分至偏贵</div>
+        <p class="vbody">Forward P/E ~65x,P/S ~21x,EV/FCF ~93x。已用 FY2027 盈利定价。DCF 公允价 ~$229 与现价 $504 的巨大分歧,全部来自 AI 放量这一 belief 变量。</p>
+      </div>
+    </div>
+
+    <div class="pull-quote">AMD 的难点不在于"它是不是一家好公司"—— 这个问题财报已经替你回答了。难点在于"在所有人都同意它是好公司之后,你还能赚到钱吗"。框架的答案是:在 $504,赔率不够好;耐心等待市场出现错觉的那一刻。</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <h4>免责声明</h4>
+    <p>本报告为基于公开数据与八模块投资评估框架的独立分析推演,不构成任何投资建议、招揽或意见。所有数据来源为 AMD 公司财报(Q1 2026 / FY2025)、SEC 备案文件、公司分析师日材料及公开市场数据,价格与估值数据截至 2026 年 5 月 28 日左右。情景目标价、概率权重及远期 EPS 假设均为分析性推演,存在高度不确定性,实际结果可能与之重大偏离。读者在做出任何投资决策前,应自行进行尽职调查并咨询合格的财务顾问。投资有风险,过往表现不代表未来结果。</p>
+    <p style="margin-top:24px; font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:0.08em;">AMD COMPREHENSIVE FRAMEWORK REPORT · EIGHT-MODULE · MAY 2026 · END</p>
+  </div>
+</footer>
+
+<script>
+const C = {
+  dc: "#1E3A5F", client: "#2D6A4F", gaming: "#B8651E", embedded: "#872D52",
+  gross: "#1E3A5F", op: "#2D6A4F", net: "#B8651E",
+  ocf: "#2D6A4F", capex: "#8B1E1E", fcf: "#1E3A5F",
+  bull: "#2D6A4F", base: "#B8651E", bear: "#8B1E1E"
+};
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.color = "#4A4843";
+
+// SEGMENT STACKED
+new Chart(document.getElementById("segStackChart"), {
+  type: "bar",
+  data: {
+    labels: ["2023","2024","2025","2026E"],
+    datasets: [
+      { label: "数据中心", data: [12.6, 12.6, 16.6, 27.0], backgroundColor: C.dc, stack: "s" },
+      { label: "客户端", data: [4.7, 7.1, 11.0, 12.5], backgroundColor: C.client, stack: "s" },
+      { label: "游戏", data: [6.2, 2.6, 3.6, 3.4], backgroundColor: C.gaming, stack: "s" },
+      { label: "嵌入式", data: [5.3, 3.6, 3.6, 3.8], backgroundColor: C.embedded, stack: "s" }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: "bottom", labels: { font: { size: 12 }, boxWidth: 12, padding: 16 } },
+      tooltip: { callbacks: { label: (c) => c.dataset.label + ": $" + c.parsed.y + "B" } } },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, ticks: { callback: (v) => "$" + v + "B" }, grid: { color: "rgba(226,219,204,0.5)" } }
+    }
+  }
+});
+
+// MARGIN
+new Chart(document.getElementById("marginChart"), {
+  type: "line",
+  data: {
+    labels: ["2023","2024","2025","Q1'26"],
+    datasets: [
+      { label: "毛利率", data: [46, 49, 51, 53], borderColor: C.gross, backgroundColor: C.gross, tension: 0.3, borderWidth: 2.5, pointRadius: 4 },
+      { label: "运营利润率", data: [1, 8, 9, 15], borderColor: C.op, backgroundColor: C.op, tension: 0.3, borderWidth: 2.5, pointRadius: 4 },
+      { label: "净利率", data: [2, 6, 10, 14], borderColor: C.net, backgroundColor: C.net, tension: 0.3, borderWidth: 2.5, pointRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: "bottom", labels: { font: { size: 12 }, boxWidth: 12, padding: 16 } },
+      tooltip: { callbacks: { label: (c) => c.dataset.label + ": " + c.parsed.y + "%" } } },
+    scales: { x: { grid: { display: false } }, y: { beginAtZero: true, max: 60, ticks: { callback: (v) => v + "%" }, grid: { color: "rgba(226,219,204,0.5)" } } }
+  }
+});
+
+// CASHFLOW
+new Chart(document.getElementById("cashflowChart"), {
+  type: "bar",
+  data: {
+    labels: ["经营现金流 OCF", "资本开支 Capex", "自由现金流 FCF"],
+    datasets: [{ data: [9.73, 1.15, 8.57], backgroundColor: [C.ocf, C.capex, C.fcf], borderRadius: 4 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => "$" + c.parsed.y + "B" } } },
+    scales: { x: { grid: { display: false } }, y: { beginAtZero: true, ticks: { callback: (v) => "$" + v + "B" }, grid: { color: "rgba(226,219,204,0.5)" } } }
+  }
+});
+
+// VALUATION SCENARIO
+new Chart(document.getElementById("valChart"), {
+  type: "bar",
+  data: {
+    labels: ["保守 28x", "中性 38x", "乐观 50x"],
+    datasets: [{ label: "隐含目标价", data: [308, 456, 700], backgroundColor: [C.bear, C.base, C.bull], borderRadius: 4 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => "$" + c.parsed.y } },
+      annotation: false },
+    scales: { x: { grid: { display: false } }, y: { beginAtZero: true, ticks: { callback: (v) => "$" + v }, grid: { color: "rgba(226,219,204,0.5)" }, title: { display: true, text: "目标价 (现价 $504 作参照)" } } }
+  }
+});
+</script>
+
+</body>
+</html>
