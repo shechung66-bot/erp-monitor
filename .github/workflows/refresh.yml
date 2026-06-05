@@ -5,7 +5,7 @@ name: refresh-erp-data
 # Actions tab via workflow_dispatch.
 on:
   schedule:
-    - cron: "0 22 * * 1-5"
+    - cron: "0 */6 * * *"
   workflow_dispatch: {}
 
 permissions:
