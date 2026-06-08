@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-07T21:52:26+00:00",
+  "generated_at": "2026-06-08T14:41:10+00:00",
   "values": {
     "net_liq": -54.1,
     "rrp": 0.761,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 15.4,
+    "vix": 21.51,
     "y10": 4.47
   },
   "tier_health": {
@@ -43,14 +43,14 @@
     "y10": 4.44
   },
   "liquidity": {
-    "stress": 4.0,
+    "stress": 4.3,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
         "score": 5.0,
         "items": {
           "sofr_iorb": {
-            "value": -0.03,
+            "value": -0.02,
             "pt": 0
           },
           "rrp": {
@@ -73,10 +73,10 @@
         }
       },
       "intermediation": {
-        "score": 2.0,
+        "score": 3.0,
         "items": {
           "hy_oas": {
-            "value": 2.74,
+            "value": 2.76,
             "pt": 0
           },
           "nfci": {
@@ -84,8 +84,8 @@
             "pt": 0
           },
           "vix": {
-            "value": 15.4,
-            "pt": 0
+            "value": 21.51,
+            "pt": 1
           },
           "move": {
             "value": 75.0,
@@ -100,12 +100,12 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": -0.03,
+        "value": -0.02,
         "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.74,
+        "value": 2.76,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -115,21 +115,21 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 15.4,
-        "triggered": false,
+        "value": 21.51,
+        "triggered": true,
         "desc": "VIX 升破 20 = 波动率确认"
       }
     },
     "extra": {
       "netliq_t": 5.84,
       "reserves_t": 3.01,
-      "hy_oas": 2.74,
+      "hy_oas": 2.76,
       "ig_oas": 0.74,
       "nfci": -0.494,
-      "sofr": 3.62,
+      "sofr": 3.63,
       "iorb": 3.65,
-      "sofr_iorb": -0.03,
-      "vix": 15.4,
+      "sofr_iorb": -0.02,
+      "vix": 21.51,
       "move": 75.0,
       "corr": 84.0
     }
@@ -164,6 +164,14 @@
       "stress": 4.0,
       "sofr_iorb": -0.03,
       "hy_oas": 2.74,
+      "nfci": -0.494,
+      "netliq_t": 5.84
+    },
+    {
+      "date": "2026-06-08",
+      "stress": 4.3,
+      "sofr_iorb": -0.02,
+      "hy_oas": 2.76,
       "nfci": -0.494,
       "netliq_t": 5.84
     }
