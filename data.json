@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-06-17T13:02:38+00:00",
+  "generated_at": "2026-06-17T23:08:39+00:00",
   "values": {
-    "net_liq": -38.6,
-    "rrp": 10.721,
-    "realy": 2.15,
-    "bei": 2.29,
+    "net_liq": -29.0,
+    "rrp": 6.828,
+    "realy": 2.14,
+    "bei": 2.26,
     "tp": 0.7671,
-    "slope": 40.0,
-    "corr": 75.0,
-    "move": 67.0
+    "slope": 38.0,
+    "corr": 71.0,
+    "move": 71.0
   },
   "lights": {
     "net_liq": "amber",
@@ -31,8 +31,8 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 16.2,
-    "y10": 4.47
+    "vix": 16.41,
+    "y10": 4.43
   },
   "tier_health": {
     "one": 50,
@@ -54,7 +54,7 @@
             "pt": 0
           },
           "rrp": {
-            "value": 10.721,
+            "value": 6.828,
             "pt": 2
           }
         }
@@ -67,7 +67,7 @@
             "pt": 1
           },
           "netliq": {
-            "value": -38.6,
+            "value": -29.0,
             "pt": 1
           }
         }
@@ -84,15 +84,15 @@
             "pt": 0
           },
           "vix": {
-            "value": 16.2,
+            "value": 16.41,
             "pt": 0
           },
           "move": {
-            "value": 67.0,
+            "value": 71.0,
             "pt": 0
           },
           "corr": {
-            "value": 75.0,
+            "value": 71.0,
             "pt": 2
           }
         }
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 16.2,
+        "value": 16.41,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -129,9 +129,9 @@
       "sofr": 3.63,
       "iorb": 3.65,
       "sofr_iorb": -0.02,
-      "vix": 16.2,
-      "move": 67.0,
-      "corr": 75.0
+      "vix": 16.41,
+      "move": 71.0,
+      "corr": 71.0
     }
   },
   "history": [
