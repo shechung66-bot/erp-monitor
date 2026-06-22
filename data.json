@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-06-22T17:56:44+00:00",
+  "generated_at": "2026-06-22T23:06:06+00:00",
   "values": {
-    "net_liq": 6.2,
-    "rrp": 0.251,
-    "realy": 2.23,
-    "bei": 2.25,
+    "net_liq": -19.0,
+    "rrp": 3.925,
+    "realy": 2.21,
+    "bei": 2.23,
     "tp": 0.7671,
-    "slope": 29.0,
-    "corr": 72.0,
-    "move": 65.0
+    "slope": 27.0,
+    "corr": 71.0,
+    "move": 70.0
   },
   "lights": {
     "net_liq": "amber",
@@ -32,7 +32,7 @@
   },
   "context": {
     "vix": 16.78,
-    "y10": 4.49
+    "y10": 4.46
   },
   "tier_health": {
     "one": 50,
@@ -54,7 +54,7 @@
             "pt": 0
           },
           "rrp": {
-            "value": 0.251,
+            "value": 3.925,
             "pt": 2
           }
         }
@@ -67,7 +67,7 @@
             "pt": 1
           },
           "netliq": {
-            "value": 6.2,
+            "value": -19.0,
             "pt": 1
           }
         }
@@ -88,11 +88,11 @@
             "pt": 0
           },
           "move": {
-            "value": 65.0,
+            "value": 70.0,
             "pt": 0
           },
           "corr": {
-            "value": 72.0,
+            "value": 71.0,
             "pt": 2
           }
         }
@@ -121,7 +121,7 @@
       }
     },
     "extra": {
-      "netliq_t": 5.86,
+      "netliq_t": 5.85,
       "reserves_t": 3.03,
       "hy_oas": 2.66,
       "ig_oas": 0.74,
@@ -130,8 +130,8 @@
       "iorb": 3.65,
       "sofr_iorb": -0.03,
       "vix": 16.78,
-      "move": 65.0,
-      "corr": 72.0
+      "move": 70.0,
+      "corr": 71.0
     }
   },
   "history": [
@@ -285,7 +285,7 @@
       "sofr_iorb": -0.03,
       "hy_oas": 2.66,
       "nfci": -0.505,
-      "netliq_t": 5.86
+      "netliq_t": 5.85
     }
   ],
   "sentiment": {
