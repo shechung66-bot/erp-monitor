@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-24T10:36:14+00:00",
+  "generated_at": "2026-06-24T18:21:17+00:00",
   "values": {
-    "net_liq": -23.9,
-    "rrp": 6.484,
+    "net_liq": -21.1,
+    "rrp": 4.534,
     "realy": 2.28,
     "bei": 2.21,
     "tp": 0.7519,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 17.28,
+    "vix": 19.49,
     "y10": 4.51
   },
   "tier_health": {
@@ -43,18 +43,18 @@
     "y10": 4.3
   },
   "liquidity": {
-    "stress": 4.0,
+    "stress": 4.3,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
         "score": 5.0,
         "items": {
           "sofr_iorb": {
-            "value": -0.04,
+            "value": -0.03,
             "pt": 0
           },
           "rrp": {
-            "value": 6.484,
+            "value": 4.534,
             "pt": 2
           }
         }
@@ -67,25 +67,25 @@
             "pt": 1
           },
           "netliq": {
-            "value": -23.9,
+            "value": -21.1,
             "pt": 1
           }
         }
       },
       "intermediation": {
-        "score": 2.0,
+        "score": 3.0,
         "items": {
           "hy_oas": {
-            "value": 2.65,
+            "value": 2.71,
             "pt": 0
           },
           "nfci": {
-            "value": -0.505,
+            "value": -0.516,
             "pt": 0
           },
           "vix": {
-            "value": 17.28,
-            "pt": 0
+            "value": 19.49,
+            "pt": 1
           },
           "move": {
             "value": 69.0,
@@ -100,22 +100,22 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": -0.04,
+        "value": -0.03,
         "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.65,
+        "value": 2.71,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
       "nfci_positive": {
-        "value": -0.505,
+        "value": -0.516,
         "triggered": false,
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 17.28,
+        "value": 19.49,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -123,13 +123,13 @@
     "extra": {
       "netliq_t": 5.85,
       "reserves_t": 3.03,
-      "hy_oas": 2.65,
+      "hy_oas": 2.71,
       "ig_oas": 0.74,
-      "nfci": -0.505,
-      "sofr": 3.61,
+      "nfci": -0.516,
+      "sofr": 3.62,
       "iorb": 3.65,
-      "sofr_iorb": -0.04,
-      "vix": 17.28,
+      "sofr_iorb": -0.03,
+      "vix": 19.49,
       "move": 69.0,
       "corr": 71.0
     }
@@ -297,10 +297,10 @@
     },
     {
       "date": "2026-06-24",
-      "stress": 4.0,
-      "sofr_iorb": -0.04,
-      "hy_oas": 2.65,
-      "nfci": -0.505,
+      "stress": 4.3,
+      "sofr_iorb": -0.03,
+      "hy_oas": 2.71,
+      "nfci": -0.516,
       "netliq_t": 5.85
     }
   ],
