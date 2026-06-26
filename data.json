@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-06-25T19:20:44+00:00",
+  "generated_at": "2026-06-26T11:18:28+00:00",
   "values": {
-    "net_liq": -22.2,
+    "net_liq": -22.7,
     "rrp": 5.718,
-    "realy": 2.29,
-    "bei": 2.18,
+    "realy": 2.23,
+    "bei": 2.21,
     "tp": 0.7519,
-    "slope": 34.0,
-    "corr": 66.0,
-    "move": 69.0
+    "slope": 30.0,
+    "corr": 62.0,
+    "move": 67.0
   },
   "lights": {
     "net_liq": "amber",
@@ -32,7 +32,7 @@
   },
   "context": {
     "vix": 18.63,
-    "y10": 4.5
+    "y10": 4.41
   },
   "tier_health": {
     "one": 50,
@@ -43,7 +43,7 @@
     "y10": 4.3
   },
   "liquidity": {
-    "stress": 4.3,
+    "stress": 5.2,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
@@ -60,14 +60,14 @@
         }
       },
       "balance": {
-        "score": 5.0,
+        "score": 7.5,
         "items": {
           "reserves": {
-            "value": 3.03,
-            "pt": 1
+            "value": 2.95,
+            "pt": 2
           },
           "netliq": {
-            "value": -22.2,
+            "value": -22.7,
             "pt": 1
           }
         }
@@ -88,11 +88,11 @@
             "pt": 1
           },
           "move": {
-            "value": 69.0,
+            "value": 67.0,
             "pt": 0
           },
           "corr": {
-            "value": 66.0,
+            "value": 62.0,
             "pt": 2
           }
         }
@@ -121,8 +121,8 @@
       }
     },
     "extra": {
-      "netliq_t": 5.85,
-      "reserves_t": 3.03,
+      "netliq_t": 5.81,
+      "reserves_t": 2.95,
       "hy_oas": 2.76,
       "ig_oas": 0.75,
       "nfci": -0.516,
@@ -130,8 +130,8 @@
       "iorb": 3.65,
       "sofr_iorb": -0.03,
       "vix": 18.63,
-      "move": 69.0,
-      "corr": 66.0
+      "move": 67.0,
+      "corr": 62.0
     }
   },
   "history": [
@@ -310,6 +310,14 @@
       "hy_oas": 2.76,
       "nfci": -0.516,
       "netliq_t": 5.85
+    },
+    {
+      "date": "2026-06-26",
+      "stress": 5.2,
+      "sofr_iorb": -0.03,
+      "hy_oas": 2.76,
+      "nfci": -0.516,
+      "netliq_t": 5.81
     }
   ],
   "sentiment": {
