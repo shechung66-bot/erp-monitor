@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T21:44:57+00:00",
+  "generated_at": "2026-06-29T14:40:17+00:00",
   "values": {
     "net_liq": -24.1,
     "rrp": 6.426,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 18.89,
+    "vix": 18.41,
     "y10": 4.4
   },
   "tier_health": {
@@ -50,7 +50,7 @@
         "score": 5.0,
         "items": {
           "sofr_iorb": {
-            "value": -0.01,
+            "value": -0.03,
             "pt": 0
           },
           "rrp": {
@@ -76,7 +76,7 @@
         "score": 3.0,
         "items": {
           "hy_oas": {
-            "value": 2.78,
+            "value": 2.83,
             "pt": 0
           },
           "nfci": {
@@ -84,7 +84,7 @@
             "pt": 0
           },
           "vix": {
-            "value": 18.89,
+            "value": 18.41,
             "pt": 1
           },
           "move": {
@@ -100,12 +100,12 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": -0.01,
+        "value": -0.03,
         "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.78,
+        "value": 2.83,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 18.89,
+        "value": 18.41,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -123,13 +123,13 @@
     "extra": {
       "netliq_t": 5.81,
       "reserves_t": 2.95,
-      "hy_oas": 2.78,
+      "hy_oas": 2.83,
       "ig_oas": 0.76,
       "nfci": -0.516,
-      "sofr": 3.64,
+      "sofr": 3.62,
       "iorb": 3.65,
-      "sofr_iorb": -0.01,
-      "vix": 18.89,
+      "sofr_iorb": -0.03,
+      "vix": 18.41,
       "move": 67.0,
       "corr": 63.0
     }
@@ -332,6 +332,14 @@
       "stress": 5.2,
       "sofr_iorb": -0.01,
       "hy_oas": 2.78,
+      "nfci": -0.516,
+      "netliq_t": 5.81
+    },
+    {
+      "date": "2026-06-29",
+      "stress": 5.2,
+      "sofr_iorb": -0.03,
+      "hy_oas": 2.83,
       "nfci": -0.516,
       "netliq_t": 5.81
     }
