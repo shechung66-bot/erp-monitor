@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-02T10:18:57+00:00",
+  "generated_at": "2026-07-02T18:17:16+00:00",
   "values": {
-    "net_liq": -17.3,
-    "rrp": 1.001,
+    "net_liq": -18.9,
+    "rrp": 2.175,
     "realy": 2.2,
     "bei": 2.23,
     "tp": 0.6842,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 16.45,
+    "vix": 16.59,
     "y10": 4.44
   },
   "tier_health": {
@@ -50,11 +50,11 @@
         "score": 7.5,
         "items": {
           "sofr_iorb": {
-            "value": 0.03,
+            "value": 0.01,
             "pt": 1
           },
           "rrp": {
-            "value": 1.001,
+            "value": 2.175,
             "pt": 2
           }
         }
@@ -67,7 +67,7 @@
             "pt": 2
           },
           "netliq": {
-            "value": -17.3,
+            "value": -18.9,
             "pt": 1
           }
         }
@@ -76,7 +76,7 @@
         "score": 2.0,
         "items": {
           "hy_oas": {
-            "value": 2.75,
+            "value": 2.74,
             "pt": 0
           },
           "nfci": {
@@ -84,7 +84,7 @@
             "pt": 0
           },
           "vix": {
-            "value": 16.45,
+            "value": 16.59,
             "pt": 0
           },
           "move": {
@@ -100,12 +100,12 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": 0.03,
+        "value": 0.01,
         "triggered": true,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.75,
+        "value": 2.74,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -115,21 +115,21 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 16.45,
+        "value": 16.59,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
     },
     "extra": {
-      "netliq_t": 5.82,
+      "netliq_t": 5.81,
       "reserves_t": 2.95,
-      "hy_oas": 2.75,
+      "hy_oas": 2.74,
       "ig_oas": 0.76,
       "nfci": -0.504,
-      "sofr": 3.68,
+      "sofr": 3.66,
       "iorb": 3.65,
-      "sofr_iorb": 0.03,
-      "vix": 16.45,
+      "sofr_iorb": 0.01,
+      "vix": 16.59,
       "move": 69.0,
       "corr": 53.0
     }
@@ -362,10 +362,10 @@
     {
       "date": "2026-07-02",
       "stress": 5.7,
-      "sofr_iorb": 0.03,
-      "hy_oas": 2.75,
+      "sofr_iorb": 0.01,
+      "hy_oas": 2.74,
       "nfci": -0.504,
-      "netliq_t": 5.82
+      "netliq_t": 5.81
     }
   ],
   "sentiment": {
