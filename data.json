@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-07-01T18:32:19+00:00",
+  "generated_at": "2026-07-02T10:18:57+00:00",
   "values": {
     "net_liq": -17.3,
     "rrp": 1.001,
-    "realy": 2.16,
-    "bei": 2.24,
+    "realy": 2.2,
+    "bei": 2.23,
     "tp": 0.6842,
-    "slope": 28.0,
-    "corr": 63.0,
-    "move": 72.0
+    "slope": 30.0,
+    "corr": 53.0,
+    "move": 69.0
   },
   "lights": {
     "net_liq": "amber",
@@ -32,7 +32,7 @@
   },
   "context": {
     "vix": 16.45,
-    "y10": 4.38
+    "y10": 4.44
   },
   "tier_health": {
     "one": 50,
@@ -88,11 +88,11 @@
             "pt": 0
           },
           "move": {
-            "value": 72.0,
+            "value": 69.0,
             "pt": 0
           },
           "corr": {
-            "value": 63.0,
+            "value": 53.0,
             "pt": 2
           }
         }
@@ -130,8 +130,8 @@
       "iorb": 3.65,
       "sofr_iorb": 0.03,
       "vix": 16.45,
-      "move": 72.0,
-      "corr": 63.0
+      "move": 69.0,
+      "corr": 53.0
     }
   },
   "history": [
@@ -353,6 +353,14 @@
     },
     {
       "date": "2026-07-01",
+      "stress": 5.7,
+      "sofr_iorb": 0.03,
+      "hy_oas": 2.75,
+      "nfci": -0.504,
+      "netliq_t": 5.82
+    },
+    {
+      "date": "2026-07-02",
       "stress": 5.7,
       "sofr_iorb": 0.03,
       "hy_oas": 2.75,
