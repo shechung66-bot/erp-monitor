@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T10:15:15+00:00",
+  "generated_at": "2026-07-03T17:02:25+00:00",
   "values": {
     "net_liq": -53.1,
     "rrp": 2.175,
@@ -76,7 +76,7 @@
         "score": 2.0,
         "items": {
           "hy_oas": {
-            "value": 2.74,
+            "value": 2.75,
             "pt": 0
           },
           "nfci": {
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.74,
+        "value": 2.75,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -123,8 +123,8 @@
     "extra": {
       "netliq_t": 5.84,
       "reserves_t": 2.97,
-      "hy_oas": 2.74,
-      "ig_oas": 0.76,
+      "hy_oas": 2.75,
+      "ig_oas": 0.75,
       "nfci": -0.504,
       "sofr": 3.66,
       "iorb": 3.65,
@@ -371,7 +371,7 @@
       "date": "2026-07-03",
       "stress": 5.7,
       "sofr_iorb": 0.01,
-      "hy_oas": 2.74,
+      "hy_oas": 2.75,
       "nfci": -0.504,
       "netliq_t": 5.84
     }
