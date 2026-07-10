@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T09:27:46+00:00",
+  "generated_at": "2026-07-10T14:13:10+00:00",
   "values": {
     "net_liq": 100.6,
     "rrp": 5.772,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 16.9,
+    "vix": 15.84,
     "y10": 4.56
   },
   "tier_health": {
@@ -50,7 +50,7 @@
         "score": 5.0,
         "items": {
           "sofr_iorb": {
-            "value": -0.07,
+            "value": -0.12,
             "pt": 0
           },
           "rrp": {
@@ -84,7 +84,7 @@
             "pt": 0
           },
           "vix": {
-            "value": 16.9,
+            "value": 15.84,
             "pt": 0
           },
           "move": {
@@ -100,7 +100,7 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": -0.07,
+        "value": -0.12,
         "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 16.9,
+        "value": 15.84,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -126,10 +126,10 @@
       "hy_oas": 2.7,
       "ig_oas": 0.76,
       "nfci": -0.515,
-      "sofr": 3.58,
+      "sofr": 3.53,
       "iorb": 3.65,
-      "sofr_iorb": -0.07,
-      "vix": 16.9,
+      "sofr_iorb": -0.12,
+      "vix": 15.84,
       "move": 69.0,
       "corr": 49.0
     }
@@ -426,7 +426,7 @@
     {
       "date": "2026-07-10",
       "stress": 3.2,
-      "sofr_iorb": -0.07,
+      "sofr_iorb": -0.12,
       "hy_oas": 2.7,
       "nfci": -0.515,
       "netliq_t": 5.96
