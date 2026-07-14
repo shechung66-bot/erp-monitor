@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T07:55:45+00:00",
+  "generated_at": "2026-07-14T13:28:36+00:00",
   "values": {
     "net_liq": 105.5,
     "rrp": 0.795,
@@ -50,7 +50,7 @@
         "score": 5.0,
         "items": {
           "sofr_iorb": {
-            "value": -0.1,
+            "value": -0.05,
             "pt": 0
           },
           "rrp": {
@@ -100,7 +100,7 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": -0.1,
+        "value": -0.05,
         "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
@@ -126,9 +126,9 @@
       "hy_oas": 2.69,
       "ig_oas": 0.77,
       "nfci": -0.515,
-      "sofr": 3.55,
+      "sofr": 3.6,
       "iorb": 3.65,
-      "sofr_iorb": -0.1,
+      "sofr_iorb": -0.05,
       "vix": 15.03,
       "move": 78.0,
       "corr": 48.0
@@ -458,7 +458,7 @@
     {
       "date": "2026-07-14",
       "stress": 3.2,
-      "sofr_iorb": -0.1,
+      "sofr_iorb": -0.05,
       "hy_oas": 2.69,
       "nfci": -0.515,
       "netliq_t": 5.96
