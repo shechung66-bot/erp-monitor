@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-17T13:18:42+00:00",
+  "generated_at": "2026-07-17T19:01:25+00:00",
   "values": {
-    "net_liq": 180.5,
-    "rrp": 0.125,
+    "net_liq": 176.6,
+    "rrp": 0.1,
     "realy": 2.32,
     "bei": 2.22,
     "tp": 0.7788,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 15.67,
+    "vix": 16.73,
     "y10": 4.55
   },
   "tier_health": {
@@ -54,7 +54,7 @@
             "pt": 0
           },
           "rrp": {
-            "value": 0.125,
+            "value": 0.1,
             "pt": 2
           }
         }
@@ -67,7 +67,7 @@
             "pt": 1
           },
           "netliq": {
-            "value": 180.5,
+            "value": 176.6,
             "pt": 0
           }
         }
@@ -84,7 +84,7 @@
             "pt": 0
           },
           "vix": {
-            "value": 15.67,
+            "value": 16.73,
             "pt": 0
           },
           "move": {
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 15.67,
+        "value": 16.73,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -124,12 +124,12 @@
       "netliq_t": 5.99,
       "reserves_t": 3.14,
       "hy_oas": 2.71,
-      "ig_oas": 0.79,
+      "ig_oas": 0.78,
       "nfci": -0.538,
       "sofr": 3.62,
       "iorb": 3.65,
       "sofr_iorb": -0.03,
-      "vix": 15.67,
+      "vix": 16.73,
       "move": 68.0,
       "corr": 50.0
     }
