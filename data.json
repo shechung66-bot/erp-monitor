@@ -1,7 +1,8 @@
 {
-  "generated_at": "2026-07-29T14:02:54+00:00",
+  "generated_at": "2026-07-29T19:08:09+00:00",
   "values": {
-    "rrp": 1.126,
+    "net_liq": 97.8,
+    "rrp": 2.576,
     "realy": 2.44,
     "bei": 2.2,
     "tp": 0.8376,
@@ -10,6 +11,7 @@
     "move": 76.0
   },
   "lights": {
+    "net_liq": "green",
     "rrp": "red",
     "realy": "red",
     "bei": "green",
@@ -19,6 +21,7 @@
     "move": "green"
   },
   "sources": {
+    "net_liq": "FRED WALCL-TGA-RRP",
     "rrp": "FRED RRPONTSYD",
     "realy": "FRED DFII10",
     "bei": "FRED T10YIE",
@@ -32,15 +35,15 @@
     "y10": 4.65
   },
   "tier_health": {
-    "one": 50,
+    "one": 67,
     "two": 50
   },
   "implied": {
-    "erp": 1.45,
+    "erp": 0.99,
     "y10": 4.3
   },
   "liquidity": {
-    "stress": 4.8,
+    "stress": 4.0,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
@@ -51,17 +54,21 @@
             "pt": 1
           },
           "rrp": {
-            "value": 1.126,
+            "value": 2.576,
             "pt": 2
           }
         }
       },
       "balance": {
-        "score": 5.0,
+        "score": 2.5,
         "items": {
           "reserves": {
             "value": 3.06,
             "pt": 1
+          },
+          "netliq": {
+            "value": 97.8,
+            "pt": 0
           }
         }
       },
@@ -69,7 +76,7 @@
         "score": 2.0,
         "items": {
           "hy_oas": {
-            "value": 2.81,
+            "value": 2.84,
             "pt": 0
           },
           "nfci": {
@@ -98,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.81,
+        "value": 2.84,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -116,7 +123,7 @@
     "extra": {
       "netliq_t": 5.92,
       "reserves_t": 3.06,
-      "hy_oas": 2.81,
+      "hy_oas": 2.84,
       "ig_oas": 0.81,
       "nfci": -0.554,
       "sofr": 3.65,
@@ -570,9 +577,9 @@
     },
     {
       "date": "2026-07-29",
-      "stress": 4.8,
+      "stress": 4.0,
       "sofr_iorb": 0.0,
-      "hy_oas": 2.81,
+      "hy_oas": 2.84,
       "nfci": -0.554,
       "netliq_t": 5.92
     }
