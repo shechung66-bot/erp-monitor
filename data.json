@@ -1,7 +1,6 @@
 {
-  "generated_at": "2026-07-29T08:32:47+00:00",
+  "generated_at": "2026-07-29T14:02:54+00:00",
   "values": {
-    "net_liq": 75.8,
     "rrp": 1.126,
     "realy": 2.44,
     "bei": 2.2,
@@ -11,7 +10,6 @@
     "move": 76.0
   },
   "lights": {
-    "net_liq": "green",
     "rrp": "red",
     "realy": "red",
     "bei": "green",
@@ -21,7 +19,6 @@
     "move": "green"
   },
   "sources": {
-    "net_liq": "FRED WALCL-TGA-RRP",
     "rrp": "FRED RRPONTSYD",
     "realy": "FRED DFII10",
     "bei": "FRED T10YIE",
@@ -31,27 +28,27 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 18.67,
+    "vix": 18.21,
     "y10": 4.65
   },
   "tier_health": {
-    "one": 67,
+    "one": 50,
     "two": 50
   },
   "implied": {
-    "erp": 0.99,
+    "erp": 1.45,
     "y10": 4.3
   },
   "liquidity": {
-    "stress": 3.2,
+    "stress": 4.8,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
-        "score": 5.0,
+        "score": 7.5,
         "items": {
           "sofr_iorb": {
-            "value": -0.01,
-            "pt": 0
+            "value": 0.0,
+            "pt": 1
           },
           "rrp": {
             "value": 1.126,
@@ -60,15 +57,11 @@
         }
       },
       "balance": {
-        "score": 2.5,
+        "score": 5.0,
         "items": {
           "reserves": {
             "value": 3.06,
             "pt": 1
-          },
-          "netliq": {
-            "value": 75.8,
-            "pt": 0
           }
         }
       },
@@ -80,11 +73,11 @@
             "pt": 0
           },
           "nfci": {
-            "value": -0.552,
+            "value": -0.554,
             "pt": 0
           },
           "vix": {
-            "value": 18.67,
+            "value": 18.21,
             "pt": 1
           },
           "move": {
@@ -100,7 +93,7 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": -0.01,
+        "value": 0.0,
         "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
@@ -110,12 +103,12 @@
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
       "nfci_positive": {
-        "value": -0.552,
+        "value": -0.554,
         "triggered": false,
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 18.67,
+        "value": 18.21,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -125,11 +118,11 @@
       "reserves_t": 3.06,
       "hy_oas": 2.81,
       "ig_oas": 0.81,
-      "nfci": -0.552,
-      "sofr": 3.64,
+      "nfci": -0.554,
+      "sofr": 3.65,
       "iorb": 3.65,
-      "sofr_iorb": -0.01,
-      "vix": 18.67,
+      "sofr_iorb": 0.0,
+      "vix": 18.21,
       "move": 76.0,
       "corr": 23.0
     }
@@ -577,10 +570,10 @@
     },
     {
       "date": "2026-07-29",
-      "stress": 3.2,
-      "sofr_iorb": -0.01,
+      "stress": 4.8,
+      "sofr_iorb": 0.0,
       "hy_oas": 2.81,
-      "nfci": -0.552,
+      "nfci": -0.554,
       "netliq_t": 5.92
     }
   ],
