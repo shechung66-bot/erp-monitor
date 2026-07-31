@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T08:43:09+00:00",
+  "generated_at": "2026-07-31T13:54:31+00:00",
   "values": {
     "net_liq": -134.2,
     "rrp": 1.076,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 20.66,
+    "vix": 17.09,
     "y10": 4.67
   },
   "tier_health": {
@@ -43,7 +43,7 @@
     "y10": 4.44
   },
   "liquidity": {
-    "stress": 6.5,
+    "stress": 6.2,
     "label": "紧张",
     "layers": {
       "repo": {
@@ -73,10 +73,10 @@
         }
       },
       "intermediation": {
-        "score": 2.0,
+        "score": 1.0,
         "items": {
           "hy_oas": {
-            "value": 2.87,
+            "value": 2.84,
             "pt": 0
           },
           "nfci": {
@@ -84,8 +84,8 @@
             "pt": 0
           },
           "vix": {
-            "value": 20.66,
-            "pt": 1
+            "value": 17.09,
+            "pt": 0
           },
           "move": {
             "value": 77.0,
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.87,
+        "value": 2.84,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -115,21 +115,21 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 20.66,
-        "triggered": true,
+        "value": 17.09,
+        "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
     },
     "extra": {
       "netliq_t": 5.83,
       "reserves_t": 2.98,
-      "hy_oas": 2.87,
+      "hy_oas": 2.84,
       "ig_oas": 0.81,
       "nfci": -0.554,
       "sofr": 3.65,
       "iorb": 3.65,
       "sofr_iorb": 0.0,
-      "vix": 20.66,
+      "vix": 17.09,
       "move": 77.0,
       "corr": 31.0
     }
@@ -593,9 +593,9 @@
     },
     {
       "date": "2026-07-31",
-      "stress": 6.5,
+      "stress": 6.2,
       "sofr_iorb": 0.0,
-      "hy_oas": 2.87,
+      "hy_oas": 2.84,
       "nfci": -0.554,
       "netliq_t": 5.83
     }
