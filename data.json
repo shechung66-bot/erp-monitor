@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-07-30T19:18:58+00:00",
+  "generated_at": "2026-07-31T02:25:31+00:00",
   "values": {
-    "net_liq": 73.4,
+    "net_liq": -134.2,
     "rrp": 1.076,
     "realy": 2.41,
-    "bei": 2.26,
+    "bei": 2.27,
     "tp": 0.8376,
-    "slope": 35.0,
-    "corr": 25.0,
-    "move": 74.0
+    "slope": 45.0,
+    "corr": 31.0,
+    "move": 77.0
   },
   "lights": {
-    "net_liq": "green",
+    "net_liq": "red",
     "rrp": "red",
     "realy": "red",
     "bei": "green",
@@ -31,20 +31,20 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 18.21,
-    "y10": 4.61
+    "vix": 20.66,
+    "y10": 4.67
   },
   "tier_health": {
-    "one": 67,
+    "one": 33,
     "two": 40
   },
   "implied": {
-    "erp": 0.99,
+    "erp": 1.91,
     "y10": 4.44
   },
   "liquidity": {
-    "stress": 4.0,
-    "label": "偏紧 / 警戒",
+    "stress": 6.5,
+    "label": "紧张",
     "layers": {
       "repo": {
         "score": 7.5,
@@ -60,15 +60,15 @@
         }
       },
       "balance": {
-        "score": 2.5,
+        "score": 10.0,
         "items": {
           "reserves": {
-            "value": 3.06,
-            "pt": 1
+            "value": 2.98,
+            "pt": 2
           },
           "netliq": {
-            "value": 73.4,
-            "pt": 0
+            "value": -134.2,
+            "pt": 2
           }
         }
       },
@@ -84,15 +84,15 @@
             "pt": 0
           },
           "vix": {
-            "value": 18.21,
+            "value": 20.66,
             "pt": 1
           },
           "move": {
-            "value": 74.0,
+            "value": 77.0,
             "pt": 0
           },
           "corr": {
-            "value": 25.0,
+            "value": 31.0,
             "pt": 1
           }
         }
@@ -115,23 +115,23 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 18.21,
-        "triggered": false,
+        "value": 20.66,
+        "triggered": true,
         "desc": "VIX 升破 20 = 波动率确认"
       }
     },
     "extra": {
-      "netliq_t": 5.92,
-      "reserves_t": 3.06,
+      "netliq_t": 5.83,
+      "reserves_t": 2.98,
       "hy_oas": 2.87,
       "ig_oas": 0.81,
       "nfci": -0.554,
       "sofr": 3.65,
       "iorb": 3.65,
       "sofr_iorb": 0.0,
-      "vix": 18.21,
-      "move": 74.0,
-      "corr": 25.0
+      "vix": 20.66,
+      "move": 77.0,
+      "corr": 31.0
     }
   },
   "history": [
@@ -590,6 +590,14 @@
       "hy_oas": 2.87,
       "nfci": -0.554,
       "netliq_t": 5.92
+    },
+    {
+      "date": "2026-07-31",
+      "stress": 6.5,
+      "sofr_iorb": 0.0,
+      "hy_oas": 2.87,
+      "nfci": -0.554,
+      "netliq_t": 5.83
     }
   ],
   "sentiment": {
