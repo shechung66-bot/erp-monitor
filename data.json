@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-08-04T14:02:56+00:00",
+  "generated_at": "2026-08-04T19:25:29+00:00",
   "values": {
-    "net_liq": -133.5,
-    "rrp": 2.127,
+    "net_liq": -131.9,
+    "rrp": 2.251,
+    "realy": 2.47,
     "bei": 2.27,
-    "tp": 0.8376,
+    "tp": 0.8681,
     "slope": 47.0,
     "corr": 20.0,
     "move": 80.0
@@ -12,6 +13,7 @@
   "lights": {
     "net_liq": "red",
     "rrp": "red",
+    "realy": "red",
     "bei": "green",
     "tp": "amber",
     "slope": "amber",
@@ -21,6 +23,7 @@
   "sources": {
     "net_liq": "FRED WALCL-TGA-RRP",
     "rrp": "FRED RRPONTSYD",
+    "realy": "FRED DFII10",
     "bei": "FRED T10YIE",
     "tp": "FRED THREEFYTP10 (KW)",
     "slope": "FRED DGS10-DGS2",
@@ -33,11 +36,11 @@
   },
   "tier_health": {
     "one": 33,
-    "two": 62
+    "two": 50
   },
   "implied": {
     "erp": 1.91,
-    "y10": 4.13
+    "y10": 4.3
   },
   "liquidity": {
     "stress": 6.2,
@@ -51,7 +54,7 @@
             "pt": 1
           },
           "rrp": {
-            "value": 2.127,
+            "value": 2.251,
             "pt": 2
           }
         }
@@ -64,7 +67,7 @@
             "pt": 2
           },
           "netliq": {
-            "value": -133.5,
+            "value": -131.9,
             "pt": 2
           }
         }
