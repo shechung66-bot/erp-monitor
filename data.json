@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-08-04T19:25:29+00:00",
+  "generated_at": "2026-08-05T02:04:41+00:00",
   "values": {
     "net_liq": -131.9,
     "rrp": 2.251,
-    "realy": 2.47,
-    "bei": 2.27,
+    "realy": 2.43,
+    "bei": 2.23,
     "tp": 0.8681,
-    "slope": 47.0,
-    "corr": 20.0,
-    "move": 80.0
+    "slope": 45.0,
+    "corr": 24.0,
+    "move": 78.0
   },
   "lights": {
     "net_liq": "red",
@@ -32,7 +32,7 @@
   },
   "context": {
     "vix": 15.86,
-    "y10": 4.75
+    "y10": 4.7
   },
   "tier_health": {
     "one": 33,
@@ -76,7 +76,7 @@
         "score": 1.0,
         "items": {
           "hy_oas": {
-            "value": 2.85,
+            "value": 2.78,
             "pt": 0
           },
           "nfci": {
@@ -88,11 +88,11 @@
             "pt": 0
           },
           "move": {
-            "value": 80.0,
+            "value": 78.0,
             "pt": 0
           },
           "corr": {
-            "value": 20.0,
+            "value": 24.0,
             "pt": 1
           }
         }
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.85,
+        "value": 2.78,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -123,15 +123,15 @@
     "extra": {
       "netliq_t": 5.83,
       "reserves_t": 2.98,
-      "hy_oas": 2.85,
-      "ig_oas": 0.79,
+      "hy_oas": 2.78,
+      "ig_oas": 0.78,
       "nfci": -0.554,
       "sofr": 3.65,
       "iorb": 3.65,
       "sofr_iorb": 0.0,
       "vix": 15.86,
-      "move": 80.0,
-      "corr": 20.0
+      "move": 78.0,
+      "corr": 24.0
     }
   },
   "history": [
@@ -628,6 +628,14 @@
       "stress": 6.2,
       "sofr_iorb": 0.0,
       "hy_oas": 2.85,
+      "nfci": -0.554,
+      "netliq_t": 5.83
+    },
+    {
+      "date": "2026-08-05",
+      "stress": 6.2,
+      "sofr_iorb": 0.0,
+      "hy_oas": 2.78,
       "nfci": -0.554,
       "netliq_t": 5.83
     }
