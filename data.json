@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T08:28:44+00:00",
+  "generated_at": "2026-08-05T13:58:07+00:00",
   "values": {
     "net_liq": -131.9,
     "rrp": 2.251,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 15.86,
+    "vix": 16.5,
     "y10": 4.7
   },
   "tier_health": {
@@ -50,7 +50,7 @@
         "score": 7.5,
         "items": {
           "sofr_iorb": {
-            "value": 0.0,
+            "value": 0.01,
             "pt": 1
           },
           "rrp": {
@@ -80,11 +80,11 @@
             "pt": 0
           },
           "nfci": {
-            "value": -0.554,
+            "value": -0.529,
             "pt": 0
           },
           "vix": {
-            "value": 15.86,
+            "value": 16.5,
             "pt": 0
           },
           "move": {
@@ -100,8 +100,8 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": 0.0,
-        "triggered": false,
+        "value": 0.01,
+        "triggered": true,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
@@ -110,12 +110,12 @@
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
       "nfci_positive": {
-        "value": -0.554,
+        "value": -0.529,
         "triggered": false,
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 15.86,
+        "value": 16.5,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -125,11 +125,11 @@
       "reserves_t": 2.98,
       "hy_oas": 2.78,
       "ig_oas": 0.78,
-      "nfci": -0.554,
-      "sofr": 3.65,
+      "nfci": -0.529,
+      "sofr": 3.66,
       "iorb": 3.65,
-      "sofr_iorb": 0.0,
-      "vix": 15.86,
+      "sofr_iorb": 0.01,
+      "vix": 16.5,
       "move": 78.0,
       "corr": 24.0
     }
@@ -634,9 +634,9 @@
     {
       "date": "2026-08-05",
       "stress": 6.2,
-      "sofr_iorb": 0.0,
+      "sofr_iorb": 0.01,
       "hy_oas": 2.78,
-      "nfci": -0.554,
+      "nfci": -0.529,
       "netliq_t": 5.83
     }
   ],
