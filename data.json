@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T08:27:47+00:00",
+  "generated_at": "2026-08-06T13:56:04+00:00",
   "values": {
     "net_liq": -132.4,
     "rrp": 1.65,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 16.5,
+    "vix": 15.81,
     "y10": 4.63
   },
   "tier_health": {
@@ -43,15 +43,15 @@
     "y10": 4.44
   },
   "liquidity": {
-    "stress": 6.2,
-    "label": "紧张",
+    "stress": 5.3,
+    "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
-        "score": 7.5,
+        "score": 5.0,
         "items": {
           "sofr_iorb": {
-            "value": 0.01,
-            "pt": 1
+            "value": -0.01,
+            "pt": 0
           },
           "rrp": {
             "value": 1.65,
@@ -84,7 +84,7 @@
             "pt": 0
           },
           "vix": {
-            "value": 16.5,
+            "value": 15.81,
             "pt": 0
           },
           "move": {
@@ -100,8 +100,8 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": 0.01,
-        "triggered": true,
+        "value": -0.01,
+        "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 16.5,
+        "value": 15.81,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -126,10 +126,10 @@
       "hy_oas": 2.73,
       "ig_oas": 0.78,
       "nfci": -0.529,
-      "sofr": 3.66,
+      "sofr": 3.64,
       "iorb": 3.65,
-      "sofr_iorb": 0.01,
-      "vix": 16.5,
+      "sofr_iorb": -0.01,
+      "vix": 15.81,
       "move": 74.0,
       "corr": 32.0
     }
@@ -641,8 +641,8 @@
     },
     {
       "date": "2026-08-06",
-      "stress": 6.2,
-      "sofr_iorb": 0.01,
+      "stress": 5.3,
+      "sofr_iorb": -0.01,
       "hy_oas": 2.73,
       "nfci": -0.529,
       "netliq_t": 5.83
