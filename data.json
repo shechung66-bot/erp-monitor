@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-08-06T13:56:04+00:00",
+  "generated_at": "2026-08-06T23:54:16+00:00",
   "values": {
-    "net_liq": -132.4,
-    "rrp": 1.65,
-    "realy": 2.4,
-    "bei": 2.22,
+    "net_liq": -141.2,
+    "rrp": 1.429,
+    "realy": 2.41,
+    "bei": 2.26,
     "tp": 0.8681,
-    "slope": 43.0,
-    "corr": 32.0,
-    "move": 74.0
+    "slope": 45.0,
+    "corr": 36.0,
+    "move": 76.0
   },
   "lights": {
     "net_liq": "red",
@@ -54,7 +54,7 @@
             "pt": 0
           },
           "rrp": {
-            "value": 1.65,
+            "value": 1.429,
             "pt": 2
           }
         }
@@ -63,11 +63,11 @@
         "score": 10.0,
         "items": {
           "reserves": {
-            "value": 2.98,
+            "value": 2.99,
             "pt": 2
           },
           "netliq": {
-            "value": -132.4,
+            "value": -141.2,
             "pt": 2
           }
         }
@@ -76,7 +76,7 @@
         "score": 1.0,
         "items": {
           "hy_oas": {
-            "value": 2.73,
+            "value": 2.75,
             "pt": 0
           },
           "nfci": {
@@ -88,11 +88,11 @@
             "pt": 0
           },
           "move": {
-            "value": 74.0,
+            "value": 76.0,
             "pt": 0
           },
           "corr": {
-            "value": 32.0,
+            "value": 36.0,
             "pt": 1
           }
         }
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.73,
+        "value": 2.75,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -121,17 +121,17 @@
       }
     },
     "extra": {
-      "netliq_t": 5.83,
-      "reserves_t": 2.98,
-      "hy_oas": 2.73,
+      "netliq_t": 5.84,
+      "reserves_t": 2.99,
+      "hy_oas": 2.75,
       "ig_oas": 0.78,
       "nfci": -0.529,
       "sofr": 3.64,
       "iorb": 3.65,
       "sofr_iorb": -0.01,
       "vix": 15.81,
-      "move": 74.0,
-      "corr": 32.0
+      "move": 76.0,
+      "corr": 36.0
     }
   },
   "history": [
@@ -643,9 +643,9 @@
       "date": "2026-08-06",
       "stress": 5.3,
       "sofr_iorb": -0.01,
-      "hy_oas": 2.73,
+      "hy_oas": 2.75,
       "nfci": -0.529,
-      "netliq_t": 5.83
+      "netliq_t": 5.84
     }
   ],
   "sentiment": {
