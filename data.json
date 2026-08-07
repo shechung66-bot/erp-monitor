@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T07:07:57+00:00",
+  "generated_at": "2026-08-07T12:53:25+00:00",
   "values": {
     "net_liq": -141.2,
     "rrp": 1.429,
@@ -7,8 +7,7 @@
     "bei": 2.26,
     "tp": 0.8681,
     "slope": 45.0,
-    "corr": 36.0,
-    "move": 76.0
+    "corr": 36.0
   },
   "lights": {
     "net_liq": "red",
@@ -17,8 +16,7 @@
     "bei": "green",
     "tp": "amber",
     "slope": "amber",
-    "corr": "red",
-    "move": "green"
+    "corr": "red"
   },
   "sources": {
     "net_liq": "FRED WALCL-TGA-RRP",
@@ -27,31 +25,30 @@
     "bei": "FRED T10YIE",
     "tp": "FRED THREEFYTP10 (KW)",
     "slope": "FRED DGS10-DGS2",
-    "corr": "FRED SP500/DGS10 30d",
-    "move": "Yahoo ^MOVE"
+    "corr": "FRED SP500/DGS10 30d"
   },
   "context": {
     "vix": 15.81,
     "y10": 4.63
   },
   "tier_health": {
-    "one": 33,
+    "one": 0,
     "two": 40
   },
   "implied": {
-    "erp": 1.91,
+    "erp": 2.8,
     "y10": 4.44
   },
   "liquidity": {
-    "stress": 5.3,
-    "label": "偏紧 / 警戒",
+    "stress": 6.2,
+    "label": "紧张",
     "layers": {
       "repo": {
-        "score": 5.0,
+        "score": 7.5,
         "items": {
           "sofr_iorb": {
-            "value": -0.01,
-            "pt": 0
+            "value": 0.0,
+            "pt": 1
           },
           "rrp": {
             "value": 1.429,
@@ -73,7 +70,7 @@
         }
       },
       "intermediation": {
-        "score": 1.0,
+        "score": 1.2,
         "items": {
           "hy_oas": {
             "value": 2.75,
@@ -87,10 +84,6 @@
             "value": 15.81,
             "pt": 0
           },
-          "move": {
-            "value": 76.0,
-            "pt": 0
-          },
           "corr": {
             "value": 36.0,
             "pt": 1
@@ -100,7 +93,7 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": -0.01,
+        "value": 0.0,
         "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
@@ -126,11 +119,11 @@
       "hy_oas": 2.75,
       "ig_oas": 0.78,
       "nfci": -0.529,
-      "sofr": 3.64,
+      "sofr": 3.65,
       "iorb": 3.65,
-      "sofr_iorb": -0.01,
+      "sofr_iorb": 0.0,
       "vix": 15.81,
-      "move": 76.0,
+      "move": null,
       "corr": 36.0
     }
   },
@@ -649,8 +642,8 @@
     },
     {
       "date": "2026-08-07",
-      "stress": 5.3,
-      "sofr_iorb": -0.01,
+      "stress": 6.2,
+      "sofr_iorb": 0.0,
       "hy_oas": 2.75,
       "nfci": -0.529,
       "netliq_t": 5.84
