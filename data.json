@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-13T12:59:21+00:00",
+  "generated_at": "2026-08-13T18:56:45+00:00",
   "values": {
-    "net_liq": -146.1,
-    "rrp": 0.725,
+    "net_liq": -145.9,
+    "rrp": 0.45,
     "realy": 2.43,
     "bei": 2.26,
     "tp": 0.8257,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 15.28,
+    "vix": 14.55,
     "y10": 4.7
   },
   "tier_health": {
@@ -54,7 +54,7 @@
             "pt": 0
           },
           "rrp": {
-            "value": 0.725,
+            "value": 0.45,
             "pt": 2
           }
         }
@@ -67,7 +67,7 @@
             "pt": 2
           },
           "netliq": {
-            "value": -146.1,
+            "value": -145.9,
             "pt": 2
           }
         }
@@ -76,7 +76,7 @@
         "score": 2.0,
         "items": {
           "hy_oas": {
-            "value": 2.72,
+            "value": 2.71,
             "pt": 0
           },
           "nfci": {
@@ -84,7 +84,7 @@
             "pt": 0
           },
           "vix": {
-            "value": 15.28,
+            "value": 14.55,
             "pt": 0
           },
           "move": {
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.72,
+        "value": 2.71,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 15.28,
+        "value": 14.55,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -123,13 +123,13 @@
     "extra": {
       "netliq_t": 5.84,
       "reserves_t": 2.99,
-      "hy_oas": 2.72,
+      "hy_oas": 2.71,
       "ig_oas": 0.79,
       "nfci": -0.549,
       "sofr": 3.62,
       "iorb": 3.65,
       "sofr_iorb": -0.03,
-      "vix": 15.28,
+      "vix": 14.55,
       "move": 72.0,
       "corr": 44.0
     }
@@ -699,7 +699,7 @@
       "date": "2026-08-13",
       "stress": 5.7,
       "sofr_iorb": -0.03,
-      "hy_oas": 2.72,
+      "hy_oas": 2.71,
       "nfci": -0.549,
       "netliq_t": 5.84
     }
