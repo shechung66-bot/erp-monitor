@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-14T12:55:50+00:00",
+  "generated_at": "2026-08-14T18:46:46+00:00",
   "values": {
-    "net_liq": -122.1,
-    "rrp": 0.45,
+    "net_liq": -121.9,
+    "rrp": 0.25,
     "realy": 2.42,
     "bei": 2.24,
     "tp": 0.8257,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 14.55,
+    "vix": 14.63,
     "y10": 4.68
   },
   "tier_health": {
@@ -54,7 +54,7 @@
             "pt": 0
           },
           "rrp": {
-            "value": 0.45,
+            "value": 0.25,
             "pt": 2
           }
         }
@@ -67,7 +67,7 @@
             "pt": 2
           },
           "netliq": {
-            "value": -122.1,
+            "value": -121.9,
             "pt": 2
           }
         }
@@ -84,7 +84,7 @@
             "pt": 0
           },
           "vix": {
-            "value": 14.55,
+            "value": 14.63,
             "pt": 0
           },
           "move": {
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 14.55,
+        "value": 14.63,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -129,7 +129,7 @@
       "sofr": 3.62,
       "iorb": 3.65,
       "sofr_iorb": -0.03,
-      "vix": 14.55,
+      "vix": 14.63,
       "move": 69.0,
       "corr": 49.0
     }
