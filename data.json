@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-08-27T06:59:12+00:00",
+  "generated_at": "2026-08-27T21:39:35+00:00",
   "values": {
-    "net_liq": -33.5,
-    "rrp": 0.702,
-    "realy": 2.32,
-    "bei": 2.32,
+    "net_liq": -60.4,
+    "rrp": 0.456,
+    "realy": 2.34,
+    "bei": 2.33,
     "tp": 0.8682,
     "slope": 47.0,
-    "corr": 40.0,
-    "move": 69.0
+    "corr": 39.0,
+    "move": 70.0
   },
   "lights": {
-    "net_liq": "amber",
+    "net_liq": "red",
     "rrp": "red",
     "realy": "red",
     "bei": "amber",
@@ -31,30 +31,30 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 15.45,
-    "y10": 4.64
+    "vix": 15.21,
+    "y10": 4.66
   },
   "tier_health": {
-    "one": 50,
+    "one": 33,
     "two": 30
   },
   "implied": {
-    "erp": 1.45,
+    "erp": 1.91,
     "y10": 4.58
   },
   "liquidity": {
-    "stress": 5.3,
+    "stress": 4.5,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
-        "score": 7.5,
+        "score": 5.0,
         "items": {
           "sofr_iorb": {
-            "value": 0.01,
-            "pt": 1
+            "value": -0.01,
+            "pt": 0
           },
           "rrp": {
-            "value": 0.702,
+            "value": 0.456,
             "pt": 2
           }
         }
@@ -63,11 +63,11 @@
         "score": 7.5,
         "items": {
           "reserves": {
-            "value": 2.94,
+            "value": 2.92,
             "pt": 2
           },
           "netliq": {
-            "value": -33.5,
+            "value": -60.4,
             "pt": 1
           }
         }
@@ -76,7 +76,7 @@
         "score": 1.0,
         "items": {
           "hy_oas": {
-            "value": 2.7,
+            "value": 2.67,
             "pt": 0
           },
           "nfci": {
@@ -84,15 +84,15 @@
             "pt": 0
           },
           "vix": {
-            "value": 15.45,
+            "value": 15.21,
             "pt": 0
           },
           "move": {
-            "value": 69.0,
+            "value": 70.0,
             "pt": 0
           },
           "corr": {
-            "value": 40.0,
+            "value": 39.0,
             "pt": 1
           }
         }
@@ -100,12 +100,12 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": 0.01,
-        "triggered": true,
+        "value": -0.01,
+        "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.7,
+        "value": 2.67,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -115,23 +115,23 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 15.45,
+        "value": 15.21,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
     },
     "extra": {
-      "netliq_t": 5.79,
-      "reserves_t": 2.94,
-      "hy_oas": 2.7,
-      "ig_oas": 0.81,
+      "netliq_t": 5.78,
+      "reserves_t": 2.92,
+      "hy_oas": 2.67,
+      "ig_oas": 0.8,
       "nfci": -0.566,
-      "sofr": 3.66,
+      "sofr": 3.64,
       "iorb": 3.65,
-      "sofr_iorb": 0.01,
-      "vix": 15.45,
-      "move": 69.0,
-      "corr": 40.0
+      "sofr_iorb": -0.01,
+      "vix": 15.21,
+      "move": 70.0,
+      "corr": 39.0
     }
   },
   "history": [
@@ -809,11 +809,11 @@
     },
     {
       "date": "2026-08-27",
-      "stress": 5.3,
-      "sofr_iorb": 0.01,
-      "hy_oas": 2.7,
+      "stress": 4.5,
+      "sofr_iorb": -0.01,
+      "hy_oas": 2.67,
       "nfci": -0.566,
-      "netliq_t": 5.79
+      "netliq_t": 5.78
     }
   ],
   "sentiment": {
