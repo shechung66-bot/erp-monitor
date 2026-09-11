@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-09-10T20:22:01+00:00",
+  "generated_at": "2026-09-11T02:44:30+00:00",
   "values": {
-    "net_liq": -30.7,
+    "net_liq": 61.2,
     "rrp": 4.736,
     "realy": 2.46,
-    "bei": 2.37,
+    "bei": 2.4,
     "tp": 0.8892,
     "slope": 40.0,
     "corr": 49.0,
-    "move": 77.0
+    "move": 82.0
   },
   "lights": {
-    "net_liq": "amber",
+    "net_liq": "green",
     "rrp": "red",
     "realy": "red",
     "bei": "amber",
@@ -35,15 +35,15 @@
     "y10": 4.83
   },
   "tier_health": {
-    "one": 50,
+    "one": 67,
     "two": 30
   },
   "implied": {
-    "erp": 1.45,
+    "erp": 0.99,
     "y10": 4.58
   },
   "liquidity": {
-    "stress": 4.8,
+    "stress": 4.0,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
@@ -60,15 +60,15 @@
         }
       },
       "balance": {
-        "score": 7.5,
+        "score": 5.0,
         "items": {
           "reserves": {
-            "value": 2.89,
+            "value": 2.99,
             "pt": 2
           },
           "netliq": {
-            "value": -30.7,
-            "pt": 1
+            "value": 61.2,
+            "pt": 0
           }
         }
       },
@@ -88,7 +88,7 @@
             "pt": 0
           },
           "move": {
-            "value": 77.0,
+            "value": 82.0,
             "pt": 0
           },
           "corr": {
@@ -121,8 +121,8 @@
       }
     },
     "extra": {
-      "netliq_t": 5.76,
-      "reserves_t": 2.89,
+      "netliq_t": 5.85,
+      "reserves_t": 2.99,
       "hy_oas": 2.71,
       "ig_oas": 0.81,
       "nfci": -0.564,
@@ -130,19 +130,11 @@
       "iorb": 3.65,
       "sofr_iorb": -0.01,
       "vix": 16.46,
-      "move": 77.0,
+      "move": 82.0,
       "corr": 49.0
     }
   },
   "history": [
-    {
-      "date": "2026-06-13",
-      "stress": 4.3,
-      "sofr_iorb": -0.05,
-      "hy_oas": 2.78,
-      "nfci": -0.506,
-      "netliq_t": 5.9
-    },
     {
       "date": "2026-06-14",
       "stress": 4.3,
@@ -854,6 +846,14 @@
       "hy_oas": 2.71,
       "nfci": -0.564,
       "netliq_t": 5.76
+    },
+    {
+      "date": "2026-09-11",
+      "stress": 4.0,
+      "sofr_iorb": -0.01,
+      "hy_oas": 2.71,
+      "nfci": -0.564,
+      "netliq_t": 5.85
     }
   ],
   "sentiment": {
