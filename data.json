@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T02:52:36+00:00",
+  "generated_at": "2026-09-13T11:02:03+00:00",
   "values": {
     "net_liq": 60.4,
     "rrp": 5.255,
@@ -43,16 +43,12 @@
     "y10": 4.58
   },
   "liquidity": {
-    "stress": 4.0,
+    "stress": 5.7,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
-        "score": 5.0,
+        "score": 10.0,
         "items": {
-          "sofr_iorb": {
-            "value": -0.03,
-            "pt": 0
-          },
           "rrp": {
             "value": 5.255,
             "pt": 2
@@ -100,7 +96,7 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": -0.03,
+        "value": null,
         "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
@@ -126,9 +122,9 @@
       "hy_oas": 2.7,
       "ig_oas": 0.8,
       "nfci": -0.564,
-      "sofr": 3.62,
+      "sofr": null,
       "iorb": 3.65,
-      "sofr_iorb": -0.03,
+      "sofr_iorb": null,
       "vix": 17.84,
       "move": 82.0,
       "corr": 48.0
@@ -849,8 +845,8 @@
     },
     {
       "date": "2026-09-13",
-      "stress": 4.0,
-      "sofr_iorb": -0.03,
+      "stress": 5.7,
+      "sofr_iorb": null,
       "hy_oas": 2.7,
       "nfci": -0.564,
       "netliq_t": 5.85
