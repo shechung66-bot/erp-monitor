@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-22T16:10:08+00:00",
+  "generated_at": "2026-09-22T20:48:37+00:00",
   "values": {
-    "net_liq": 89.0,
-    "rrp": 0.582,
-    "realy": 2.68,
+    "net_liq": 89.3,
+    "rrp": 0.453,
+    "realy": 2.62,
     "bei": 2.34,
-    "tp": 0.961,
-    "slope": 25.0,
-    "corr": 49.0,
-    "move": 81.0
+    "tp": 0.9595,
+    "slope": 20.0,
+    "corr": 52.0,
+    "move": 79.0
   },
   "lights": {
     "net_liq": "green",
@@ -16,7 +16,7 @@
     "realy": "red",
     "bei": "amber",
     "tp": "amber",
-    "slope": "amber",
+    "slope": "green",
     "corr": "red",
     "move": "green"
   },
@@ -32,15 +32,15 @@
   },
   "context": {
     "vix": 14.87,
-    "y10": 5.01
+    "y10": 4.96
   },
   "tier_health": {
     "one": 67,
-    "two": 30
+    "two": 40
   },
   "implied": {
     "erp": 0.99,
-    "y10": 4.58
+    "y10": 4.44
   },
   "liquidity": {
     "stress": 3.2,
@@ -54,7 +54,7 @@
             "pt": 0
           },
           "rrp": {
-            "value": 0.582,
+            "value": 0.453,
             "pt": 2
           }
         }
@@ -67,7 +67,7 @@
             "pt": 1
           },
           "netliq": {
-            "value": 89.0,
+            "value": 89.3,
             "pt": 0
           }
         }
@@ -88,11 +88,11 @@
             "pt": 0
           },
           "move": {
-            "value": 81.0,
+            "value": 79.0,
             "pt": 0
           },
           "corr": {
-            "value": 49.0,
+            "value": 52.0,
             "pt": 2
           }
         }
@@ -130,8 +130,8 @@
       "iorb": 3.9,
       "sofr_iorb": -0.05,
       "vix": 14.87,
-      "move": 81.0,
-      "corr": 49.0
+      "move": 79.0,
+      "corr": 52.0
     }
   },
   "history": [
