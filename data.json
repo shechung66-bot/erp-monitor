@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-09-22T20:48:37+00:00",
+  "generated_at": "2026-09-23T03:03:14+00:00",
   "values": {
     "net_liq": 89.3,
     "rrp": 0.453,
     "realy": 2.62,
-    "bei": 2.34,
+    "bei": 2.33,
     "tp": 0.9595,
     "slope": 20.0,
     "corr": 52.0,
@@ -76,7 +76,7 @@
         "score": 2.0,
         "items": {
           "hy_oas": {
-            "value": 2.68,
+            "value": 2.66,
             "pt": 0
           },
           "nfci": {
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.68,
+        "value": 2.66,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -123,7 +123,7 @@
     "extra": {
       "netliq_t": 5.87,
       "reserves_t": 3.01,
-      "hy_oas": 2.68,
+      "hy_oas": 2.66,
       "ig_oas": 0.77,
       "nfci": -0.56,
       "sofr": 3.85,
@@ -135,14 +135,6 @@
     }
   },
   "history": [
-    {
-      "date": "2026-06-25",
-      "stress": 4.3,
-      "sofr_iorb": -0.03,
-      "hy_oas": 2.76,
-      "nfci": -0.516,
-      "netliq_t": 5.85
-    },
     {
       "date": "2026-06-26",
       "stress": 5.2,
@@ -852,6 +844,14 @@
       "stress": 3.2,
       "sofr_iorb": -0.05,
       "hy_oas": 2.68,
+      "nfci": -0.56,
+      "netliq_t": 5.87
+    },
+    {
+      "date": "2026-09-23",
+      "stress": 3.2,
+      "sofr_iorb": -0.05,
+      "hy_oas": 2.66,
       "nfci": -0.56,
       "netliq_t": 5.87
     }
