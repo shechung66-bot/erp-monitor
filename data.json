@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-23T15:59:24+00:00",
+  "generated_at": "2026-09-23T21:01:58+00:00",
   "values": {
     "net_liq": 89.3,
-    "rrp": 0.453,
-    "realy": 2.62,
+    "rrp": 0.461,
+    "realy": 2.63,
     "bei": 2.33,
     "tp": 0.9595,
-    "slope": 20.0,
-    "corr": 52.0,
-    "move": 79.0
+    "slope": 25.0,
+    "corr": 53.0,
+    "move": 95.0
   },
   "lights": {
     "net_liq": "green",
@@ -16,9 +16,9 @@
     "realy": "red",
     "bei": "amber",
     "tp": "amber",
-    "slope": "green",
+    "slope": "amber",
     "corr": "red",
-    "move": "green"
+    "move": "amber"
   },
   "sources": {
     "net_liq": "FRED WALCL-TGA-RRP",
@@ -35,15 +35,15 @@
     "y10": 4.96
   },
   "tier_health": {
-    "one": 67,
-    "two": 40
+    "one": 50,
+    "two": 30
   },
   "implied": {
-    "erp": 0.99,
-    "y10": 4.44
+    "erp": 1.45,
+    "y10": 4.58
   },
   "liquidity": {
-    "stress": 3.2,
+    "stress": 3.5,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
@@ -54,7 +54,7 @@
             "pt": 0
           },
           "rrp": {
-            "value": 0.453,
+            "value": 0.461,
             "pt": 2
           }
         }
@@ -73,7 +73,7 @@
         }
       },
       "intermediation": {
-        "score": 2.0,
+        "score": 3.0,
         "items": {
           "hy_oas": {
             "value": 2.68,
@@ -88,11 +88,11 @@
             "pt": 0
           },
           "move": {
-            "value": 79.0,
-            "pt": 0
+            "value": 95.0,
+            "pt": 1
           },
           "corr": {
-            "value": 52.0,
+            "value": 53.0,
             "pt": 2
           }
         }
@@ -130,8 +130,8 @@
       "iorb": 3.9,
       "sofr_iorb": -0.03,
       "vix": 14.21,
-      "move": 79.0,
-      "corr": 52.0
+      "move": 95.0,
+      "corr": 53.0
     }
   },
   "history": [
@@ -849,7 +849,7 @@
     },
     {
       "date": "2026-09-23",
-      "stress": 3.2,
+      "stress": 3.5,
       "sofr_iorb": -0.03,
       "hy_oas": 2.68,
       "nfci": -0.555,
