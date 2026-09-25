@@ -1,17 +1,15 @@
 {
-  "generated_at": "2026-09-25T16:24:08+00:00",
+  "generated_at": "2026-09-25T21:03:31+00:00",
   "values": {
-    "net_liq": 1.4,
-    "rrp": 0.63,
-    "realy": 2.76,
+    "rrp": 0.576,
+    "realy": 2.85,
     "bei": 2.33,
     "tp": 0.9595,
-    "slope": 26.0,
-    "corr": 57.0,
-    "move": 105.0
+    "slope": 31.0,
+    "corr": 56.0,
+    "move": 96.0
   },
   "lights": {
-    "net_liq": "amber",
     "rrp": "red",
     "realy": "red",
     "bei": "amber",
@@ -21,7 +19,6 @@
     "move": "amber"
   },
   "sources": {
-    "net_liq": "FRED WALCL-TGA-RRP",
     "rrp": "FRED RRPONTSYD",
     "realy": "FRED DFII10",
     "bei": "FRED T10YIE",
@@ -32,19 +29,19 @@
   },
   "context": {
     "vix": 14.21,
-    "y10": 5.11
+    "y10": 5.18
   },
   "tier_health": {
-    "one": 33,
+    "one": 25,
     "two": 30
   },
   "implied": {
-    "erp": 1.91,
+    "erp": 2.12,
     "y10": 4.58
   },
   "liquidity": {
-    "stress": 5.2,
-    "label": "偏紧 / 警戒",
+    "stress": 6.0,
+    "label": "紧张",
     "layers": {
       "repo": {
         "score": 5.0,
@@ -54,21 +51,17 @@
             "pt": 0
           },
           "rrp": {
-            "value": 0.63,
+            "value": 0.576,
             "pt": 2
           }
         }
       },
       "balance": {
-        "score": 7.5,
+        "score": 10.0,
         "items": {
           "reserves": {
             "value": 2.93,
             "pt": 2
-          },
-          "netliq": {
-            "value": 1.4,
-            "pt": 1
           }
         }
       },
@@ -88,11 +81,11 @@
             "pt": 0
           },
           "move": {
-            "value": 105.0,
+            "value": 96.0,
             "pt": 1
           },
           "corr": {
-            "value": 57.0,
+            "value": 56.0,
             "pt": 2
           }
         }
@@ -130,8 +123,8 @@
       "iorb": 3.9,
       "sofr_iorb": -0.02,
       "vix": 14.21,
-      "move": 105.0,
-      "corr": 57.0
+      "move": 96.0,
+      "corr": 56.0
     }
   },
   "history": [
@@ -849,7 +842,7 @@
     },
     {
       "date": "2026-09-25",
-      "stress": 5.2,
+      "stress": 6.0,
       "sofr_iorb": -0.02,
       "hy_oas": 2.8,
       "nfci": -0.555,
