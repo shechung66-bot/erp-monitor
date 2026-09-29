@@ -1,15 +1,17 @@
 {
-  "generated_at": "2026-09-29T12:04:20+00:00",
+  "generated_at": "2026-09-29T21:47:13+00:00",
   "values": {
-    "rrp": 0.851,
-    "realy": 2.83,
-    "bei": 2.34,
-    "tp": 0.9595,
-    "slope": 36.0,
-    "corr": 54.0,
-    "move": 102.0
+    "net_liq": -3.4,
+    "rrp": 11.446,
+    "realy": 2.9,
+    "bei": 2.35,
+    "tp": 1.0203,
+    "slope": 32.0,
+    "corr": 56.0,
+    "move": 107.0
   },
   "lights": {
+    "net_liq": "amber",
     "rrp": "red",
     "realy": "red",
     "bei": "amber",
@@ -19,6 +21,7 @@
     "move": "amber"
   },
   "sources": {
+    "net_liq": "FRED WALCL-TGA-RRP",
     "rrp": "FRED RRPONTSYD",
     "realy": "FRED DFII10",
     "bei": "FRED T10YIE",
@@ -28,19 +31,19 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 14.21,
-    "y10": 5.17
+    "vix": 16.07,
+    "y10": 5.24
   },
   "tier_health": {
-    "one": 25,
+    "one": 33,
     "two": 30
   },
   "implied": {
-    "erp": 2.12,
+    "erp": 1.91,
     "y10": 4.58
   },
   "liquidity": {
-    "stress": 6.8,
+    "stress": 6.0,
     "label": "紧张",
     "layers": {
       "repo": {
@@ -51,17 +54,21 @@
             "pt": 1
           },
           "rrp": {
-            "value": 0.851,
+            "value": 11.446,
             "pt": 2
           }
         }
       },
       "balance": {
-        "score": 10.0,
+        "score": 7.5,
         "items": {
           "reserves": {
             "value": 2.93,
             "pt": 2
+          },
+          "netliq": {
+            "value": -3.4,
+            "pt": 1
           }
         }
       },
@@ -69,7 +76,7 @@
         "score": 3.0,
         "items": {
           "hy_oas": {
-            "value": 2.93,
+            "value": 3.02,
             "pt": 0
           },
           "nfci": {
@@ -77,15 +84,15 @@
             "pt": 0
           },
           "vix": {
-            "value": 14.21,
+            "value": 16.07,
             "pt": 0
           },
           "move": {
-            "value": 102.0,
+            "value": 107.0,
             "pt": 1
           },
           "corr": {
-            "value": 54.0,
+            "value": 56.0,
             "pt": 2
           }
         }
@@ -98,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 2.93,
+        "value": 3.02,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -108,23 +115,23 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 14.21,
+        "value": 16.07,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
     },
     "extra": {
-      "netliq_t": 5.77,
+      "netliq_t": 5.76,
       "reserves_t": 2.93,
-      "hy_oas": 2.93,
-      "ig_oas": 0.81,
+      "hy_oas": 3.02,
+      "ig_oas": 0.83,
       "nfci": -0.555,
       "sofr": 3.9,
       "iorb": 3.9,
       "sofr_iorb": 0.0,
-      "vix": 14.21,
-      "move": 102.0,
-      "corr": 54.0
+      "vix": 16.07,
+      "move": 107.0,
+      "corr": 56.0
     }
   },
   "history": [
@@ -842,11 +849,11 @@
     },
     {
       "date": "2026-09-29",
-      "stress": 6.8,
+      "stress": 6.0,
       "sofr_iorb": 0.0,
-      "hy_oas": 2.93,
+      "hy_oas": 3.02,
       "nfci": -0.555,
-      "netliq_t": 5.77
+      "netliq_t": 5.76
     }
   ],
   "sentiment": {
