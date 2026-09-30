@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T11:50:08+00:00",
+  "generated_at": "2026-09-30T17:30:41+00:00",
   "values": {
     "net_liq": -3.4,
     "rrp": 11.446,
@@ -8,7 +8,7 @@
     "tp": 1.0203,
     "slope": 32.0,
     "corr": 56.0,
-    "move": 107.0
+    "move": 108.0
   },
   "lights": {
     "net_liq": "amber",
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 16.07,
+    "vix": 16.04,
     "y10": 5.24
   },
   "tier_health": {
@@ -43,15 +43,15 @@
     "y10": 4.58
   },
   "liquidity": {
-    "stress": 6.0,
-    "label": "紧张",
+    "stress": 5.2,
+    "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
-        "score": 7.5,
+        "score": 5.0,
         "items": {
           "sofr_iorb": {
-            "value": 0.0,
-            "pt": 1
+            "value": -0.02,
+            "pt": 0
           },
           "rrp": {
             "value": 11.446,
@@ -76,19 +76,19 @@
         "score": 3.0,
         "items": {
           "hy_oas": {
-            "value": 3.02,
+            "value": 3.08,
             "pt": 0
           },
           "nfci": {
-            "value": -0.555,
+            "value": -0.548,
             "pt": 0
           },
           "vix": {
-            "value": 16.07,
+            "value": 16.04,
             "pt": 0
           },
           "move": {
-            "value": 107.0,
+            "value": 108.0,
             "pt": 1
           },
           "corr": {
@@ -100,22 +100,22 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": 0.0,
+        "value": -0.02,
         "triggered": false,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 3.02,
+        "value": 3.08,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
       "nfci_positive": {
-        "value": -0.555,
+        "value": -0.548,
         "triggered": false,
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 16.07,
+        "value": 16.04,
         "triggered": false,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -123,14 +123,14 @@
     "extra": {
       "netliq_t": 5.76,
       "reserves_t": 2.93,
-      "hy_oas": 3.02,
-      "ig_oas": 0.83,
-      "nfci": -0.555,
-      "sofr": 3.9,
+      "hy_oas": 3.08,
+      "ig_oas": 0.84,
+      "nfci": -0.548,
+      "sofr": 3.88,
       "iorb": 3.9,
-      "sofr_iorb": 0.0,
-      "vix": 16.07,
-      "move": 107.0,
+      "sofr_iorb": -0.02,
+      "vix": 16.04,
+      "move": 108.0,
       "corr": 56.0
     }
   },
@@ -849,10 +849,10 @@
     },
     {
       "date": "2026-09-30",
-      "stress": 6.0,
-      "sofr_iorb": 0.0,
-      "hy_oas": 3.02,
-      "nfci": -0.555,
+      "stress": 5.2,
+      "sofr_iorb": -0.02,
+      "hy_oas": 3.08,
+      "nfci": -0.548,
       "netliq_t": 5.76
     }
   ],
