@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T00:04:44+00:00",
+  "generated_at": "2026-10-13T13:26:37+00:00",
   "values": {
     "net_liq": 2.7,
     "rrp": 0.3,
@@ -8,7 +8,7 @@
     "tp": 1.0847,
     "slope": 47.0,
     "corr": 54.0,
-    "move": 98.0
+    "move": 101.0
   },
   "lights": {
     "net_liq": "amber",
@@ -88,7 +88,7 @@
             "pt": 0
           },
           "move": {
-            "value": 98.0,
+            "value": 101.0,
             "pt": 1
           },
           "corr": {
@@ -130,7 +130,7 @@
       "iorb": 3.9,
       "sofr_iorb": -0.03,
       "vix": 14.84,
-      "move": 98.0,
+      "move": 101.0,
       "corr": 54.0
     }
   },
