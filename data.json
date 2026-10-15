@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-10-15T16:12:34+00:00",
+  "generated_at": "2026-10-15T20:52:29+00:00",
   "values": {
-    "net_liq": -1.7,
-    "rrp": 0.201,
-    "realy": 2.88,
+    "net_liq": 105.8,
+    "rrp": 1.201,
+    "realy": 2.84,
     "bei": 2.35,
     "tp": 1.0729,
-    "slope": 42.0,
-    "corr": 52.0,
-    "move": 104.0
+    "slope": 37.0,
+    "corr": 45.0,
+    "move": 102.0
   },
   "lights": {
-    "net_liq": "amber",
+    "net_liq": "green",
     "rrp": "red",
     "realy": "red",
     "bei": "amber",
@@ -32,18 +32,18 @@
   },
   "context": {
     "vix": 16.87,
-    "y10": 5.21
+    "y10": 5.19
   },
   "tier_health": {
-    "one": 33,
+    "one": 50,
     "two": 30
   },
   "implied": {
-    "erp": 1.91,
+    "erp": 1.45,
     "y10": 4.58
   },
   "liquidity": {
-    "stress": 4.3,
+    "stress": 3.5,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
@@ -54,21 +54,21 @@
             "pt": 0
           },
           "rrp": {
-            "value": 0.201,
+            "value": 1.201,
             "pt": 2
           }
         }
       },
       "balance": {
-        "score": 5.0,
+        "score": 2.5,
         "items": {
           "reserves": {
-            "value": 3.03,
+            "value": 3.02,
             "pt": 1
           },
           "netliq": {
-            "value": -1.7,
-            "pt": 1
+            "value": 105.8,
+            "pt": 0
           }
         }
       },
@@ -88,11 +88,11 @@
             "pt": 0
           },
           "move": {
-            "value": 104.0,
+            "value": 102.0,
             "pt": 1
           },
           "corr": {
-            "value": 52.0,
+            "value": 45.0,
             "pt": 2
           }
         }
@@ -122,7 +122,7 @@
     },
     "extra": {
       "netliq_t": 5.87,
-      "reserves_t": 3.03,
+      "reserves_t": 3.02,
       "hy_oas": 3.25,
       "ig_oas": 0.84,
       "nfci": -0.499,
@@ -130,8 +130,8 @@
       "iorb": 3.9,
       "sofr_iorb": -0.02,
       "vix": 16.87,
-      "move": 104.0,
-      "corr": 52.0
+      "move": 102.0,
+      "corr": 45.0
     }
   },
   "history": [
@@ -849,7 +849,7 @@
     },
     {
       "date": "2026-10-15",
-      "stress": 4.3,
+      "stress": 3.5,
       "sofr_iorb": -0.02,
       "hy_oas": 3.25,
       "nfci": -0.499,
