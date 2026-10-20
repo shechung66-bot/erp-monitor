@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-19T18:29:08+00:00",
+  "generated_at": "2026-10-20T03:10:36+00:00",
   "values": {
     "net_liq": 101.9,
     "rrp": 0.33,
-    "realy": 2.78,
+    "realy": 2.74,
     "bei": 2.35,
     "tp": 1.0729,
-    "slope": 33.0,
-    "corr": 44.0,
+    "slope": 35.0,
+    "corr": 39.0,
     "move": 101.0
   },
   "lights": {
@@ -32,7 +32,7 @@
   },
   "context": {
     "vix": 19.99,
-    "y10": 5.1
+    "y10": 5.09
   },
   "tier_health": {
     "one": 50,
@@ -43,7 +43,7 @@
     "y10": 4.58
   },
   "liquidity": {
-    "stress": 3.8,
+    "stress": 3.5,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
@@ -73,7 +73,7 @@
         }
       },
       "intermediation": {
-        "score": 4.0,
+        "score": 3.0,
         "items": {
           "hy_oas": {
             "value": 3.31,
@@ -92,8 +92,8 @@
             "pt": 1
           },
           "corr": {
-            "value": 44.0,
-            "pt": 2
+            "value": 39.0,
+            "pt": 1
           }
         }
       }
@@ -131,18 +131,10 @@
       "sofr_iorb": -0.02,
       "vix": 19.99,
       "move": 101.0,
-      "corr": 44.0
+      "corr": 39.0
     }
   },
   "history": [
-    {
-      "date": "2026-07-22",
-      "stress": 3.2,
-      "sofr_iorb": -0.04,
-      "hy_oas": 2.69,
-      "nfci": -0.552,
-      "netliq_t": 5.99
-    },
     {
       "date": "2026-07-23",
       "stress": 2.8,
@@ -850,6 +842,14 @@
     {
       "date": "2026-10-19",
       "stress": 3.8,
+      "sofr_iorb": -0.02,
+      "hy_oas": 3.31,
+      "nfci": -0.499,
+      "netliq_t": 5.87
+    },
+    {
+      "date": "2026-10-20",
+      "stress": 3.5,
       "sofr_iorb": -0.02,
       "hy_oas": 3.31,
       "nfci": -0.499,
