@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-21T16:30:53+00:00",
+  "generated_at": "2026-10-21T21:10:29+00:00",
   "values": {
-    "move": 97.0
+    "move": 96.0
   },
   "lights": {
     "move": "amber"
@@ -37,7 +37,7 @@
         "score": 5.0,
         "items": {
           "move": {
-            "value": 97.0,
+            "value": 96.0,
             "pt": 1
           }
         }
@@ -75,7 +75,7 @@
       "iorb": null,
       "sofr_iorb": null,
       "vix": null,
-      "move": 97.0,
+      "move": 96.0,
       "corr": null
     }
   },
