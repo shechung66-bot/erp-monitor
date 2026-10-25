@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T20:07:34+00:00",
+  "generated_at": "2026-10-25T02:58:18+00:00",
   "values": {
     "net_liq": 7.7,
     "rrp": 0.2,
@@ -135,14 +135,6 @@
     }
   },
   "history": [
-    {
-      "date": "2026-07-27",
-      "stress": 3.2,
-      "sofr_iorb": -0.01,
-      "hy_oas": 2.79,
-      "nfci": -0.552,
-      "netliq_t": 5.92
-    },
     {
       "date": "2026-07-28",
       "stress": 3.2,
@@ -849,6 +841,14 @@
     },
     {
       "date": "2026-10-24",
+      "stress": 6.0,
+      "sofr_iorb": 0.0,
+      "hy_oas": 3.4,
+      "nfci": -0.496,
+      "netliq_t": 5.8
+    },
+    {
+      "date": "2026-10-25",
       "stress": 6.0,
       "sofr_iorb": 0.0,
       "hy_oas": 3.4,
