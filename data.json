@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-09T14:59:49+00:00",
+  "generated_at": "2026-11-10T01:06:50+00:00",
   "values": {
-    "net_liq": -81.1,
-    "rrp": 0.15,
-    "realy": 2.6,
-    "bei": 2.23,
+    "net_liq": -81.2,
+    "rrp": 0.252,
+    "realy": 2.63,
+    "bei": 2.22,
     "tp": 0.9089,
-    "slope": 38.0,
+    "slope": 35.0,
     "corr": -28.0,
-    "move": 90.0
+    "move": 86.0
   },
   "lights": {
     "net_liq": "red",
@@ -18,7 +18,7 @@
     "tp": "amber",
     "slope": "amber",
     "corr": "green",
-    "move": "amber"
+    "move": "green"
   },
   "sources": {
     "net_liq": "FRED WALCL-TGA-RRP",
@@ -31,15 +31,15 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 28.18,
-    "y10": 4.84
+    "vix": 25.64,
+    "y10": 4.86
   },
   "tier_health": {
-    "one": 17,
+    "one": 33,
     "two": 60
   },
   "implied": {
-    "erp": 2.34,
+    "erp": 1.91,
     "y10": 4.16
   },
   "liquidity": {
@@ -54,7 +54,7 @@
             "pt": 0
           },
           "rrp": {
-            "value": 0.15,
+            "value": 0.252,
             "pt": 2
           }
         }
@@ -67,7 +67,7 @@
             "pt": 2
           },
           "netliq": {
-            "value": -81.1,
+            "value": -81.2,
             "pt": 1
           }
         }
@@ -84,11 +84,11 @@
             "pt": 0
           },
           "vix": {
-            "value": 28.18,
+            "value": 25.64,
             "pt": 2
           },
           "move": {
-            "value": 90.0,
+            "value": 86.0,
             "pt": 0
           },
           "corr": {
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 28.18,
+        "value": 25.64,
         "triggered": true,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -129,20 +129,12 @@
       "sofr": 3.89,
       "iorb": 3.9,
       "sofr_iorb": -0.01,
-      "vix": 28.18,
-      "move": 90.0,
+      "vix": 25.64,
+      "move": 86.0,
       "corr": -28.0
     }
   },
   "history": [
-    {
-      "date": "2026-08-12",
-      "stress": 5.7,
-      "sofr_iorb": -0.01,
-      "hy_oas": 2.72,
-      "nfci": -0.549,
-      "netliq_t": 5.84
-    },
     {
       "date": "2026-08-13",
       "stress": 5.7,
@@ -849,6 +841,14 @@
     },
     {
       "date": "2026-11-09",
+      "stress": 4.8,
+      "sofr_iorb": -0.01,
+      "hy_oas": 3.42,
+      "nfci": -0.459,
+      "netliq_t": 5.79
+    },
+    {
+      "date": "2026-11-10",
       "stress": 4.8,
       "sofr_iorb": -0.01,
       "hy_oas": 3.42,
