@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-18T14:59:47+00:00",
+  "generated_at": "2026-11-18T23:50:05+00:00",
   "values": {
-    "net_liq": 42.9,
-    "rrp": 0.351,
-    "realy": 2.92,
-    "bei": 2.21,
+    "net_liq": 42.8,
+    "rrp": 0.331,
+    "realy": 2.89,
+    "bei": 2.19,
     "tp": 0.9864,
-    "slope": 29.0,
-    "corr": -36.0,
+    "slope": 30.0,
+    "corr": -35.0,
     "move": 98.0
   },
   "lights": {
@@ -32,7 +32,7 @@
   },
   "context": {
     "vix": 25.46,
-    "y10": 5.12
+    "y10": 5.1
   },
   "tier_health": {
     "one": 33,
@@ -54,7 +54,7 @@
             "pt": 1
           },
           "rrp": {
-            "value": 0.351,
+            "value": 0.331,
             "pt": 2
           }
         }
@@ -67,7 +67,7 @@
             "pt": 2
           },
           "netliq": {
-            "value": 42.9,
+            "value": 42.8,
             "pt": 1
           }
         }
@@ -76,7 +76,7 @@
         "score": 3.0,
         "items": {
           "hy_oas": {
-            "value": 3.34,
+            "value": 3.43,
             "pt": 0
           },
           "nfci": {
@@ -92,7 +92,7 @@
             "pt": 1
           },
           "corr": {
-            "value": -36.0,
+            "value": -35.0,
             "pt": 0
           }
         }
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 3.34,
+        "value": 3.43,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -123,15 +123,15 @@
     "extra": {
       "netliq_t": 5.84,
       "reserves_t": 2.96,
-      "hy_oas": 3.34,
-      "ig_oas": 0.9,
+      "hy_oas": 3.43,
+      "ig_oas": 0.92,
       "nfci": -0.478,
       "sofr": 3.92,
       "iorb": 3.9,
       "sofr_iorb": 0.02,
       "vix": 25.46,
       "move": 98.0,
-      "corr": -36.0
+      "corr": -35.0
     }
   },
   "history": [
@@ -851,7 +851,7 @@
       "date": "2026-11-18",
       "stress": 6.0,
       "sofr_iorb": 0.02,
-      "hy_oas": 3.34,
+      "hy_oas": 3.43,
       "nfci": -0.478,
       "netliq_t": 5.84
     }
