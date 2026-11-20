@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-11-19T15:08:43+00:00",
+  "generated_at": "2026-11-20T00:13:25+00:00",
   "values": {
-    "net_liq": 42.8,
-    "rrp": 0.331,
-    "realy": 2.89,
-    "bei": 2.19,
+    "net_liq": 78.8,
+    "rrp": 0.405,
+    "realy": 2.88,
+    "bei": 2.16,
     "tp": 0.9864,
-    "slope": 30.0,
-    "corr": -35.0,
-    "move": 94.0
+    "slope": 27.0,
+    "corr": -34.0,
+    "move": 96.0
   },
   "lights": {
-    "net_liq": "amber",
+    "net_liq": "green",
     "rrp": "red",
     "realy": "red",
     "bei": "green",
@@ -32,18 +32,18 @@
   },
   "context": {
     "vix": 24.56,
-    "y10": 5.1
+    "y10": 5.07
   },
   "tier_health": {
-    "one": 33,
+    "one": 50,
     "two": 60
   },
   "implied": {
-    "erp": 1.91,
+    "erp": 1.45,
     "y10": 4.16
   },
   "liquidity": {
-    "stress": 5.7,
+    "stress": 4.8,
     "label": "偏紧 / 警戒",
     "layers": {
       "repo": {
@@ -54,21 +54,21 @@
             "pt": 1
           },
           "rrp": {
-            "value": 0.331,
+            "value": 0.405,
             "pt": 2
           }
         }
       },
       "balance": {
-        "score": 7.5,
+        "score": 5.0,
         "items": {
           "reserves": {
-            "value": 2.96,
+            "value": 2.98,
             "pt": 2
           },
           "netliq": {
-            "value": 42.8,
-            "pt": 1
+            "value": 78.8,
+            "pt": 0
           }
         }
       },
@@ -76,7 +76,7 @@
         "score": 2.0,
         "items": {
           "hy_oas": {
-            "value": 3.43,
+            "value": 3.47,
             "pt": 0
           },
           "nfci": {
@@ -88,11 +88,11 @@
             "pt": 1
           },
           "move": {
-            "value": 94.0,
+            "value": 96.0,
             "pt": 1
           },
           "corr": {
-            "value": -35.0,
+            "value": -34.0,
             "pt": 0
           }
         }
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 3.43,
+        "value": 3.47,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -121,28 +121,20 @@
       }
     },
     "extra": {
-      "netliq_t": 5.84,
-      "reserves_t": 2.96,
-      "hy_oas": 3.43,
-      "ig_oas": 0.92,
+      "netliq_t": 5.82,
+      "reserves_t": 2.98,
+      "hy_oas": 3.47,
+      "ig_oas": 0.93,
       "nfci": -0.478,
       "sofr": 3.9,
       "iorb": 3.9,
       "sofr_iorb": 0.0,
       "vix": 24.56,
-      "move": 94.0,
-      "corr": -35.0
+      "move": 96.0,
+      "corr": -34.0
     }
   },
   "history": [
-    {
-      "date": "2026-08-22",
-      "stress": 4.8,
-      "sofr_iorb": -0.02,
-      "hy_oas": 2.75,
-      "nfci": -0.559,
-      "netliq_t": 5.79
-    },
     {
       "date": "2026-08-23",
       "stress": 4.8,
@@ -854,6 +846,14 @@
       "hy_oas": 3.43,
       "nfci": -0.478,
       "netliq_t": 5.84
+    },
+    {
+      "date": "2026-11-20",
+      "stress": 4.8,
+      "sofr_iorb": 0.0,
+      "hy_oas": 3.47,
+      "nfci": -0.478,
+      "netliq_t": 5.82
     }
   ],
   "sentiment": {
