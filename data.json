@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T03:44:26+00:00",
+  "generated_at": "2026-11-24T16:54:17+00:00",
   "values": {
     "net_liq": 78.8,
     "rrp": 0.35,
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 35.89,
+    "vix": 26.62,
     "y10": 4.92
   },
   "tier_health": {
@@ -84,7 +84,7 @@
             "pt": 0
           },
           "vix": {
-            "value": 35.89,
+            "value": 26.62,
             "pt": 2
           },
           "move": {
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 35.89,
+        "value": 26.62,
         "triggered": true,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -129,7 +129,7 @@
       "sofr": 3.92,
       "iorb": 3.9,
       "sofr_iorb": 0.02,
-      "vix": 35.89,
+      "vix": 26.62,
       "move": 101.0,
       "corr": -46.0
     }
