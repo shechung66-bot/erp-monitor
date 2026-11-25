@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-24T16:54:17+00:00",
+  "generated_at": "2026-11-25T01:51:43+00:00",
   "values": {
     "net_liq": 78.8,
-    "rrp": 0.35,
-    "realy": 2.77,
-    "bei": 2.13,
-    "tp": 0.9864,
+    "rrp": 0.301,
+    "realy": 2.79,
+    "bei": 2.12,
+    "tp": 0.8888,
     "slope": 29.0,
-    "corr": -46.0,
-    "move": 101.0
+    "corr": -40.0,
+    "move": 99.0
   },
   "lights": {
     "net_liq": "green",
@@ -54,7 +54,7 @@
             "pt": 1
           },
           "rrp": {
-            "value": 0.35,
+            "value": 0.301,
             "pt": 2
           }
         }
@@ -76,7 +76,7 @@
         "score": 4.0,
         "items": {
           "hy_oas": {
-            "value": 3.76,
+            "value": 3.63,
             "pt": 1
           },
           "nfci": {
@@ -88,11 +88,11 @@
             "pt": 2
           },
           "move": {
-            "value": 101.0,
+            "value": 99.0,
             "pt": 1
           },
           "corr": {
-            "value": -46.0,
+            "value": -40.0,
             "pt": 0
           }
         }
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 3.76,
+        "value": 3.63,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -123,26 +123,18 @@
     "extra": {
       "netliq_t": 5.82,
       "reserves_t": 2.98,
-      "hy_oas": 3.76,
-      "ig_oas": 0.98,
+      "hy_oas": 3.63,
+      "ig_oas": 0.97,
       "nfci": -0.478,
       "sofr": 3.92,
       "iorb": 3.9,
       "sofr_iorb": 0.02,
       "vix": 26.62,
-      "move": 101.0,
-      "corr": -46.0
+      "move": 99.0,
+      "corr": -40.0
     }
   },
   "history": [
-    {
-      "date": "2026-08-27",
-      "stress": 4.5,
-      "sofr_iorb": -0.01,
-      "hy_oas": 2.67,
-      "nfci": -0.566,
-      "netliq_t": 5.78
-    },
     {
       "date": "2026-08-28",
       "stress": 4.5,
@@ -852,6 +844,14 @@
       "stress": 5.5,
       "sofr_iorb": 0.02,
       "hy_oas": 3.76,
+      "nfci": -0.478,
+      "netliq_t": 5.82
+    },
+    {
+      "date": "2026-11-25",
+      "stress": 5.5,
+      "sofr_iorb": 0.02,
+      "hy_oas": 3.63,
       "nfci": -0.478,
       "netliq_t": 5.82
     }
