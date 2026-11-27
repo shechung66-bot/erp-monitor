@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T01:26:35+00:00",
+  "generated_at": "2026-11-27T16:01:23+00:00",
   "values": {
     "net_liq": 78.9,
     "rrp": 0.3,
@@ -8,7 +8,7 @@
     "tp": 0.8888,
     "slope": 28.0,
     "corr": -39.0,
-    "move": 98.0
+    "move": 95.0
   },
   "lights": {
     "net_liq": "green",
@@ -31,7 +31,7 @@
     "move": "Yahoo ^MOVE"
   },
   "context": {
-    "vix": 26.36,
+    "vix": 26.8,
     "y10": 4.91
   },
   "tier_health": {
@@ -43,15 +43,15 @@
     "y10": 4.16
   },
   "liquidity": {
-    "stress": 5.5,
-    "label": "偏紧 / 警戒",
+    "stress": 6.3,
+    "label": "紧张",
     "layers": {
       "repo": {
-        "score": 7.5,
+        "score": 10.0,
         "items": {
           "sofr_iorb": {
-            "value": 0.04,
-            "pt": 1
+            "value": 0.05,
+            "pt": 2
           },
           "rrp": {
             "value": 0.3,
@@ -84,11 +84,11 @@
             "pt": 0
           },
           "vix": {
-            "value": 26.36,
+            "value": 26.8,
             "pt": 2
           },
           "move": {
-            "value": 98.0,
+            "value": 95.0,
             "pt": 1
           },
           "corr": {
@@ -100,7 +100,7 @@
     },
     "confirmations": {
       "sofr_iorb_positive": {
-        "value": 0.04,
+        "value": 0.05,
         "triggered": true,
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
@@ -115,7 +115,7 @@
         "desc": "NFCI 转正 = 金融条件由松转紧"
       },
       "vix_above20": {
-        "value": 26.36,
+        "value": 26.8,
         "triggered": true,
         "desc": "VIX 升破 20 = 波动率确认"
       }
@@ -126,11 +126,11 @@
       "hy_oas": 3.72,
       "ig_oas": 0.98,
       "nfci": -0.444,
-      "sofr": 3.94,
+      "sofr": 3.95,
       "iorb": 3.9,
-      "sofr_iorb": 0.04,
-      "vix": 26.36,
-      "move": 98.0,
+      "sofr_iorb": 0.05,
+      "vix": 26.8,
+      "move": 95.0,
       "corr": -39.0
     }
   },
@@ -849,8 +849,8 @@
     },
     {
       "date": "2026-11-27",
-      "stress": 5.5,
-      "sofr_iorb": 0.04,
+      "stress": 6.3,
+      "sofr_iorb": 0.05,
       "hy_oas": 3.72,
       "nfci": -0.444,
       "netliq_t": 5.82
