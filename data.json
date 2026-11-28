@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-11-27T16:01:23+00:00",
+  "generated_at": "2026-11-28T00:59:44+00:00",
   "values": {
-    "net_liq": 78.9,
-    "rrp": 0.3,
-    "realy": 2.79,
-    "bei": 2.12,
+    "net_liq": 38.9,
+    "rrp": 0.35,
+    "realy": 2.73,
+    "bei": 2.15,
     "tp": 0.8888,
-    "slope": 28.0,
+    "slope": 24.0,
     "corr": -39.0,
     "move": 95.0
   },
   "lights": {
-    "net_liq": "green",
+    "net_liq": "amber",
     "rrp": "red",
     "realy": "red",
     "bei": "green",
     "tp": "amber",
-    "slope": "amber",
+    "slope": "green",
     "corr": "green",
     "move": "amber"
   },
@@ -32,18 +32,18 @@
   },
   "context": {
     "vix": 26.8,
-    "y10": 4.91
+    "y10": 4.85
   },
   "tier_health": {
-    "one": 50,
-    "two": 60
+    "one": 33,
+    "two": 70
   },
   "implied": {
-    "erp": 1.45,
-    "y10": 4.16
+    "erp": 1.91,
+    "y10": 4.02
   },
   "liquidity": {
-    "stress": 6.3,
+    "stress": 7.2,
     "label": "紧张",
     "layers": {
       "repo": {
@@ -54,21 +54,21 @@
             "pt": 2
           },
           "rrp": {
-            "value": 0.3,
+            "value": 0.35,
             "pt": 2
           }
         }
       },
       "balance": {
-        "score": 5.0,
+        "score": 7.5,
         "items": {
           "reserves": {
-            "value": 2.98,
+            "value": 2.96,
             "pt": 2
           },
           "netliq": {
-            "value": 78.9,
-            "pt": 0
+            "value": 38.9,
+            "pt": 1
           }
         }
       },
@@ -76,7 +76,7 @@
         "score": 4.0,
         "items": {
           "hy_oas": {
-            "value": 3.72,
+            "value": 3.77,
             "pt": 1
           },
           "nfci": {
@@ -105,7 +105,7 @@
         "desc": "SOFR-IORB 连续转正 = Repo 真正变紧的第一确认"
       },
       "hy_widening": {
-        "value": 3.72,
+        "value": 3.77,
         "triggered": false,
         "desc": "HY 信用利差明显走阔 = 压力传到风险资产融资"
       },
@@ -121,10 +121,10 @@
       }
     },
     "extra": {
-      "netliq_t": 5.82,
-      "reserves_t": 2.98,
-      "hy_oas": 3.72,
-      "ig_oas": 0.98,
+      "netliq_t": 5.83,
+      "reserves_t": 2.96,
+      "hy_oas": 3.77,
+      "ig_oas": 0.99,
       "nfci": -0.444,
       "sofr": 3.95,
       "iorb": 3.9,
@@ -135,14 +135,6 @@
     }
   },
   "history": [
-    {
-      "date": "2026-08-30",
-      "stress": 4.5,
-      "sofr_iorb": -0.01,
-      "hy_oas": 2.63,
-      "nfci": -0.566,
-      "netliq_t": 5.78
-    },
     {
       "date": "2026-08-31",
       "stress": 5.7,
@@ -854,6 +846,14 @@
       "hy_oas": 3.72,
       "nfci": -0.444,
       "netliq_t": 5.82
+    },
+    {
+      "date": "2026-11-28",
+      "stress": 7.2,
+      "sofr_iorb": 0.05,
+      "hy_oas": 3.77,
+      "nfci": -0.444,
+      "netliq_t": 5.83
     }
   ],
   "sentiment": {
